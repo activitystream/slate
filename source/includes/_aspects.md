@@ -45,7 +45,7 @@ metric | Double | Additional/generic metric information for the test outcome
 amount | Double | Additional/generic amount information for the test outcome
 properties | Map | Free format map structure with additional information not stored in the analytics engine but stored with every result. Use the classification aspect to add dimensions to the AB_Test outcome.
 
-
+**Applies to:** `Events`
 ## Attachments
 ```json
 {
@@ -80,7 +80,7 @@ created | DateTime | ISO Date Time
 updated | DateTime | ISO Date Time
 properties | Map | Free format map structure with custom information
 
-
+**Applies to:** `Events`
 ## Client Device
 ```json
 {
@@ -100,6 +100,7 @@ properties | Map | Free format map structure with custom information
 
 Based on browser string and is only used for web/browser originated events.
 
+**Applies to:** `Events`
 ## Client IP
 ```json
 {
@@ -119,6 +120,7 @@ Based on browser string and is only used for web/browser originated events.
 ```
 If the event is originated over public Internet and the IP address is provided then Activity Stream supplies the specifics that can be resolved from the IP address. 
 
+**Applies to:** `Events`
 ## CEI (Customer Experience Index)
 ```json
 {
@@ -152,6 +154,7 @@ points | Float | Points being scored
 traction* | Long | For how long does this affect the entity (in minutes) (See duration serialization). *Defaults to 120 days (120 days * 1.440 minutes = 172.800 minutes)
 targets | String[] | List of the entities that should be affected by this. (ACTOR/AFFECTS etc.) “ACTOR” is the default target for profiling values.
 
+**Applies to:** `Events (and indirectly to customers)`
 ## Demography
 
 Field | Type | Description  
@@ -189,6 +192,7 @@ A list of dimension+value pairs used to enhance other aspects. The values in cla
 
 In that way AB test results, pageviews, purchases or any other aspect that automatically generated time-series do get extra dimensions for slicing and dicing.
  
+**Applies to:** `Events` `Entities` 
 ## Geo Locations
 ```json
 {
@@ -214,7 +218,7 @@ type | String | Presentation/processing  tags: from (location), to (destination)
 accuracy | Integer | A 0..10 rating for the accurary of this location.  This is not the geolocation-acuration (resolution) but how reliably the bound entity can be associated with that location. 10 means that it/he was positively there. 0 mean that it’s a vague guess.
 bind_to* | String | Common or long-lived information like this may be moved to the ACTOR entity if it applies to all events from the actor. In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the section. Multiple entries are stored for slow changing aspects to keep complete auditing log. * Defaults to the ACTOR entity
 
-
+**Applies to:** `Events` `Entities`
 ## Grouped
 ```json
 {
@@ -241,6 +245,7 @@ Make sure all messages meant to be collapsed together share the same group and s
 
 Please note that “re:”, “fwd:” etc. are removed from the group string if found.
 
+**Applies to:** `Events`
 ## Items (Invoice/Purchase Items)
 ```json
 {
@@ -272,6 +277,7 @@ total_for_sale | Double | How many items were (max) for sale
 description | String | Text description of the item bought
 properties | Map | Map for customer specific information
 
+**Applies to:** `Events`
 ## Locale
 ```json
 {
@@ -295,14 +301,13 @@ Requesting an event with different locale then used when reporting the event wil
 
 * Please note that automatic conversion of amounts relies on international currency index (see link) and may not conform with the currency valuation you use internally.
 
-
 Field | Type | Description  
 ----- | ---- | -----------
 locale | String | Java locale addressing both language and country. Language: ISO 639 alpha-2/3 Location/country: ISO 3166 alpha-2/3 Sample language tag: en-GB
 currency | String | 3 letter currency code (ISO 4217).  Sample currency code: “USD”
 timezone | String | The time zone ID. (time zones in the tz database) Sample timezone ID: “America/Phoenix”
 
-
+**Applies to:** `Events` `Entities`
 ## Messaging
 ```json
 {
@@ -345,6 +350,7 @@ Can enhance or is complemented by: Attachments, Locale, Classification, **Collap
 
 This aspect has not been implemented
 
+**Applies to:** `Events`
 ## Page View
 ```json
 {
@@ -386,10 +392,11 @@ protocol | String | Defaults to HTTP
 content | List<Relations> | List of content Items/Entities types: FEATURED|LISTED|RELATED|TEASED|ADVERTISED
 properties | Map | request properties
 
-
+**Applies to:** `Events`
 ## Presentation
 Commonly used fields to display entities but can also be used for events.
 
+**Applies to:** `Events` `Entities`
 ## Resolvable
 If the originating system already has an ID for the event that it must to use to resolve the event in the activity stream then an external_id can be supplied. 
 
@@ -399,18 +406,23 @@ The batch_id is used to tag a whole batch of events so that they can be invalida
 
 This can, for example, be used to rollback external transaction. As the activity stream is a read-only event store then the events are rolled-back by invalidating them which leaves them in the stream but hides them.
 
+**Applies to:** `Events` `Entities`
 ## Settings
 Use the Setting aspect to track changes for configuration/settings. Multiple settings can attached to a single event and you can always ask for the settings as they were at a specific time for the associated entity.
 
+**Applies to:** `Events (and indirectly to entities)`
 ## Summary
 Used to store customized title & summary information. 
 
 Please note that the action_type (“as.app.reward.unlocked” in this case) can also have title information attached to it and that storing a common template there can be more efficient than storing redundant strings with every event.
 
+**Applies to:** `Events` `Entities`
 ## Tags
 An array of strings used to further classify events in the activity stream. You can use any tag you like but keep in mind that a small set (low cardinality) of tags is commonly more useful than a large set of tags.
 
+**Applies to:** `Events` `Entities`
 ## Timed
 If the action that the event is based on has duration the it can be represented here. This can, for example, be the time a AB Test took or the duration of a session reported at the end of the session. 
 
+**Applies to:** `Events` `Entities`
 ## Transaction
