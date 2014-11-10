@@ -19,53 +19,84 @@ search: true
 ---
 
 # Introduction
-Activity Stream’s main goal is to collect and process data in real time from a number of different data sources to assemble a complete view of what is happening, who is responsible and what effects it’s having. This “big-picture” is used to gain a unique view of events happening across the enterprise, a view which is normally unattainable as data is scattered across numerous systems.
+Activity Stream’s main goal is to collect data in real time from a number of different data sources to assemble a complete view of what is happening, who is responsible and what effects it’s having. This “big-picture” is used to gain a unique view of events happening across the enterprise, a view which is normally unattainable as data is scattered across numerous systems.
 
-Continuous, cognitive, analysis of this data is performed to detect perishable insights, opportunities and threats so Activity Stream can provide actionable intelligence and observations. These observations are then presented to the right people, or systems, at the right time and in the right context to turn data into information, knowledge and appropriate actions.
+Continuous, cognitive, analysis of this data is performed to detect perishable insights, opportunities and threats so Activity Stream can provide actionable intelligence and observations which are are presented to the right people, or systems, at the right time and in the right context to turn data into information, knowledge and appropriate actions.
 
-For a developer it may help to think of Activity Stream as a centralized system-log that, instead of storing system-related-information, stores business-related-information.
+For a developer it may help to think of Activity Stream as a centralized system-log that, instead of storing system-related-information, stores business-related-information. This "biz-log", formally known as the AS Historical Store, supports both arbitrary events and times-eries data. It also has the ability to link events and time-series data to the associated business entities and link business entities to each other.
 
-This "biz-log", formally known as the AS Historical Store, supports both arbitrary events and times-eries data. It also has the ability to link events and time-series data to the associated business entities and link business entities to each other. 
+<!-- It can, for example, be viewed from the perspective of the client, the product, a division/department, a particular event type or any combination there of. It can be used to keep people informed or used for analytical processing that can detect and discover patterns, opportunities, threats and make other observations we call Actionable Intelligence that is produced to reflect on daily operations and draw attention to improvement opportunities. -->
+# Events
+A event is any event/action taking place that during daily operations and has relevance for the organization or its customers. A website login, complete purchase, new order or client expressing an interest in a product are all examples of such events.
 
-It can, for example, be viewed from the perspective of the client, the product, a division/department, a particular event type or any combination there of. It can be used to keep people informed or used for analytical processing that can detect and discover patterns, opportunities, threats and make other observations we call Actionable Intelligence that is produced to reflect on daily operations and draw attention to improvement opportunities.
+These events happen at irregular intervals and are collected and associated with the customer, the product or any other business-entities affected, involved or referenced by the event.
 
-# Business Events
-A business-event is any action/event that takes place during daily operations and has relevance for the organization or its customers. A website login, purchase, order or client expressing an interest in a product are all examples of such events.
+Each event is reported by a single or more event-messages which can be sent directly to to the REST API or to Activity Stream via messaging queue.
+## Common Event Message Properties
+```json
+{
+  "type": "as.web.page.browse",
+  "origin": "com.activitystream.www",
+  "occurred_at": "2014-11-10T12:01:02.345Z",
+  "entities": [
+    {"ACTOR":"User/stefanb"}
+  ],
+  "aspects": {
+    "pageview": {
+      "path":"/cat/prod-cat/product",
+      "referrer":"http://www.somesite.com/page/ad"
+    }
+  },
+  "properties": {
+    "use":4,
+    "any":"json",
+    "structure":true
+  }
+}
+```
 
-These events happen at irregular intervals and are collected and associated with the customer, the product or any other business-entities affected, involved or referenced by the business-event.
-
-Each business-event is represented by a single event-message which can be sent directly to to the REST API or to AS via messaging queue.    
-## Common Event Properties
 Property | Type | Description 
 -------- | ---- | -----------
-**type** | String | Event Type (What happened) The type-category of the event specified in lower case and with a dot separated hierarchy. If you are using your own proprietary event types then please think of the type key as a category structure ranging from the least specific to the most specific. Thinking of this as a verb, with a category structure as a prefix, can help :)
-**occurred_at** | DateTime | ISO 8601 serialized datetime value with both milliseconds and time zone representing the exact time that the event occurred in the origin/source system. Milliseconds are important to create a unique event signature. occurred_at should only be set using server time. Have it set on the server side rather than sending it from a browser.
-**origin** | String | Where is the event originated from? A dot separated list representing a origin hierarchy. It’s a good rule to structure the origin string so that it ranges from the least_specific.to_the.most_specific. (always in lower case) 
-**entities** | List\<Relation\> | Every event is related to at least two entities, the entity responsible for the event occurring and the business entity affected/involved by the event. 
-properties | Map\<S,O\> | This is where you store all the custom properties that you want to use in further processing. Any JSON structure is valid here and even nested properties can be used in queries. 
-aspects | Map\<Aspect,Value\>| Aspects are commonly used information snippets which have rich support in Activity Stream both for processing and representation. Each event message can have multiple aspects. Aspects are a semi-normalized way to store common elements and they make it possible for us to build rich functionalities and user interfaces which services a wide range of users, rather than focusing on very specific needs of few. 
-
-'''Examples: as.ecom.cart.add	(domain.category.subcat.action) as.ecom.auth.sign-up	(domain.category.subcat.action) as.ecom.auth.login	(domain.category.subcat.action)'''
-'''Examples: com.activitystream.webserver1	(top_level_domain.domain.server) as.enhancer.ipLookup 		(system.subsystem.procedure_name)'''
-'''Events in the activity stream are commonly related to more entities than two business entities. [{"role_type":"entity_type/id", "properties”: {}, "proxy_for":"entity_type/id"}]'''
+**type** | String | Identifies the type of the event</br></br>**Example:** as.web.page.browse (*domain.category.subcat.action*)<br><ul><li>Dot separated hierarchy</li><li>Ranges from the least specific to the most specific</li><li>Specified in lower case</li></ul>When constructing your own event-types it can help to think of these as a hierarchical category structure where the last part as a verb.
+**origin** | String | Identifies where the event is originated from.</br></br>**Example:** com.activitystream.webserver1 *(tld.domain.host)*</br><ul><li>A dot separated list representing a origin hierarchy.</li><li>Ranges from the least_specific.to_the.most_specific</li><li>Specified in lower case</li></ul>
+**occurred_at** | DateTime | The exact time that the event occurred</br><ul><li>ISO 8601 serialized datetime</li><li>Includes milliseconds\* and time zone</li><li>Set by the origin/source system.</li></ul>\**Milliseconds are important to create a unique event signature (UUID)*.
+**entities** | List\<Relation\> | Lists all entities somehow involved in the event.<br><br>Every involved entity is listed with the role (relations-type) it had in the event. All events have at least an ACTOR.</br></br>Please view this detailed list of built-in roles (relation-types).
+aspects | Map\<Aspect,Value\>| Aspects are commonly used information snippets which have rich support in Activity Stream for processing, analysis and representation.</br></br>Please view this detailed list of aspects.
+properties | Map\<S,O\> | Any JSON structure can be used to store custom properties not stored as aspects.
 
 ## Advanced Properties
-
-Property | Type | Description 
+```json
+{
+  "type": "as.web.page.browse",
+  "origin": "com.activitystream.www",
+  "occurred_at": "2014-02-23T12:00:00.000Z",
+  "entities": [
+    {"ACTOR":"User/stefanb"}
+  ],
+  "aspects": {
+    "pageview": {
+      "path":"/something/classified"
+    }
+  },
+  "importance": 5,
+  "acl": [{"READ":"User/stefanb"}]
+}
+```
+Property | Type | Description
 -------- | ---- | -----------
-importance | Integer | A message importance (priority/severity) setting ranging from 0 .. 5. (5 critical, 4 very important, 3 important, 2 notable, 1 unimportant, 0 auditing only event)  Importance is used for filtering visible events in the activity stream and for emphasising important events. 
-acl | List<RULE> | Access Control Settings (See access control) 
-token | String | Explicit token reference. (No surrounding hashes, only the token) If the token exists then the observation message is merged with the token defaults before its processed. If an implicit token is found then it’s copied to this field as a usage reference.
-payload | Base64 | Additional details regarding the event. **Please note**: The content of payload is compressed and stored using Base64 encoding. It’s returned in the same form as reported but it’s content can not, for this reason, be used in queries.
+importance | Integer | A message importance (priority/severity) setting ranging from 0 .. 5. <ul><li>5 critical</li><li>4 very important</li><li>3 important</li><li>2 notable</li><li>1 unimportant</li><li>0 auditing only event</li></ul>Importance is used for filtering visible events in the activity stream and for emphasising important events. Importance can be set globally for the event type or for individual events.
+acl | List\<Rule\> | Access Control List (See access control)
+token | String | If defaults have been provided for the token then the new message is merged with those defaults before its processed. (See token based defaults)
+payload | Base64 | Additional details regarding the event.<br><br> **Please note**: The content of payload is compressed and stored using Base64 encoding. It’s returned in the same form as reported but it’s content can not, for this reason, be used in queries.
 
 ## API
 ### REST
 ### Message QUEUE
 
-# Business Entities
-Customers, Orders, Employees, Invoices, Cases, Projects and Documents are all examples  of common business-entities. Each of these entities produces, directly or indirectly, a considerable amount of related events.
+# Entities
+Users, Customers, Orders, Employees, Invoices, Cases, Projects and Documents are all examples  of common (business) entities. Each entity produces or is affected by a considerable amount of events.
 
-Each entity has its own event log, its activity stream, showing all the events that are relevant for it where each event in the activity stream can also be a part of the activity streams of the other entities involved, like the employees, the customer or both.
+Each entity has its own even-log, its activity stream, showing all the events that are relevant for it where each event in the activity stream can also be a part of the activity streams of the other entities involved, like the employees, the customer or both.
 
 It’s important to understand that all business-entities have both implicit and explicit links between them. 
 
@@ -81,6 +112,8 @@ Capturing all of this in a graph is a valuable trade of Activity Stream. There i
 ## API
 ### REST
 ### Message QUEUE
+
+# Roles & Relations
 
 # Collaboration
 ## Comments
@@ -99,13 +132,13 @@ Every bump is a link between exactly two entities, the user-entity responsible f
 ### Message QUEUE
 
 # Time-Series
-All business events produce analytical information and have their time-series “footprint” but here we referring to traditional timeseries, e.a. a collection of data-points normally emitted by systems at fixed or irregular intervals.
+All events produce analytical information and have their time-series “footprint” but here we referring to traditional timeseries, e.a. a collection of data-points normally emitted by systems at fixed or irregular intervals.
 
 In today’s operational environment there is a rich need to combine arbitrary business-events with machine generated data in order to tie together the “state of the environment” and the events happening in that environment because internal and external factors like system health, weather and time-of-day are all relevant to the “corporate performance” and can provide key contextual information when looking for patterns. 
 
 The ability to store a vast amount of such data and link it to business-entities and -events will become even more critical with the Internet-of-things really starts taking off.
 
--- Activity Stream, in order to maintain a comprehensive view of both fixed interval events and arbitrary business events, stores typical time-series data in addition to event data. 
+-- Activity Stream, in order to maintain a comprehensive view of both fixed interval events and arbitrary events, stores typical time-series data in addition to event data.
 -- Time-series are updated for business-events but raw time-series data (data-points) can also be sent to Activity Stream for processing and storing.      
 
 ## Time-Series Data (Data-Points)

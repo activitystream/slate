@@ -1,18 +1,10 @@
 # Message Aspects
-Aspects are commonly used message extensions which have rich support in Activity Stream in regards to processing and representation.
- 
-Aspects offer a normalized/structured way to store common information in a way that makes it possible for us to build rich functionality and ui that meet common needs without restricting customization.
+Aspects are commonly used message extensions which have rich support in Activity Stream in regards to processing and representation. The offer a normalized/structured way to store common information in a way that makes it possible for us to build rich functionality and ui that meet common needs without restricting customization.
 
-You can mix and match aspects to get the desired functionality for your custom events as aspect work with both events belonging to the Activity Stream Event Library as well as any custom event. 
+You can mix and match aspects to trigger the desired functionality for any custom event as well as events from the Activity Stream Event Library.
 
-An event message can have multiple aspects or none at all but it’s good to keep in mind that a clear sign of bloated event messages is if the aspect do not seem to fit together or it’s unclear what aspects affect in the message. 
+Event message can include multiple aspects or none at all but it’s good to keep in mind that a clear sign of bloated event messages is if the aspect do not seem to fit together or it’s unclear what aspects affect in the message. In other words; it’s sometimes better to send more messages than cram everything into one.
 
-In other words; it’s sometimes better to send more messages than cram everything into one.
-
-The AS Event messages can also be enhanced with the use of plugable elements, called aspects, where common use cases are tackled in a uniform way. We believe that by understanding the fundamentals of your messages and their requirements we can service you in a much better. 
-
-If you, for example, use the Classification aspect we know exactly how to enhance your timeseries with relevant information. That way we can have the right analytics information available to you at all times, correct up to the last second and, as another example, by using the Attachment aspect we know how to properly represent the event in the activity stream UI.
- 
 ## AB Testing
 ```json
 {
@@ -35,19 +27,22 @@ If you, for example, use the Classification aspect we know exactly how to enhanc
   }
 }
 ```
-
-Events that include the AB_Test aspects are stored in the AB Test analytics store where the are immediately available for querying, reporting and for other analytical processing.
+The ab_test aspect is used to store AB Test results. Analytics for AB Tests is immediately available as well as real-time dashboards tailored for AB testing.
 
 Field | Type | Description | Default 
 ----- | ---- | ----------- | -------
-id | String | The AB Test ID. Valid ids contain lowercase strings and “_” only. (much like a field in a database table)
-variant | String | What variant of the test led to this event. Valid variant contain lowercase strings and “_” only.
-outcome | String | What was the outcome of the test Valid outcome contain lowercase strings and “_” only.
+**id** | String | The AB Test ID. Valid ids contain lowercase strings and “_” only. (much like a field-name in a database table)
+**variant** | String | What variant of the test led to this event. Valid variant contain lowercase strings and "_" only.
+**outcome** | String | What was the outcome of the test. Valid outcome contain lowercase strings and "_" only.
 metric | Double | Additional/generic metric information for the test outcome 
 amount | Double | Additional/generic amount information for the test outcome
-properties | Map | Free format map structure with additional information not stored in the analytics engine but stored with every result. Use the classification aspect to add dimensions to the AB_Test outcome.
+properties | JSON | Free format JSON structure with additional information.
 
-**Applies to:** `Events`
+Applies to: `Events`</br>
+Enhanced with: `Dimensions*`, `Timed**`
+
+*\*Use the classification aspect to add dimensions to the AB_Test outcome.*</br>
+*\*Use the timed aspect to report how lon the AB test took.*
 ## Attachments
 ```json
 {
@@ -61,6 +56,7 @@ properties | Map | Free format map structure with additional information not sto
     "attachments": [
       {
         "url":"http://www.mbl.is/tncache/frimg/dimg_cache/e370x247/7/34/7343072.jpg",
+        "description":"John and Suzie doing math",
         "size":3445,
         "properties":{"smu":"fleh"}
       }
@@ -80,7 +76,8 @@ height | Double |
 size | Double | Bytes
 created | DateTime | ISO Date Time
 updated | DateTime | ISO Date Time
-properties | Map | Free format map structure with custom information
+description | String |
+properties | JSON | Free format JSON structure with custom information
 
 **Applies to:** `Events`
 ## Client Device
@@ -90,11 +87,14 @@ properties | Map | Free format map structure with custom information
   "origin": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
-    {"ACTOR":"Session/S434F4K223J", "PROXY_FOR":"Customer/311068"}
+    {
+      "ACTOR":"Session/S434F4K223J",
+      "PROXY_FOR":"Customer/311068"
+    }
   ],
   "aspects": {
     "client_device": {
-      "user_agent":"Mozilla/5.0 (Linux; U; Android 2.2; fr-lu; HTC Legend Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+      "user_agent":"Mozilla/5.0 ..."
     }
   }
 }
@@ -109,14 +109,16 @@ Based on browser string and is only used for web/browser originated events.
   "type": "as.auth.login",
   "origin": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
-  "entities": [{"ACTOR":"Session/S434F4K223J", "PROXY_FOR":"Customer/311068"}],
+  "entities": [
+    {
+      "ACTOR":"Session/S434F4K223J",
+      "PROXY_FOR":"Customer/311068"
+    }
+  ],
   "aspects": {
     "client_ip": {
       "ip":"190.236.141.125"
-     },
-    "client_device": {
-      "user_agent":"Mozilla/5.0 (Linux; U; Android 2.2; fr-lu; HTC Legend Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
-    }
+     }
   }
 }
 ```
@@ -148,16 +150,31 @@ A calculated outcome of these can be used as a Customer Experience Index or a fa
 
 Field | Type | Description  
 ----- | ---- | ----------- 
-intent | Float | Is the target doing good or bad things - evil <-> good (-5 … +5)
-engagement | Float | Is the target engaged - inactive <-> Active (-5 … +5) 
-happiness | Float | Is the target experiencing good or bad things - frustrated <-> happy (-5 … +5)
-care | Float | Is the user being attended to - neglected <-> pampered (-5 … +5)
+intent | Float | Is the target doing good or bad things</br>evil <-> good (-5 … +5)
+engagement | Float | Is the target engaged</br>inactive <-> active (-5 … +5)
+happiness | Float | Is the target experiencing good or bad things</br>frustrated <-> happy (-5 … +5)
+care | Float | Is the user being attended to</br>neglected <-> pampered (-5 … +5)
 points | Float | Points being scored
-traction* | Long | For how long does this affect the entity (in minutes) (See duration serialization). *Defaults to 120 days (120 days * 1.440 minutes = 172.800 minutes)
-targets | String[] | List of the entities that should be affected by this. (ACTOR/AFFECTS etc.) “ACTOR” is the default target for profiling values.
+traction* | Long | For how long does this affect the entity (in minutes) (See duration serialization).</br>*Defaults to 120 days (120 days * 1.440 minutes = 172.800 minutes)
+affects | String[] | List of the entities that should be affected by this. (ACTOR/AFFECTS etc.)</br>"ACTOR" is the default target for profiling values.
 
-**Applies to:** `Events (and indirectly to customers)`
+**Applies to:** `Events (and indirectly to customers/entities)`
 ## Demography
+```json
+{
+  "entity_type": "Customer",
+  "entity_id": "311068",
+  "aspects": {
+    "Demography": [
+      {
+        "gender":"male",
+        "birth_year":1968,
+        "marital_status":"married"
+      }
+    ]
+  }
+}
+```
 
 Field | Type | Description  
 ----- | ---- | ----------- 
@@ -171,10 +188,11 @@ employment | String |
 disability | String | 
 income | String | 
 housing | String | 
-properties | Map | Free format map structure with custom information
+properties | JSON | Free format JSON structure with custom information
 
+**Applies to:** `Entities`
 ## Dimensions (Classification)
-```json
+```javascript
 {
   "type": "as.auth.login",
   "origin": "com.activitystream.www",
@@ -192,7 +210,7 @@ properties | Map | Free format map structure with custom information
 ```
 A list of dimension+value pairs used to enhance other aspects. The values in classification are, for example, added to all time-series that are created for the event. 
 
-In that way AB test results, pageviews, purchases or any other aspect that automatically generated time-series do get extra dimensions for slicing and dicing.
+In that way AB test results, page-views, purchases or any other aspect that automatically generated time-series do get extra dimensions for slicing and dicing.
  
 **Applies to:** `Events` `Entities` `Data-Points`
 ## Geo Locations
@@ -230,7 +248,10 @@ bind_to* | String | Common or long-lived information like this may be moved to t
     {"ACTOR":"Username/stefanb"}
   ],
   "aspects": {
-    "grouped": { "group":"Regarding the collapsed emails", "scope":"email" }
+    "grouped": {
+      "group":"Regarding the collapsed emails",
+      "scope":"email"
+    }
   }
 }
 ```
@@ -256,8 +277,18 @@ Please note that “re:”, “fwd:” etc. are removed from the group string if
   "entities": [{"ACTOR":"Session/311068"}],
   "aspects": {
     "invoice": [
-      {"BOUGHT":"Event/3982928", "variant":"VIP Pass", "item_count":3, "item_price":75},
-      {"RENTED":"Event/3982928", "variant":"Parking", "item_count":1, "item_price":25}
+      {
+        "BOUGHT":"Event/3982928",
+        "variant":"VIP Pass",
+        "item_count":3,
+        "item_price":75
+      },
+      {
+        "RENTED":"Event/3982928",
+        "variant":"Parking",
+        "item_count":1,
+        "item_price":25
+      }
     ]
   }
 }
@@ -266,7 +297,7 @@ Generic purchase information. Items in the list will get the appropriate relatio
 
 Field | Type | Description  
 ----- | ---- | -----------
-item | type:entity_ref | < type >:< entity_type >/< entity_id > (BOUGHT, RENTED, LEASED, GOT, WON, RESERVED, RETURNED, SELECTED)
+item | type:entity_ref | < type >:< entity_type >/< entity_id > (BOUGHT, RENTED, LEASED, GOT, WON, RESERVED, RETURNED, SELECTED, UNSELECTED)
 item_count | Double | Number of items (Use localize aspect to control currency)
 item_price | Double | Price of individual item (Use localize aspect to control currency)
 variant | String | If the product is available in multiple variants then this is it’s label
@@ -277,7 +308,7 @@ tax_percentage | Double | Tax % to be added to the item price (total price + fee
 total_in_stock | Double | How many items still in stock
 total_for_sale | Double | How many items were (max) for sale
 description | String | Text description of the item bought
-properties | Map | Map for customer specific information
+properties | JSON | JSON containing customer specific information
 
 **Applies to:** `Events`
 ## Locale
@@ -341,7 +372,7 @@ cc* | String[] | The event will be linked with all the emails/handles provided i
 bcc* | String[] | The event will be linked with all the emails/handles provided in the recipient sections.
 url | String | A fully qualified URL pointing to the email on the email server.
 content | String | A summary of the email content
-properties | Map | Map for additional, customer specific, information
+properties |  for |  for containing additional, customer specific, information
 group | Boolean | Add grouping/collapsing information for the event (default is true)
 
 Can enhance or is complemented by: Attachments, Locale, Classification, **Collapsable, Access Control		
@@ -392,39 +423,263 @@ response_code | Integer | HTTP Response code (Defaults to 200)
 size | integer | Size of response in bytes
 protocol | String | Defaults to HTTP
 content | List<Relations> | List of content Items/Entities types: FEATURED|LISTED|RELATED|TEASED|ADVERTISED
-properties | Map | request properties
+properties | JSON | Custom request properties
 
 **Applies to:** `Events`
 ## Presentation
+```json
+{
+  "type": "as.ecom.product.browse",
+  "origin": "com.activitystream.www",
+  "relations": [
+    {"ACTOR":"User/stefanb"}
+  ],
+  "aspects": {
+    "presentation": {
+      "label":"Stefán Baxter",
+      "details_url":"%or.etru%/customers/stefanbaxter",
+      "thumbnail":"http://activitystream.com/employees/stefanbaxter.png"
+    }
+  }
+}
+```
 Commonly used fields to display entities but can also be used for events.
+
+Field | Type | Description
+----- | ---- | -----------
+label | String | Name or human readable label for the event/entity
+details_url | String | Home URL for the entity. Pointer to entity details.*
+thumbnail | String | URL pointing to a default thumbnail/image used to represent the entity*
+icon | String | URL pointing to a default icon/logo used to represent the entity* (css classsname)
+
+* All URLs can, with use of  templating, be based on values from the origin or the event_type record.
 
 **Applies to:** `Events` `Entities`
 ## Resolvable
+```json
+{
+  "type": "as.auth.failed",
+  "origin": "com.activitystream.www",
+  "relations": [
+    {"ACTOR":"User/stefanb"}
+  ],
+  "aspects": {
+    "resolvable": {
+      "external_id":"342",
+      "batch_id":"sfds"
+    }
+  }
+}
+```
 If the originating system already has an ID for the event that it must to use to resolve the event in the activity stream then an external_id can be supplied. 
-
-The origin and the external_id are unique together. 
 
 The batch_id is used to tag a whole batch of events so that they can be invalidated later on if, for example, a transaction fails. The batch_id is always resolved for a specific/single origin but many events can have the same batch_id.
 
 This can, for example, be used to rollback external transaction. As the activity stream is a read-only event store then the events are rolled-back by invalidating them which leaves them in the stream but hides them.
 
+Field | Type | Description
+----- | ---- | -----------
+external_id | String | When external systems need to find individual events based on their own event ID then they can supply it using this aspect.</br>*external_id is unique within the origin and needs origin information to be resolved.
+batch_id | String | External batch id which can be used, when supplied with origin, to resolve a whole batch of events.</br>*batch_id is resolved with origin information.
+
 **Applies to:** `Events` `Entities`
 ## Settings
+```json
+{
+  "type": "as.settings.changed",
+  "origin": "com.activitystream.www",
+  "relations": [
+    {"ACTOR":"User/stefanb"}
+  ],
+  "aspects": {
+    "settings": {
+      "volume":"3",
+      "active_channel":"32",
+      "active_profile":"family"
+    }
+  }
+}
+```
 Use the Setting aspect to track changes for configuration/settings. Multiple settings can attached to a single event and you can always ask for the settings as they were at a specific time for the associated entity.
 
-**Applies to:** `Events (and indirectly to entities)`
+\**Please note that the settings are associated with the “AFFECTS” entity if available or the “ACTOR" entity if no ‘bind_to’ target is specified.*
+
+"setting"="new_value"
+Name of the setting that is affected and the new/current value for the setting.
+
+**Applies to:** `Events`
 ## Summary
+```json
+{
+  "type": "as.rewards.unlocked",
+  "origin": "com.activitystream.www",
+  "occurred_at": "2014-02-23T12:00:00.001Z",
+  "relations": [
+    {"ACTOR":"Session/9fa660bb-9c43-4214-b603-882453ccf088"}
+  ],
+  "aspects": {
+  "summary": {
+    "title":"Stefán has now unlocked the 'Ignorant dude' trophy",
+    "subtitle":"by answering 30 questions incorrectly",
+    "content":"One awesome dry spell!"}
+  }
+}
+```
 Used to store customized title & summary information. 
+
+Field | Type | Description
+----- | ---- | -----------
+title | String
+subtitle | String
+content | String
+properties | JSON | JSON containing additional, customer specific, information
 
 Please note that the action_type (“as.app.reward.unlocked” in this case) can also have title information attached to it and that storing a common template there can be more efficient than storing redundant strings with every event.
 
 **Applies to:** `Events` `Entities`
 ## Tags
+```json
+{
+  "type": "as.auth.failed",
+  "origin": "com.activitystream.www",
+  "relations": [
+    {"ACTOR":"Username/stefanb"}
+  ],
+  "aspects": {
+    "tags": ["Severe","Red"]
+  }
+}
+```
 An array of strings used to further classify events in the activity stream. You can use any tag you like but keep in mind that a small set (low cardinality) of tags is commonly more useful than a large set of tags.
 
 **Applies to:** `Events` `Entities`
 ## Timed
-If the action that the event is based on has duration the it can be represented here. This can, for example, be the time a AB Test took or the duration of a session reported at the end of the session. 
+```javascript
+//With began and ended (explicit):
+{
+  "type": "as.session.ended",
+  "origin": "com.activitystream.www",
+  "occurred_at": "2014-02-23T12:00:00.000Z",
+  "relations": [
+    {"ACTOR":"Session/9fa660bb-9c43-4214-b603-882453ccf088", "proxy_for":"User/311068"}
+  ],
+  "aspects": {
+    "timed": {"begins":"2014-02-23T11:50:00.000Z", "ends":"2014-02-23T12:00:00.000Z"}
+  }
+}
+
+//With began and duration (explicit using duration):
+{
+  "aspects": {
+    "timed": {"begins":"2014-02-23T11:50:00.000Z", "duration":600000}
+  }
+}
+
+//With began only (Implicit: using occurred_at as ended):
+{
+  "aspects": {
+    "timed": {"begins":"2014-02-23T11:50:00.000Z"}
+  }
+}
+
+//With duration only (Implicit: using occurred_at as ended and occurred_at-duration as began):
+{
+  "aspects": {
+    "timed": {"duration":600000}
+  }
+}
+```
+If the action that the event is based on has duration the it can be represented here. This can, for example, be the time a AB Test took or the duration of a session reported at the end of the session.
+
+Field | Type | Description
+----- | ---- | -----------
+begins | ISO Date |
+ends | ISO Date |
+duration | Long | Milliseconds
+type | String | Any custom type ("Duration" for example)
+
+**Please Note**: It it’s unclear to which part of your event message the timed aspect applies to then it’s a good sign of your event message becoming too bloated. Creating two separate events, even of two different event types, is recommended in such cases.
+Begin and ends need to belong to the same time-zone.
 
 **Applies to:** `Events` `Entities`
+## TS Data (Data-Points)
+```javascript
+{
+  "type": "as.sysops.status.report",
+  "origin": "com.activitystream.server1",
+  "occurred_at": "2014-02-23T12:00:00.000Z",
+  "relations": [
+    {"ACTOR":"Demon/Sysops"}
+  ],
+  "aspects": {
+    "ts_data": {
+       "volume":3,
+       "free_disk_space_pc":92,
+       "machine_load":1.5
+    },
+    "classification": {
+      "machine_type":"virtual",
+      "instance_type":"small"
+    }
+  }
+}
+```
+In addition to be registered in the AS event-entity graph the event updates a time series with this datapoint.
+
+**Please note:** For high frequency, fixed interval, time-series we recommend using the DataPoint message rather than sending in regular events with the ts_data aspect.
+
+Additional dimensions are added from Locale, Client Device and GeoLocation. Additional/manual dimensions can be set using the Classification aspect.
+
 ## Transaction
+
+Field | Type | Description
+----- | ---- | -----------
+**type** | String | Payable/Receivable or Debit/Credit
+**medium** | String | Cash, Card, Check, Transfer, Other
+**amount** | Double |
+invoice_nr | String |
+reference_no | String |
+account_out | String |
+account_in | String |
+card_number  | String | Obfuscated only (Meta card numbers only)
+card_exp  | String | Expiration data
+properties | JSON | Any JSON structure containing customer/transaction specific information
+
+**Applies to:** `Events`
+
+##Update
+```javascript
+{
+  "type": "as.entity.update",
+  "origin": "com.activitystream.server1",
+  "occurred_at": "2014-02-23T12:00:00.000Z",
+  "relations": [
+    {"ACTOR":"Employee/stefanb"},
+    {"AFFECTS":"User/stefanb"}
+  ],
+  "aspects": {
+    "update": {
+      "aspects":{},
+      "properties":{}
+    }
+  }
+}
+```
+Aspect used to update entities (Event Sourcing style).
+
+Any entity can be updated using the update aspect. This is an ideal way to keep track of changes as the change-event and the changes are reported in one integrated event.
+
+The Entity API also provides a complete interface for Entity manipulation but modification events are not necessarily reported. Using the Entity API is the preferred way to update Entity information especially in the case of heavy message load and highly redundant/repeated information.
+
+Field | Type | Description
+----- | ---- | -----------
+update | JSON |
+patch | JSON |
+properties | JSON |
+aspects | JSON |
+
+**Please note:** This action is idempotent and only the delta/changes are stored.  To save space in the case of redundant requests the update-aspect information will only reflect the values that were actually changed on the target Entity so all redundant data will be discarded.
+
+Remember that the information stored with the entity is only meant to help with presentation, statistics, analysis and search and that it’s not an ideal place to be the source for business information. Meaning that it should not become your primary storage.
+
+
