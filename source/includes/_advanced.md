@@ -1,6 +1,35 @@
 # Advanced Topics
 ## Scoped API Keys
+Scoped API keys is an access token that can be generated using the master/management API keys as authentication in web applications.
+
+Scoped keys are short lived and created for specific use. A session bound key can, for example, be created that includes information about the current user, roles, access etc. 
+
+If defaults values are provided, when registering the key, they will be added to all subsequent messages submitted with that key along with user information.
+
+If user information is not available when adding the key it can be added at later stage by tying together the server session and the correct user in submitted events/messages.
+
+Please note: 
+To make sure that the management API key is not compromised the scoped API keys should always be created on the server-side over a secure connection and the then passed on to the browser.
+
+Implementation methods
+Store it in the server session and then make it available on every page 
+If no server-sessions are available then (either of the two options):
+Store the scoped API key in a client/browser cookie and add it to the js-client from there
+Create it once and set “req_cookie” to true*
+*Currently this method is suboptimal and should be used as such
+
+Scoped API keys are only added and never updated or deleted but they can be expired at any time.
 ## Message defaults using Token
+A token can be created with "default event information" to be used as defaults for subsequent events. Every subsequent event message, referencing the token, will be merged with the properties previously stored with the token. 
+
+An outgoing email may, for example, may contain a token in it’s subject line which include classification information for the email etc. and all later emails inbound or outbound can then be classified in the same way automatically.
+
+Activity Stream also looks for an embedded tracker token in main text fields of the event message and if found the token is used to populate it with default values from the registered token defaults. 
+
+Embedded tokens are formatted like this #token# where the length of the generated token is kept to a minimum without sacrificing security.
+
+Tokens based defaults are ideal to bridge disjoint messages, like in the email example before, but they are not ideal to affect all the messages of a session unless the default values are well crafted and suit for all messages that reference the token.
+
 ## Relations Types
 ## Sub-classing Relationship Types
 ## Sub-classing Entity Types
@@ -26,6 +55,38 @@ Business-entities, contrary to business-events, can be changed at will as well a
 Every business-event and every business-entity has a ACL (Access Control List) which details who has access to the information. An empty ACL means that it open but once a single entry is on that list the item is only available to those applicable. The ACL can contain individual users, roles or groups
 
 ## Deterministic UUIDs 
+
+
+## Caveats
+The first thing you will that notice when you start working with Activity Stream is that we use a semi-structured message format. This is different from most event-driven-analytics approaches currently available but we have solid reasons for doing it this way and we hope that you will learn to appreciate them no later than when you start reaping the benefits.
+
+Please get familiar with the following concepts so we can make this ride as smooth as possible.
+
+###Message Structure
+Both business-events and business-entities can be stored using almost solely custom properties but we discourage that use of Activity Stream and think there are so many great tools available for such use-cases.
+
+Our promise is simple: If you structure common element of your data according to AS convention then we will service it better than anyone. 
+
+This does not limit you in storing any custom/proprietary data it merely means storing commonly used data according to a common convention. This allows us to create a wealth of re-usable processing and presentation featured that you can tap into at will.
+
+### Message Aspects
+Aspects provide a convention to store commonly used information like Presentation information, GeoLocation, AB Test results and much more.
+
+Think of aspects like feature-flips that, when used, allow you to request customized service from the Activity Stream platform for your business-events or business-entities.
+
+A simple example of this is the data enrichment automatically triggered when the ClientIP aspect is used. In that case AS fetches all relevant information known about that IP address and includes it in the message and all/any subsequent processing of the message.
+
+The Aspects are a key component in providing a rich, but ever growing, set of features/services to our customers without 
+
+### Relations
+The relationships between an event and a entity, or between entities, can be typed and have properties. This means, for example, that the relationship from an event to a entity can declare what role the entity played in the event. 
+
+Activity Stream comes with a range of built in relationship-types (Roles) used to describe even complex relations but new sub-types can be declared on the fly when needed.  
+
+### Free-Format Data as Properties
+Any JSON structure can be stored as properties and there it a first class citizen in terms of queries and other processing.
+
+Additional, bulk-data, can be stored under payload where it’s compressed and only handed over lazily without any processing.
 
 > To authorize, use this code:
 

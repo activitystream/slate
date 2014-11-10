@@ -8,8 +8,10 @@ You can mix and match aspects to get the desired functionality for your custom e
 An event message can have multiple aspects or none at all but it’s good to keep in mind that a clear sign of bloated event messages is if the aspect do not seem to fit together or it’s unclear what aspects affect in the message. 
 
 In other words; it’s sometimes better to send more messages than cram everything into one.
- 
-  
+
+The AS Event messages can also be enhanced with the use of plugable elements, called aspects, where common use cases are tackled in a uniform way. We believe that by understanding the fundamentals of your messages and their requirements we can service you in a much better. 
+
+If you, for example, use the Classification aspect we know exactly how to enhance your timeseries with relevant information. That way we can have the right analytics information available to you at all times, correct up to the last second and, as another example, by using the Attachment aspect we know how to properly represent the event in the activity stream UI.
  
 ## AB Testing
 ```json
@@ -121,7 +123,7 @@ Based on browser string and is only used for web/browser originated events.
 If the event is originated over public Internet and the IP address is provided then Activity Stream supplies the specifics that can be resolved from the IP address. 
 
 **Applies to:** `Events`
-## CEI (Customer Experience Index)
+## Customer Experience Index (CEI)
 ```json
 {
   "type": "as.auth.password.change",
@@ -192,7 +194,7 @@ A list of dimension+value pairs used to enhance other aspects. The values in cla
 
 In that way AB test results, pageviews, purchases or any other aspect that automatically generated time-series do get extra dimensions for slicing and dicing.
  
-**Applies to:** `Events` `Entities` 
+**Applies to:** `Events` `Entities` `Data-Points`
 ## Geo Locations
 ```json
 {
