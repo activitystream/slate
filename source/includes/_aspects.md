@@ -298,12 +298,12 @@ Generic purchase information. Items in the list will get the appropriate relatio
 Field | Type | Description  
 ----- | ---- | -----------
 item | type:entity_ref | < type >:< entity_type >/< entity_id > (BOUGHT, RENTED, LEASED, GOT, WON, RESERVED, RETURNED, SELECTED, UNSELECTED)
-item_count | Double | Number of items (Use localize aspect to control currency)
-item_price | Double | Price of individual item (Use localize aspect to control currency)
-variant | String | If the product is available in multiple variants then this is it’s label
-serial | String[] | Serial numbers of purchased items (if available)
-fee_fixed | Double | Fixed cost added on top of total price (count x price)
-fee_percentage | Double | Variable cost added on top of total price (count x price)
+item_count | Double | Number of items
+item_price | Double | Price of individual item (Use the [localize](#locale) aspect to control currency)
+variant | String | Product variant when applicable
+serial_numbers | String[] | Serial numbers of purchased items (if available)
+fee_fixed | Double | Fixed cost added on top of total price (item_count x fixed_fee)
+fee_percentage | Double | Variable cost added on top of total price (item_count x fee_percentage)
 discount_percentage | Double | Discount % to be subtracted from the total item price (total price + fees)
 tax_percentage | Double | Tax % to be added to the item price (total price + fees - discount)
 total_in_stock | Double | How many items still in stock
