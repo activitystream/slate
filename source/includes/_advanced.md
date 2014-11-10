@@ -20,7 +20,80 @@ Create it once and set “req_cookie” to true*
 
 Scoped API keys are only added and never updated or deleted but they can be expired at any time.
 ## Message defaults using Token
-A token can be created with "default event information" to be used as defaults for subsequent events. Every subsequent event message, referencing the token, will be merged with the properties previously stored with the token. 
+```javascript
+//STEP 1 - Setup (Store a default message for a specific token):
+{
+  "token":"bkg", //Token is generated if left blank
+  "relations": [
+    {"REFERENCES": "Promoter/hw_jimmy_buffet"},
+    {"REFERENCES": "Artist/734667"}
+  ],
+  "aspects": {
+    "classification": {
+      "primary_market": "us",
+    }
+    "presentation":{
+      "label":"Jimmy Buffett",
+      "thumbnail":"http://media.ticketmaster.com/en-us/dbimages/165162a.jpg"
+    }
+  },
+  "variables": {
+    "baseurl":"http://www.ticketmaster.com/some/path",
+    "mobileurl":"http://m.ticketmaster.com/another/path"
+  }  //only referenced variables are used in the composite
+}
+
+//STEP 2 - User (Send a simple message that specifies a token)
+{
+  "token": "bkg", //reference the token to be used
+  "type": "as.web.redirect",
+  "origin": "com.web.server1",
+  "relations": [
+    {"ACTOR": "Cookie/eac98d34-0fbf-4c44-a4fa-bb092b6b18ce", "PROXY_FOR":"MobilituUnique/<MUniqueId>"}
+  ],
+  "aspects": {
+    "pageview": {
+      "path": "%baseurl%" //fetches the baseurl value from variables
+    },
+    "client_device": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.122 Safari/537.36",
+    "client_ip": "127.0.0.1"
+  }
+}
+
+
+//The composite message stored and processed:
+{
+  "type": "as.web.redirect",
+  "origin": "com.web.server1",
+  "relations": [
+    {"ACTOR": "Cookie/eac98d34-0fbf-4c44-a4fa-bb092b6b18ce", "PROXY_FOR":"MobilituUnique/<MUniqueId>"},
+    {"INVOLVES": "ShortUrl/bkg"},
+    {"REFERENCES": "Promoter/hw_jimmy_buffet"},
+    {"REFERENCES": "Artist/734667"}
+  ],
+  "variables": {
+    "baseurl":"http://www.ticketmaster.com/some/path",
+    "mobileurl":"http://m.ticketmaster.com/another/path"
+  }
+  "aspects": {
+    "pageview": {
+      "path": "http://www.ticketmaster.com/some/path"
+    },
+    "classification": {
+      "primary_market": "us",
+    }
+    "presentation":{
+      "label":"Jimmy Buffett",
+      "client_device": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.122 Safari/537.36",
+      "client_ip": "127.0.0.1"
+      "thumbnail":"http://media.ticketmaster.com/en-us/dbimages/165162a.jpg"
+    }
+  },
+  "token":"bkg"
+}
+
+```
+A token can be created with "default event information" to be used as defaults for subsequent events. Every subsequent event message, specifying the token, will be merged with the defaults previously stored for that token.
 
 An outgoing email may, for example, may contain a token in it’s subject line which include classification information for the email etc. and all later emails inbound or outbound can then be classified in the same way automatically.
 
@@ -29,6 +102,14 @@ Activity Stream also looks for an embedded tracker token in main text fields of 
 Embedded tokens are formatted like this #token# where the length of the generated token is kept to a minimum without sacrificing security.
 
 Tokens based defaults are ideal to bridge disjoint messages, like in the email example before, but they are not ideal to affect all the messages of a session unless the default values are well crafted and suit for all messages that reference the token.
+
+
+Property | Type | Description
+-------- | ---- | -----------
+token | String | If an external system specifies the token then this property is used. If no external token is supplied then a default token is returned.
+defaults_values | Map | This can be any* JSON structure which is a valid part of the messages that will use the tracker token returned.</br> *Defaults can not contain event specific information like occurred_at, origin or type. The defaults map can include a variables section and the values provided there can be added to subsequent messages with references to the variable name.
+variables | Map | Values are added to subsequent messages when it a) reference the token and b) contains the variable name enclosed in %%. (%variable_name%)
+valid_until | ISO Date | ISO datetime value with both milliseconds and time zone representing the exact time that the tracker token expires.
 
 ## Relations Types
 ## Sub-classing Relationship Types
@@ -142,7 +223,7 @@ curl "http://example.com/api/kittens"
 
 > The above command returns JSON structured like this:
 
-```json
+```javascript
 [
   {
     "id": 1,
@@ -195,7 +276,7 @@ curl "http://example.com/api/kittens/3"
 
 > The above command returns JSON structured like this:
 
-```json
+```javascript
 {
   "id": 2,
   "name": "Isis",
@@ -214,4 +295,3 @@ This endpoint retrieves a specific kitten.
 Parameter | Description
 --------- | -----------
 ID | The ID of the cat to retrieve
-

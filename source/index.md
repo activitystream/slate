@@ -2,9 +2,7 @@
 title: Event Message Reference
 
 language_tabs:
-  - ruby  
-  - python
-  - json
+  - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -33,7 +31,7 @@ These events happen at irregular intervals and are collected and associated with
 
 Each event is reported by a single or more event-messages which can be sent directly to to the REST API or to Activity Stream via messaging queue.
 ## Common Event Message Properties
-```json
+```javascript
 {
   "type": "as.web.page.browse",
   "origin": "com.activitystream.www",
@@ -60,12 +58,12 @@ Property | Type | Description
 **type** | String | Identifies the type of the event</br></br>**Example:** as.web.page.browse (*domain.category.subcat.action*)<br><ul><li>Dot separated hierarchy</li><li>Ranges from the least specific to the most specific</li><li>Specified in lower case</li></ul>When constructing your own event-types it can help to think of these as a hierarchical category structure where the last part as a verb.
 **origin** | String | Identifies where the event is originated from.</br></br>**Example:** com.activitystream.webserver1 *(tld.domain.host)*</br><ul><li>A dot separated list representing a origin hierarchy.</li><li>Ranges from the least_specific.to_the.most_specific</li><li>Specified in lower case</li></ul>
 **occurred_at** | DateTime | The exact time that the event occurred</br><ul><li>ISO 8601 serialized datetime</li><li>Includes milliseconds\* and time zone</li><li>Set by the origin/source system.</li></ul>\**Milliseconds are important to create a unique event signature (UUID)*.
-**entities** | List\<Relation\> | Lists all entities somehow involved in the event.<br><br>Every involved entity is listed with the role (relations-type) it had in the event. All events have at least an ACTOR.</br></br>Please view this detailed list of built-in roles (relation-types).
-aspects | Map\<Aspect,Value\>| Aspects are commonly used information snippets which have rich support in Activity Stream for processing, analysis and representation.</br></br>Please view this detailed list of aspects.
+**entities** | List\<Relation\> | Lists all entities somehow involved in the event.<br><br>Every involved entity is listed with the role (relations-type) it had in the event. All events have at least an ACTOR.</br></br>Please view this detailed list of built-in [roles (relation-types)](#roles-amp-relations).
+aspects| Map\<Aspect,Value\>| Aspects are commonly used information snippets which have rich support in Activity Stream for processing, analysis and representation.</br></br>Please view this [detailed list of aspects](#message-aspects).
 properties | Map\<S,O\> | Any JSON structure can be used to store custom properties not stored as aspects.
 
 ## Advanced Properties
-```json
+```javascript
 {
   "type": "as.web.page.browse",
   "origin": "com.activitystream.www",
@@ -85,8 +83,8 @@ properties | Map\<S,O\> | Any JSON structure can be used to store custom propert
 Property | Type | Description
 -------- | ---- | -----------
 importance | Integer | A message importance (priority/severity) setting ranging from 0 .. 5. <ul><li>5 critical</li><li>4 very important</li><li>3 important</li><li>2 notable</li><li>1 unimportant</li><li>0 auditing only event</li></ul>Importance is used for filtering visible events in the activity stream and for emphasising important events. Importance can be set globally for the event type or for individual events.
-acl | List\<Rule\> | Access Control List (See access control)
-token | String | If defaults have been provided for the token then the new message is merged with those defaults before its processed. (See token based defaults)
+acl | List\<Rule\> | Access Control List (See [access control](#access-control))
+token | String | If defaults have been provided for the token then the new message is merged with those defaults before its processed. (See [token based defaults](#message-defaults-using-token))
 payload | Base64 | Additional details regarding the event.<br><br> **Please note**: The content of payload is compressed and stored using Base64 encoding. It’s returned in the same form as reported but it’s content can not, for this reason, be used in queries.
 
 ## API

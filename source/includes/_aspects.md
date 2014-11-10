@@ -6,7 +6,7 @@ You can mix and match aspects to trigger the desired functionality for any custo
 Event message can include multiple aspects or none at all but it’s good to keep in mind that a clear sign of bloated event messages is if the aspect do not seem to fit together or it’s unclear what aspects affect in the message. In other words; it’s sometimes better to send more messages than cram everything into one.
 
 ## AB Testing
-```json
+```javascript
 {
   "type": "as.ec.cart.purchased",
   "origin": "com.activitystream.www",
@@ -44,7 +44,7 @@ Enhanced with: `Dimensions*`, `Timed**`
 *\*Use the classification aspect to add dimensions to the AB_Test outcome.*</br>
 *\*Use the timed aspect to report how lon the AB test took.*
 ## Attachments
-```json
+```javascript
 {
   "type": "as.crm.email.sent",
   "origin": "com.activitystream.www",
@@ -81,7 +81,7 @@ properties | JSON | Free format JSON structure with custom information
 
 **Applies to:** `Events`
 ## Client Device
-```json
+```javascript
 {
   "type": "as.auth.login",
   "origin": "com.activitystream.www",
@@ -104,7 +104,7 @@ Based on browser string and is only used for web/browser originated events.
 
 **Applies to:** `Events`
 ## Client IP
-```json
+```javascript
 {
   "type": "as.auth.login",
   "origin": "com.activitystream.www",
@@ -126,7 +126,7 @@ If the event is originated over public Internet and the IP address is provided t
 
 **Applies to:** `Events`
 ## Customer Experience Index (CEI)
-```json
+```javascript
 {
   "type": "as.auth.password.change",
   "origin": "com.activitystream.www",
@@ -160,7 +160,7 @@ affects | String[] | List of the entities that should be affected by this. (ACTO
 
 **Applies to:** `Events (and indirectly to customers/entities)`
 ## Demography
-```json
+```javascript
 {
   "entity_type": "Customer",
   "entity_id": "311068",
@@ -214,7 +214,7 @@ In that way AB test results, page-views, purchases or any other aspect that auto
  
 **Applies to:** `Events` `Entities` `Data-Points`
 ## Geo Locations
-```json
+```javascript
 {
   "type": "as.auth.failed",
   "origin": "com.activitystream.www",
@@ -240,7 +240,7 @@ bind_to* | String | Common or long-lived information like this may be moved to t
 
 **Applies to:** `Events` `Entities`
 ## Grouped
-```json
+```javascript
 {
   "type": "as.msg.email.sent",
   "origin": "com.activitystream.www",
@@ -269,8 +269,8 @@ Make sure all messages meant to be collapsed together share the same group and s
 Please note that “re:”, “fwd:” etc. are removed from the group string if found.
 
 **Applies to:** `Events`
-## Items (Invoice/Purchase Items)
-```json
+## Items (Commerce)
+```javascript
 {
   "type": "as.ec.cart.purchase.completed",
   "origin": "com.activitystream.www",
@@ -301,6 +301,7 @@ item | type:entity_ref | < type >:< entity_type >/< entity_id > (BOUGHT, RENTED,
 item_count | Double | Number of items (Use localize aspect to control currency)
 item_price | Double | Price of individual item (Use localize aspect to control currency)
 variant | String | If the product is available in multiple variants then this is it’s label
+serial | String[] | Serial numbers of purchased items (if available)
 fee_fixed | Double | Fixed cost added on top of total price (count x price)
 fee_percentage | Double | Variable cost added on top of total price (count x price)
 discount_percentage | Double | Discount % to be subtracted from the total item price (total price + fees)
@@ -312,7 +313,7 @@ properties | JSON | JSON containing customer specific information
 
 **Applies to:** `Events`
 ## Locale
-```json
+```javascript
 {
   "type": "as.auth.failed",
   "origin": "com.activitystream.www",
@@ -342,7 +343,7 @@ timezone | String | The time zone ID. (time zones in the tz database) Sample tim
 
 **Applies to:** `Events` `Entities`
 ## Messaging
-```json
+```javascript
 {
   "type": "as.msg.email.sent",
   "origin": "com.activitystream.exchange",
@@ -385,7 +386,7 @@ This aspect has not been implemented
 
 **Applies to:** `Events`
 ## Page View
-```json
+```javascript
 {
   "type": "as.web.page.browse",
   "origin": "com.activitystream.www",
@@ -427,7 +428,7 @@ properties | JSON | Custom request properties
 
 **Applies to:** `Events`
 ## Presentation
-```json
+```javascript
 {
   "type": "as.ecom.product.browse",
   "origin": "com.activitystream.www",
@@ -456,7 +457,7 @@ icon | String | URL pointing to a default icon/logo used to represent the entity
 
 **Applies to:** `Events` `Entities`
 ## Resolvable
-```json
+```javascript
 {
   "type": "as.auth.failed",
   "origin": "com.activitystream.www",
@@ -484,7 +485,7 @@ batch_id | String | External batch id which can be used, when supplied with orig
 
 **Applies to:** `Events` `Entities`
 ## Settings
-```json
+```javascript
 {
   "type": "as.settings.changed",
   "origin": "com.activitystream.www",
@@ -509,7 +510,7 @@ Name of the setting that is affected and the new/current value for the setting.
 
 **Applies to:** `Events`
 ## Summary
-```json
+```javascript
 {
   "type": "as.rewards.unlocked",
   "origin": "com.activitystream.www",
@@ -538,7 +539,7 @@ Please note that the action_type (“as.app.reward.unlocked” in this case) can
 
 **Applies to:** `Events` `Entities`
 ## Tags
-```json
+```javascript
 {
   "type": "as.auth.failed",
   "origin": "com.activitystream.www",
