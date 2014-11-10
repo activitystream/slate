@@ -115,29 +115,194 @@ Capturing all of this in a graph is a valuable trade of Activity Stream. There i
 
 # Collaboration
 ## Comments
+```javascript
+//Minimal comment message:
+{
+  "origin":"com.activitystream.www",
+  "relations": [
+    {"COMMENTS":"Employee/stefan@flaumur.is"}, 
+    {"COMMENTED_ON":"Vehicle/VF058"}
+  ],
+  "comment":"Some ride this is!" 
+}
+
+//Minimal comment using a stream_id to identify a event:
+{
+  "origin":"com.activitystream.www",
+  "relations": [ 
+      {"COMMENTS":"Employee/lindarut"},
+      {"COMMENTED_ON":"a2def97d-f2b0-3dc8-be51-f2a54a1879c3"}
+  ],
+  "comment":"This car is great, does it come in gold?" 
+}
+
+// Comment on a customer entity: 
+{
+  "origin":"com.activitystream.www",
+  "relations": [
+    {"COMMENTS":"Employee/stefan@flaumur.is"},
+    {"COMMENTED_ON":"Customer/3110686369"}
+  ],
+  "comment":"I’ll be back!" 
+}
+
+//Comment with tags and with explicit references to other employee: 
+{
+  "origin":"com.activitystream.www",
+  "relations": [ 
+    {"COMMENTS":"Employee/stefanb"}, 
+    {"MENTIONS":"Employee/sbaxter"}, 
+    {"COMMENTED_ON":"Vehicle/VF058"}
+  ],
+  "aspects":{"tags":["smu","fleh"]},
+  "comment":"This car is great, does it come in gold?" 
+}
+
+//Comment with tags and implicit/embedded reference to another employee: 
+{
+  "origin":"com.activitystream.www",
+  "relations": [ 
+    {"COMMENTS":"Employee/stefanb"}, 
+    {"COMMENTED_ON":"Vehicle/VF058"}
+  ],
+  "comment":"This car is great, does it come in gold @Employee/lindarut? #smu #fleh" 
+}
+```
 A comment can be made regarding any event in Activity Stream as well as directly on business entities. A single comment can be attached to multiple targets and can contain detailed information and references to users etc.
 
 Comments provide a way to facilitate business focused discussion on anything that has happened in a social kind of way. In addition to facilitate discussion between employees it can also facilitate discussion with the customer on extranets or any other controlled ueser interface.
-### Common Properties
+
+### Common Message Properties
+
+Property | Type | Description
+-------- | ---- | -----------
+origin | String | Where is the comment originated from? A period separated list representing a origin hierarchy. It’s a good rule to structure the origin string so that it ranges from the least_specific.to_the.most_specific.<ul><li>Examples:</li><li>com.activitystream.webserver1		(top_level_domain.domain.server)</li><li>com.activitystream.www			(top_level_domain.domain.site)</li><li>as.enhancer.ipLookup 			(system.subsystem.procedure_name)</li></ul>
+comment | String | Embedding implicit tags:</br> Tags can be embedded in the comment using the hash tag (#).</br>Embedding implicit relations:</br>The comment it self special characters: @refID looks for an entity referencewith the User/refID or the Employee/refID signatures and automatically adds  “MENTIONES” relations.</br>Examples: Stefán@Employee/stefanb @Customer/311068 @Vehicle/VF058 @stream_id
+relations | List<relation> | Every comment is related to at least two entities, the entity responsible for making the comment and the business entity that the comment belongs to. Comments can also reference other users or other entities.</br>Supported types are:<ul><li>COMMENTS - the entity that makes the comment</li><li>COMMENTED_ON - the entities that the comment applies to</li><li>MENTIONS - entities referenced or discussed in the comment</li></ul>See Event/Entity Relations for details.
+occurred_at | ISO Date | Occurred_at should always be set with server time or left blank to have it set by Activity Stream up on reception..
+aspects | Map<S,M> | Aspects are commonly used information snippets which have rich support in Activity Stream both for processing and representation. Each event message can have multiple aspects. </br>Supported aspects: GeoLocation, Classification, Gamification*, Attachments, Locale *Gamification settings are always associated with the one commenting
+acl | List<AC> | A list of entities which can see this comment (Access Control List) * If no rule is set then the event is accessible to all users </br>READ is the only option here and the writer (COMMENTS) is the only one with WRITE access by default. Anyone with WRITE access on the target entity (COMMENTED_ON) can remove/hide the comment by altering the ACL rules (nothing is ever permanently removed)
+
+### API
+### REST
+### Message QUEUE
+
 
 ## Bumps
+```javascript
+//Simple bump message:
+{
+  "entities":[
+    {"ACTOR":"Employee/lindarut"},
+    {"BUMP_UP":"Vehicle:Car/VF058"}
+  ]
+}
+
+//Bump up an event in the activity stream by stream id:
+{
+  "entities": [ 
+    {"ACTOR":"User/stebax@gmail.com"}, 
+    {"BUMP_UP":"206fd910-d2f3-3a08-bca6-fe7088360a78"}
+  ]
+}
+
+//Multiple bumps in one message:
+{
+  "entities": [ 
+    {"ACTOR":"Employee/stefanb"}, 
+    {"BUMP_NEUTRAL":"Customer/311068"},
+    {"BUMP_DOWN":"Vehicle:Car/VF058"},
+    {"BUMP_UP":"206fd910-d2f3-3a08-bca6-fe7088360a78"}
+  ]
+}
+```
 Bump(s) are essentially the same thing a “like” and a “+1”. It’s a simple way for users to express their opinions regarding stream items (event, entities and comments).
 
-Every bump is a link between exactly two entities, the user-entity responsible for voting/bumping and the stream-item being voted on. 
-### Common Properties
+Every bump is a link between exactly two entities, the user-entity responsible for voting/bumping and the stream-item being voted on.
+ 
+Property | Type | Description
+-------- | ---- | -----------
+actor | Stream Item | Either an <entity_type>/<entity_id> pair or a stream_id.  Examples: Employee/stefanb  a2def97d-f2b0-3dc8-be51-f2a54a1879c3
+action:entity | Stream Item | <bump_type>:<entity_type>/<entity_id> <bump_type>:<stream_id>   Action: BUMP_UP BUMP_DOWN BUMP_NEUTRAL
+
+
+### Common Message Properties
 ## API
 ### REST
 ### Message QUEUE
 
 # Time-Series
+```javascript
+//Minimal data-point:
+//Only stores one metric, “load”, in the “SystemHealth” time serie and adds “server1” as the origin dimensions.
+{
+  "series": "SystemHealth",
+  "origin": "server1",
+  "occurred_at": "2014-01-19T12:56:48.442Z",
+  "aspects": {
+    "ts_data": {
+      "load":5.6
+    }
+  }
+}
+
+//Multiple data-points and an entity reference:
+//Adds metrics for “tries“ and “importance” to the “CaptchasTooManyFailed” timeseries using the provided time as the precise time for the data-point and with Customer(3110686369) as a dimensions.  This also establishes a link between the customer entity in the historical store and this particular timeseries.
+{
+  "series": "CaptchasTooManyFailed",
+  "origin": "as.cep3",
+  "occurred_at": "2014-01-19T12:56:48.442Z",
+  "relations": [{"REFERENCES": "Customer/3110686369"}],
+  "aspects": {
+    "ts_data": {"tries":1, "importance":3,}
+  }
+}
+
+//Multiple entity references
+//Does the same as the one above except it references more entities in the historical store (Customer/IP)
+{
+  "series": "CaptchasTooManyFailed",
+  "origin": "as.cep3",
+  "occurred_at": "2014-01-19T12:56:48.442Z",
+  "relations": [
+    {"AFFECTS": "Customer/3110686369"},
+    {"REFERENCES": "IP/192.168.1.1"}
+  ],
+  "aspects": {
+    "ts_data": {
+       "importance":3,
+       "tries":1
+    },
+    "classification": {"type":"Google"}
+  }
+}
+```
+Data points are time-series entries that can be reported individually, in batches or as an integrated part of an event message using the ts_data aspect.
+
+Activity Stream includes a real-time analytics store that is capable of storing data points with multiple dimensions which are available for querying as soon as submitted. 
+
+Think of the AS time series as a OLAP/Cube which is updated continuously and can be sliced and diced at will.
+
+<!--
 All events produce analytical information and have their time-series “footprint” but here we referring to traditional timeseries, e.a. a collection of data-points normally emitted by systems at fixed or irregular intervals.
-
 In today’s operational environment there is a rich need to combine arbitrary business-events with machine generated data in order to tie together the “state of the environment” and the events happening in that environment because internal and external factors like system health, weather and time-of-day are all relevant to the “corporate performance” and can provide key contextual information when looking for patterns. 
-
 The ability to store a vast amount of such data and link it to business-entities and -events will become even more critical with the Internet-of-things really starts taking off.
-
 -- Activity Stream, in order to maintain a comprehensive view of both fixed interval events and arbitrary events, stores typical time-series data in addition to event data.
 -- Time-series are updated for business-events but raw time-series data (data-points) can also be sent to Activity Stream for processing and storing.      
+-->
+## Common Message Properties
+
+Property | Type | Description
+-------- | ---- | -----------
+series | String | The Time-Series label/name. First time a series label is used the timeseries is instantiated and should require no additional preparation.
+origin | String | Where is the datapoint originated from (Source System). The origin becomes a dimension in the time-series entry. Examples: com.activitystream.webserver1	(top_level_domain.domain.server) processing-line-1.scale-1.weight-meter-1 (machine.component.meter)
+occurred_at | ISO Date | ISO serialized datetime representing the exact time that the event occurred at the origin/source system. *Handling of data-points in AS differs from other events messages and a default occurred_at value is not provided. This means that the originating system must always provide the correct “measurement time” for data-points.
+relations | List<relation> | A link between the Entity and the Time-series is created the first time the entity is mentioned in conjunction with the time-series. Relation format: [{"type":"<entity_type>/<entity_id>"}]  Supported types are: - AFFECTS - The entity that the time series value afects (like temperature) - REFERENCES - Entity not directly involved in the ts data but should be Relationship information is  added to the timeseries data as a dimensions, much in the same way as the classification dimensions, but the difference is that entities listed here, and residing in the historical-graph,  are associated/linked with the timeseries for further/later processing.
+aspects | Map | The data-point information is separated into 1 to 3 different aspects depending on the nature/purpose of the information. These are some of the same aspects available for AS Event Messages and are documented below.
+ts_data | Map | A Key/Value pair representing metric and a value pairs for the time-series where the value is always numeric (double).
+classification | Map | A key value pair representing a dimension and the corresponding dimension values.  Dimensions are useful for querying, aggregating and faceting time-series data. 
+geo_location | String | A lat,long string containing valid geo coordinates. Simple Geo queries will be supported shortly (they are currently supported as an experimental feature in Druid).
+
 
 ## Time-Series Data (Data-Points)
 In addition to be registered in the AS event-entity graph the event updates a time series with this datapoint. 
