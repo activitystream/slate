@@ -274,9 +274,10 @@ Please note that “re:”, “fwd:” etc. are removed from the group string if
 {
   "type": "as.ec.cart.purchase.completed",
   "origin": "com.activitystream.www",
+  "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [{"ACTOR":"Session/311068"}],
   "aspects": {
-    "invoice": [
+    "items": [
       {
         "BOUGHT":"Event/3982928",
         "variant":"VIP Pass",
@@ -648,39 +649,6 @@ properties | JSON | Any JSON structure containing customer/transaction specific 
 
 **Applies to:** `Events`
 
-##Update
-```javascript
-{
-  "type": "as.entity.update",
-  "origin": "com.activitystream.server1",
-  "occurred_at": "2014-02-23T12:00:00.000Z",
-  "relations": [
-    {"ACTOR":"Employee/stefanb"},
-    {"AFFECTS":"User/stefanb"}
-  ],
-  "aspects": {
-    "update": {
-      "aspects":{},
-      "properties":{}
-    }
-  }
-}
-```
-Aspect used to update entities (Event Sourcing style).
-
-Any entity can be updated using the update aspect. This is an ideal way to keep track of changes as the change-event and the changes are reported in one integrated event.
-
-The Entity API also provides a complete interface for Entity manipulation but modification events are not necessarily reported. Using the Entity API is the preferred way to update Entity information especially in the case of heavy message load and highly redundant/repeated information.
-
-Field | Type | Description
------ | ---- | -----------
-update | JSON |
-patch | JSON |
-properties | JSON |
-aspects | JSON |
-
-**Please note:** This action is idempotent and only the delta/changes are stored.  To save space in the case of redundant requests the update-aspect information will only reflect the values that were actually changed on the target Entity so all redundant data will be discarded.
-
-Remember that the information stored with the entity is only meant to help with presentation, statistics, analysis and search and that it’s not an ideal place to be the source for business information. Meaning that it should not become your primary storage.
-
+##Update (Entity)
+This aspect allows Entities to be updated as a part of any event message. Please se the Entity [Update Message](#update-message) for details on how entities can be updated.
 
