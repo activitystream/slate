@@ -28,7 +28,6 @@ includes:
   - as-api/aspects
   - as-api/access
   - as-api/advanced_topics
-  - as-api/details_and_references
 
 search: true
 ---
@@ -79,11 +78,3 @@ Any User, with sufficient privileges, can [subscribe to events or observations](
 
 ### Streaming Analytics
 Every message received by Activity Stream is processed and analysed. That process yields a lot af statistical information which is published, via a web-socket and message queue, at fixed intervals. This, along with streaming-events, can be used to build dashboards that are continuously updated and more.        
-
-### Further Reading
-
-* [Provisioning API]()
-* [SQL graph queries]()
-* [Advanced analytical queries]()
-* [A Library of standard AS event-messages ]()
-* [Cookbook]()
