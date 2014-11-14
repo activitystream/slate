@@ -781,7 +781,117 @@ Please note that the action_type (“as.app.reward.unlocked” in this case) can
 **Applies to:** `Events` `Entities`</br>
 **Compliments:** `Presentation`
 ## Tags
+```shell
+{
+  "type": "as.auth.failed",
+  "origin": "com.activitystream.www",
+  "relations": [
+    {"ACTOR":"Username/stefanb"}
+  ],
+  "aspects": {
+    "tags": ["Severe","Red"]
+  }
+}
+```
+An array of strings used to further classify events in the activity stream. You can use any tag you like but keep in mind that a small set (low cardinality) of tags is commonly more useful than a large set of tags.
+
+**Applies to:** `Events` `Entities`
 ## Timed
+```shell
+//With began and ended (explicit):
+{
+  "type": "as.session.ended",
+  "origin": "com.activitystream.www",
+  "occurred_at": "2014-02-23T12:00:00.000Z",
+  "relations": [
+    {"ACTOR":"Session/9fa660bb-9c43-4214-b603-882453ccf088", "proxy_for":"User/311068"}
+  ],
+  "aspects": {
+    "timed": {"begins":"2014-02-23T11:50:00.000Z", "ends":"2014-02-23T12:00:00.000Z"}
+  }
+}
+
+//With began and duration (explicit using duration):
+{
+  "aspects": {
+    "timed": {"begins":"2014-02-23T11:50:00.000Z", "duration":600000}
+  }
+}
+
+//With began only (Implicit: using occurred_at as ended):
+{
+  "aspects": {
+    "timed": {"begins":"2014-02-23T11:50:00.000Z"}
+  }
+}
+
+//With duration only (Implicit: using occurred_at as ended and occurred_at-duration as began):
+{
+  "aspects": {
+    "timed": {"duration":600000}
+  }
+}
+```
+If the action that the event is based on has duration the it can be represented here. This can, for example, be the time a AB Test took or the duration of a session reported at the end of the session.
+
+**Please Note**: It it’s unclear to which part of your event message the timed aspect applies to then it’s a good sign of your event message becoming too bloated. Creating two separate events, even of two different event types, is recommended in such cases.
+
+Field | Type | Description
+----- | ---- | -----------
+begins | ISO Date |
+ends | ISO Date |
+duration | Long | Milliseconds
+type | String | Any custom type ("Duration" for example)
+
+**Applies to:** `Events` `Entities`
+
 ## TS Data (Data-Points)
+```shell
+Sample of a event message that piggybacks a timeseries entry
+{
+  "type": "as.sysops.status.report",
+  "origin": "com.activitystream.server1",
+  "occurred_at": "2014-02-23T12:00:00.000Z",
+  "relations": [
+    {"ACTOR":"Demon/Sysops"}
+  ],
+  "aspects": {
+    "ts_data": {
+       "series":"sfsd",
+       "volume":3,
+       "free_disk_space_pc":92,
+       "machine_load":1.5
+    },
+    "classification": {
+      "machine_type":"virtual",
+      "instance_type":"small"
+    }
+  }
+}
+```
+In addition to be registered in the AS event-entity graph the event updates a time series with this data-point.
+
+**Please note:** For high frequency, fixed interval, time-series we recommend using the DataPoint message rather than sending in regular events with the ts_data aspect.
+
+Additional dimensions are added from Locale, Client Device and GeoLocation. Additional/manual dimensions can be set using the Classification aspect.
+
 ## Transaction
+
+Field | Type | Description
+----- | ---- | -----------
+**type** | String | Payable/Receivable or Debit/Credit
+**medium** | String | Cash, Card, Check, Transfer, Other
+**amount** | Double |
+invoice_nr | String |
+reference_no | String |
+account_out | String |
+account_in | String |
+card_number  | String | Obfuscated only (Meta card numbers only)
+card_exp  | String | Expiration data
+properties | JSON | Any JSON structure containing customer/transaction specific information
+
+**Applies to:** `Events`
+
 ## Update
+Event sourcing
+This aspect allows Entities to be updated as a part of any event message. Please se the Entity [Update Message](#update-message) for details on how entities can be updated.
