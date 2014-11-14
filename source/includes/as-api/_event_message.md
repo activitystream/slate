@@ -54,11 +54,54 @@ returns this:
 `POST` `https://<tenant>.activitystream.com/api/collector/v1/events`
 
 ###Request properties
-Property | Description\*
+Property | Description
 -------- | -----------
 api_key  | Your API (unless pre-authenticated)
    
 ## Send via Message Queue
+```shell
+returns nothing
+```
+###Settings
+Property | Description
+-------- | -----------
+vhost | Same as configured in AS admin/setup
+exchange | to-activitystream
+message_key | event-type signature ("as.web.page.browse" in the example above)
+
 ## Event queries
+```shell
+Returns the event-message as submitted
+
+
+Returns the event-message as submitted a long with information on all linked entities
+
+Returns a json structure showing the analytic entries automatically generated for the entry
+```
+
+###Single event message:
+`POST` `https://<tenant>.activitystream.com/api/v1/as/events/{stream-id}`
+
+###Single event message and related entities:
+`GET` `https://<tenant>.activitystream.com/api/v1/as/events/{stream-id}/details`
+
+###Shows analytic entries generated for the event:
+`GET` `https://<tenant>.activitystream.com/api/v1/as/events/{stream-id}/analytics` 
+
+###List of Comments attached to the event:
+`GET` `https://<tenant>.activitystream.com/api/v1/as/events/{stream-id}/comments?page={page-nr}&pagesize={items-on-page}` 
+
+###List of Bumps attached to the event:
+`GET` `https://<tenant>.activitystream.com/api/v1/as/events/{stream-id}/bumps?page={page-nr}&pagesize={items-on-page}` 
+
+###Single Event by an external id specified in the "identafiable" aspect
+`GET` `https://<tenant>.activitystream.com/api/v1/as/events/external-id/{external-id}` 
+
+###All Events by an external batch-id specified in the "identafiable" aspect
+`GET` `https://<tenant>.activitystream.com/api/v1/as/events/external-batch-id/{batch-id}` 
+
+* See [Graph Queries]() for information on querying the event-entity graph using SQL
+* See [Access Control]() for information on changing the ACL for an event
+
 ## Analytic queries
 ## Streaming updates
