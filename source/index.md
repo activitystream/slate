@@ -2,14 +2,14 @@
 title: AS API
 
 language_tabs:
-  - javascript
 
 toc_footers:
-  - <h3>Other Documentation</h3>
+  - <h3>Documentation Index</h3>
+  - <a href='/as-api.html#'>The Activity Stream API</a>
   - <a href='/provisioning.html#'>Provisioning API</a>
   - <a href='/graph.html#'>SQL Graph Queries</a>
   - <a href='/analytics.html#'>Analytic Queries</a>
-  - <a href='/as-library.html#'>Library of standard AS messages</a>
+  - <a href='/as-catalog.html#'>The AS Event-Type Catalog</a>
   - <a href='/recipes.html#'>Recipes</a>
   - <a href='/details.html#'>Details & references</a>
   
@@ -19,5 +19,27 @@ search: true
 ---
 
 # Introduction
-This documentation will help you ...
+Here you will find the documentation for the Activity Stream platform. We hope it will help you get quickly up-to-speed and provide you with enough information to tak full advantage of our platform.
 
+##The Activity Stream API
+Everything you need to know about sending event-messages, time-series data and other activity stream items to us via REST API or via Message Queue. It also covers how to query the activity stream, deal with access controls and several other advanced topics when it comes to manipulating the Historical Store of Activity Stream. [more](/as-api.html)
+
+##Provisioning API
+Here you learn how to set up the Activity Stream platform to suit your needs, how to create new users or create scoped API keys for specific use-cases. [more](/provisioning.html) (pending)
+
+##SQL Graph Queries
+The Historical store, that contains all the events and entities in it's event-entity graph can be queried using a SQL like DSL which has been enhanced to facilitate graph traversals and other graph specific goodies. [more](/graph.html) (pending)
+
+##Analytic Queries
+The Real-Time Analytics store is always up-to-date (more like up-to-the-second) and is capable of answering ad-hoc queries in an instance. Here you learn how to use the simple REST queries as well as to do advanced querying. [more](/analytics.html) (pending)
+
+##The AS Event-Type Catalog*
+Activity Stream is building a catalog of predefined event-types. When they are used the Observation Engine automatically kicks in and starts producing Observations without any further configuration and tailored dashboards as well as domain specific reports become available.  [more](/as-library.html)
+
+\***Please Note:** It may depend on your subscription what observations, dashboards and reports become available to you.
+
+##Recipes
+Here we collect all the tips, tricks and recipes for known/common scenarios. This section is maintained in collaboration with our users. [more](/recipes.html)
+
+##Details & references
+More detailed reading material available for those interested in nuts and bolts. The common denominator here is that this is material that we did nat want to have clutter our API documentation but we hope some may find interesting or at least helpful. [more](/details.html)

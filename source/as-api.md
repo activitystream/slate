@@ -5,12 +5,12 @@ language_tabs:
   - json
 
 toc_footers:
-  - <h3>AS Documentation:</h3>
+  - <h3>Documentation Index</h3>
   - Activity Stream API
   - <a href='/provisioning.html#'>Provisioning API</a>
   - <a href='/graph.html#'>SQL Graph Queries</a>
   - <a href='/analytics.html#'>Analytic Queries</a>
-  - <a href='/as-library.html#'>Library of standard AS messages</a>
+  - <a href='/as-catalog.html#'>The AS Event-Type Catalog</a>
   - <a href='/recipes.html#'>Recipes</a>
   - <a href='/details.html#'>Details & references</a>
   
@@ -20,6 +20,7 @@ includes:
   - as-api/timeseries_message
   - as-api/comments
   - as-api/bump
+  - as-api/event_relations
   - as-api/entity_relations
   - as-api/notifications
   - as-api/observations
@@ -62,7 +63,7 @@ The entities involved in an event all have respective roles. The "ACTOR" is, for
 ### Link Type
 In Activity Stream any entity can be [linked to any other entity]() and the link between the entities can be typed, have properties and weight. That way a Customer can, for example, be a "OWNER" of a Car. [Common Link types]() are built into Activity Stream but new [Link-Types can defined on the fly]().
 
-### Aspects
+### Message Aspects
 [Aspects]() are commonly used message extensions which have rich support in Activity Stream in regards to processing and representation.
 
 ### Time-Series
