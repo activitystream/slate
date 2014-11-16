@@ -55,27 +55,31 @@ A instance of a User, Product, WebPage and Order are all examples of entities. T
 That way each event becomes a part of the entities history, its activity stream, that reflects the type of event and the role that the entity played in the event. [Entity-types]() as created just-in-time and can be [sub-classed]() for advanced querying
 
 ### Event-Entity Graph
-Activity Stream's stores all events in a [graph](). This enables a range of valuable services but it does introduce some requirements on the event-message structure.
+Activity Stream's stores all events in its [Historical Store]() which is graph based. This enables a range of valuable services but it does introduce some requirements on the event-message structure.
 
 ### Role
-The entities involved in an event all have respective roles. The "ACTOR" is, for example, the entity triggering the event and "AFFECTS" is the role used for all entities directly affected by the event while "REFERENCES" is the role used for entities involved in the event but have no real bearing on the event. [Common roles]() are built into Activity Stream but new [Roles can defined on the fly]().
+The entities involved in an event all have respective roles. The "ACTOR" is, for example, the entity triggering the event and the "AFFECTS" role is used for all entities directly affected by the event while the "REFERENCES" role is used for entities involved in the event but have no real bearing on the event. [Common roles]() are built into Activity Stream but custom [Roles can defined on the fly]().
 
 ### Link Type
-In Activity Stream any entity can be [linked to any other entity]() and the link between the entities can be typed, have properties and weight. That way a Customer can, for example, be a "OWNER" of a Car. [Common Link types]() are built into Activity Stream but new [Link-Types can defined on the fly]().
+Any entity can be [linked to any other entity]() and the link between the entities can be typed, have properties and weight. That way a Customer can, for example, be a "OWNER" of a Car or be synonymous, in terms of event history, with his personal mobile phone. [Common Link types]() are built into Activity Stream but custom [Link-Types can defined on the fly]().
 
 ### Message Aspects
-[Aspects]() are commonly used message extensions which have rich support in Activity Stream in regards to processing and representation.
+[Aspects](#aspects) are commonly used message extensions which have rich support in Activity Stream in regards to processing and representation.
 
 ### Time-Series
 Activity Stream includes a [real-time analytics store]() capable of storing multi-metric, multi-dimensional time-series where new data points are immediately available for [ad-hoc querying]().
 Think of the AS analytics store as an dynamic OLAP/Cube which is continuously updated and can be sliced and diced at will. You can submit any TS data to the analytics store as new time-series are created on demand. 
 
 ### Observations
-[Observations]() are stream items created by the [Observation Engine]() in Activity Streams when it detects situations, threats or opportunities which it has been trained to identify.
-These observations become a part of the activity stream for the entities it involves and it's sent to users and systems that have expressed interest in them or the entities involved.
+[Observations]() are stream items created by the [Observation Engine]() when it detects situations, threats or opportunities which it has been trained to identify.
+These observations become a part of the activity stream for the entities it involves and it's sent to users and systems that have expressed interest in them or the entities involved. This is the preferred way to deliver actionable intelligence to users but observations are sent directly to systems, via message queue, as well.
 
 ### Notifications
-Any User, with sufficient privileges, can [subscribe to events or observations]() of certain types or concerning certain entities and receive notifications when applicable.
+Any User, with sufficient privileges, can [subscribe to events or observations]() of certain types or concerning certain entities and receive notifications when applicable. 
+
+### Stream_ID
+Every peace of data belonging to the activity stream has a stream_id. This applies to events, entities, comments, bumps, subscriptions and more. To improve tracking and consistency the Stream IDs are calculated using [deterministic UUIDs]() (named) that can be pre-calculated for any object, even before sending it to Activity Stream.         
+
 
 ### Streaming Analytics
 Every message received by Activity Stream is processed and analysed. That process yields a lot af statistical information which is published, via a web-socket and message queue, at fixed intervals. This, along with streaming-events, can be used to build dashboards that are continuously updated and more.        

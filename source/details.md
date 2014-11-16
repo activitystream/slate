@@ -22,3 +22,19 @@ search: true
 # Introduction
 This documentation will help you ...
 
+# The Historical Store
+## Event-Entity Graph
+## Append only 
+
+# The Analytics Store
+## What is real-time?
+
+# The Observation Engine
+## Complex Event Processing
+## Machine Learning
+## Pattern discovery and detection 
+
+# Best Practices
+## Constructing Event-Type Keys
+## Constructing Origin Keys
+## Defining Event Importance

@@ -45,8 +45,8 @@ metric | Double | Additional/generic metric information for the test outcome
 amount | Double | Additional/generic amount information for the test outcome
 properties | JSON | Free format JSON structure with additional information.
 
-**Applies to:** `Events`</br>
-**Enhanced with:** [`Dimensions*`](), [`Timed**`]()
+**Applies to:** [`Events`]()</br>
+**Enhanced by:** [`Dimensions*`](), [`Timed**`]()
 
 *\*Use the classification aspect to add dimensions to the AB_Test outcome.*</br>
 *\*Use the timed aspect to report how lon the AB test took.*
@@ -92,11 +92,12 @@ created | DateTime | ISO Date Time when the file was created (Used if missing fr
 updated | DateTime | ISO Date Time when the file was updated (Used if missing from file information)
 mime_type | String | Explicitly specifies the document type (Ignoring the file extensions).
 properties | JSON | Free format JSON structure with custom information
-content | Base64 | The email contents***
+content | Base64 | The file contents***
 
-**Applies to:** `Events`
+**Applies to:** [`Events`]()
+**Enhances:** [`Messaging`]()
 
-*** Email contents, as well as document contents, depends on AS subscription
+*** Storing of file contents, as well as email contents, depends on your AS subscription
 
 ### Additional queries and interfaces
 * See [Events](#events) for information on sending the event to AS.
@@ -144,19 +145,20 @@ Field | Type | Description
 ----- | ---- | -----------
 user_agent | String | The user agent (browser) used by the ACTOR when causing the parent event to be produced
 bind_to* | String | Common or long-lived information, like this, may be moved to the ACTOR entity if it applies to all events from the actor.</br>In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the section. Multiple entries are stored for slow changing aspects to keep complete auditing log.
-\_device_vendor | String |
-\_device_type | String |
-\_device_pname | String |
-\_brower_vendor | String |
-\_browser_type | String |
-\_browser_version | String |
-\_os_type | String |
-\_os_version | String |
-\_is_input_device | Boolean |
-\_is_tablet | Boolean |
-\_is_wireless | Boolean |
-\_display_width | Integer
-\_display_height |Integer
+ | |  **Following are read-only properties**
+*\_device_vendor* | String |
+*\_device_type* | String |
+*\_device_pname* | String |
+*\_brower_vendor* | String |
+*\_browser_type* | String |
+*\_browser_version* | String |
+*\_os_type* | String |
+*\_os_version* | String |
+*\_is_input_device* | Boolean |
+*\_is_tablet* | Boolean |
+*\_is_wireless* | Boolean |
+*\_display_width* | Integer
+*\_display_height* |Integer
 
 **Applies to:** `Events`
 
@@ -207,19 +209,19 @@ Field | Type | Description
 ----- | ---- | -----------
 ip | IP Address | The IP address used by the ACTOR when causing the parent to be produced
 bind_to* | String | Common or long-lived information, like this, may be moved to the ACTOR entity if it applies to all events from the actor.</br> In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the section. Multiple entries are stored for slow changing aspects to keep complete auditing log.
-\_isp | String | Name of the ISP if it could be resolved for the IP
-\_organization | String | Name of the Organization the IP if it could be resolved for the IP
-\_reverse_dns | String | Reverse DNS Name for the IP if it could be resolved
-\_geolocation | Map | GeoLocation entry if existed for the IP (See GeoLocation)
-\_locale | Map | Locale entry if existed for the IP (See Locale)
+ | |  **Following are read-only properties**
+*\_isp* | String | Name of the ISP if it could be resolved for the IP
+*\_organization* | String | Name of the Organization the IP if it could be resolved for the IP
+*\_reverse_dns* | String | Reverse DNS Name for the IP if it could be resolved
+*\_geolocation* | Map | GeoLocation entry if existed for the IP (See GeoLocation)
+*\_locale* | Map | Locale entry if existed for the IP (See Locale)
 
 * Needs updating
 
-**Applies to:** `Events`
+**Applies to:** [`Events`]()</br>
 
 ### Additional queries and interfaces
 * See [Events](#events) for information on sending the event to AS.
-
 
 ## Customer Experience Index (CEI)
 ```shell
@@ -237,11 +239,10 @@ A partial password-changed-message illustrating the use of the cei aspect:
   }
 }
 ```
-Each event can have synthesized/imagined effect on the entities affected by it. When applicable it can, for example, be used to guesstimate the current state of a customer based on the things in his activity stream.
+Each event can have synthesized/imagined effect on the entities affected by it. When applicable it can, for example, be used to estimate the current state of a customer based on the things in his activity stream.
 
-The defaults for this can be stored with the event type and applied to all events where these settings are missing.
+The defaults can be stored for each event-type but also explicitly defined for individual events using this aspect.
 
-A calculated outcome of these can be used as a Customer Experience Index or a factor in such an index.
 
 Field | Type | Description
 ----- | ---- | -----------
@@ -253,11 +254,12 @@ points | Float | Points being scored
 traction* | Long | For how long does this affect the entity (in minutes) (See duration serialization).</br>*Defaults to 120 days (120 days * 1.440 minutes = 172.800 minutes)
 affects | String[] | List of the entities that should be affected by this. (ACTOR/AFFECTS etc.)</br>"ACTOR" is the default target for profiling values.
 
-**Applies to:** `Entities` (via Events)
+**Applies to:** [`Entities`]() (via Event-Types and Events), [`Event-Types`]()
 
 ### Additional queries and interfaces
 * See [Events](#events) for information on sending the event to AS.
 * See [Analytic queries](/analytics.html#cei-analytics) for information on fetching CEI analytics.
+* See [CEI calculations and analytics]() for more information on the Customer Experience Index.
 
 ## Demography
 ```shell
@@ -291,7 +293,7 @@ income | String | XXX Range
 housing | String | **Partially Owned**, **Fully Owned**, **Rent**, **Rent-Free**, **Other**
 properties | JSON | Free format JSON structure with custom information
 
-**Applies to:** `Entities` (Preferably entities that represent individuals)</br>
+**Applies to:** [`Entities`]() (Preferably entities that represent individuals)</br>
 **Enhanced with:** [`Locale*`](#locale)  [`Timed*`](#timed)
 
 ### Additional queries and interfaces
@@ -325,7 +327,7 @@ Field | Type | Description
 key   | String | The key in the "{**key**}":{value} pair
 value | Double | The value in the "{key}":{**value**} pair
 
-**Applies to:** `Events`, `Time-Series Data`</br>
+**Applies to:** [`Events`](), [`Time-Series Data`](), [`Event-Types`]()</br>
 **Enhances:** [`TS Data`](#ts-data-data-points)
 
 ### Additional queries and interfaces
@@ -378,22 +380,23 @@ Field | Type | Description
 bind_to* | String | Common or long-lived information like this may be associated with linked entities, especially if it applies to all events related to that entity (usually the actor). In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the session. Multiple entries are stored for slow changing aspects to keep complete location log.
 type | String | Presentation/processing  tags: **from** (location), **to** (destination), **residence**, **work**, **temporary**
 accuracy | Integer | A 0..10 rating for the accuracy of this location.  This is not the geolocation-accuracy (resolution) but how reliably the bound entity can be associated with that location. 10 means that it/he was positively there. 0 mean that it’s a vague guess.
-\_continent|String|
-\_country|String|
-\_country_code|String|
-\_region|String|
-\_region_code|String|
-\_area|String|
-\_area_code|String|
-\_city|String|
-\_postal_code|String|
-\_organization|String|
-\_street|String|
-\_street_no|String|
-\_dma_code|String|
-\_metro_code|String|
+ | |  **Following are read-only properties**
+*\_continent*|String|
+*\_country*|String|
+*\_country_code*|String|
+*\_region*|String|
+*\_region_code*|String|
+*\_area*|String|
+*\_area_code*|String|
+*\_city*|String|
+*\_postal_code*|String|
+*\_organization*|String|
+*\_street*|String|
+*\_street_no*|String|
+*\_dma_code*|String|
+*\_metro_code*|String|
 
-**Applies to:** `Events`, `Entities`</br>
+**Applies to:** [`Events`](), [`Entities`](),  [`Event-Types`]()</br>
 **Enhanced by:** [`Timed`](#timed), [`Locale`](#timed)
 
 *It depends on subscription whether geo_location is enriched or not and is always quantity based *
@@ -442,7 +445,7 @@ Make sure all messages meant to be collapsed together share the same group and s
 
 Please note that “re:”, “fwd:” etc. are removed from the group string if found.
 
-**Applies to:** `Events`
+**Applies to:** [`Events`]()
 
 ### Additional queries and interfaces
 * See [Events](#events) for information on updating entities in AS.
@@ -496,8 +499,8 @@ properties | JSON | JSON containing customer specific information
 \_discount|Double|N/A
 
 
-**Applies to:** `Events`</br>
-**Enhanced by:** [`Locale`](#timed)
+**Applies to:** [`Events`]()</br>
+**Enhanced by:** [`Locale`](#timed), [`transaction`](#transaction)
 
 ## Locale
 ```shell
@@ -528,7 +531,8 @@ locale | String | Java locale addressing both language and country. Language: IS
 currency | String | 3 letter currency code (ISO 4217).  Sample currency code: “USD”
 timezone | String | The time zone ID. (time zones in the tz database) Sample timezone ID: “America/Phoenix”
 
-**Applies to:** `Events` `Entities`
+**Applies to:** [`Events`]() [`Entities`]()</br>
+**Enhances:** [`items`](##items-xcommerce) [`transaction`](#transaction) [`gelolocation`](#gelo-location)
 
 ## Messaging
 ```shell
@@ -580,7 +584,7 @@ properties |  for |  for containing additional, customer specific, information
 group | Boolean | Add grouping/collapsing information for the event (default is true)
 content | Base64 | The email contents***
 
-**Enhance by:** `Attachments`, `Locale`, `Dimensions`, `**Collapsable`, `Access Control`, `Token`
+**Enhance by:** [`Attachments`](), [`Locale`](), [`Dimensions`}(), [`**Collapsable`](), [`Access Control`]()
 
 *All emails are created using the entity type Email.  Relations between email addresses and business entities (employees, customer, partners etc.) can be explicitly created using the Entity API.
 
@@ -590,7 +594,7 @@ content | Base64 | The email contents***
 
 This aspect has not been implemented
 
-**Applies to:** `Events`
+**Applies to:** [`Events`]()
 
 ## Page View
 ```shell
@@ -630,18 +634,20 @@ The pageview aspect is handy when reporting web based events but they can also b
 
 Field | Type | Description
 ----- | ---- | -----------
-path | String | (id) A required path (last part of url or the whole URL if the origin attribute is not used to specifiy that. (Mapped to a Page Entity). Please note: Everything after ? will be removed and added to pageview properties.
+**path** | String | A required path (last part of url or the whole URL if the origin attribute is not used to specify that. (Mapped to a Page Entity). Please note: Everything after ? will be removed and added to path_properties.
+path_properties | JSON | Custom request properties for the page path
 referrer | String | (id) The referrer URL (Where the request is originated/redirected from) (Mapped to a Page Entity) Please note: Everything after ? will be removed and added to the reference  properties (not pageview properties).
+referrer_properties | JSON | Custom request properties of the referrer URL
 keyword | String | Search term
 method | String | **GET**, POST, PUT, DELETE, PATCH (Defaults to GET)
 response_code | Integer | HTTP Response code (Defaults to 200)
 size | integer | Size of response in bytes
 protocol | String | Defaults to HTTP
-page_content | List<Relations> | List of content Items/Entities types: FEATURED|LISTED|RELATED|TEASED|ADVERTISED
-properties | JSON | Custom request properties
+page_content | List<Relations> | List of content Items/Entities types: FEATURED, LISTED, RELATED, TEASED, ADVERTISED
 
-**Applies to:** `Events`</br>
-**Enhance by:** `Timed`, `Dimensions`
+
+**Applies to:** [`Events`]()</br>
+**Enhance by:** [`Timed`](), [`Dimensions`]()
 
 ## Presentation
 ```shell
@@ -692,8 +698,7 @@ icon | String | URL pointing to a default icon/logo used to represent the entity
 
 * All URLs can, with use of  templating, be based on values from the origin or the event_type record.
 
-**Applies to:** `Events` `Entities`</br>
-**Enhances:** `update`
+**Applies to:** [`Events`](), [`Entities`](), [`Event-Types`]()
 
 ## Resolvable
 ```shell
@@ -722,7 +727,7 @@ Field | Type | Description
 external_id | String | When external systems need to find individual events based on their own event ID then they can supply it using this aspect.</br>*external_id is unique within the origin and needs origin information to be resolved.
 batch_id | String | External batch id which can be used, when supplied with origin, to resolve a whole batch of events.</br>*batch_id is resolved with origin information.
 
-**Applies to:** `Events`
+**Applies to:** [`Events`]()
 
 ## Settings
 ```shell
@@ -748,7 +753,7 @@ Use the Setting aspect to track changes for configuration/settings. Multiple set
 "setting"="new_value"
 Name of the setting that is affected and the new/current value for the setting.
 
-**Applies to:** `Events`
+**Applies to:** [`Events`](), [`Entities`]() (Indirectly via events)
 
 ## Summary
 ```shell
@@ -778,8 +783,9 @@ properties | JSON | JSON containing additional, customer specific, information
 
 Please note that the action_type (“as.app.reward.unlocked” in this case) can also have title information attached to it and that storing a common template there can be more efficient than storing redundant strings with every event.
 
-**Applies to:** `Events` `Entities`</br>
-**Compliments:** `Presentation`
+**Applies to:** [`Events`](), [`Entities`]()</br>
+**Compliments:** [`Presentation`]()
+
 ## Tags
 ```shell
 {
@@ -795,7 +801,8 @@ Please note that the action_type (“as.app.reward.unlocked” in this case) can
 ```
 An array of strings used to further classify events in the activity stream. You can use any tag you like but keep in mind that a small set (low cardinality) of tags is commonly more useful than a large set of tags.
 
-**Applies to:** `Events` `Entities`
+
+**Applies to:** [`Events`](), [`Entities`]()
 ## Timed
 ```shell
 //With began and ended (explicit):
@@ -843,7 +850,8 @@ ends | ISO Date |
 duration | Long | Milliseconds
 type | String | Any custom type ("Duration" for example)
 
-**Applies to:** `Events` `Entities`
+**Applies to:** [`Events`]() [`Entities`]()
+**Enhances:** [`Pageview`](), [`AB_Test`]()
 
 ## TS Data (Data-Points)
 ```shell
@@ -862,7 +870,7 @@ Sample of a event message that piggybacks a timeseries entry
        "free_disk_space_pc":92,
        "machine_load":1.5
     },
-    "classification": {
+    "dimensions": {
       "machine_type":"virtual",
       "instance_type":"small"
     }
@@ -881,7 +889,7 @@ Field | Type | Description
 ----- | ---- | -----------
 **type** | String | Payable/Receivable or Debit/Credit
 **medium** | String | Cash, Card, Check, Transfer, Other
-**amount** | Double |
+**amount** | Double | The transferred amount (The [Locale](#locale) aspect is used to specify currency)
 invoice_nr | String |
 reference_no | String |
 account_out | String |
@@ -890,7 +898,9 @@ card_number  | String | Obfuscated only (Meta card numbers only)
 card_exp  | String | Expiration data
 properties | JSON | Any JSON structure containing customer/transaction specific information
 
-**Applies to:** `Events`
+**Applies to:** [`TSData`]()</br>
+**Enhanced by:** [`dimensions`](#dimensions-classification)
+
 
 ## Update
 Event sourcing
