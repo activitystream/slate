@@ -1,4 +1,5 @@
 # Bumps, Likes and Votes
+##Introduction to bumps
 Bump(s) are essentially the same thing a “like” and a “+1”. It’s a simple way for users to express their opinions regarding stream items (event, entities and comments).
 
 Every bump is a link between exactly two entities, the user-entity responsible for voting/bumping and the stream-item being voted on. 

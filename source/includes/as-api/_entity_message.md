@@ -1,4 +1,5 @@
 # Entities
+##Introduction to entities
 Entities (Business objects) represent any object that are references by events in the activity stream. An insurance company would typically, and at least, have Customer, Vehicle, Policy and Claim as entity-types and numerous instances of each type.
 
 Entities, as well as [entity-types](), are created automatically the first time they are referenced by an event but they can also be create explicitly using REST or by sending entity information in a dedicated message to the message queue.

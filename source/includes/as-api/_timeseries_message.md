@@ -1,4 +1,5 @@
 # Time-Series
+##Introduction to time-series and data-points
 Data points are time-series entries that can be reported individually, in batches or as an integrated part of an event message using the ts_data aspect.
 
 Activity Stream includes a real-time analytics store that is capable of storing data points with multiple dimensions which are available for querying as soon as submitted. 

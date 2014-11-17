@@ -1,4 +1,5 @@
 # Comments
+##Introduction to comments
 A comment can be made regarding any stream item (event, entity or comments) in the activity stream as well as directly on business entities. A single comment can be attached to multiple stream items (targets) and can contain references to entities as well.
 
 Comments provide a way to facilitate business focused discussion on anything that has happened in a social kind of way. In addition to facilitate discussion between employees it can also facilitate discussion with the customer via extra-nets etc.

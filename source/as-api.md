@@ -24,9 +24,9 @@ includes:
   - as-api/entity_relations
   - as-api/notifications
   - as-api/observations
-  - as-api/activity_stream
-  - as-api/analytics  
   - as-api/aspects
+  - as-api/activity_stream
+  - as-api/streaming
   - as-api/access
   - as-api/advanced_topics
 
