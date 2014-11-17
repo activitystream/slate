@@ -10,7 +10,8 @@ Simple link-message explicitly defining a 1:1 link between an email and a custom
   "entity_ref":"Customer/3110686369",
   "relations": {"AKA":"Email/stefan@activitystream.com"}
 }
-An example of a Complete link-message:
+
+An example of a more detailed link-message:
 {
   "entity_ref":"Customer/3110686369",
   "relations": {
@@ -25,7 +26,6 @@ An example of a Complete link-message:
     "weight":5
   }
 }
-
 ```
 
 Property | Type | Description
@@ -44,6 +44,7 @@ properties | JSON | Any valid JSON structure .
   * **IS**		 		    Exclusive 1:1 relations
   * **KNOWS**				Definitive relationship
   * **KNOWS_OF**			Should know of it's existence
+</br></br>
 
 * Basic Entity Relations:
   * **AKA**                 exclusive 1:1 relations (IS) (Extends IS)
@@ -54,8 +55,9 @@ properties | JSON | Any valid JSON structure .
   * **ASSOCIATED_WITH**		Has social relations to (less important than family) (KNOWS)
   * **ON_BEHALF_OF**		non-exclusive relations (KNOWS_OF)
   * **HAS_RELATIONS_TO**	Has other relations to (other more distant relations) (KNOWS_OF)
+</br></br>
 
-* Interest Relations
+* Interest Relations:
   * **INTEREST**			Abstract Type for expressed interest (Extends KNOWS_OF)
   * **FOLLOWS**    			The source entity follows the destination entity (Extends INTEREST)
   * **MANAGES**		        (Extends INTEREST)
