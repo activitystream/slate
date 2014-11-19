@@ -79,16 +79,21 @@ Returns this:
 {
 }
 ```
-`POST` `https://<tenant>.activitystream.com/api/collector/v1/events?api_key={api-key}`
+`POST` `https://{tenant-label}.activitystream.com/api/collector/v1/events?api_key={api-key}`
 
 ###Check if event-message is validate (Nothing gets persisted)
-`POST` `https://<tenant>.activitystream.com/api/v1/events/validate`
+`POST` `https://{tenant-label}.activitystream.com/api/v1/events/validate?api_key={api-key}`
 
 ###Request properties
 Property | Description
 -------- | -----------
 {api-key} | Your API (unless pre-authenticated)
-   
+
+Header| Description
+-------- | -----------
+Content-Type | application/json
+
+
 ## Submit via Message Queue
 ```shell
 Returns nothing except an acknowledgement from the queue that the message has been received. Please see information regarding deterministic UUIDs showing how stream_id can be calculate for an event even before if it is sent.   
@@ -112,32 +117,32 @@ Returns a json structure showing the analytic entries automatically generated fo
 ```
 
 ###Fetch a single event:
-`GET` `https://<tenant>.activitystream.com/api/v1/as/events/{stream-id}`
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/{stream-id}`
 
 ###Fetch a single event, related entities and enriched data:
-`GET` `https://<tenant>.activitystream.com/api/v1/as/events/{stream-id}/details`
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/{stream-id}/details`
 
 ###Shows analytic entries generated for the event:
-`GET` `https://<tenant>.activitystream.com/api/v1/as/events/{stream-id}/analytics` 
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/{stream-id}/analytics`
 
 ###List of events attached to a single entity (See stream API):
-`GET` `https://<tenant>.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/events?page={page-nr}&pagesize={items-on-page}&filter={filter}` 
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/events?page={page-nr}&pagesize={items-on-page}&filter={filter}`
 
 ###List of Comments attached to the event:
-`GET` `https://<tenant>.activitystream.com/api/v1/as/events/{stream-id}/comments?page={page-nr}&pagesize={items-on-page}&filter={filter}` 
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/{stream-id}/comments?page={page-nr}&pagesize={items-on-page}&filter={filter}`
 
 ###List of Bumps attached to the event:
-`GET` `https://<tenant>.activitystream.com/api/v1/as/events/{stream-id}/bumps?page={page-nr}&pagesize={items-on-page}&filter={filter}` 
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/{stream-id}/bumps?page={page-nr}&pagesize={items-on-page}&filter={filter}`
 
 ###Single Event by an external id specified in the "identifiable" aspect
-`GET` `https://<tenant>.activitystream.com/api/v1/as/events/external-id/{external-id}` 
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/external-id/{external-id}`
 
 ###All Events by an external batch-id specified in the "identifiable" aspect
-`GET` `https://<tenant>.activitystream.com/api/v1/as/events/external-batch-id/{batch-id}` 
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/external-batch-id/{batch-id}`
 
-### Query Properties
 Property | Description
 -------- | -----------
+{api-key} |
 {entity-ref} | A unique identifier of an entity that includes the entity-type and a unique entity-id {entity-type}/{entity-id} like "Customer/3110686369"
 {entity-type} | The part of the {entity_ref} that specifies the Entity/Object Type. Car, Customer, Order are all examples of entity types. This is normally the table name in your database or a human readable version of it.
 {entity-id} | The unique id of the entity with that entity-type. This is normally the ID of the entity in your database.

@@ -1,5 +1,5 @@
 # Time-Series
-##Introduction to time-series and data-points
+##Introduction to data-points and time-series
 Data points are time-series entries that can be reported individually, in batches or as an integrated part of an event message using the ts_data aspect.
 
 Activity Stream includes a real-time analytics store that is capable of storing data points with multiple dimensions which are available for querying as soon as submitted. 
@@ -58,6 +58,83 @@ aspects | Map | The data-point information is separated into 1 to 3 different as
 
 **Valid aspects:** [`dimensions`]() [`ts_data`]() [`geo_location`]()
 
-## Additional queries and interfaces
-* See [Streaming updates]() for information on how to subscribe to streaming event updates.
+## Submit via REST API
+```shell
+Returns this:
+{
+}
+```
+`POST` `https://{tenant-label}.activitystream.com/api/collector/v1/data-points?api_key={api-key}`
+`Headers` `Content-Type: application/json`
+
+###Check if event-message is validate (Nothing gets persisted)
+`POST` `https://{tenant-label}.activitystream.com/api/v1/data-points/validate?api_key={api-key}`
+
+###Request properties
+Property | Description
+-------- | -----------
+{api-key} | Your API (unless pre-authenticated)
+
+Header| Description
+-------- | -----------
+Content-Type | application/json
+
+## Submit via Message Queue
+```shell
+Returns nothing except an acknowledgement from the queue that the message has been received.
+```
+###Connection Settings
+Property | Description
+-------- | -----------
+server | receiverX.activitystream.com (unless you are using a local RabbitMQ cluster)
+vhost | {tenant-label} name unless you are using a local RabbitMQ cluster and the it's the same as you configured in AS admin/setup.
+exchange | to-activitystream
+message_key | as.api.datapoint
+
+## Time-Series - Metadata API
+
+###Fetch a list of all available time-series:
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/time-series?page={page-nr}&pagesize={items-on-page}&filter={filter}&api_key={api-key}`
+
+###Fetch all the metadata for a certain time-series:
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/time-series/{time-series}?api_key={api-key}`
+
+###Save aspect information and properties for a single timeseries:
+`PUT` `https://{tenant-label}.activitystream.com/api/v1/as/time-series/{time-series}?api_key={api-key}`
+
+<!--
+###Remove a time series and all its values and entity connections:
+`DELETE` `https://{tenant-label}.activitystream.com/api/v1/as/time-series/{time-series}?api_key={api-key}`-->
+
+###Fetch all the metrics that have been used in a certain time-series:
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/time-series/{time-series}/metrics?page={page-nr}&pagesize={items-on-page}&filter={filter}&api_key={api-key}`
+
+###Fetch all the dimensions that have been used in a certain time-series:
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/time-series/{time-series}/dimensions?page={page-nr}&pagesize={items-on-page}&filter={filter}&api_key={api-key}`
+
+###Fetch all the origins that have submitted data into a certain time-series:
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/time-series/{time-series}/origin?page={page-nr}&pagesize={items-on-page}&filter={filter}&api_key={api-key}`
+
+###Fetch all the entities active in a certain time-series:
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/time-series/{time-series}/entities?page={page-nr}&pagesize={items-on-page}&filter={filter}&api_key={api-key}`
+
+###Fetch all the timeseries active for a certain entity:
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/time-series?page={page-nr}&pagesize={items-on-page}&filter={filter}&api_key={api-key}`
+
+Property | Description
+-------- | -----------
+{api-key} | Your API key
+{time-series} | The label of the time series
+{entity-type} | The part of the {entity_ref} that specifies the Entity/Object Type. Car, Customer, Order are all examples of entity types. This is normally the table name in your database or a human readable version of it.
+{entity-id} | The unique id of the entity with that entity-type. This is normally the ID of the entity in your database.
+{page-nr} | The page number to fetch. 1 is the first page and also the default value.
+{items-on-page} | Specifies how many items should be on each page. 20 is the default value and 300 is the maximum value.
+{filter} | A SQL filter (where clause) to apply to the result set. Please read [SQL]() for further information on the graph enabled SQL dialect that we use
+{tenant-label} | Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
+
+## Time-Series - Query API
 * See [Analytic queries]() for information on fetching analytic information for the submitted data-points.
+* See [Streaming updates]() for information on how to subscribe to streaming event updates.
+
+**Please be advised:**
+The support for “simple” time-series in AS is provided to accommodate traditional “metric+value timeseries data”. In AS we also have a multi-metric-multi-dimensional alternatives which are **currently available on request** as they require minimum configuration on our behalf (bound to become automatic). *Please let us know if that option is required by one of your use cases.*
