@@ -1,6 +1,2 @@
 # Notifications
-## Adding a subscription
-## Removing a subscription
-## Approving a subscription
-## Querying subscriptions
-## Querying notifications
+Documentation is not available at this time.

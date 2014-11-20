@@ -91,7 +91,7 @@ vhost | {tenant-label} name unless you are using a local RabbitMQ cluster and th
 exchange | to-activitystream
 message_key | as.api.datapoint
 
-## Time-Series - Metadata API
+## TS - Metadata API
 
 ###Fetch a list of all available time-series:
 `GET` `https://{tenant-label}.activitystream.com/api/v1/as/time-series?page={page-nr}&pagesize={items-on-page}&filter={filter}&api_key={api-key}`
@@ -132,7 +132,7 @@ Property | Description
 {filter} | A SQL filter (where clause) to apply to the result set. Please read [SQL]() for further information on the graph enabled SQL dialect that we use
 {tenant-label} | Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
 
-## Time-Series - Query API
+## TS - Query API
 * See [Analytic queries]() for information on fetching analytic information for the submitted data-points.
 * See [Streaming updates]() for information on how to subscribe to streaming event updates.
 

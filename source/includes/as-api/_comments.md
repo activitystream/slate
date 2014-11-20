@@ -4,6 +4,9 @@ A comment can be made regarding any stream item (event, entity or comments) in t
 
 Comments provide a way to facilitate business focused discussion on anything that has happened in a social kind of way. In addition to facilitate discussion between employees it can also facilitate discussion with the customer via extra-nets etc.
 
+###Access control
+Access Control List is available to control who has access to the comment to accommodate internal, external, grouped and globally available comments alike.
+
 ## Comment-Message Properties
 ```shell
 A comment message using explicit setters:
@@ -97,14 +100,14 @@ Returns a list comments made on a single entity
 ### Query Properties
 Property | Description
 -------- | -----------
-{entity-type} |  
-{entity-id} |
-{stream-id} |
-{page-nr} |
-{items-on-page} |
-{filter} |
-{tag} |
-
+{entity-type} | The part of the {entity_ref} that specifies the Entity/Object Type. Car, Customer, Order are all examples of entity types. This is normally the table name in your database or a human readable version of it.
+{entity-id} | The unique id of the entity with that entity-type. This is normally the ID of the entity in your database.
+{page-nr} | The page number to fetch. 1 is the first page and also the default value.
+{items-on-page} | Specifies how many items should be on each page. 20 is the default value and 300 is the maximum value.
+{stream-id} | The internal ID used by Activity Stream. This is a named UUID version of the {entity-ref}
+{filter} | A SQL filter (where clause) to apply to the result set. Please read [SQL]() for further information on the graph enabled SQL dialect that we use
+{tenant-label} | Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
+{tag} | The value of the tag (#somestuff) to look up comments for
 
 ## Additional queries and interfaces
 * See [Streaming updates]() for information on how to subscribe to streaming event updates.

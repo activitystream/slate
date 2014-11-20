@@ -1,4 +1,2 @@
 # Observations
-## Running analysis
-## Adding new analysis
-## Observation Queries
+Documentation is not available at this time.

@@ -51,6 +51,7 @@ Property | Type | Description
 entity_ref | entity_ref | {entity-type}>/{entity_id} (examples: "Employee/stefanb")
 properties | JSON | Any custom properties you might want to keep for the entity.
 aspects | Map<Aspect,Map>| Aspects used to describe the entity
+acl | List\<AccessRule\> | Access Control List</br>*See [access control](#access-control) for details*
  | |  **Following are read-only properties**
 *\_streamid* | String | A unique, read-only, stream-id for the entity.</br>Stream IDs are calculated using [deterministic UUIDs]() (named) that can be calculated on the client side before sending the entity.
 *\_registered_at* | DateTime | ISO Date when entity registered
@@ -58,10 +59,75 @@ aspects | Map<Aspect,Map>| Aspects used to describe the entity
 
 **Available Aspects:** [`Attachments`](#attachments), [`Dimensions`](#dimensions), [`Demography`](#demography), [`GEO Location`](#geo-locations),  [`Presentation`](#presentation), [`Summary`](#summary), [`Tags`](#tags), [`Timed`](#timed) 
 
-## Post entity information
+## Submit via REST API
+```shell
+Returns this:
+{
+}
+```
+`POST` `https://{tenant-label}.activitystream.com/api/collector/v1/entities?api_key={api-key}`
 
-## Send via Message Queue
+###Check if entity-message is validate (Nothing gets persisted)
+`POST` `https://{tenant-label}.activitystream.com/api/v1/entities/validate?api_key={api-key}`
+
+###Request properties
+Property | Description
+-------- | -----------
+{api-key} | Your API (unless pre-authenticated)
+
+Header| Description
+-------- | -----------
+Content-Type | application/json
+
+
+## Submit via Message Queue
+```shell
+Returns nothing except an acknowledgement from the queue that the message has been received. Please see information regarding deterministic UUIDs showing how stream_id can be calculate for an event even before if it is sent.
+```
+###Connection Settings
+Property | Description
+-------- | -----------
+server | receiverX.activitystream.com (unless you are using a local RabbitMQ cluster)
+vhost | {tenant-label} name unless you are using a local RabbitMQ cluster and the it's the same as you configured in AS admin/setup.
+exchange | to-activitystream
+message_key | as.api.entity
+
 ## Update with an event-message
-## Entity queries
-## Analytic queries
-## Streaming updates
+
+## Entity Query API
+```shell
+```
+
+###Fetch a single entity:
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}`
+
+###Fetch a single entity by Stream ID:
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{stream-id}`
+
+###List of Comments attached to the entity:
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/comments?page={page-nr}&pagesize={items-on-page}&filter={filter}`
+
+###List of Bumps attached to the entity:
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/bumps?page={page-nr}&pagesize={items-on-page}&filter={filter}`
+
+###List of Entity Relations linked to the entity:
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/links?page={link-types}&direction={link-direction}&page={page-nr}&pagesize={items-on-page}&filter={filter}`
+
+Property | Description
+-------- | -----------
+{api-key} |
+{entity-type} | The part of the {entity_ref} that specifies the Entity/Object Type. Car, Customer, Order are all examples of entity types. This is normally the table name in your database or a human readable version of it.
+{entity-id} | The unique id of the entity with that entity-type. This is normally the ID of the entity in your database.
+{stream-id} | The internal ID used by Activity Stream. This is a named UUID version of the {entity-ref}
+{link-types} | A comma separated list of link types. Subtypes are selected for any specified parent type. Defaults to **all**.
+{link-direction} | Links can be Inbound, Outbound or Both. (values: IN / OUT / BOTH). Defaults to **both**.
+{page-nr} | The page number to fetch. 1 is the first page and also the default value.
+{items-on-page} | Specifies how many items should be on each page. 20 is the default value and 300 is the maximum value.
+{filter} | A SQL filter (where clause) to apply to the result set. Please read [SQL]() for further information on the graph enabled SQL dialect that we use
+{tenant-label} | Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
+
+## Additional queries and interfaces
+* See [Streaming updates]() for information on how to subscribe to streaming entity updates.
+* See [Graph Queries]() for information on querying the event-entity graph using SQL.
+* See [Analytic queries]() for information on fetching analytic information for the entity.
+* See [Access Control]() for information on changing the ACL for an entity.
