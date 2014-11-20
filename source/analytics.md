@@ -40,3 +40,5 @@ This documentation will help you ...
 ###Time-Series Queries
 ###Time-Series Streaming Analytics
 
+###Simple Timeseries Queries
+`/api/analytics/timeseries/{series}>/{dimensions}[,..]/[aggr:]{metric}[,..]/{granularity}/{from}/{to}?{dimension}=<filter>[,…]&sort={metric}&limit={limit}?apikey=<api_key>`
