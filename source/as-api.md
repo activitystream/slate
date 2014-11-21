@@ -68,7 +68,9 @@ Any entity can be [linked to any other entity]() and the link between the entiti
 
 ### Time-Series
 Activity Stream includes a [real-time analytics store]() capable of storing multi-metric, multi-dimensional time-series where new data points are immediately available for [ad-hoc querying]().
-Think of the AS analytics store as an dynamic OLAP/Cube which is continuously updated and can be sliced and diced at will. You can submit any TS data to the analytics store as new time-series are created on demand. 
+Think of the AS analytics store as an dynamic OLAP/Cube which is continuously updated and can be sliced and diced at will. 
+
+Analytic information for submitted event-messages are immediately available and messages containing purchase information, page-views and ab-testing information are represented in purpose build analytic models. You can submit any data-points to the analytics which creates new time-series on demand. 
 
 ### Observations
 [Observations]() are stream items created by the [Observation Engine]() when it detects situations, threats or opportunities which it has been trained to identify.
