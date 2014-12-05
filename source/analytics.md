@@ -20,34 +20,39 @@ search: true
 ---
 
 # Introduction
-This documentation will help you get
+Cover:
+Different analytic data sources and a collection of topic specific post aggregations and calculations
+Event based analytics, Generic time-series, Custom (aspect based) analytics, Observation and system analytics.
+Event messages and their analytical footprint (Why separation)
+Aspects that contribute to analytic dimensions
+Same basic query structure
+RAW queries for full control
 
 #Event Analytics
+List of generic queries for event analytics
 
-#Purchasing
-##Purchasing Queries
-##Purchasing Streaming Analytics
+##Event Queries
 
-#Web Analytics
-##Web Analytics Queries
-##Web Analytics Streaming Analytics
+##Dimensions & metrics fields
+Property | Type | Description
+-------- | ----------- | -----------
+origin | D | The system/server that submitted the data-points
+{entity-type} | D | The entity type of entities related to the data-points
+{dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
+value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
+count | M | Return the number of data-point entries in the aggregated period (See above)
+duration | M |
 
-#AB Testing
-##AB Testing Queries
-##AB Testing Streaming Analytics
+#Times-Series Analytics
 
-#Times-Series
 ##Time-Series Queries
-##Time-Series Streaming Analytics
-
-##Simple Timeseries Queries
-`/api/analytics/timeseries/{series}>/{dimensions}[,..]/[aggr:]{metric}[,..]/{granularity}/{from}/{to}?{dimension}=<filter>[,…]&sort={metric}&limit={limit}?apikey=<api_key>`
+`/api/analytics/timeseries/{series}>/{dimensions}[,..]/[aggr:]{metric}[,..]/{granularity}/{from}/{to}?{dimension}={filter}[,…]&sort={metric}&limit={limit}?apikey=<api_key>`
 
 Property | Description
 -------- | -----------
 {series} | The series name that you specified in the message
-{dimensions} | list of dimensions to facet/group on. This is any value from the classification section. (type in the above example). Defaults to metric
-{metric} | Metrics to include and the aggregation to user. Defaults to count This is any key/value from the ts_data section (importance/type in the example above)</br>Metric calculations for aggregated results:</br>sum:, min:, max:</br>Used to control the calculation done on the aggregated value (rollup on minutes/hours/days/etc.)
+{dimensions} | list of dimensions to group by. This is either the 'metric' dimension, origin, related entity types or any value from the dimensions section in your [data-point message](/as-api.html#data-point-message-properties).
+{metric} | Metrics to include and the aggregation to user with simple time-series this is either value or count. </br>Metric calculations for aggregated results: sum:, min:, max:
 {granularity} | The aggregation period/duration - defaults to a day</br> Named values: "all", "none", "minute", "fifteen_minute", "thirty_minute", "hour", "day"</br>ISO 8601 Period examples: P2W = 2 Weeks, P3M = 3 Months, PT1H = 1 Hour, PT1H30M = 1 Hour and 30 minutes, PT0.750S = 750 milliseconds</br>The period specified can not be shorter than the minimum granularity of the time-series which is, by default, 1 minute in AS Analytics.</br>(Finer grained results can only be attained in the AS Event Processor for new/incoming test results).
 {from} | defaults to today@midnight (see period section for fixed offsets) </br>Period example: “P-1D” can be used to start exactly 24 hours ago.
 {to} | defaults to now (includes most recent data points)
@@ -55,6 +60,130 @@ Property | Description
 {sort} | sort=<metric> or for descending sort=-<metric></br>order and limit can be used to affect the results.</br>descending order: &order=-<field>
 {limit} | limit=<count>   (offset/paging is still missing). Ascending order and only 5 results: &order=<field>[..]&limit=5
 
+##Dimensions & metrics fields
+Property | Type | Description
+-------- | ----------- | -----------
+origin | D | The system/server that submitted the data-points
+{entity-type} | D | The entity type of entities related to the data-points
+{dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
+value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
+count | M | Return the number of data-point entries in the aggregated period (See above)
+
+##Time-Series Streaming Analytics
+
+#Purchasing Analytics
+##Purchasing Queries
+List of custom purchasing queries
+
+##Dimensions & metrics fields
+Property | Type | Description
+-------- | ----------- | -----------
+origin | D | The system/server that submitted the data-points
+{entity-type} | D | The entity type of entities related to the data-points
+{dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
+value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
+count | M | Return the number of data-point entries in the aggregated period (See above)
+item_count | M |
+item_price | M |
+total_fee | M |
+total_tax | M |
+total_discount | M |
+total_price | M |
+duration | M |
+
+##Purchasing Streaming Analytics
+
+#Web Analytics
+
+##Web Analytics Queries
+List of custom queries for Web analytics
+
+##Dimensions & metrics fields
+Property | Type | Description
+-------- | ----------- | -----------
+origin | D | The system/server that submitted the data-points
+{entity-type} | D | The entity type of entities related to the data-points
+{dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
+value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
+count | M | Return the number of data-point entries in the aggregated period (See above)
+duration | M |
+size | M |
+
+##Web Analytics Streaming Analytics
+
+#AB Testing
+
+##AB Testing Queries
+List of custom queries for AB Testing analytics
+
+##Dimensions & metrics fields
+Property | Type | Description
+-------- | ----------- | -----------
+origin | D | The system/server that submitted the data-points
+ab_test | D |
+outcome | D |
+count | M | Return the number of data-point entries in the aggregated period (See above)
+amount | M |
+metric | M |
+duration | M |
+{entity-type} | D | The entity type of entities related to the data-points
+{dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
+
+##AB Testing Streaming Analytics
+
+#CEI Analytics
+##CEI Queries
+List of custom queries for CEI analytics
+
+##Dimensions & metrics fields
+Property | Type | Description
+-------- | ----------- | -----------
+origin | D | The system/server that submitted the data-points
+{entity-type} | D | The entity type of entities related to the data-points
+{dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
+value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
+count | M | Return the number of data-point entries in the aggregated period (See above)
+importance | M |
+duration | M |
+
+##CEI streaming analytics
+
+#Observation Analytics
+##Observation Queries
+List of custom queries for Observation analytics
+
+##Dimensions & metrics fields
+Property | Type | Description
+-------- | ----------- | -----------
+origin | D | The system/server that submitted the data-points
+{entity-type} | D | The entity type of entities related to the data-points
+{dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
+value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
+count | M | Return the number of data-point entries in the aggregated period (See above)
+importance | M |
+duration | M |
+
+##Observations streaming analytics
+
+#System Analytics
+##System Queries
+
+##Dimensions & metrics fields
+Property | Type | Description
+-------- | ----------- | -----------
+origin | D | The system/server that submitted the data-points
+{entity-type} | D | The entity type of entities related to the data-points
+{dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
+value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
+count | M | Return the number of data-point entries in the aggregated period (See above)
+amount | M |
+metric | M |
+duration | M |
+
+##System streaming analytics
+
 #RAW Queries
 
 #Recipes
+
+#Question & Answers

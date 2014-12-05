@@ -20,5 +20,15 @@ search: true
 ---
 
 # Introduction
-This documentation will help you ...
+points:
+filters as a part of a predefined scope
+standalone queries
+querying a graph
+Performance (AS specific indexing may not suit every as-hoc query)
+Using the event/entity API will ensure best performance
+Access to raw queries depends on subscription plan
 
+#Event Query Examples
+#Entity Query Examples
+#The query language
+#Detailed documentation

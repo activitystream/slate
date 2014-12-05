@@ -20,5 +20,5 @@ search: true
 ---
 
 # Introduction
-This documentation will help you ...
+Here wil will gradually build a library of common tasks and the recommended way to solve them
 
