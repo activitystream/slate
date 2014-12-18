@@ -18,7 +18,7 @@ Here you will find the examples for Mobilitus and Promogogo.
 
 In the following examples we are only changing the following path-based settings:
 
-`/{dimensions}[,..]/[aggr:]{metric}[,..]/{granularity}/{from}/{to}?{dimension}={filter}[,…]&sort={metric}&limit={limit}?apikey=<api_key>`
+`/{dimensions}[,..]/[aggr:]{metric}[,..]/{granularity}/{from}/{to}?{dimension}={filter}[,…]&sort={metric}&limit={limit}&tz={timezone}&apikey=<api_key>`
 
 Property | Description
 -------- | -----------
