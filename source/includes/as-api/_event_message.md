@@ -30,7 +30,7 @@ Simple event-message reporting a page-view:
   "type": "as.web.page.browse",
   "origin": "com.activitystream.www",   
   "occurred_at": "2014-11-10T12:01:02.345Z",
-  "entities": [
+  "roles": [
     {"ACTOR":"Session/KJ982KJ2", "proxy_for":"Customer/311068"},
   ],
   "aspects": {
@@ -57,9 +57,9 @@ Property | Type | Description\*
 -------- | ---- | -----------
 **type** | String | The event-type </br>*Defaults to message key when received via message queue.*
 **origin** | String | What system+server or service sent the event
-**entities** | List\<Relation\> | All entities involved in the event.</br>*Details on [Event relations](#event-relations-roles)*
+**roles** | List\<[Role](#roles-event-relations)\> | All entities involved in the event. </br>*[Details on Roles](#roles-event-relations)*
 occurred_at| DateTime | The exact time that the event occurred (ISO 8601 serialized).</br>*Defaults to local time when received by AS.*
-aspects*| Map\<Aspect,Map\>| Aspects optionally contain event information that Activity Stream knows how to enrich, analyse and represent.</br>*See list of all [available aspects](#aspects)*
+aspects*| Map\<[Aspect](#aspects),Map\>| Aspects optionally contain event information that Activity Stream knows how to enrich, analyse and represent.</br>*See list of all [available aspects](#aspects)*
 properties | JSON | Any JSON structure containing additional event information in a custom format.
 importance | Integer | The event importance (priority/severity) setting ranging from 0 .. 5.</br>0 - 1 - 2 - 3 - 4 - 5
 acl | List\<AccessRule\> | Access Control List</br>*See [access control](#access-control) for details*
@@ -79,15 +79,17 @@ Returns this:
 {
 }
 ```
-`POST` `https://{tenant-label}.activitystream.com/api/collector/v1/events?api_key={api-key}`
+###Asynchronously Persist Event [POST]:
+https://`{tenant-label}`.activitystream.com/api/collector/v1/events?api_key=`{api-key}`
 
-###Check if event-message is validate (Nothing gets persisted)
-`POST` `https://{tenant-label}.activitystream.com/api/v1/events/validate?api_key={api-key}`
+###Check if event-message is validate [POST] (Nothing gets persisted):
+https://`{tenant-label}`.activitystream.com/api/v1/events/validate?api_key=`{api-key}`
 
 ###Request properties
 Property | Description
 -------- | -----------
-{api-key} | Your API (unless pre-authenticated)
+`{api-key}` | Your API (unless pre-authenticated)
+`{tenant-label}` | Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
 
 Header| Description
 -------- | -----------
@@ -103,7 +105,9 @@ Property | Description
 -------- | -----------
 server | receiverX.activitystream.com (unless you are using a local RabbitMQ cluster)
 vhost | {tenant-label} name unless you are using a local RabbitMQ cluster and the it's the same as you configured in AS admin/setup.
-exchange | to-activitystream
+user | Your MQ-User (Assigned in the AS Admin)
+password | Your MQ-User Password (Assigned/Registered in the AS Admin)
+exchange | *to-activitystream*
 message_key | event-type signature ("as.web.page.browse" in the example above)
 
 ## Event Query API
@@ -116,41 +120,41 @@ Returns the event-message as submitted a long with information on all linked ent
 Returns a json structure showing the analytic entries automatically generated for the entry
 ```
 
-###Fetch a single event:
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/{stream-id}`
+###Fetch a single event [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/events/`{stream-id}`
 
-###Fetch a single event, related entities and enriched data:
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/{stream-id}/details`
+###Fetch a single event, related entities and enriched data [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/events/`{stream-id}`/details
 
-###Shows analytic entries generated for the event:
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/{stream-id}/analytics`
+###Shows analytic entries generated for the event [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/events/`{stream-id}`/analytics
 
-###List of events attached to a single entity (See stream API):
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/events?page={page-nr}&pagesize={items-on-page}&filter={filter}`
+###List of events attached to a single entity (See stream API) [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/events?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`
 
-###List of Comments attached to the event:
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/{stream-id}/comments?page={page-nr}&pagesize={items-on-page}&filter={filter}`
+###List of Comments attached to the event [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/events/`{stream-id}`/comments?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`
 
-###List of Bumps attached to the event:
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/{stream-id}/bumps?page={page-nr}&pagesize={items-on-page}&filter={filter}`
+###List of Bumps attached to the event [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/events/`{stream-id}`/bumps?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`
 
-###Single Event by an external id specified in the "identifiable" aspect
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/external-id/{external-id}`
+###Single Event by an external id specified in the "identifiable" aspect [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/events/external-id/`{external-id}`
 
-###All Events by an external batch-id specified in the "identifiable" aspect
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/events/external-batch-id/{batch-id}`
+###All Events by an external batch-id specified in the "identifiable" aspect [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/events/external-batch-id/`{batch-id}`
 
 Property | Description
 -------- | -----------
-{api-key} |
-{entity-ref} | A unique identifier of an entity that includes the entity-type and a unique entity-id {entity-type}/{entity-id} like "Customer/3110686369"
-{entity-type} | The part of the {entity_ref} that specifies the Entity/Object Type. Car, Customer, Order are all examples of entity types. This is normally the table name in your database or a human readable version of it.
-{entity-id} | The unique id of the entity with that entity-type. This is normally the ID of the entity in your database.
-{stream-id} | The internal ID used by Activity Stream. This is a named UUID version of the {entity-ref}
-{page-nr} | The page number to fetch. 1 is the first page and also the default value.
-{items-on-page} | Specifies how many items should be on each page. 20 is the default value and 300 is the maximum value.
-{filter} | A SQL filter (where clause) to apply to the result set. Please read [SQL]() for further information on the graph enabled SQL dialect that we use
-{tenant-label} | Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
+`{api-key}`| Your API key
+`{entity-ref}`| A unique identifier of an entity that includes the entity-type and a unique entity-id {entity-type}/{entity-id} like "Customer/3110686369"
+`{entity-type}`| The part of the {entity_ref} that specifies the Entity/Object Type. Car, Customer, Order are all examples of entity types. This is normally the table name in your database or a human readable version of it.
+`{entity-id}`| The unique id of the entity with that entity-type. This is normally the ID of the entity in your database.
+`{stream-id}`| The internal ID used by Activity Stream. This is a named UUID version of the {entity-ref}
+`{page-nr}`| The page number to fetch. 1 is the first page and also the default value.
+`{items-on-page}`| Specifies how many items should be on each page. 20 is the default value and 300 is the maximum value.
+`{filter}`| A SQL filter (where clause) to apply to the result set. Please read [SQL]() for further information on the graph enabled SQL dialect that we use
+`{tenant-label}`| Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
 
 
 ## Additional queries and interfaces

@@ -19,15 +19,16 @@ search: true
 ---
 
 # Introduction
-Here you will find the documentation for the Activity Stream platform. We hope it will help you get quickly up-to-speed and provide you with enough information to tak full advantage of our platform.
+Here you will find the documentation for the Activity Stream platform.</br>
+We hope it will help you get quickly up-to-speed and provide you with enough information to tak full advantage of our platform.
 
-##The Activity Stream API
-Everything you need to know about sending event-messages, time-series data and other activity stream items to AS via REST API or via Message Queue. It also covers how to query the activity stream, deal with access controls and several other advanced topics when it comes to manipulating the activity stream. [more](/as-api.html)
+##[Activity Stream API](/as-api.html)
+Everything you need to know about sending event-messages, time-series data and other activity stream items to AS via REST API or via Message Queue. It also covers how to query the activity stream, deal with access controls and several other advanced topics when it comes to manipulating the activity stream.
 
 ##Provisioning API
 Here you learn how to configure the Activity Stream platform to suit your needs, how to create new users, create scoped API keys (for specific use-cases) and more. [more](/provisioning.html) (pending)
 
-##SQL Graph Queries
+##Graph Queries (SQL)
 The Historical store, containing all the activity stream data in it's event-entity graph, can be queried using a SQL like language which has been enhanced to facilitate graph traversals and other graph specific goodies. [more](/graph.html) (pending)
 
 ##Analytic Queries

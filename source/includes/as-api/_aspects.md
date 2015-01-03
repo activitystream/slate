@@ -281,16 +281,16 @@ A incomplete entity-message showing use of the demography aspect:
 
 Field | Type | Suggested values (but you can surely use your own)
 ----- | ---- | -----------
-gender | String | **Male**, **Female**, **Unknown**, **Trans Female**, **Trans Male**, **Trans Person**, **Gender Variant**, **Gender Questioning**, **Bigender**, **Androgynous**, **Pangender**, **Transsexual**.
-birth_year | Integer | 1930 ... 201X
-ethnicity | String | **White**, **Hispanic** / **Latino**, **Black** / **African American**, **Native American** / **American Indian**, **Asian** / **Pacific Islander**, **Multiracial**, **Other**
-marital_status | String | **Single** (never married), **Married** or **In-Partnership**, **Widowed**, **Divorced**, **Separated**, **Other**
-education | String | **No schooling**, **Nursery school**, **Primary school** (up to 11th grade), **No diploma** (12th grade), **High school** (graduate/GED), Some **College credit** (No degree), **Associate degree** (AA, AS), **Bachelor's degree** (BA, AB, BS), **Master's degree** (MA, MS, MEng, MEd, MSW, MBA), **Professional degree** (MD, DDS, DVM, LLB, JD), **Doctorate degree** (PhD, EdD)
+gender | String | `Male`, `Female`, `Unknown`, `Trans Female`, `Trans Male`, `Trans Person`, `Gender Variant`, `Gender Questioning`, `Bigender`, `Androgynous`, `Pangender`, `Transsexual`.
+birth_year | Integer | 19+ ... 2014
+ethnicity | String | `White`, `Hispanic` / `Latino`, `Black` / `African American`, `Native American` / `American Indian`, `Asian` / `Pacific Islander`, `Multiracial`, `Other`
+marital_status | String | `Single` (never married), `Married` or `In-Partnership`, `Widowed`, `Divorced`, `Separated`, `Other`
+education | String | `No schooling`, `Nursery school`, `Primary school` (up to 11th grade), `No diploma` (12th grade), `High school` (graduate/GED), Some `College credit` (No degree), `Associate degree` (AA, AS), `Bachelor's degree` (BA, AB, BS), `Master's degree` (MA, MS, MEng, MEd, MSW, MBA), `Professional degree` (MD, DDS, DVM, LLB, JD), `Doctorate degree` (PhD, EdD)
 family_size | String | 1 .. XX
-employment | String | **Employed**, **Self-employed**, **Out of work and looking**, **Out of work not looking**, **A homemaker**, **A student**, **Military**, **Retired**, **Unable** to work, **Other**
+employment | String | `Employed`, `Self-employed`, `Out of work and looking`, `Out of work not looking`, `A homemaker`, `A student`, `Military`, `Retired`, `Unable` to work, `Other`
 disability | String |
 income | String | XXX Range
-housing | String | **Partially Owned**, **Fully Owned**, **Rent**, **Rent-Free**, **Other**
+housing | String | `Partially Owned`, `Fully Owned`, `Rent`, `Rent-Free`, `Other`
 properties | JSON | Free format JSON structure with custom information
 
 **Applies to:** [`Entities`]() (Preferably entities that represent individuals)</br>

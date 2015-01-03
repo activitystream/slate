@@ -1,4 +1,4 @@
-# Entity Relations (Links)
+# Links (Entity Relations)
 Business Entities in the Historical Store (Event-Entity-Graph) can be related to each other in multiple ways. The relationships can be described using a Relationship-class and Relationship-weight.  This allows for advanced graph mining based on both the events related to an entity and the entity relationship to other entities.
 
 Finding the shortest path between entities, common interests and do sophisticated graph mining becomes possible when these relationships are defined/mapped properly.
@@ -8,30 +8,32 @@ Finding the shortest path between entities, common interests and do sophisticate
 Simple link-message explicitly defining a 1:1 link between an email and a customer
 {
   "entity_ref":"Customer/3110686369",
-  "relations": {"AKA":"Email/stefan@activitystream.com"}
+  "links": {"AKA":"Email/stefan@activitystream.com"}
 }
 
 An example of a more detailed link-message:
 {
   "entity_ref":"Customer/3110686369",
-  "relations": {
-    "AKA":"Email/stefan@activitystream.com",
-    "properties":{
-      "any":"thing",
-      "you":["would","like"],
-      "to":{"store":true}
-    },
-    "active_from":"",
-    "active_until":"",
-    "weight":5
-  }
+  "links": [
+    {
+      "AKA":{"entity_ref":"Email/stefan@activitystream.com"},
+      "properties":{
+        "any":"thing",
+        "you":["would","like"],
+        "to":{"store":true}
+      },
+      "active_from":"",
+      "active_until":"",
+      "weight":5
+    }
+  ]
 }
 ```
 
 Property | Type | Description
 -------- | ---- | -----------
 **entity_ref**|String|A reference for the source/parent entity 
-**relation**|Relation|Format: “TYPE”:”entity_ref” See list of link-types
+**relations**|Relation|Format: "TYPE":{entity} See list of link-types
 active_from | DateTime | ISO Date This relations is active from the given date
 active_until | ISO Date | This relations is active until the given date 
 weight | Double | An additional weight for the relationship (used for advanced graph mining)

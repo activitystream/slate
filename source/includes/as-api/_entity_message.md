@@ -1,12 +1,14 @@
 # Entities
 ##Introduction to entities
-Entities (Business objects) represent any object that are references by events in the activity stream. An insurance company would typically, and at least, have Customer, Vehicle, Policy and Claim as entity-types and numerous instances of each type.
+Entities (Business objects) represent any object that is referenced by events in the activity stream.
+</br> An insurance company would typically, and at least, have Customer, Vehicle, Policy and Claim as entity-types and numerous entities of each entity-type.
 
-Entities, as well as [entity-types](), are created automatically the first time they are referenced by an event but they can also be create explicitly using REST or by sending entity information in a dedicated message to the message queue.
+Entities, as well as [entity-types](), are created automatically the first time they are referenced by an event but they can also be create explicitly using REST or by sending entity information in a dedicated entity-message to the message queue.
 ### Additional entity information
 Any JSON information can be stored as properties of a business entity and when the [Aspects]() are used to store them then the Entity can be represented by Activity Stream and meaningful information from the entity can be used while processing associated Business Events.
 ### Unlimited entity relations
-Entities are stored in a graph where even the most complicated relations between entities can be stored in a simple way. By using the same kind of approach as social-networking sites use, to store different types of friendships and who is following who, we are able to link any entity with any other entity where the relationship types can be customized on the fly.
+Entities are stored in a graph where even the most complicated relations between entities can be stored in a simple way.
+</br>By using the same kind of approach as social-networking sites use, to store different types of friendships and who is following who, we are able to link any entity with any other entity where the relationship types can be customized on the fly.
 
 See [adding and removing Entity Relations]() for details on how to link and unlink entities
 ### Full referential integrity
@@ -48,7 +50,8 @@ Example of a entity-message that sets various aspects for an Artist
 
 Property | Type | Description
 -------- | ---- | -----------
-entity_ref | entity_ref | {entity-type}>/{entity_id} (examples: "Employee/stefanb")
+entity_ref | EntityRef | {entity-type}/{entity_id} (examples: "Employee/stefanb")
+relations | List\<EntityRelation\> | A list of entity relations to be added to the entity (Always additive)
 properties | JSON | Any custom properties you might want to keep for the entity.
 aspects | Map<Aspect,Map>| Aspects used to describe the entity
 acl | List\<AccessRule\> | Access Control List</br>*See [access control](#access-control) for details*
@@ -65,15 +68,17 @@ Returns this:
 {
 }
 ```
-`POST` `https://{tenant-label}.activitystream.com/api/collector/v1/entities?api_key={api-key}`
+###Submit an entity [POST]
+https://`{tenant-label}`.activitystream.com/api/collector/v1/entities?api_key=`{api-key}`
 
-###Check if entity-message is validate (Nothing gets persisted)
-`POST` `https://{tenant-label}.activitystream.com/api/v1/entities/validate?api_key={api-key}`
+###Check if entity-message is validate (Nothing gets persisted) [POST]
+https://`{tenant-label}`.activitystream.com/api/v1/entities/validate?api_key=`{api-key}`
 
 ###Request properties
 Property | Description
 -------- | -----------
 {api-key} | Your API (unless pre-authenticated)
+{tenant-label} | Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
 
 Header| Description
 -------- | -----------
@@ -98,33 +103,33 @@ message_key | as.api.entity
 ```shell
 ```
 
-###Fetch a single entity:
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}`
+###Fetch a single entity [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`
 
-###Fetch a single entity by Stream ID:
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{stream-id}`
+###Fetch a single entity by Stream ID [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{stream-id}`
 
-###List of Comments attached to the entity:
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/comments?page={page-nr}&pagesize={items-on-page}&filter={filter}`
+###List of Comments attached to the entity [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/comments?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`
 
-###List of Bumps attached to the entity:
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/bumps?page={page-nr}&pagesize={items-on-page}&filter={filter}`
+###List of Bumps attached to the entity [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/bumps?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`
 
-###List of Entity Relations linked to the entity:
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/links?page={link-types}&direction={link-direction}&page={page-nr}&pagesize={items-on-page}&filter={filter}`
+###List of Entity Relations linked to the entity [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/links?page=`{link-types}`&direction=`{link-direction}`&page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`
 
 Property | Description
 -------- | -----------
-{api-key} |
-{entity-type} | The part of the {entity_ref} that specifies the Entity/Object Type. Car, Customer, Order are all examples of entity types. This is normally the table name in your database or a human readable version of it.
-{entity-id} | The unique id of the entity with that entity-type. This is normally the ID of the entity in your database.
-{stream-id} | The internal ID used by Activity Stream. This is a named UUID version of the {entity-ref}
-{link-types} | A comma separated list of link types. Subtypes are selected for any specified parent type. Defaults to **all**.
-{link-direction} | Links can be Inbound, Outbound or Both. (values: IN / OUT / BOTH). Defaults to **both**.
-{page-nr} | The page number to fetch. 1 is the first page and also the default value.
-{items-on-page} | Specifies how many items should be on each page. 20 is the default value and 300 is the maximum value.
-{filter} | A SQL filter (where clause) to apply to the result set. Please read [SQL]() for further information on the graph enabled SQL dialect that we use
-{tenant-label} | Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
+`{api-key}`| Your API key
+`{entity-type}`| The part of the {entity_ref} that specifies the Entity/Object Type. Car, Customer, Order are all examples of entity types. This is normally the table name in your database or a human readable version of it.
+`{entity-id}`| The unique id of the entity with that entity-type. This is normally the ID of the entity in your database.
+`{stream-id}`| The internal ID used by Activity Stream. This is a named UUID version of the {entity-ref}
+`{link-types}`| A comma separated list of link types. Subtypes are selected for any specified parent type. Defaults to **all**.
+`{link-direction}`| Links can be Inbound, Outbound or Both. (values: IN / OUT / BOTH). Defaults to **both**.
+`{page-nr}`| The page number to fetch. 1 is the first page and also the default value.
+`{items-on-page}`| Specifies how many items should be on each page. 20 is the default value and 300 is the maximum value.
+`{filter}`| A SQL filter (where clause) to apply to the result set. Please read [SQL]() for further information on the graph enabled SQL dialect that we use
+`{tenant-label}`| Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
 
 ## Additional queries and interfaces
 * See [Streaming updates]() for information on how to subscribe to streaming entity updates.
