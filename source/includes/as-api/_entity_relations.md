@@ -1,8 +1,8 @@
-# Links (Entity Relations)
+# Entity Relations (Links)
 Business Entities, in the Event-Entity-Graph, can be related to each other in multiple ways. The relationships can be described using a Relationship-type and Relationship-weight.
 </br>This allows for advanced graph mining based on both the events related to an entity and the entity relationship to other entities.
 
-## Link-message properties
+## Link properties
 ```shell
 Simple link-message explicitly defining a 1:1 link between an email and a customer
 {
@@ -64,10 +64,5 @@ You can subclass any link type by adding your own type name to the end of the th
 
 **Please note:** All link-type labels are unique and can only be used once and that link-types are always upper-case
 
-## Link entities
-## Unlink entities
-## Relations queries
+## Link API
 
-## Additional queries and interfaces
-* See [Graph Queries]() for information on querying the event-entity graph using SQL.
-* See [Aliasing]() for information on how these relations can be used to improved the activity stream 

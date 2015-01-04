@@ -77,7 +77,6 @@ message_key | as.api.entity
 ## Entity API
 ```shell
 ```
-
 ###Update an entity [POST]
 https://`{tenant-label}`.activitystream.com/api/collector/v1/entities?api_key=`{api-key}`
 
@@ -107,8 +106,3 @@ Property | Description
 `{filter}`| A SQL filter (where clause) to apply to the result set. Please read [SQL]() for further information on the graph enabled SQL dialect that we use
 `{tenant-label}`| Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
 
-## Additional queries and interfaces
-* See [Streaming updates]() for information on how to subscribe to streaming entity updates.
-* See [Graph Queries]() for information on querying the event-entity graph using SQL.
-* See [Analytic queries]() for information on fetching analytic information for the entity.
-* See [Access Control]() for information on changing the ACL for an entity.

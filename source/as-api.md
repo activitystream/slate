@@ -16,8 +16,8 @@ toc_footers:
   
 includes:
   - as-api/event_message
-  - as-api/entity_message
   - as-api/event_relations
+  - as-api/entity_message
   - as-api/entity_relations
   - as-api/aspects
   - as-api/activity_stream

@@ -1,4 +1,6 @@
-# Roles (Event Relations)
+# Event Relations (Roles)
+
+## Role properties
 
 Property | Type | Description
 -------- | ---- | -----------
@@ -15,9 +17,6 @@ PROXY_FOR|Entity|A secondary entity that is fronted by the primary entity of the
   * **WITNESSED**           Entity is involved in event (not directly affected)
   * **REFERENCES**          Entity is referenced in the event (not involved or directly affected)
 </br></br>
-
-## Sub-classing role-types
-
 
 ## Custom Role Types
 You can subclass any relations type by adding your own type name to the end of the the relationship type you would like to subclass/extend: “INTEREST:TRACKS”. Please note that once the “TRACK” subclass is created that “TRACK” becomes a reserved keyword for this relations type only and that it will always and only extend “INTEREST”. Plan your relationship types carefully.
