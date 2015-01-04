@@ -51,7 +51,7 @@ Example of a entity-message that sets various aspects for an Artist
 Property | Type | Description
 -------- | ---- | -----------
 entity_ref | EntityRef | {entity-type}/{entity_id} (examples: "Employee/stefanb")
-relations | List\<EntityRelation\> | A list of entity relations to be added to the entity (Always additive)
+links | List\<EntityRelation\> | A list of entity links (relations) to be added for the entity (Always additive)
 properties | JSON | Any custom properties you might want to keep for the entity.
 aspects | Map<Aspect,Map>| Aspects used to describe the entity
 acl | List\<AccessRule\> | Access Control List</br>*See [access control](#access-control) for details*
@@ -62,60 +62,36 @@ acl | List\<AccessRule\> | Access Control List</br>*See [access control](#access
 
 **Available Aspects:** [`Attachments`](#attachments), [`Dimensions`](#dimensions), [`Demography`](#demography), [`GEO Location`](#geo-locations),  [`Presentation`](#presentation), [`Summary`](#summary), [`Tags`](#tags), [`Timed`](#timed) 
 
-## Submit via REST API
-```shell
-Returns this:
-{
-}
-```
-###Submit an entity [POST]
-https://`{tenant-label}`.activitystream.com/api/collector/v1/entities?api_key=`{api-key}`
-
-###Check if entity-message is validate (Nothing gets persisted) [POST]
-https://`{tenant-label}`.activitystream.com/api/v1/entities/validate?api_key=`{api-key}`
-
-###Request properties
-Property | Description
--------- | -----------
-{api-key} | Your API (unless pre-authenticated)
-{tenant-label} | Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
-
-Header| Description
--------- | -----------
-Content-Type | application/json
-
-
-## Submit via Message Queue
+## Update via Message Queue
 ```shell
 Returns nothing except an acknowledgement from the queue that the message has been received. Please see information regarding deterministic UUIDs showing how stream_id can be calculate for an event even before if it is sent.
 ```
 ###Connection Settings
 Property | Description
 -------- | -----------
-server | receiverX.activitystream.com (unless you are using a local RabbitMQ cluster)
+server | inbound.activitystream.com (unless you are using a local RabbitMQ cluster)
 vhost | {tenant-label} name unless you are using a local RabbitMQ cluster and the it's the same as you configured in AS admin/setup.
 exchange | to-activitystream
 message_key | as.api.entity
 
-## Update with an event-message
-
-## Entity Query API
+## Entity API
 ```shell
 ```
 
-###Fetch a single entity [GET]:
+###Update an entity [POST]
+https://`{tenant-label}`.activitystream.com/api/collector/v1/entities?api_key=`{api-key}`
+
+###Check if entity-message is validate [POST]\*
+https://`{tenant-label}`.activitystream.com/api/v1/entities/validate?api_key=`{api-key}`
+\*Nothing gets persisted
+
+###Fetch a single entity by entity reference [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`
 
 ###Fetch a single entity by Stream ID [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{stream-id}`
 
-###List of Comments attached to the entity [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/comments?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`
-
-###List of Bumps attached to the entity [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/bumps?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`
-
-###List of Entity Relations linked to the entity [GET]:
+###List of Links (Entity Relations) for the entity [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/links?page=`{link-types}`&direction=`{link-direction}`&page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`
 
 Property | Description

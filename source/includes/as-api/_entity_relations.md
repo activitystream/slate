@@ -1,7 +1,6 @@
 # Links (Entity Relations)
-Business Entities in the Historical Store (Event-Entity-Graph) can be related to each other in multiple ways. The relationships can be described using a Relationship-class and Relationship-weight.  This allows for advanced graph mining based on both the events related to an entity and the entity relationship to other entities.
-
-Finding the shortest path between entities, common interests and do sophisticated graph mining becomes possible when these relationships are defined/mapped properly.
+Business Entities, in the Event-Entity-Graph, can be related to each other in multiple ways. The relationships can be described using a Relationship-type and Relationship-weight.
+</br>This allows for advanced graph mining based on both the events related to an entity and the entity relationship to other entities.
 
 ## Link-message properties
 ```shell
@@ -22,8 +21,8 @@ An example of a more detailed link-message:
         "you":["would","like"],
         "to":{"store":true}
       },
-      "active_from":"",
-      "active_until":"",
+      "active_from":"2014-12-01T15:40:00.000z",
+      "active_until":null,
       "weight":5
     }
   ]
@@ -33,7 +32,7 @@ An example of a more detailed link-message:
 Property | Type | Description
 -------- | ---- | -----------
 **entity_ref**|String|A reference for the source/parent entity 
-**relations**|Relation|Format: "TYPE":{entity} See list of link-types
+**links**|Relation...|Format: "TYPE":{entity} See list of link-types
 active_from | DateTime | ISO Date This relations is active from the given date
 active_until | ISO Date | This relations is active until the given date 
 weight | Double | An additional weight for the relationship (used for advanced graph mining)
@@ -48,26 +47,22 @@ properties | JSON | Any valid JSON structure .
   * **KNOWS_OF**			Should know of it's existence
 </br></br>
 
-* Basic Entity Relations:
-  * **AKA**                 exclusive 1:1 relations (IS) (Extends IS)
-  * **PROXY_FOR**          	exclusive 1:1 relations (IS) (Session can be a proxy for a user) (IS)
-  * **PART_OF**  			non-exclusive relationship (Membership, employment) (KNOWS)
-  * **BELONGS_TO**			non-exclusive relationship (describes ownership/possession) (KNOWS)
-  * **RELATED_TO**			Family relations (KNOWS)
-  * **ASSOCIATED_WITH**		Has social relations to (less important than family) (KNOWS)
-  * **ON_BEHALF_OF**		non-exclusive relations (KNOWS_OF)
-  * **HAS_RELATIONS_TO**	Has other relations to (other more distant relations) (KNOWS_OF)
+* Basic Entity Relations (Links):
+  * **AKA**                 exclusive 1:1 relations (Extends IS) (**A**lso **K**now **A**s)
+  * **PROXY_FOR**          	exclusive 1:1 relations (Extends IS) (WebSession can be a proxy for a user)
+  * **PART_OF**  			non-exclusive relationship (Extends KNOWS) (Membership, employment)
+  * **BELONGS_TO**			non-exclusive relationship (Extends KNOWS) (describes ownership/possession)
+  * **RELATED_TO**			Family relations (Extends KNOWS)
+  * **ASSOCIATED_WITH**		Has social relations to(Extends KNOWS)
+  * **ON_BEHALF_OF**		non-exclusive relations (Extends KNOWS_OF)
+  * **HAS_RELATIONS_TO**	Has other relations to (Extends KNOWS_OF) (other more distant relations)
 </br></br>
 
-* Interest Relations:
-  * **INTEREST**			Abstract Type for expressed interest (Extends KNOWS_OF)
-  * **FOLLOWS**    			The source entity follows the destination entity (Extends INTEREST)
-  * **MANAGES**		        (Extends INTEREST)
-
 ## Custom Link Types
-You can subclass any relations type by adding your own type name to the end of the the relationship type you would like to subclass/extend: “INTEREST:TRACKS”. Please note that once the “TRACK” subclass is created that “TRACK” becomes a reserved keyword for this relations type only and that it will always and only extend “INTEREST”. Plan your relationship types carefully.
+You can subclass any link type by adding your own type name to the end of the the relationship type you would like to subclass/extend: "RELATED_TO:MOTHER".
+</br>Once the "MOTHER" subclass is created "MOTHER" becomes a reserved keyword for this relations type and it will always and only extend "RELATED_TO".
 
-**Please note:** All link-type labels are unique and can only be used once and that link-types are always upper-case 
+**Please note:** All link-type labels are unique and can only be used once and that link-types are always upper-case
 
 ## Link entities
 ## Unlink entities

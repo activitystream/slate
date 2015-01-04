@@ -372,9 +372,8 @@ html, body {
     margin-bottom: 0.1em;
     margin-top: 1em;
     border-top: 1px solid #ddd;
-    @include background-image(
-      linear-gradient(top, #fff, #f9f9f9)
-    );
+    //@include background-image( linear-gradient(top, #fff, #f9f9f9) );
+    @include background-image( linear-gradient(top, rgba(#fff,0.4), rgba(#fff, 0)));
   }
 
   h1:first-child, div:first-child + h1 {
@@ -390,9 +389,7 @@ html, body {
     //border-top: 1px solid #ccc;
     padding-top: 1em;
     padding-bottom: 0.3em;
-    @include background-image(
-      linear-gradient(top, rgba(#fff,0.4), rgba(#fff, 0))
-    );
+    //@include background-image( linear-gradient(top, rgba(#fff,0.4), rgba(#fff, 0)));
   }
 
   // h2s right after h1s should bump right up
@@ -404,16 +401,16 @@ html, body {
 
   h3, h4, h5, h6 {
     @extend %header-font;
-    font-size: 12px;
+    font-size: 13px;
     margin-top: 2.5em;
     margin-bottom: 0.8em;
-    text-transform: uppercase;
+    //text-transform: uppercase;
   }
 
   h3 {
     margin-top: 1.5em;
     margin-bottom: 0.3em;
-    text-transform: uppercase;
+    //text-transform: uppercase;
   }
 
   h4, h5, h6 {
@@ -484,6 +481,7 @@ html, body {
     border-radius: 3px;
     @extend %break-words;
     @extend %code-font;
+    white-space: nowrap;
   }
 
   aside {

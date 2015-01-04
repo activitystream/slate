@@ -1,9 +1,5 @@
 #Aspects
-Aspects are commonly used message extensions which have rich support in Activity Stream in regards to processing and representation. The offer a normalized/structured way to store common information in a way that makes it possible for us to build rich functionality and ui that meet common needs without restricting customization.
-
-You can mix and match aspects to trigger the desired functionality for any custom event as well as events from the Activity Stream Event Library.
-
-Event message can include multiple aspects or none at all but it’s good to keep in mind that a clear sign of bloated event messages is if the aspect do not seem to fit together or it’s unclear what aspects affect in the message. In other words; it’s sometimes better to send more messages than cram everything into one.
+Aspects are commonly used event and entity extensions which have rich support in Activity Stream in regards to processing and representation. The offer a normalized/structured way to store common information in a way that makes it possible for us to build rich functionality and ui that meet common needs without restricting customization.
 
 ## AB Testing
 ```shell
@@ -94,7 +90,7 @@ mime_type | String | Explicitly specifies the document type (Ignoring the file e
 properties | JSON | Free format JSON structure with custom information
 content | Base64 | The file contents***
 
-**Applies to:** [`Events`]()
+**Applies to:** [`Events`]()</br>
 **Enhances:** [`Messaging`]()
 
 *** Storing of file contents, as well as email contents, depends on your AS subscription
@@ -241,20 +237,19 @@ A partial password-changed-message illustrating the use of the cei aspect:
 ```
 Each event can have synthesized/imagined effect on the entities affected by it. When applicable it can, for example, be used to estimate the current state of a customer based on the things in his activity stream.
 
-The defaults can be stored for each event-type but also explicitly defined for individual events using this aspect.
+The defaults can be stored for each Event-Type but they can also be explicitly defined for individual events using this aspect.
 
 
 Field | Type | Description
 ----- | ---- | -----------
-engagement | Float | Is the target engaged</br>inactive <-> active (-5 … +5)
-happiness | Float | Is the target experiencing good or bad things</br>frustrated <-> happy (-5 … +5)
-care | Float | Is the user being attended to</br>neglected <-> pampered (-5 … +5)
-intent | Float | Is the target doing good or bad things</br>evil <-> good (-5 … +5)
-points | Float | Points being scored
-traction* | Long | For how long does this affect the entity (in minutes) (See duration serialization).</br>*Defaults to 120 days (120 days * 1.440 minutes = 172.800 minutes)
-affects | String[] | List of the entities that should be affected by this. (ACTOR/AFFECTS etc.)</br>"ACTOR" is the default target for profiling values.
+engagement | Float | Is the target entity engaged</br>inactive <-> active (-5 … +5)
+happiness | Float | Is the target entity experiencing good or bad things</br>frustrated <-> happy (-5 … +5)
+care | Float | Is the target entity being attended to</br>neglected <-> pampered (-5 … +5)
+intent | Float | Is the target entity doing good or bad things</br>evil <-> good (-5 … +5)
+duration | Long | For how long does this affect the target entity</br>evil <-> good (-5 … +5)
+affects* | String[] | List of the entities that should be affected by this. (ACTOR/AFFECTS etc.)</br>\* ACTOR is the default target for profiling values.
 
-**Applies to:** [`Entities`]() (via Event-Types and Events), [`Event-Types`]()
+**Applies to:** [`Events`](), [`Entities`]() (via Event-Types and Events), [`Event-Types`]()</br>
 
 ### Additional queries and interfaces
 * See [Events](#events) for information on sending the event to AS.
@@ -290,7 +285,7 @@ family_size | String | 1 .. XX
 employment | String | `Employed`, `Self-employed`, `Out of work and looking`, `Out of work not looking`, `A homemaker`, `A student`, `Military`, `Retired`, `Unable` to work, `Other`
 disability | String |
 income | String | XXX Range
-housing | String | `Partially Owned`, `Fully Owned`, `Rent`, `Rent-Free`, `Other`
+housing | String | `Partially Owned`, `Fully Owned`, `Rent`, `Rent-Free`, **Other**
 properties | JSON | Free format JSON structure with custom information
 
 **Applies to:** [`Entities`]() (Preferably entities that represent individuals)</br>
@@ -445,7 +440,7 @@ Make sure all messages meant to be collapsed together share the same group and s
 
 Please note that “re:”, “fwd:” etc. are removed from the group string if found.
 
-**Applies to:** [`Events`]()
+**Applies to:** [`Events`]()</br>
 
 ### Additional queries and interfaces
 * See [Events](#events) for information on updating entities in AS.
@@ -584,7 +579,7 @@ properties |  for |  for containing additional, customer specific, information
 group | Boolean | Add grouping/collapsing information for the event (default is true)
 content | Base64 | The email contents***
 
-**Enhance by:** [`Attachments`](), [`Locale`](), [`Dimensions`}(), [`**Collapsable`](), [`Access Control`]()
+**Enhance by:** [`Attachments`](), [`Locale`](), [`Dimensions`}(), [`**Collapsable`](), [`Access Control`]()</br>
 
 *All emails are created using the entity type Email.  Relations between email addresses and business entities (employees, customer, partners etc.) can be explicitly created using the Entity API.
 
@@ -594,7 +589,7 @@ content | Base64 | The email contents***
 
 This aspect has not been implemented
 
-**Applies to:** [`Events`]()
+**Applies to:** [`Events`]()</br>
 
 ## Page View
 ```shell
@@ -698,7 +693,7 @@ icon | String | URL pointing to a default icon/logo used to represent the entity
 
 * All URLs can, with use of  templating, be based on values from the origin or the event_type record.
 
-**Applies to:** [`Events`](), [`Entities`](), [`Event-Types`]()
+**Applies to:** [`Events`](), [`Entities`](), [`Event-Types`]()</br>
 
 ## Resolvable
 ```shell
@@ -727,7 +722,7 @@ Field | Type | Description
 external_id | String | When external systems need to find individual events based on their own event ID then they can supply it using this aspect.</br>*external_id is unique within the origin and needs origin information to be resolved.
 batch_id | String | External batch id which can be used, when supplied with origin, to resolve a whole batch of events.</br>*batch_id is resolved with origin information.
 
-**Applies to:** [`Events`]()
+**Applies to:** [`Events`]()</br>
 
 ## Settings
 ```shell
@@ -753,7 +748,7 @@ Use the Setting aspect to track changes for configuration/settings. Multiple set
 "setting"="new_value"
 Name of the setting that is affected and the new/current value for the setting.
 
-**Applies to:** [`Events`](), [`Entities`]() (Indirectly via events)
+**Applies to:** [`Events`](), [`Entities`]() (Indirectly via events)</br>
 
 ## Summary
 ```shell
@@ -802,7 +797,8 @@ Please note that the action_type (“as.app.reward.unlocked” in this case) can
 An array of strings used to further classify events in the activity stream. You can use any tag you like but keep in mind that a small set (low cardinality) of tags is commonly more useful than a large set of tags.
 
 
-**Applies to:** [`Events`](), [`Entities`]()
+**Applies to:** [`Events`](), [`Entities`]()</br>
+
 ## Timed
 ```shell
 //With began and ended (explicit):
@@ -850,8 +846,8 @@ ends | ISO Date |
 duration | Long | Milliseconds
 type | String | Any custom type ("Duration" for example)
 
-**Applies to:** [`Events`]() [`Entities`]()
-**Enhances:** [`Pageview`](), [`AB_Test`]()
+**Applies to:** [`Events`]() [`Entities`]()</br>
+**Enhances:** [`Pageview`](), [`AB_Test`]()</br>
 
 ## TS Data (Data-Points)
 ```shell
