@@ -1,4 +1,4 @@
-#The Activity Stream
-##Get Entities activity stream
-##Generic Queries
-##RAW Graph Queries
+#Advanced Topics
+##Embedding Entities In Events
+##Token Based Message Defaults
+##Why and how to use PROXY_FOR

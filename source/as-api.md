@@ -21,6 +21,7 @@ includes:
   - as-api/entity_relations
   - as-api/aspects
   - as-api/activity_stream
+  - as-api/advanced_topics
 
 search: true
 ---
