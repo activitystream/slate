@@ -72,18 +72,24 @@ message_key | event-type signature ("as.web.page.browse" in the example above)
 
 ## Event API
 
+###Check if event-message is valid [POST]\*:
+https://`{tenant-label}`.activitystream.com/api/v1/as/events/validate?api_key=`{api-key}`
+</br>\*Nothing gets persisted
+
 ###Asynchronously Persist Event [POST]:
 https://`{tenant-label}`.activitystream.com/api/collector/v1/events?api_key=`{api-key}`
 
-###Check if event-message is valid [POST]\*:
-https://`{tenant-label}`.activitystream.com/api/v1/events/validate?api_key=`{api-key}`
-</br>\*Nothing gets persisted
+###Synchrnously Persist Event [POST]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/events?api_key=`{api-key}`
 
 ###Fetch a single event [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/events/`{stream-id}`
 
 ###Fetch a single event, related entities and enriched data [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/events/`{stream-id}`/details
+https://`{tenant-label}`.activitystream.com/api/v1/as/events/`{stream-id}`/detailed
+
+###Inspect what analytics information was generated for the event [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/events/`{stream-id}`/analytics
 
 ###List of events attached to a single entity (See stream API) [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/events?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`
