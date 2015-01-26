@@ -133,9 +133,9 @@ Field | Type | Description
 Verb | URL | Action
 ---- | ----------- | -----------
 GET | /api/v1/provisioning/privileges | List all privileges
-GET | /api/v1/provisioning/privileges/{username} | Get a user privilege
-PUT | /api/v1/provisioning/privileges/{username} | update user privilege
-DELETE | /api/v1/provisioning/privileges/{username} | Revoke user privileges
+GET | /api/v1/provisioning/users/{username}/privilege | Get a user privilege
+PUT | /api/v1/provisioning/users/{username}/privilege | update user privilege
+DELETE | /api/v1/provisioning/users/{username}/privilege | Revoke user privileges
 
 ### Privilege Fields
 Field | Type | Description
