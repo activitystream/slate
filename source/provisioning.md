@@ -46,9 +46,9 @@ Verb | URL | Action
 ### Tenant Fields
 Field | Type | Description
 ----- | ---- | -----------
-`name` | String | Full name of the tenant
-`label` | String | The "slugified" tenant name (Most often the same as the primary domain name for the organization)
-`active` | Boolean | Is the tenant currently running/active
+**`name`** | String | Full name of the tenant
+**`label`** | String | The "slugified" tenant name (Most often the same as the primary domain name for the organization)
+**`active`** | Boolean | Is the tenant currently running/active
 `icon` | String | The company logo used to brand the admin pages
 `theme` | String | The theme used for the admin interfaces
 `tenantEndpoints` | List | List of configured End-points for event/information messaging
@@ -90,6 +90,7 @@ Verb | URL | Action
 ---- | ----------- | -----------
 GET  | /api/v1/provisioning/users | List Active Users
 GET  | /api/v1/provisioning/users/{username} | Get a single user
+POST | /api/v1/provisioning/users | Add a new user
 PUT  | /api/v1/provisioning/users/{username} | Update a single user
 DELETE  | /api/v1/provisioning/users/{username} | Revoke all privileges for the user for active tenant
 GET | /api/v1/provisioning/users?q=\<info\> | Search for User already with tenant privileges
@@ -98,17 +99,18 @@ GET | /api/v1/provisioning/as-users?q=\<info\> | Global Search for AS Users
 ### User Fields
 Field | Type | Description
 ----- | ---- | -----------
-`username` | String | A unique user name (most often the email)
-`email` | String | User email
-`firstName` | String |
-`lastName` | String |
-`timeZone` | String |
-`country` | String |
-`zipCode` | String |
-`avatar` | String | The avatar
-`gender` | String |
-`birthYear` | Integer |
-`hint` | String |
+**`username`** | String | A unique user name (most often the email)
+**`email`** | String | User email
+**`password`** | String | Required when creating a user (otherwise not disclosed)
+`firstName` | String | First name of the user
+`lastName` | String | Last name of the user
+`timeZone` | String | Local user timezone
+`country` | String | Location of the user
+`zipCode` | String | Zipcode of the user
+`avatar` | String | Avatar image used to represent the user
+`gender` | String | The gender of the user  M/F/U
+`birthYear` | Integer | The birth year of the user
+`hint` | String | Password hint for the user
 `tenantUserPrivileges` | List | List of privileges awarded to the user
 `activeApiKeys` | List | List of active API keys assigned to the user
 
@@ -132,16 +134,17 @@ Field | Type | Description
 ### REST Actions
 Verb | URL | Action
 ---- | ----------- | -----------
-GET | /api/v1/provisioning/privileges | List all privileges
+GET | /api/v1/provisioning/privileges | List all users privileges
 GET | /api/v1/provisioning/users/{username}/privilege | Get a user privilege
-PUT | /api/v1/provisioning/users/{username}/privilege | update user privilege
+POST | /api/v1/provisioning/users/{username}/privilege | Add new user privilege
+PUT | /api/v1/provisioning/users/{username}/privilege | Update user privilege
 DELETE | /api/v1/provisioning/users/{username}/privilege | Revoke user privileges
 
 ### Privilege Fields
 Field | Type | Description
 ----- | ---- | -----------
-`role` | String | USER (Can see his own things)</br> TEAM_LEADER (Can see his own things and things of immediate subordinates)</br> MANAGEMENT (Can see his own things and things of all subordinates)</br> ADMINISTRATOR (Can Manage everything)</br> INTERNAL_AUDITING (Can see everything but Manage nothing)
-`activeFrom` | DateTime | Activation Date
+**`role`** | String | USER - Can see his own things</br> TEAM_LEADER - Can see his own things and things of immediate subordinates</br> MANAGEMENT - Can see his own things and things of all subordinates</br> ADMINISTRATOR - Can Manage everything</br> INTERNAL_AUDITING - Can see everything but Manage nothing
+`activeFrom` | DateTime | Activation Date (Defaults to now if not provided with future date)
 `activeUntil` | DateTime | De-Activation Date
 
 
@@ -168,10 +171,10 @@ DELETE | /api/v1/provisioning/domain-mapping/{domain} | Delete domain mapping
 ### Domain Mapping Fields
 Field | Type | Description
 ----- | ---- | -----------
-`domain` | String | A fully qualified domain name that AS should service for this tenant
+**`domain`** | String | A fully qualified domain name that AS should service for this tenant
 `icon` | String | The icon used to brand the UI
 `theme` | String | The theme used for AS when this mapping is accessed
-`activeFrom` | DateTime | Activation Date
+`activeFrom` | DateTime | Activation Date (Defaults to now if not provided with future date)
 `activeUntil` | DateTime | De-Activation Date
 
 
@@ -235,38 +238,34 @@ DELETE | /api/v1/provisioning/service-endpoints/{id} | Delete service-endpoint
 ### Service Endpoint Fields
 Field | Type | Description
 ----- | ---- | -----------
-url|String|
-userName|String|
-password|String|
-provUserName|String|
-provPassword|String|
-provPort|String|
-apiKey|String|
-messageHandler|String|
-exchange|String|
-binding|String|
-active|String|
-durable|String|
-vhost|String|
-activeFrom|String|
-activeUntil|String|
-registeredDate|String|
-endpointType|Map|
+**`url`**|String|
+**`endpointType`**|Map|
+`userName`|String|
+`password`|String|
+`provUserName`|String|
+`provPassword`|String|
+`provPort`|String|
+`apiKey`|String|
+`messageHandler`|String|
+`exchange`|String|
+`binding`|String|
+`active`|String|
+`durable`|String|
+`vhost`|String|
+`activeFrom`|String|
+`activeUntil`|String|
+`registeredDate`|String|
+
 
 ## API Keys
 
 Verb | URL | Action
 ---- | ----------- | -----------
 
-## Token
-
-Verb | URL | Action
----- | ----------- | -----------
-
-
 ## Global request parameters for search and paging
 Field | Description | Example
 ----- | ----------- | -----------
-page | page number starting from 0 | ?page=2
-size | number of items per page. Defaults to 20 | ?size=10
-q | query string (Functionality varies slightly based on end-point) | ?q=\<some-email\>
+`page` | page number starting from 0 | ?page=2
+`size` | number of items per page. Defaults to 20 | ?size=10
+`order` | Field to order by | -
+`q` | query string (Functionality varies slightly based on end-point) | ?q=\<some-email\>
