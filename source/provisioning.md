@@ -57,12 +57,12 @@ Field | Type | Description
 
 ## Users
 ```shell
-/api/v1/provisioning/users/modev
+GET: /api/v1/provisioning/users/<some-user>
 {
-    username: "mobdev",
-    email: "tenant+mobilitus@activitystream.com",
-    firstName: "Mobilitus",
-    lastName: "Tickets",
+    username: "<some-user>",
+    email: "tenant+<some-user>@activitystream.com",
+    firstName: null,
+    lastName: null,
     timeZone: null,
     country: "ISL",
     zipCode: "108",
@@ -79,6 +79,7 @@ Field | Type | Description
     activeApiKeys: [
         {
             apiToken: "<some-api-key>",
+            type: "BASIC",
             activeFrom: "2014-08-26T08:21:30Z",
             activeUntil: null
         }
@@ -117,17 +118,17 @@ Field | Type | Description
 
 ## Privileges
 ```shell
-/api/v1/provisioning/privileges/{username}
+GET /api/v1/provisioning/privileges/<some-user>
 {
     role: "ADMINISTRATOR",
     activeFrom: "2014-09-09T13:49:29Z",
     activeUntil: null,
     user: {
-        firstName: "Language",
-        lastName: "Genius",
-        email: "tenant+cooori@activitystream.com",
+        firstName: "<some-user-firstName>",
+        lastName: "<some-user-lastName>",
+        email: "tenant+<some-user>@activitystream.com",
         avatar: null,
-        username: "coooridev"
+        username: "<some-user>"
     }
 }
 ```
@@ -150,9 +151,9 @@ Field | Type | Description
 
 ## Domain Mapping
 ```shell
-/api/v1/provisioning/domain-mapping/cooori.localhost
+GET /api/v1/provisioning/domain-mapping/<some-domain.com>
 {
-    domain: "cooori.localhost",
+    domain: "<some-domain.com>",
     icon: "",
     theme: "",
     activeFrom: "2014-09-09T13:50:17Z",
@@ -195,24 +196,22 @@ Verb | URL | Action
 
 ## Service Endpoints
 ```shell
-/api/v1/provisioning/service-endpoints/{id}
+GET /api/v1/provisioning/service-endpoints/<endpoint.id>
 {
-    id: {id},
-    tenantId: 5,
-    endpointTypeId: 1,
-    url: "{server.url}",
+    id: <endpoint.id>,
+    url: "<server.url>",
     userName: "admin",
-    password: "{password}",
+    password: "<password>",
     provUserName: "admin",
-    provPassword: "{password}",
+    provPassword: "<password>",
     provPort: null,
     apiKey: "",
     messageHandler: "",
-    exchange: "from-cooori",
+    exchange: "<exchange>",
     binding: "#",
     active: true,
     durable: true,
-    vhost: "cooori",
+    vhost: "<tenant-specific-vhost>",
     activeFrom: "2014-09-09T13:36:07Z",
     activeUntil: "2016-09-09T13:36:08Z",
     registeredByUserId: 1,
@@ -238,29 +237,60 @@ DELETE | /api/v1/provisioning/service-endpoints/{id} | Delete service-endpoint
 ### Service Endpoint Fields
 Field | Type | Description
 ----- | ---- | -----------
-**`url`**|String|
-**`endpointType`**|Map|
-`userName`|String|
-`password`|String|
-`provUserName`|String|
-`provPassword`|String|
-`provPort`|String|
-`apiKey`|String|
-`messageHandler`|String|
-`exchange`|String|
-`binding`|String|
-`active`|String|
-`durable`|String|
-`vhost`|String|
-`activeFrom`|String|
-`activeUntil`|String|
-`registeredDate`|String|
+**`url`**|String|The URL of the server that renders the service
+**`endpointType`**|Map|The Endpoint Type
+`userName`|String|Username used to access the service
+`password`|String|Password used to access the service
+`provUserName`|String|The Username used for provisioning the service (If applicable)
+`provPassword`|String|The Username password for provisioning the service (If applicable)
+`provPort`|String|An alternative port used to access provisioning of the service
+`apiKey`|String|A API key to use to access the service (Alternative to user/pass)
+`messageHandler`|String|A custom message handler used to communicate with the service
+`exchange`|String|The exchange used (if service is Message Queue)
+`binding`|String|The binding used (if service is Message Queue)
+`active`|String|Is the service active
+`durable`|String|Is the message queue durable (if service is Message Queue)
+`vhost`|String|The vhost used (if service is Message Queue)
+`activeFrom`|String|When does/did the service become available
+`activeUntil`|String|When will/did the service become un-available
+*`registeredDate`*|String|When was the service registered (Read-Only)
 
 
 ## API Keys
+```shell
+GET /api/v1/provisioning/api-keys/<apiToken>
+{
+
+    "apiToken": "<apiToken>",
+    "type": "BASIC",
+    "activeFrom": "2014-12-13T10:02:43Z",
+    "activeUntil": null,
+    "createdDate": "2014-12-13T10:02:47Z"
+
+}
+```
+### REST Actions
 
 Verb | URL | Action
 ---- | ----------- | -----------
+GET | /api/v1/provisioning/api-keys | Lists tenant-only Api Keys
+GET | /api/v1/provisioning/api-keys/{apiToken} | Lists tenant-only Api Keys
+GET | /api/v1/provisioning/api-keys/{apiToken} | Fetch a single, tenant-only, API key
+GET | /api/v1/provisioning/user-api-keys | Lists user assigned Api Keys
+GET | /api/v1/provisioning/users/{user}/api-keys | List Api Keys assigned to a particular user
+POST | /api/v1/provisioning/users/{user}/api-keys | Create a new Api Key
+GET | /api/v1/provisioning/users/{user}/api-keys/{apiToken} | Fetch a single, user-assigned, API key
+PUT | /api/v1/provisioning/users/{user}/api-keys/{apiToken} | Update and Api Keys assigned to a particular user
+DELETE | /api/v1/provisioning/users/{user}/api-keys/{apiToken} | Delete an API Key
+
+### Service Endpoint Fields
+Field | Type | Description
+----- | ---- | -----------
+**`type`**|STRING|
+*`apiToken`*|String|Read-Only
+*`dateCreated`*|String|Read-Only
+`activeFrom` | DateTime | Activation Date (Defaults to now if not provided with future date)
+`activeUntil` | DateTime | De-Activation Date
 
 ## Global request parameters for search and paging
 Field | Description | Example
