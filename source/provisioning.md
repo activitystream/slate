@@ -179,20 +179,47 @@ Field | Type | Description
 `activeUntil` | DateTime | De-Activation Date
 
 
-## Services
+## Services & Service Subscriptions
 
+### REST Actions
 Verb | URL | Action
 ---- | ----------- | -----------
+GET | /api/v1/provisioning/services | Lists active services
+GET | /api/v1/provisioning/available-services | Lists available services
+GET | /api/v1/provisioning/available-services/{service-label} | Fetch a service description for a single services
+GET | /api/v1/provisioning/services/{service-label} | Fetch a single subscription
+POST | /api/v1/provisioning/services/{service-label} | Add a service subscription
+PUT | /api/v1/provisioning/services/{service-label} | Change a service subscription
+DELETE | /api/v1/provisioning/services/{service-label} | Remove a service subscription
+
+### Service Fields
+Field | Type | Description
+----- | ---- | -----------
+
+### Service Subscription Fields
+Field | Type | Description
+----- | ---- | -----------
 
 ## Dashboards
 
+### REST Actions
 Verb | URL | Action
 ---- | ----------- | -----------
+
+### Dashboard Fields
+Field | Type | Description
+----- | ---- | -----------
+
 
 ## Statements
 
+### REST Actions
 Verb | URL | Action
 ---- | ----------- | -----------
+
+### Statement Fields
+Field | Type | Description
+----- | ---- | -----------
 
 ## Service Endpoints
 ```shell
