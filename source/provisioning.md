@@ -205,6 +205,12 @@ Field | Type | Description
 ### REST Actions
 Verb | URL | Action
 ---- | ----------- | -----------
+GET | /api/v1/provisioning/dashboards | All dashboards available
+GET | /api/v1/provisioning/tenant-dashboards | Custom made tenant dashboards
+GET | /api/v1/provisioning/service-dashboards | All dashboards available (Custom + belong to active services)
+POST | /api/v1/provisioning/tenant-dashboards | Add a custom dashboard
+PUT | /api/v1/provisioning/tenant-dashboards/{dashboard} | Update a custom dashboard
+DELETE | /api/v1/provisioning/tenant-dashboards/{dashboard} | Remove a custom dashboard
 
 ### Dashboard Fields
 Field | Type | Description
@@ -212,10 +218,20 @@ Field | Type | Description
 
 
 ## Statements
+This API is only accessible for Enterprise licenses
 
 ### REST Actions
 Verb | URL | Action
 ---- | ----------- | -----------
+GET | /api/v1/provisioning/statements | All OI statements available
+GET | /api/v1/provisioning/tenant-statements | Custom made OI statements
+GET | /api/v1/provisioning/service-statements | All OI Statements available (Custom + belong to active services)
+POST | /api/v1/provisioning/tenant-statements | Add a custom statement
+PUT | /api/v1/provisioning/tenant-statements/{statement} | Update a custom statement
+DELETE | /api/v1/provisioning/tenant-statements/{statement} | Remove a custom statement
+GET | /api/v1/provisioning/statements/{statement}/config | Get configuration for the specified statement
+PUT | /api/v1/provisioning/statements/{statement}/config | Update the configuration for the specified statement
+GET | /api/v1/provisioning/statements/{statement}/details | Get detail information for the specified statement
 
 ### Statement Fields
 Field | Type | Description
@@ -313,7 +329,7 @@ DELETE | /api/v1/provisioning/users/{user}/api-keys/{apiToken} | Delete an API K
 ### Service Endpoint Fields
 Field | Type | Description
 ----- | ---- | -----------
-**`type`**|STRING|
+**`type`**|STRING|INGESTION_ONLY - Can only be used to submit event-messages</br>QUERY_ONLY - Can only be used to query date</br>BASIC - Normal (User access depends on privileges)
 *`apiToken`*|String|Read-Only
 *`dateCreated`*|String|Read-Only
 `activeFrom` | DateTime | Activation Date (Defaults to now if not provided with future date)
