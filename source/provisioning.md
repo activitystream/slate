@@ -206,11 +206,13 @@ Field | Type | Description
 Verb | URL | Action
 ---- | ----------- | -----------
 GET | /api/v1/provisioning/dashboards | All dashboards available
-GET | /api/v1/provisioning/tenant-dashboards | Custom made tenant dashboards
+GET | /api/v1/provisioning/dashboards/{label} | Information on a single dashboard
+GET | /api/v1/provisioning/tenant-dashboards | Custom tenant dashboards
+GET | /api/v1/provisioning/tenant-dashboards/{dashboard-label} | Information on a custom tenant dashboards
 GET | /api/v1/provisioning/service-dashboards | All dashboards available (Custom + belong to active services)
 POST | /api/v1/provisioning/tenant-dashboards | Add a custom dashboard
-PUT | /api/v1/provisioning/tenant-dashboards/{dashboard} | Update a custom dashboard
-DELETE | /api/v1/provisioning/tenant-dashboards/{dashboard} | Remove a custom dashboard
+PUT | /api/v1/provisioning/tenant-dashboards/{dashboard-label} | Update a custom dashboard
+DELETE | /api/v1/provisioning/tenant-dashboards/{dashboard-label} | Remove a custom dashboard
 
 ### Dashboard Fields
 Field | Type | Description
@@ -228,10 +230,10 @@ GET | /api/v1/provisioning/tenant-statements | Custom made OI statements
 GET | /api/v1/provisioning/service-statements | All OI Statements available (Custom + belong to active services)
 POST | /api/v1/provisioning/tenant-statements | Add a custom statement
 PUT | /api/v1/provisioning/tenant-statements/{statement} | Update a custom statement
-DELETE | /api/v1/provisioning/tenant-statements/{statement} | Remove a custom statement
-GET | /api/v1/provisioning/statements/{statement}/config | Get configuration for the specified statement
-PUT | /api/v1/provisioning/statements/{statement}/config | Update the configuration for the specified statement
-GET | /api/v1/provisioning/statements/{statement}/details | Get detail information for the specified statement
+DELETE | /api/v1/provisioning/tenant-statements/{statement-label} | Remove a custom statement
+GET | /api/v1/provisioning/statements/{statement-label}/config | Get configuration for the specified statement
+PUT | /api/v1/provisioning/statements/{statement-label}/config | Update the configuration for the specified statement
+GET | /api/v1/provisioning/statements/{statement-label}/details | Get detail information for the specified statement
 
 ### Statement Fields
 Field | Type | Description
