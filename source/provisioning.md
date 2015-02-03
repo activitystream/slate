@@ -195,10 +195,23 @@ DELETE | /api/v1/provisioning/services/{service-label} | Remove a service subscr
 ### Service Fields
 Field | Type | Description
 ----- | ---- | -----------
+**`name`** | String(250) | Full name of the service
+**`label`** | String(32) | A slug/label for the service
+**`type`** | String | Types: INTERNAL, MANDATORY, OPTIONAL, PREMIUM, EXCLUSIVE, CUSTOM
+**`status`** | String | Statuses: ALPHA, BETA, PRODUCTION, ARCHIVED
+`icon` | String(50) | Icon used to label the service
+`preview` | String(250) | URL/Path to a preview image for the service
+`shortDescription` | Text | A short description of the service
+`description` | Text | A full description of the service
 
 ### Service Subscription Fields
 Field | Type | Description
 ----- | ---- | -----------
+**`service`** | Service | The service that the subscription applies to
+**`registeredBy`** | User | The user that created the subscription
+`activeFrom` | DateTime | The day that the subscription became active
+`activeUntil` | DateTime | the day that the subscript became inactive
+`registeredDate` | DateTime | the day that the subscription was created
 
 ## Dashboards
 
@@ -217,6 +230,20 @@ DELETE | /api/v1/provisioning/tenant-dashboards/{dashboard-label} | Remove a cus
 ### Dashboard Fields
 Field | Type | Description
 ----- | ---- | -----------
+**`title`** | String(250) | Title displayed on the top of the dashboard
+**`menuLabel`** | String(50) | Menu label for the dashboard
+**`label`** | String(50) | Slug / URL label for the dashboard
+**`type`** | String |REAL_TIME, OI_OVERVIEW, ENTITY_OVERVIEW, SYSTEM, SETTINGS, CUSTOM
+**`status`** | String |ALPHA, BETA, PRODUCTION, ARCHIVED
+**`listOrder`** | int | Menu ordering (listOrder+label)
+`subtitle` | String(250) |Subtitle displayed on the top of the dashboard
+`biLine` | String(50) | Text displayed with the preview image
+`preview` | String(250) | URL/Path to a preview image for the dashboard
+`path` | String(250) | Optional, custom, path to map the dashboards to
+`icon` | String(50) | Icon used to label the dashboard (With title and in menu)
+`template` | String(250) | Optional template to use to render the dashboard (?)
+`description` | Text | A description of dashboard content
+`settings` | JSON | The settings used to construct the dashboard.
 
 
 ## Statements
