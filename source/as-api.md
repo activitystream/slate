@@ -20,6 +20,8 @@ includes:
   - as-api/entity_message
   - as-api/entity_relations
   - as-api/aspects
+  - as-api/comments
+  - as-api/bumps
   - as-api/activity_stream
   - as-api/advanced_topics
 

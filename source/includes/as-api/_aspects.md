@@ -245,9 +245,10 @@ Field | Type | Description
 engagement | Float | Is the target entity engaged</br>inactive <-> active (-5 … +5)
 happiness | Float | Is the target entity experiencing good or bad things</br>frustrated <-> happy (-5 … +5)
 care | Float | Is the target entity being attended to</br>neglected <-> pampered (-5 … +5)
+rating | Float | customer rating liability <-> asset (-5 … +5)
 intent | Float | Is the target entity doing good or bad things</br>evil <-> good (-5 … +5)
-duration | Long | For how long does this affect the target entity</br>evil <-> good (-5 … +5)
 affects* | String[] | List of the entities that should be affected by this. (ACTOR/AFFECTS etc.)</br>\* ACTOR is the default target for profiling values.
+duration | Long | For how long does this affect the target (days)
 
 **Applies to:** [`Events`](), [`Entities`]() (via Event-Types and Events), [`Event-Types`]()</br>
 
