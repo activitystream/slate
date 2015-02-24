@@ -87,11 +87,14 @@ https://`{tenant-label}`.activitystream.com/api/v1/entities/validate?api_key=`{a
 ###Fetch a single entity by entity reference [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`
 
+###Fetch a list of entity by a entity type [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`?page=`{page-nr}`&size=`{items-on-page}`&q=`{filter}`
+
 ###Fetch a single entity by Stream ID [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{stream-id}`
 
 ###List of Links (Entity Relations) for the entity [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/links?page=`{link-types}`&direction=`{link-direction}`&page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/links?type=`{link-types}`&direction=`{link-direction}`&page=`{page-nr}`&size=`{items-on-page}`&q=`{filter}`
 
 Property | Description
 -------- | -----------
