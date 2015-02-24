@@ -2,9 +2,9 @@
 ```javascript
 //This event message:
 {
-  "type": "as.crm.auth.login",
-  "origin": "com.activitystream.www",
-  "relations": [
+  "action": "as.crm.auth.login",
+  "source": "com.activitystream.www",
+  "involves": [
     {"ACTOR": "Artist/984829"}
   ]
 }
@@ -69,18 +69,18 @@ Capturing all of this in a graph is a valuable trade of Activity Stream. There i
 ## Common Entity Properties
 Property | Type | Description
 -------- | ---- | -----------
-entity_ref | String | <entity_type>/<entity_id>  Examples: Employee/stefanb a2def97d-f2b0-3dc8-be51-f2a54a1879c3 (Using Stream ID)
-relations | List<relation> | Entity Relations
+entity_ref | String | <entity_ref>  Examples: Employee/stefanb a2def97d-f2b0-3dc8-be51-f2a54a1879c3 (Using Stream ID)
+involves | List<Role> | Entity Relations
 aspects | Map | Supported aspects are: Classification, GeoLocation, Presentation, Tags, Locale, Timed, Summary, Attachments. Please see aspect documentation for further information.
 properties | JSON | Any custom properties you might want to keep for the entity.
 
 ## Update Message
 ```javascript
 {
-  "type": "as.entity.update",
-  "origin": "as.provisioning.crud",
+  "action": "as.entity.update",
+  "source": "as.provisioning.crud",
   "occurred_at": "2014-02-23T12:00:00.000Z",
-  "relations": [
+  "involves": [
     {"ACTOR":"Employee/stefanb"},
     {"AFFECTS":"User/stefanb"}
   ],
@@ -126,10 +126,10 @@ patch | JSON | patches the current aspects, properties with altered values
 # Time-Series
 ```javascript
 //Minimal data-point:
-//Only stores one metric, “load”, in the “SystemHealth” time serie and adds “server1” as the origin dimensions.
+//Only stores one metric, “load”, in the “SystemHealth” time serie and adds “server1” as the source dimensions.
 {
   "series": "SystemHealth",
-  "origin": "server1",
+  "source": "server1",
   "occurred_at": "2014-01-19T12:56:48.442Z",
   "aspects": {
     "ts_data": {
@@ -142,9 +142,9 @@ patch | JSON | patches the current aspects, properties with altered values
 //Adds metrics for “tries“ and “importance” to the “CaptchasTooManyFailed” timeseries using the provided time as the precise time for the data-point and with Customer(3110686369) as a dimensions.  This also establishes a link between the customer entity in the historical store and this particular timeseries.
 {
   "series": "CaptchasTooManyFailed",
-  "origin": "as.cep3",
+  "source": "as.cep3",
   "occurred_at": "2014-01-19T12:56:48.442Z",
-  "relations": [{"REFERENCES": "Customer/3110686369"}],
+  "involves": [{"REFERENCES": "Customer/3110686369"}],
   "aspects": {
     "ts_data": {"tries":1, "importance":3,}
   }
@@ -154,9 +154,9 @@ patch | JSON | patches the current aspects, properties with altered values
 //Does the same as the one above except it references more entities in the historical store (Customer/IP)
 {
   "series": "CaptchasTooManyFailed",
-  "origin": "as.cep3",
+  "source": "as.cep3",
   "occurred_at": "2014-01-19T12:56:48.442Z",
-  "relations": [
+  "involves": [
     {"AFFECTS": "Customer/3110686369"},
     {"REFERENCES": "IP/192.168.1.1"}
   ],
@@ -187,9 +187,9 @@ The ability to store a vast amount of such data and link it to business-entities
 Property | Type | Description
 -------- | ---- | -----------
 series | String | The Time-Series label/name. First time a series label is used the timeseries is instantiated and should require no additional preparation.
-origin | String | Where is the datapoint originated from (Source System). The origin becomes a dimension in the time-series entry. Examples: com.activitystream.webserver1	(top_level_domain.domain.server) processing-line-1.scale-1.weight-meter-1 (machine.component.meter)
-occurred_at | ISO Date | ISO serialized datetime representing the exact time that the event occurred at the origin/source system. *Handling of data-points in AS differs from other events messages and a default occurred_at value is not provided. This means that the originating system must always provide the correct “measurement time” for data-points.
-relations | List<relation> | A link between the Entity and the Time-series is created the first time the entity is mentioned in conjunction with the time-series. Relation format: [{"type":"<entity_type>/<entity_id>"}]  Supported types are: - AFFECTS - The entity that the time series value afects (like temperature) - REFERENCES - Entity not directly involved in the ts data but should be Relationship information is  added to the timeseries data as a dimensions, much in the same way as the classification dimensions, but the difference is that entities listed here, and residing in the historical-graph,  are associated/linked with the timeseries for further/later processing.
+source | String | Where is the datapoint originated from (Source System). The source becomes a dimension in the time-series entry. Examples: com.activitystream.webserver1	(top_level_domain.domain.server) processing-line-1.scale-1.weight-meter-1 (machine.component.meter)
+occurred_at | ISO Date | ISO serialized datetime representing the exact time that the event occurred at the source/source system. *Handling of data-points in AS differs from other events messages and a default occurred_at value is not provided. This means that the originating system must always provide the correct “measurement time” for data-points.
+involves | List<Role> | A link between the Entity and the Time-series is created the first time the entity is mentioned in conjunction with the time-series. Relation format: [{"type":"<entity_type>/<entity_id>"}]  Supported types are: - AFFECTS - The entity that the time series value afects (like temperature) - REFERENCES - Entity not directly involved in the ts data but should be Relationship information is  added to the timeseries data as a dimensions, much in the same way as the classification dimensions, but the difference is that entities listed here, and residing in the historical-graph,  are associated/linked with the timeseries for further/later processing.
 aspects | Map | The data-point information is separated into 1 to 3 different aspects depending on the nature/purpose of the information. These are some of the same aspects available for AS Event Messages and are documented below.
 ts_data | Map | A Key/Value pair representing metric and a value pairs for the time-series where the value is always numeric (double).
 classification | Map | A key value pair representing a dimension and the corresponding dimension values.  Dimensions are useful for querying, aggregating and faceting time-series data.

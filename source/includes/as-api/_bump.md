@@ -8,7 +8,7 @@ Every bump is a link between exactly two entities, the user-entity responsible f
 ```shell
 Simple bump example:
 {
-  "relations":[
+  "involves":[
     {"ACTOR":"Employee/lindarut"},
     {"BUMP_UP":"Vehicle:Car/VF058"}
   ]
@@ -16,7 +16,7 @@ Simple bump example:
 
 Bump up an event in the stream by stream id:
 {
-  "relations": [ 
+  "involves": [
     {"ACTOR":"Employee/stefanb"}, 
     {"BUMP_UP":"206fd910-d2f3-3a08-bca6-fe7088360a78"}
   ]
@@ -24,7 +24,7 @@ Bump up an event in the stream by stream id:
 
 Multiple bumps in one message:
 {
-  "relations": [ 
+  "involves": [
     {"ACTOR":"Employee/stefanb"}, 
     {"BUMP_DOWN":"Vehicle:Car/VF058"},
     {"BUMP_UP":"206fd910-d2f3-3a08-bca6-fe7088360a78"}
@@ -34,8 +34,8 @@ Multiple bumps in one message:
 
 Property | Type | Description
 -------- | ---- | -----------
-actor | Entity | Either an <entity_type>/<entity_id> pair or a stream_id.  Examples: Employee/stefanb a2def97d-f2b0-3dc8-be51-f2a54a1879c3 
-action:entity | Stream Item | <bump_type>:<entity_type>/<entity_id> or <bump_type>:<stream_id> Action: BUMP_UP BUMP_DOWN  BUMP_NEUTRAL Examples: "BUMP_UP":"Vehicle/VF058" "BUMP_DOWN":"Vehicle/RT050"
+actor | Entity | Either an <entity_ref> or a stream_id.  Examples: Employee/stefanb a2def97d-f2b0-3dc8-be51-f2a54a1879c3
+action:entity | Stream Item | <bump_type>:<entity_ewf> or <bump_type>:<stream_id> Action: BUMP_UP BUMP_DOWN  BUMP_NEUTRAL Examples: "BUMP_UP":"Vehicle/VF058" "BUMP_DOWN":"Vehicle/RT050"
 
 **Valid aspects:** None
 

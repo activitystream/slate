@@ -5,8 +5,8 @@ Aspects are commonly used event and entity extensions which have rich support in
 ```shell
 A partial purchase-message illustrating the use of the ab_testing aspect:
 {
-  "type": "as.ec.cart.purchased",
-  "origin": "com.activitystream.www",
+  "action": "as.ec.cart.purchased",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
     {"ACTOR":"Session/KJ982KJ2", "proxy_for":"Customer/311068"},
@@ -56,8 +56,8 @@ properties | JSON | Free format JSON structure with additional information.
 ```shell
 A partial email-sent-message illustrating the use of the attachments aspect:
 {
-  "type": "as.crm.email.sent",
-  "origin": "com.activitystream.www",
+  "action": "as.crm.email.sent",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.003Z",
   "entities": [
     {"ACTOR":"User/311068"}
@@ -102,8 +102,8 @@ content | Base64 | The file contents***
 ```shell
 A partial login-message illustrating the use of the client_device aspect:
 {
-  "type": "as.auth.login",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.login",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
     {
@@ -120,8 +120,8 @@ A partial login-message illustrating the use of the client_device aspect:
 
 Same partial message showing the use of the client_device shorthand:
 {
-  "type": "as.auth.login",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.login",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
     {
@@ -166,8 +166,8 @@ bind_to* | String | Common or long-lived information, like this, may be moved to
 ```shell
 A partial login-message illustrating the use of the client_ip aspect:
 {
-  "type": "as.auth.login",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.login",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
     {
@@ -184,8 +184,8 @@ A partial login-message illustrating the use of the client_ip aspect:
 
 Same partial message showing the use of the client_ip shorthand:
 {
-  "type": "as.auth.login",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.login",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
     {
@@ -223,8 +223,8 @@ bind_to* | String | Common or long-lived information, like this, may be moved to
 ```shell
 A partial password-changed-message illustrating the use of the cei aspect:
 {
-  "type": "as.auth.password.change",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.password.change",
+  "source": "com.activitystream.www",
   "entities": [
     {"ACTOR":"Customer/311068"}
   ],
@@ -300,8 +300,8 @@ properties | JSON | Free format JSON structure with custom information
 ```shell
 A incomplete login-message showing use of the dimensions aspect:
 {
-  "type": "as.auth.login",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.login",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
     {"ACTOR":"User/311068"}
@@ -334,8 +334,8 @@ value | Double | The value in the "{key}":{**value**} pair
 ```shell
 A incomplete login-failed-message showing use of the geo_location aspect:
 {
-  "type": "as.auth.failed",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.failed",
+  "source": "com.activitystream.www",
   "entities": [{"ACTOR":"Username/stefanb"}],
   "aspects": {
     "geo_location": {
@@ -347,8 +347,8 @@ A incomplete login-failed-message showing use of the geo_location aspect:
 
 A incomplete route-set-message showing use of the geo_location aspect with multiple values:
 {
-  "type": "as.fleet.route.set",
-  "origin": "com.activitystream.www",
+  "action": "as.fleet.route.set",
+  "source": "com.activitystream.www",
   "entities": [{"ACTOR":"Username/stefanb"}],
   "aspects": {
     "geo_location": [
@@ -374,7 +374,7 @@ Field | Type | Description
 ----- | ---- | -----------
 **latlong**| String | "double,double" with "latitude,longitude"
 bind_to* | String | Common or long-lived information like this may be associated with linked entities, especially if it applies to all events related to that entity (usually the actor). In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the session. Multiple entries are stored for slow changing aspects to keep complete location log.
-type | String | Presentation/processing  tags: **from** (location), **to** (destination), **residence**, **work**, **temporary**
+action | String | Presentation/processing  tags: **from** (location), **to** (destination), **residence**, **work**, **temporary**
 accuracy | Integer | A 0..10 rating for the accuracy of this location.  This is not the geolocation-accuracy (resolution) but how reliably the bound entity can be associated with that location. 10 means that it/he was positively there. 0 mean that it’s a vague guess.
  | |  **Following are read-only properties**
 *\_continent*|String|
@@ -409,8 +409,8 @@ coordinates|Double[] | List of double values [lat,long] / [double, double] repre
 ```shell
 A incomplete email-sent-message showing use of the grouped aspect:
 {
-  "type": "as.msg.email.sent",
-  "origin": "com.activitystream.www",
+  "action": "as.msg.email.sent",
+  "source": "com.activitystream.www",
   "entities": [{"ACTOR":"Username/stefanb"}],
   "aspects": {
     "grouped": {
@@ -422,15 +422,15 @@ A incomplete email-sent-message showing use of the grouped aspect:
 
 Shorthand example:
 {
-  "type": "as.msg.email.received",
-  "origin": "com.activitystream.www",
-  "relations": [{"ACTOR":"Username/stefanb"}],
+  "action": "as.msg.email.received",
+  "source": "com.activitystream.www",
+  "involves": [{"ACTOR":"Username/stefanb"}],
   "aspects": {"grouped":"Regarding the grouped/collapsed emails"}
 }
 ```
 Events spanning a wide time range can be pulled together and collapsed into a group and placed in the stream according to the most recent event in the group. This behaviour is common in email programs where an email thread is grouped together and collapsed, showing only the latest email.
 
-To achieve this the messages in the group must have the same group value. If the grouped events are of different event-types then they also need to specify a scope. That way all the different email event messages can specify “email” as their collapse group and the main subject, without RE:/FWD: prefixes, as their value.
+To achieve this the messages in the group must have the same group value. If the grouped events are of different actions then they also need to specify a scope. That way all the different email event messages can specify “email” as their collapse group and the main subject, without RE:/FWD: prefixes, as their value.
 
 Field | Type | Description
 ----- | ---- | -----------
@@ -450,8 +450,8 @@ Please note that “re:”, “fwd:” etc. are removed from the group string if
 ```shell
 A incomplete purchase-completed-message showing use of the items aspect:
 {
-  "type": "as.ec.cart.purchase.completed",
-  "origin": "com.activitystream.www",
+  "action": "as.ec.cart.purchase.completed",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [{"ACTOR":"Session/311068"}],
   "aspects": {
@@ -476,7 +476,7 @@ Generic purchase information. Items in the list will get the appropriate relatio
 
 Field | Type | Description
 ----- | ---- | -----------
-item | type:entity_ref | < type >:< entity_type >/< entity_id > (BOUGHT, RENTED, LEASED, GOT, WON, RESERVED, RETURNED, SELECTED, UNSELECTED)
+item | action:entity_ref | < action >:< entity_ref > (BOUGHT, RENTED, LEASED, GOT, WON, RESERVED, RETURNED, SELECTED, UNSELECTED)
 item_count | Double | Number of items
 item_price | Double | Price of individual item (Use the [localize](#locale) aspect to control currency)
 variant | String | Product variant when applicable
@@ -501,8 +501,8 @@ properties | JSON | JSON containing customer specific information
 ## Locale
 ```shell
 {
-  "type": "as.auth.failed",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.failed",
+  "source": "com.activitystream.www",
   "entities": [
     {"ACTOR":"Username/stefanb"}
   ],
@@ -534,8 +534,8 @@ timezone | String | The time zone ID. (time zones in the tz database) Sample tim
 ```shell
 A complete email-sent-message showing the use of the messaging aspect:
 {
-  "type": "as.msg.email.sent",
-  "origin": "com.activitystream.exchange",
+  "action": "as.msg.email.sent",
+  "source": "com.activitystream.exchange",
   "entities": [
     {"ACTOR":"Username/stefanb"}
   ],
@@ -556,7 +556,7 @@ A complete email-sent-message showing the use of the messaging aspect:
       }
     ],
     "dimensions": {
-      "type":"proposal",
+      "action":"proposal",
     },
     "properties": {
       "some":true,
@@ -596,8 +596,8 @@ This aspect has not been implemented
 ```shell
 A complete web-page-viewed-message showing the use of the messaging aspect:
 {
-  "type": "as.web.page.browse",
-  "origin": "com.activitystream.www",
+  "action": "as.web.page.browse",
+  "source": "com.activitystream.www",
   "entities": [
     {"ACTOR":"Session/32948429384239", "proxy_for": "Customer/311068"}
   ],
@@ -630,7 +630,7 @@ The pageview aspect is handy when reporting web based events but they can also b
 
 Field | Type | Description
 ----- | ---- | -----------
-**path** | String | A required path (last part of url or the whole URL if the origin attribute is not used to specify that. (Mapped to a Page Entity). Please note: Everything after ? will be removed and added to path_properties.
+**path** | String | A required path (last part of url or the whole URL if the source attribute is not used to specify that. (Mapped to a Page Entity). Please note: Everything after ? will be removed and added to path_properties.
 path_properties | JSON | Custom request properties for the page path
 referrer | String | (id) The referrer URL (Where the request is originated/redirected from) (Mapped to a Page Entity) Please note: Everything after ? will be removed and added to the reference  properties (not pageview properties).
 referrer_properties | JSON | Custom request properties of the referrer URL
@@ -649,9 +649,9 @@ page_content | List<Relations> | List of content Items/Entities types: FEATURED,
 ```shell
 Simple event that includes simple presentation information
 {
-  "type": "as.ecom.product.browse",
-  "origin": "com.activitystream.www",
-  "relations": [
+  "action": "as.ecom.product.browse",
+  "source": "com.activitystream.www",
+  "involves": [
     {"ACTOR":"User/stefanb"}
   ],
   "aspects": {
@@ -664,9 +664,9 @@ Simple event that includes simple presentation information
 }
 Simple event that includes the update aspect to set presentation information for an entity
 {
-  "type": "as.entity.update",
-  "origin": "some.internal.system.process",
-  "relations": [
+  "action": "as.entity.update",
+  "source": "some.internal.system.process",
+  "involves": [
     {"ACTOR":"User/stefanb"},
     {"AFFECTS":"Customer/311068"}
   ],
@@ -688,20 +688,21 @@ Commonly used fields to display human-readable entity information but applies to
 Field | Type | Description
 ----- | ---- | -----------
 label | String | Name or human readable label for the event/entity
+description | String | A short description of the entity
 details_url | String | Home URL for the entity. Pointer to entity details.*
 thumbnail | String | URL pointing to a default thumbnail/image used to represent the entity*
 icon | String | URL pointing to a default icon/logo used to represent the entity* (css classsname)
 
-* All URLs can, with use of  templating, be based on values from the origin or the event_type record.
+* All URLs can, with use of  templating, be based on values from the source or the event_type record.
 
 **Applies to:** [`Events`](), [`Entities`](), [`Event-Types`]()</br>
 
 ## Resolvable
 ```shell
 {
-  "type": "as.auth.failed",
-  "origin": "com.activitystream.www",
-  "relations": [
+  "action": "as.auth.failed",
+  "source": "com.activitystream.www",
+  "involves": [
     {"ACTOR":"User/stefanb"}
   ],
   "aspects": {
@@ -714,23 +715,23 @@ icon | String | URL pointing to a default icon/logo used to represent the entity
 ```
 If the originating system already has an ID for the event that it must to use to resolve the event in the activity stream then an external_id can be supplied.
 
-The batch_id is used to tag a whole batch of events so that they can be invalidated later on if, for example, a transaction fails. The batch_id is always resolved for a specific/single origin but many events can have the same batch_id.
+The batch_id is used to tag a whole batch of events so that they can be invalidated later on if, for example, a transaction fails. The batch_id is always resolved for a specific/single source but many events can have the same batch_id.
 
 This can, for example, be used to rollback external transaction. As the activity stream is a append-only event store then the events are rolled-back by invalidating them (which leaves them in the stream but hides them).
 
 Field | Type | Description
 ----- | ---- | -----------
-external_id | String | When external systems need to find individual events based on their own event ID then they can supply it using this aspect.</br>*external_id is unique within the origin and needs origin information to be resolved.
-batch_id | String | External batch id which can be used, when supplied with origin, to resolve a whole batch of events.</br>*batch_id is resolved with origin information.
+external_id | String | When external systems need to find individual events based on their own event ID then they can supply it using this aspect.</br>*external_id is unique within the source and needs source information to be resolved.
+batch_id | String | External batch id which can be used, when supplied with source, to resolve a whole batch of events.</br>*batch_id is resolved with source information.
 
 **Applies to:** [`Events`]()</br>
 
 ## Settings
 ```shell
 {
-  "type": "as.settings.changed",
-  "origin": "com.activitystream.www",
-  "relations": [
+  "action": "as.settings.changed",
+  "source": "com.activitystream.www",
+  "involves": [
     {"ACTOR":"User/stefanb"}
   ],
   "aspects": {
@@ -754,10 +755,10 @@ Name of the setting that is affected and the new/current value for the setting.
 ## Summary
 ```shell
 {
-  "type": "as.rewards.unlocked",
-  "origin": "com.activitystream.www",
+  "action": "as.rewards.unlocked",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.001Z",
-  "relations": [
+  "involves": [
     {"ACTOR":"Session/9fa660bb-9c43-4214-b603-882453ccf088"}
   ],
   "aspects": {
@@ -777,7 +778,7 @@ subtitle | String
 content | String
 properties | JSON | JSON containing additional, customer specific, information
 
-Please note that the action_type (“as.app.reward.unlocked” in this case) can also have title information attached to it and that storing a common template there can be more efficient than storing redundant strings with every event.
+Please note that the action (“as.app.reward.unlocked” in this case) can also have title information attached to it and that storing a common template there can be more efficient than storing redundant strings with every event.
 
 **Applies to:** [`Events`](), [`Entities`]()</br>
 **Compliments:** [`Presentation`]()
@@ -785,9 +786,9 @@ Please note that the action_type (“as.app.reward.unlocked” in this case) can
 ## Tags
 ```shell
 {
-  "type": "as.auth.failed",
-  "origin": "com.activitystream.www",
-  "relations": [
+  "action": "as.auth.failed",
+  "source": "com.activitystream.www",
+  "involves": [
     {"ACTOR":"Username/stefanb"}
   ],
   "aspects": {
@@ -804,10 +805,10 @@ An array of strings used to further classify events in the activity stream. You 
 ```shell
 //With began and ended (explicit):
 {
-  "type": "as.session.ended",
-  "origin": "com.activitystream.www",
+  "action": "as.session.ended",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
-  "relations": [
+  "involves": [
     {"ACTOR":"Session/9fa660bb-9c43-4214-b603-882453ccf088", "proxy_for":"User/311068"}
   ],
   "aspects": {
@@ -854,10 +855,10 @@ type | String | Any custom type ("Duration" for example)
 ```shell
 Sample of a event message that piggybacks a timeseries entry
 {
-  "type": "as.sysops.status.report",
-  "origin": "com.activitystream.server1",
+  "action": "as.sysops.status.report",
+  "source": "com.activitystream.server1",
   "occurred_at": "2014-02-23T12:00:00.000Z",
-  "relations": [
+  "involves": [
     {"ACTOR":"Demon/Sysops"}
   ],
   "aspects": {

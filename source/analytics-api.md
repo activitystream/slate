@@ -36,9 +36,9 @@ A instance of a User, Product, WebPage and Order are all examples of entities.</
 These (Business)entities are automatically created when referenced by an event and then the event, as well as all future events, are linked to the entity.
 
 That way each event becomes a part of the entities history, its activity stream, that reflects the type of event and the role that the entity played in the event.</br>
-[Event-types]() and [Entity-types]() are created just-in-time.
+[Actions]() and [Actions]() are created just-in-time.
 
-### [Roles](#roles-event-relations)
+### [Involves](#roles-event-relations)
 The entities involved in an event all have respective roles.
 </br>The "ACTOR" is, for example, the entity responsible for triggering the event and
 </br>the "AFFECTS" role is used for relations to all entities directly affected by the event while

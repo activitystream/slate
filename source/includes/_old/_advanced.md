@@ -24,7 +24,7 @@ Scoped API keys are only added and never updated or deleted but they can be expi
 //STEP 1 - Setup (Store a default message for a specific token):
 {
   "token":"bkg", //Token is generated if left blank
-  "relations": [
+  "involves": [
     {"REFERENCES": "Promoter/hw_jimmy_buffet"},
     {"REFERENCES": "Artist/734667"}
   ],
@@ -46,9 +46,9 @@ Scoped API keys are only added and never updated or deleted but they can be expi
 //STEP 2 - User (Send a simple message that specifies a token)
 {
   "token": "bkg", //reference the token to be used
-  "type": "as.web.redirect",
-  "origin": "com.web.server1",
-  "relations": [
+  "action": "as.web.redirect",
+  "source": "com.web.server1",
+  "involves": [
     {"ACTOR": "Cookie/eac98d34-0fbf-4c44-a4fa-bb092b6b18ce", "PROXY_FOR":"MobilituUnique/<MUniqueId>"}
   ],
   "aspects": {
@@ -63,9 +63,9 @@ Scoped API keys are only added and never updated or deleted but they can be expi
 
 //The composite message stored and processed:
 {
-  "type": "as.web.redirect",
-  "origin": "com.web.server1",
-  "relations": [
+  "action": "as.web.redirect",
+  "source": "com.web.server1",
+  "involves": [
     {"ACTOR": "Cookie/eac98d34-0fbf-4c44-a4fa-bb092b6b18ce", "PROXY_FOR":"MobilituUnique/<MUniqueId>"},
     {"INVOLVES": "ShortUrl/bkg"},
     {"REFERENCES": "Promoter/hw_jimmy_buffet"},
@@ -107,7 +107,7 @@ Tokens based defaults are ideal to bridge disjoint messages, like in the email e
 Property | Type | Description
 -------- | ---- | -----------
 token | String | If an external system specifies the token then this property is used. If no external token is supplied then a default token is returned.
-defaults_values | Map | This can be any* JSON structure which is a valid part of the messages that will use the tracker token returned.</br> *Defaults can not contain event specific information like occurred_at, origin or type. The defaults map can include a variables section and the values provided there can be added to subsequent messages with references to the variable name.
+defaults_values | Map | This can be any* JSON structure which is a valid part of the messages that will use the tracker token returned.</br> *Defaults can not contain event specific information like occurred_at, source or action. The defaults map can include a variables section and the values provided there can be added to subsequent messages with references to the variable name.
 variables | Map | Values are added to subsequent messages when it a) reference the token and b) contains the variable name enclosed in %%. (%variable_name%)
 valid_until | ISO Date | ISO datetime value with both milliseconds and time zone representing the exact time that the tracker token expires.
 
@@ -115,15 +115,15 @@ valid_until | ISO Date | ISO datetime value with both milliseconds and time zone
 ## Sub-classing Relationship Types
 ## Sub-classing Entity Types
 ## Event Type Library
-Each event-message submitted to the activity stream is of a particular type. “as.auth.login” is an example of a event-type-key used when reporting that a customer or an employee logs on to a website/system.
+Each event-message submitted to the activity stream reports a particular action. “as.auth.login” is an example of a action-key used when reporting that a customer or an employee logs on to a website/system.
 
-You can easily use your own event-types as they are created automatically on first use and service and processing active for that new event-type can be configured in the AS Admin if the defaults do not suffice.
+You can easily use your own actions as they are created automatically on first use and service and processing active for that new action can be configured in the AS Admin if the defaults do not suffice.
 
-Activity Stream is building a library of common event-types that will provide you with a) scaffolding/blueprints for integration and b) access to pre-built analysis and advanced processing.
+Activity Stream is building a library of common actions that will provide you with a) scaffolding/blueprints for integration and b) access to pre-built analysis and advanced processing.
 
-An example of this is the simple “as.authentication.login” event-type. If that is used, with the associated event-types as *.login.failed, then the system will automatically identify problems, or any abnormalities in the login behavior for users.
+An example of this is the simple “as.authentication.login” action. If that is used, with the associated action as *.login.failed, then the system will automatically identify problems, or any abnormalities in the login behavior for users.
 
-In other words; using event-types from the AS Event-Type Library does not only help you to plan and categorize your business-events but it opens the door to pre-built analysis, reporting and features that would normally take a considerable amount of time when created on per-organization basis.
+In other words; using actions from the AS Actions Library does not only help you to plan and categorize your business-events but it opens the door to pre-built analysis, reporting and features that would normally take a considerable amount of time when created on per-organization basis.
  
 ## Append Only 
 The Historical Event Store in Activity Stream is append-only. This means that any reported business-event is permanently on-record and that it can not be changed, not ever.

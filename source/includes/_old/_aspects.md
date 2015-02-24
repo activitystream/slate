@@ -8,8 +8,8 @@ Event message can include multiple aspects or none at all but it’s good to kee
 ## AB Testing
 ```javascript
 {
-  "type": "as.ec.cart.purchased",
-  "origin": "com.activitystream.www",
+  "action": "as.ec.cart.purchased",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
     {"ACTOR":"Session/KJ982KJ2", "proxy_for":"Customer/311068"},
@@ -46,8 +46,8 @@ Enhanced with: `Dimensions*`, `Timed**`
 ## Attachments
 ```javascript
 {
-  "type": "as.crm.email.sent",
-  "origin": "com.activitystream.www",
+  "action": "as.crm.email.sent",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.003Z",
   "entities": [
     {"ACTOR":"User/311068"}
@@ -83,8 +83,8 @@ properties | JSON | Free format JSON structure with custom information
 ## Client Device
 ```javascript
 {
-  "type": "as.auth.login",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.login",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
     {
@@ -106,8 +106,8 @@ Based on browser string and is only used for web/browser originated events.
 ## Client IP
 ```javascript
 {
-  "type": "as.auth.login",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.login",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
     {
@@ -128,8 +128,8 @@ If the event is originated over public Internet and the IP address is provided t
 ## Customer Experience Index (CEI)
 ```javascript
 {
-  "type": "as.auth.password.change",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.password.change",
+  "source": "com.activitystream.www",
   "entities": [
     {"ACTOR":"Customer/311068"}
   ],
@@ -142,7 +142,7 @@ If the event is originated over public Internet and the IP address is provided t
 ```
 Each event can have synthesized/imagined effect on the entities affected by it. When applicable it can, for example, be used to guesstimate the current state of a customer based on the things in his activity stream.
 
-The defaults for this can be stored with the event type and applied to all events where these settings are missing.
+The defaults for this can be stored with the action and applied to all events where these settings are missing.
 
 A calculated outcome of these can be used as a Customer Experience Index or a factor in such an index.
 
@@ -194,8 +194,8 @@ properties | JSON | Free format JSON structure with custom information
 ## Dimensions (Classification)
 ```javascript
 {
-  "type": "as.auth.login",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.login",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
     {"ACTOR":"User/311068"}
@@ -216,8 +216,8 @@ In that way AB test results, page-views, purchases or any other aspect that auto
 ## Geo Locations
 ```javascript
 {
-  "type": "as.auth.failed",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.failed",
+  "source": "com.activitystream.www",
   "entities": [{"ACTOR":"Username/stefanb"}],
   "aspects": {
     "geo_location": {
@@ -242,8 +242,8 @@ bind_to* | String | Common or long-lived information like this may be moved to t
 ## Grouped
 ```javascript
 {
-  "type": "as.msg.email.sent",
-  "origin": "com.activitystream.www",
+  "action": "as.msg.email.sent",
+  "source": "com.activitystream.www",
   "entities": [
     {"ACTOR":"Username/stefanb"}
   ],
@@ -257,12 +257,12 @@ bind_to* | String | Common or long-lived information like this may be moved to t
 ```
 Events spanning a wide time range can be pulled together and collapsed into a group and placed in the stream according to the most recent event in the group. This behaviour is common in email programs where an email thread is grouped together and collapsed, showing only the latest email.
 
-To achieve this the messages in the group must have the same group value. If the grouped events are of different event-types then they also need to specify a scope. That way all the different email event messages can specify “email” as their collapse group and the main subject, without RE:/FWD: prefixes, as their value.
+To achieve this the messages in the group must have the same group value. If the grouped events are of different action then they also need to specify a scope. That way all the different email event messages can specify “email” as their collapse group and the main subject, without RE:/FWD: prefixes, as their value.
 
 Field | Type | Description  
 ----- | ---- | -----------
-group | String | The common value used to group and collapse all found events of this same event type. (see type for grouping different event types together)
-scope | String | To group events of multiple event-types into the same group then put a common scope here.  
+group | String | The common value used to group and collapse all found events of this same action. (see action for grouping different event types together)
+scope | String | To group events of multiple event-types into the same group then put a common scope here.
 
 Make sure all messages meant to be collapsed together share the same group and scope settings.
 
@@ -272,8 +272,8 @@ Please note that “re:”, “fwd:” etc. are removed from the group string if
 ## Items (Commerce)
 ```javascript
 {
-  "type": "as.ec.cart.purchase.completed",
-  "origin": "com.activitystream.www",
+  "action": "as.ec.cart.purchase.completed",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [{"ACTOR":"Session/311068"}],
   "aspects": {
@@ -298,7 +298,7 @@ Generic purchase information. Items in the list will get the appropriate relatio
 
 Field | Type | Description  
 ----- | ---- | -----------
-item | type:entity_ref | < type >:< entity_type >/< entity_id > (BOUGHT, RENTED, LEASED, GOT, WON, RESERVED, RETURNED, SELECTED, UNSELECTED)
+item | action:entity_ref | < action >:< entity_ref > (BOUGHT, RENTED, LEASED, GOT, WON, RESERVED, RETURNED, SELECTED, UNSELECTED)
 item_count | Double | Number of items
 item_price | Double | Price of individual item (Use the [localize](#locale) aspect to control currency)
 variant | String | Product variant when applicable
@@ -316,8 +316,8 @@ properties | JSON | JSON containing customer specific information
 ## Locale
 ```javascript
 {
-  "type": "as.auth.failed",
-  "origin": "com.activitystream.www",
+  "action": "as.auth.failed",
+  "source": "com.activitystream.www",
   "entities": [
     {"ACTOR":"Username/stefanb"}
   ],
@@ -346,8 +346,8 @@ timezone | String | The time zone ID. (time zones in the tz database) Sample tim
 ## Messaging
 ```javascript
 {
-  "type": "as.msg.email.sent",
-  "origin": "com.activitystream.exchange",
+  "action": "as.msg.email.sent",
+  "source": "com.activitystream.exchange",
   "entities": [
     {"ACTOR":"Username/stefanb"}
   ],
@@ -389,8 +389,8 @@ This aspect has not been implemented
 ## Page View
 ```javascript
 {
-  "type": "as.web.page.browse",
-  "origin": "com.activitystream.www",
+  "action": "as.web.page.browse",
+  "source": "com.activitystream.www",
   "entities": [
     {"ACTOR":"User/stefanb"}
   ],
@@ -417,8 +417,8 @@ The pageview aspect is handy when storing web based events.
 
 Field | Type | Description  
 ----- | ---- | -----------
-path | String | (id) A required path (last part of url or the whole URL if the origin attribute is not used to specifiy that. (Mapped to a Page Entity). Please note: Everything after ? will be removed and added to pageview properties.
-referrer | String | (id) The referrer URL (Where the request is originated/redirected from) (Mapped to a Page Entity) Please note: Everything after ? will be removed and added to the reference  properties (not pageview properties). 
+path | String | (id) A required path (last part of url or the whole URL if the source attribute is not used to specifiy that. (Mapped to a Page Entity). Please note: Everything after ? will be removed and added to pageview properties.
+referrer | String | (id) The referrer URL (Where the request is originated/redirected from) (Mapped to a Page Entity) Please note: Everything after ? will be removed and added to the reference  properties (not pageview properties).
 keyword | String | Search term
 method | String | GET|POST|PUT|DELETE|PATCH (Defaults to GET)
 response_code | Integer | HTTP Response code (Defaults to 200)
@@ -431,9 +431,9 @@ properties | JSON | Custom request properties
 ## Presentation
 ```javascript
 {
-  "type": "as.ecom.product.browse",
-  "origin": "com.activitystream.www",
-  "relations": [
+  "action": "as.ecom.product.browse",
+  "source": "com.activitystream.www",
+  "involves": [
     {"ACTOR":"User/stefanb"}
   ],
   "aspects": {
@@ -454,15 +454,15 @@ details_url | String | Home URL for the entity. Pointer to entity details.*
 thumbnail | String | URL pointing to a default thumbnail/image used to represent the entity*
 icon | String | URL pointing to a default icon/logo used to represent the entity* (css classsname)
 
-* All URLs can, with use of  templating, be based on values from the origin or the event_type record.
+* All URLs can, with use of  templating, be based on values from the source or the action record.
 
 **Applies to:** `Events` `Entities`
 ## Resolvable
 ```javascript
 {
-  "type": "as.auth.failed",
-  "origin": "com.activitystream.www",
-  "relations": [
+  "action": "as.auth.failed",
+  "source": "com.activitystream.www",
+  "involves": [
     {"ACTOR":"User/stefanb"}
   ],
   "aspects": {
@@ -473,24 +473,24 @@ icon | String | URL pointing to a default icon/logo used to represent the entity
   }
 }
 ```
-If the originating system already has an ID for the event that it must to use to resolve the event in the activity stream then an external_id can be supplied. 
+If the originating system already has an ID for the event that it must to use to resolve the event in the activity stream then an external_id can be supplied.
 
-The batch_id is used to tag a whole batch of events so that they can be invalidated later on if, for example, a transaction fails. The batch_id is always resolved for a specific/single origin but many events can have the same batch_id.
+The batch_id is used to tag a whole batch of events so that they can be invalidated later on if, for example, a transaction fails. The batch_id is always resolved for a specific/single source but many events can have the same batch_id.
 
 This can, for example, be used to rollback external transaction. As the activity stream is a read-only event store then the events are rolled-back by invalidating them which leaves them in the stream but hides them.
 
 Field | Type | Description
 ----- | ---- | -----------
-external_id | String | When external systems need to find individual events based on their own event ID then they can supply it using this aspect.</br>*external_id is unique within the origin and needs origin information to be resolved.
-batch_id | String | External batch id which can be used, when supplied with origin, to resolve a whole batch of events.</br>*batch_id is resolved with origin information.
+external_id | String | When external systems need to find individual events based on their own event ID then they can supply it using this aspect.</br>*external_id is unique within the source and needs source information to be resolved.
+batch_id | String | External batch id which can be used, when supplied with source, to resolve a whole batch of events.</br>*batch_id is resolved with source information.
 
 **Applies to:** `Events` `Entities`
 ## Settings
 ```javascript
 {
-  "type": "as.settings.changed",
-  "origin": "com.activitystream.www",
-  "relations": [
+  "action": "as.settings.changed",
+  "source": "com.activitystream.www",
+  "involves": [
     {"ACTOR":"User/stefanb"}
   ],
   "aspects": {
@@ -513,10 +513,10 @@ Name of the setting that is affected and the new/current value for the setting.
 ## Summary
 ```javascript
 {
-  "type": "as.rewards.unlocked",
-  "origin": "com.activitystream.www",
+  "action": "as.rewards.unlocked",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.001Z",
-  "relations": [
+  "involves": [
     {"ACTOR":"Session/9fa660bb-9c43-4214-b603-882453ccf088"}
   ],
   "aspects": {
@@ -536,15 +536,15 @@ subtitle | String
 content | String
 properties | JSON | JSON containing additional, customer specific, information
 
-Please note that the action_type (“as.app.reward.unlocked” in this case) can also have title information attached to it and that storing a common template there can be more efficient than storing redundant strings with every event.
+Please note that the action (“as.app.reward.unlocked” in this case) can also have title information attached to it and that storing a common template there can be more efficient than storing redundant strings with every event.
 
 **Applies to:** `Events` `Entities`
 ## Tags
 ```javascript
 {
-  "type": "as.auth.failed",
-  "origin": "com.activitystream.www",
-  "relations": [
+  "action": "as.auth.failed",
+  "source": "com.activitystream.www",
+  "involves": [
     {"ACTOR":"Username/stefanb"}
   ],
   "aspects": {
@@ -559,10 +559,10 @@ An array of strings used to further classify events in the activity stream. You 
 ```javascript
 //With began and ended (explicit):
 {
-  "type": "as.session.ended",
-  "origin": "com.activitystream.www",
+  "action": "as.session.ended",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
-  "relations": [
+  "involves": [
     {"ACTOR":"Session/9fa660bb-9c43-4214-b603-882453ccf088", "proxy_for":"User/311068"}
   ],
   "aspects": {
@@ -600,17 +600,17 @@ ends | ISO Date |
 duration | Long | Milliseconds
 type | String | Any custom type ("Duration" for example)
 
-**Please Note**: It it’s unclear to which part of your event message the timed aspect applies to then it’s a good sign of your event message becoming too bloated. Creating two separate events, even of two different event types, is recommended in such cases.
+**Please Note**: It it’s unclear to which part of your event message the timed aspect applies to then it’s a good sign of your event message becoming too bloated. Creating two separate events, even of two different actions, is recommended in such cases.
 Begin and ends need to belong to the same time-zone.
 
 **Applies to:** `Events` `Entities`
 ## TS Data (Data-Points)
 ```javascript
 {
-  "type": "as.sysops.status.report",
-  "origin": "com.activitystream.server1",
+  "action": "as.sysops.status.report",
+  "source": "com.activitystream.server1",
   "occurred_at": "2014-02-23T12:00:00.000Z",
-  "relations": [
+  "involves": [
     {"ACTOR":"Demon/Sysops"}
   ],
   "aspects": {

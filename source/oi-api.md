@@ -35,8 +35,8 @@ Each event becomes and item in the activity stream and is associated with all th
 A instance of a User, Product, WebPage and Order are all examples of entities.</br>
 These (Business)entities are automatically created when referenced by an event and then the event, as well as all future events, are linked to the entity.
 
-That way each event becomes a part of the entities history, its activity stream, that reflects the type of event and the role that the entity played in the event.</br>
-[Event-types]() and [Entity-types]() are created just-in-time.
+That way each event becomes a part of the entities history, its activity stream, that reflects the action reported by the event and the role that the entity played in the event.</br>
+[Actions]() and [Entity-types]() are created just-in-time.
 
 ### [Roles](#roles-event-relations)
 The entities involved in an event all have respective roles.

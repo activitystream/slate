@@ -35,7 +35,7 @@ The Historical store, containing all the activity stream data in it's event-enti
 The Real-Time Analytics store is always up-to-date (more like up-to-the-second) and is capable of answering ad-hoc queries in an instance. Here you learn how to use the simple REST queries as well as to use advanced querying. [more](/analytics.html) (pending)
 
 ##The AS Event-Type Catalog*
-Activity Stream is building a catalog of predefined event-types. When these event-types are used the Observation Engine automatically kicks in and starts producing Observations without any further configuration and tailored dashboards as well as domain specific reports become available.  [more](/as-library.html)
+Activity Stream is building a catalog of predefined actions. When these actions are used the Observation Engine automatically kicks in and starts producing Observations without any further configuration and tailored dashboards as well as domain specific reports become available.  [more](/as-library.html)
 
 \***Please Note:** It may depend on your subscription what observations, dashboards and reports become available to you.
 

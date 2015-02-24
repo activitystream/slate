@@ -11,7 +11,7 @@ Think of the AS time series as a OLAP/Cube which is updated continuously and can
 Single metric submitted to the analytics store:
 {
   "series": "SystemHealth",
-  "origin": "server1",
+  "source": "server1",
   "occurred_at": "2014-01-19T12:56:48.442Z",
   "aspects": {
     "ts_data": {
@@ -23,7 +23,7 @@ Single metric submitted to the analytics store:
 Multiple data-points having additional dimensions and a entity references submitted to the analytics store:
 {
   "series": "CaptchasTooManyFailed",
-  "origin": "as.cep3",
+  "source": "as.cep3",
   "occurred_at": "2014-01-19T12:56:48.442Z",
   "entities": [
     {"AFFECTS": "Customer/3110686369"}
@@ -41,9 +41,9 @@ Multiple data-points having additional dimensions and a entity references submit
 Property | Type | Description
 -------- | ---- | -----------
 **series** | String | The Time-Series label/name.</br>First time a series label is used the timeseries is instantiated and should require no additional preparation.
-**occurred_at** | DateTime | ISO serialized datetime representing the exact time that the event occurred at the origin/source system.</br>Handling of data-points in AS differs from other events messages and a default occurred_at value is not provided. This means that the originating system must always provide the correct “measurement time” for data-points.
-origin | String | Where is the data-point originated from (Source System). </br>The origin becomes a dimension in the time-series entry.
-entities | List\<EntityRelation\> | A link between the Entity and the Time-series is created the first time the entity is referenced from a data-point belonging to the time-series. </br>AFFECTS, REFLECTS, REFERENCES</br>This is done to track the relations between entities and time-series.
+**occurred_at** | DateTime | ISO serialized datetime representing the exact time that the event occurred at the source system.</br>Handling of data-points in AS differs from other events messages and a default occurred_at value is not provided. This means that the originating system must always provide the correct “measurement time” for data-points.
+source | String | Where is the data-point originated from (Source System). </br>The source becomes a dimension in the time-series entry.
+involves | List\<Role\> | A link between the Entity and the Time-series is created the first time the entity is referenced from a data-point belonging to the time-series. </br>AFFECTS, REFLECTS, REFERENCES</br>This is done to track the relations between entities and time-series.
 aspects | Map | The data-point information is separated into 1 to 3 different aspects depending on the nature/purpose of the information.
 &nbsp;&nbsp;&nbsp;&nbsp;ts_data| Map | A Key/Value pair representing metric+value pairs for the time-series where the value is always numeric (double).
 &nbsp;&nbsp;&nbsp;&nbsp;dimensions| Map | A key value pair representing a dimension and the corresponding dimension values.  Dimensions are useful for querying, aggregating and faceting time-series data.
@@ -102,8 +102,8 @@ https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}
 ###Fetch all the dimensions that have been used in a certain time-series [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`/dimensions?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&api_key=`{api-key}`
 
-###Fetch all the origins that have submitted data into a certain time-series [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`/origin?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&api_key=`{api-key}`
+###Fetch all the source that have submitted data into a certain time-series [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`/source?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&api_key=`{api-key}`
 
 ###Fetch all the entities active in a certain time-series [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`/entities?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&api_key=`{api-key}`

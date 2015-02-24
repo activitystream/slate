@@ -135,7 +135,7 @@ GET /api/v1/provisioning/privileges/<some-user>
 ### REST Actions
 Verb | URL | Action
 ---- | ----------- | -----------
-GET | /api/v1/provisioning/privileges | List all users privileges
+GET | /api/v1/provisioning/privileges | List all user privileges
 GET | /api/v1/provisioning/users/{username}/privilege | Get a user privilege
 POST | /api/v1/provisioning/users/{username}/privilege | Add new user privilege
 PUT | /api/v1/provisioning/users/{username}/privilege | Update user privilege
@@ -197,7 +197,7 @@ Field | Type | Description
 ----- | ---- | -----------
 **`name`** | String(250) | Full name of the service
 **`label`** | String(32) | A slug/label for the service
-**`type`** | String | Types: INTERNAL, MANDATORY, OPTIONAL, PREMIUM, EXCLUSIVE, CUSTOM
+**`type`** | String | Types: INTERNAL, MANDATORY, SUBSCRIPTION_PLAN, OPTIONAL, PREMIUM, EXCLUSIVE, CUSTOM
 **`status`** | String | Statuses: ALPHA, BETA, PRODUCTION, ARCHIVED
 `icon` | String(50) | Icon used to label the service
 `preview` | String(250) | URL/Path to a preview image for the service
@@ -297,13 +297,19 @@ GET /api/v1/provisioning/service-endpoints/<endpoint.id>
     }
 }
 ```
+Service endpoints describe how data is sent/fetched from the tenant into Activity Stream and how information from Activity Stream is delivered back to him.
+
+Event messages can be submitted without configuration via the REST/HTTP interface but also sent directly to a Message Queue at Activity Stream but we can also fetch event-messages from message queues belonging tour tenants.
+
+We provide error feedback and operational insights via message queues that, like with ingestion, reside with us or our tenants.
+
 ### REST Actions
 Verb | URL | Action
 ---- | ----------- | -----------
-GET | /api/v1/provisioning/service-endpoints | List service-endpoint
-POST | /api/v1/provisioning/service-endpoints | Add service-endpoint
-PUT | /api/v1/provisioning/service-endpoints/{id} | Update service-endpoint
-DELETE | /api/v1/provisioning/service-endpoints/{id} | Delete service-endpoint
+GET | /api/v1/provisioning/endpoints | List service-endpoint
+POST | /api/v1/provisioning/endpoints | Add service-endpoint
+PUT | /api/v1/provisioning/endpoints/{id} | Update service-endpoint
+DELETE | /api/v1/provisioning/endpoints/{id} | Delete service-endpoint
 
 
 ### Service Endpoint Fields

@@ -6,8 +6,8 @@ Each event is reported by a single or more event-messages which can be sent dire
 ```javascript
 //A sample message reporting a page-view
 {
-  "type": "as.web.page.browse",
-  "origin": "com.activitystream.www",
+  "action": "as.web.page.browse",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-11-10T12:01:02.345Z",
   "entities": [
     {"ACTOR":"Session/KJ982KJ2", "proxy_for":"Customer/311068"},
@@ -33,8 +33,8 @@ Each event is reported by a single or more event-messages which can be sent dire
 ```
 Property | Type | Description\*
 -------- | ---- | -----------
-**type** | String | The event-type </br>*Defaults to message key when received via message queue.*
-**origin** | String | What system+server or service sent the event
+**action** | String | The action reported by the message </br>*Defaults to message key when received via message queue.*
+**source** | String | What system+server or service sent the event
 **entities** | List\<Relation\> | All entities involved in the event.</br>*Details on [Event relations]()*
 occurred_at| DateTime | The exact time that the event occurred (ISO 8601 serialized).</br>*Defaults to local time when received by AS.*
 aspects| Map\<Aspect,Value\>| Aspects optionally contain event information that Activity Stream knows how to enrich, analyse and represent.</br>*See list of [available aspects]()*

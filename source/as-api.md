@@ -21,7 +21,7 @@ includes:
   - as-api/entity_relations
   - as-api/aspects
   - as-api/comments
-  - as-api/bumps
+  - as-api/bump
   - as-api/activity_stream
   - as-api/advanced_topics
 
@@ -37,13 +37,13 @@ Please familiarize yourself with the following before you start constructing you
 <img align="right" src="/images/event-diagram-1.png">
 A event is any event or action reported to Activity Stream from an external systems via an event-message.
 Each event becomes and item in the activity stream and is associated with all the entities involved in or by the event.
-All events are of specific [Event-types]() which are created dynamically on first use (just-in-time).
+All events represent a specific [Action]() which are created dynamically on first use (just-in-time).
 
 ### [Entities](#introduction-to-entities)
 A instance of a User, Product, WebPage and Order are all examples of entities.</br>
 These (Business)entities are automatically created, just-in-time, when referenced by an event and then the event, as well as all future events, are linked to the entity.
 
-That way each event becomes a part of the entities history, its activity stream, that reflects the type of event and the role that the entity played in the event.
+That way each event becomes a part of the entities history, its activity stream, that reflects the action reported by the event and the role that the entity played in the event.
 
 ### [Roles (Event Relations)](#roles-event-relations)
 The entities involved in an event all have respective roles.

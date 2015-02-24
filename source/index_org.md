@@ -34,7 +34,7 @@ Typically these events happen at irregular intervals and are collected and assoc
 Each event is reported by a single or more event-messages which can be sent directly to to the REST API or to Activity Stream via messaging queue.
 -->
 ### Entity
-Business-entities are automatically created when referenced by an event. The event, as well as all future events, are then linked to that entity. Each event becomes a part of the entities history, its activity stream, that reflects the type of event and the role that the entity played in the event. [Entity-types]() as created just-in-time and can be [sub-classed]() for advanced querying
+Business-entities are automatically created when referenced by an event. The event, as well as all future events, are then linked to that entity. Each event becomes a part of the entities history, its activity stream, that reflects the action reported by the event and the role that the entity played in the event. [Entity-types]() as created just-in-time and can be [sub-classed]() for advanced querying
 
 ### Event-Entity Graph
 Activity Stream's stores all events in a [graph](). This enables a range of valuable services but it does introduce some requirements on the event-message structure.
@@ -64,8 +64,8 @@ For a developer it may help to think of Activity Stream as a centralized system-
 ```javascript
 //A sample message reporting a page-view
 {
-  "type": "as.web.page.browse",
-  "origin": "com.activitystream.www",
+  "action": "as.web.page.browse",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-11-10T12:01:02.345Z",
   "entities": [
     {"ACTOR":"Session/KJ982KJ2", "proxy_for":"Customer/311068"},
@@ -91,8 +91,8 @@ For a developer it may help to think of Activity Stream as a centralized system-
 ```
 Property | Type | Description
 -------- | ---- | -----------
-**type** | String | The event-type | Message key
-**origin** | String | Where was the event sent from
+**action** | String | The Action reported by the event | Message key
+**source** | String | Where was the event sent from
 **entities** | List\<Relation\> | All entities involved in the event.
 occurred_at | DateTime | The exact time that the event occurred (ISO 8601 serialized)
 aspects| Map\<Aspect,Value\>| Aspects contain additional event information that Activity Stream knows how to analyse and represent
@@ -107,10 +107,10 @@ token | String | Use a default message pre-registered with a token. (See [token 
 <!--
 Property | Type | Description
 -------- | ---- | -----------
-**type** | String | Identifies the type of the event</br></br>**Example:** as.web.page.browse (*domain.category.subcat.action*)<br><ul><li>Dot separated hierarchy</li><li>Ranges from the least specific to the most specific</li><li>Specified in lower case</li></ul>When constructing your own event-types it can help to think of these as a hierarchical category structure where the last part as a verb.
-**origin** | String | Identifies where the event is originated from.</br></br>**Example:** com.activitystream.webserver1 *(tld.domain.host)*</br><ul><li>A dot separated list representing a origin hierarchy.</li><li>Ranges from the least_specific.to_the.most_specific</li><li>Specified in lower case</li></ul>
+**action** | String | Identifies the action reported by the event</br></br>**Example:** as.web.page.browse (*domain.category.subcat.action*)<br><ul><li>Dot separated hierarchy</li><li>Ranges from the least specific to the most specific</li><li>Specified in lower case</li></ul>When constructing your own actions it can help to think of these as a hierarchical category structure where the last part as a verb.
+**source** | String | Identifies where the event is originated from.</br></br>**Example:** com.activitystream.webserver1 *(tld.domain.host)*</br><ul><li>A dot separated list representing a source hierarchy.</li><li>Ranges from the least_specific.to_the.most_specific</li><li>Specified in lower case</li></ul>
 **entities** | List\<Relation\> | Lists all entities somehow involved in the event.<br><br>Every involved entity is listed with the role (relations-type) it had in the event. All events have at least an ACTOR.</br></br>Please view this detailed list of built-in [roles (relation-types)](#roles-amp-relations).
-occurred_at | DateTime | The exact time that the event occurred</br><ul><li>ISO 8601 serialized datetime</li><li>Includes milliseconds\* and time zone</li><li>Set by the origin/source system.</li></ul>\**Milliseconds are important to create a unique event signature (UUID)*. (Defaults to AS server time on reception)
+occurred_at | DateTime | The exact time that the event occurred</br><ul><li>ISO 8601 serialized datetime</li><li>Includes milliseconds\* and time zone</li><li>Set by the source system.</li></ul>\**Milliseconds are important to create a unique event signature (UUID)*. (Defaults to AS server time on reception)
 aspects| Map\<Aspect,Value\>| Aspects are commonly used information snippets which have rich support in Activity Stream for processing, analysis and representation.</br></br>Please view this [detailed list of aspects](#message-aspects).
 properties | Map\<S,O\> | Any JSON structure can be used to store custom properties not stored as aspects.
 -->
@@ -119,8 +119,8 @@ properties | Map\<S,O\> | Any JSON structure can be used to store custom propert
 ```javascript
 
 {
-  "type": "as.web.page.browse",
-  "origin": "com.activitystream.www",
+  "action": "as.web.page.browse",
+  "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
     {"ACTOR":"User/stefanb"}
@@ -138,7 +138,7 @@ properties | Map\<S,O\> | Any JSON structure can be used to store custom propert
 <--
 Property | Type | Description
 -------- | ---- | -----------
-importance | Integer | A message importance (priority/severity) setting ranging from 0 .. 5. <ul><li>5 critical</li><li>4 very important</li><li>3 important</li><li>2 notable</li><li>1 unimportant</li><li>0 auditing only event</li></ul>Importance is used for filtering visible events in the activity stream and for emphasising important events. Importance can be set globally for the event type or for individual events.
+importance | Integer | A message importance (priority/severity) setting ranging from 0 .. 5. <ul><li>5 critical</li><li>4 very important</li><li>3 important</li><li>2 notable</li><li>1 unimportant</li><li>0 auditing only event</li></ul>Importance is used for filtering visible events in the activity stream and for emphasising important events. Importance can be set globally for the action or for individual events.
 acl | List\<Rule\> | Access Control List (See [access control](#access-control))
 token | String | If defaults have been provided for the token then the new message is merged with those defaults before its processed. (See [token based defaults](#message-defaults-using-token))
 payload | Base64 | Additional details regarding the event.<br><br> **Please note**: The content of payload is compressed and stored using Base64 encoding. It’s returned in the same form as reported but it’s content can not, for this reason, be used in queries.
@@ -152,9 +152,9 @@ payload | Base64 | Additional details regarding the event.<br><br> **Please note
 ```javascript
 //This event message:
 {
-  "type": "as.crm.auth.login",
-  "origin": "com.activitystream.www",
-  "relations": [
+  "action": "as.crm.auth.login",
+  "source": "com.activitystream.www",
+  "involves": [
     {"ACTOR": "Artist/984829"}
   ]
 }
@@ -220,7 +220,7 @@ Capturing all of this in a graph is a valuable trade of Activity Stream. There i
 Property | Type | Description
 -------- | ---- | -----------
 entity_ref | String | <entity_type>/<entity_id>  Examples: Employee/stefanb a2def97d-f2b0-3dc8-be51-f2a54a1879c3 (Using Stream ID)
-relations | List<relation> | Entity Relations
+relations | List<Relation> | Entity Relations
 aspects | Map | Supported aspects are: Classification, GeoLocation, Presentation, Tags, Locale, Timed, Summary, Attachments. Please see aspect documentation for further information.
 properties | JSON | Any custom properties you might want to keep for the entity.
 
@@ -228,9 +228,9 @@ properties | JSON | Any custom properties you might want to keep for the entity.
 ```javascript
 {
   "type": "as.entity.update",
-  "origin": "as.provisioning.crud",
+  "source": "as.provisioning.crud",
   "occurred_at": "2014-02-23T12:00:00.000Z",
-  "relations": [
+  "involves": [
     {"ACTOR":"Employee/stefanb"},
     {"AFFECTS":"User/stefanb"}
   ],
@@ -271,8 +271,8 @@ patch | JSON | patches the current aspects, properties with altered values
 ```javascript
 //Minimal comment message:
 {
-  "origin":"com.activitystream.www",
-  "relations": [
+  "source":"com.activitystream.www",
+  "involves": [
     {"COMMENTS":"Employee/stefan@flaumur.is"}, 
     {"COMMENTED_ON":"Vehicle/VF058"}
   ],
@@ -281,8 +281,8 @@ patch | JSON | patches the current aspects, properties with altered values
 
 //Minimal comment using a stream_id to identify a event:
 {
-  "origin":"com.activitystream.www",
-  "relations": [ 
+  "source":"com.activitystream.www",
+  "involves": [
       {"COMMENTS":"Employee/lindarut"},
       {"COMMENTED_ON":"a2def97d-f2b0-3dc8-be51-f2a54a1879c3"}
   ],
@@ -291,8 +291,8 @@ patch | JSON | patches the current aspects, properties with altered values
 
 // Comment on a customer entity: 
 {
-  "origin":"com.activitystream.www",
-  "relations": [
+  "source":"com.activitystream.www",
+  "involves": [
     {"COMMENTS":"Employee/stefan@flaumur.is"},
     {"COMMENTED_ON":"Customer/3110686369"}
   ],
@@ -301,8 +301,8 @@ patch | JSON | patches the current aspects, properties with altered values
 
 //Comment with tags and with explicit references to other employee: 
 {
-  "origin":"com.activitystream.www",
-  "relations": [ 
+  "source":"com.activitystream.www",
+  "involves": [
     {"COMMENTS":"Employee/stefanb"}, 
     {"MENTIONS":"Employee/sbaxter"}, 
     {"COMMENTED_ON":"Vehicle/VF058"}
@@ -313,8 +313,8 @@ patch | JSON | patches the current aspects, properties with altered values
 
 //Comment with tags and implicit/embedded reference to another employee: 
 {
-  "origin":"com.activitystream.www",
-  "relations": [ 
+  "source":"com.activitystream.www",
+  "involves": [
     {"COMMENTS":"Employee/stefanb"}, 
     {"COMMENTED_ON":"Vehicle/VF058"}
   ],
@@ -329,9 +329,9 @@ Comments provide a way to facilitate business focused discussion on anything tha
 
 Property | Type | Description
 -------- | ---- | -----------
-origin | String | Where is the comment originated from? A period separated list representing a origin hierarchy. It’s a good rule to structure the origin string so that it ranges from the least_specific.to_the.most_specific.<ul><li>Examples:</li><li>com.activitystream.webserver1		(top_level_domain.domain.server)</li><li>com.activitystream.www			(top_level_domain.domain.site)</li><li>as.enhancer.ipLookup 			(system.subsystem.procedure_name)</li></ul>
+source | String | Where is the comment originated from? A period separated list representing a source hierarchy. It’s a good rule to structure the source string so that it ranges from the least_specific.to_the.most_specific.<ul><li>Examples:</li><li>com.activitystream.webserver1		(top_level_domain.domain.server)</li><li>com.activitystream.www			(top_level_domain.domain.site)</li><li>as.enhancer.ipLookup 			(system.subsystem.procedure_name)</li></ul>
 comment | String | Embedding implicit tags:</br> Tags can be embedded in the comment using the hash tag (#).</br>Embedding implicit relations:</br>The comment it self special characters: @refID looks for an entity referencewith the User/refID or the Employee/refID signatures and automatically adds  “MENTIONES” relations.</br>Examples: Stefán@Employee/stefanb @Customer/311068 @Vehicle/VF058 @stream_id
-relations | List<relation> | Every comment is related to at least two entities, the entity responsible for making the comment and the business entity that the comment belongs to. Comments can also reference other users or other entities.</br>Supported types are:<ul><li>COMMENTS - the entity that makes the comment</li><li>COMMENTED_ON - the entities that the comment applies to</li><li>MENTIONS - entities referenced or discussed in the comment</li></ul>See Event/Entity Relations for details.
+involves | List<role> | Every comment is related to at least two entities, the entity responsible for making the comment and the business entity that the comment belongs to. Comments can also reference other users or other entities.</br>Supported types are:<ul><li>COMMENTS - the entity that makes the comment</li><li>COMMENTED_ON - the entities that the comment applies to</li><li>MENTIONS - entities referenced or discussed in the comment</li></ul>See Event/Entity Relations for details.
 occurred_at | ISO Date | Occurred_at should always be set with server time or left blank to have it set by Activity Stream up on reception..
 aspects | Map<S,M> | Aspects are commonly used information snippets which have rich support in Activity Stream both for processing and representation. Each event message can have multiple aspects. </br>Supported aspects: GeoLocation, Classification, Gamification*, Attachments, Locale *Gamification settings are always associated with the one commenting
 acl | List<AC> | A list of entities which can see this comment (Access Control List) * If no rule is set then the event is accessible to all users </br>READ is the only option here and the writer (COMMENTS) is the only one with WRITE access by default. Anyone with WRITE access on the target entity (COMMENTED_ON) can remove/hide the comment by altering the ACL rules (nothing is ever permanently removed)
@@ -387,10 +387,10 @@ action:entity | Stream Item | <bump_type>:<entity_type>/<entity_id> <bump_type>:
 # Time-Series
 ```javascript
 //Minimal data-point:
-//Only stores one metric, “load”, in the “SystemHealth” time serie and adds “server1” as the origin dimensions.
+//Only stores one metric, “load”, in the “SystemHealth” time serie and adds “server1” as the source dimensions.
 {
   "series": "SystemHealth",
-  "origin": "server1",
+  "source": "server1",
   "occurred_at": "2014-01-19T12:56:48.442Z",
   "aspects": {
     "ts_data": {
@@ -403,9 +403,9 @@ action:entity | Stream Item | <bump_type>:<entity_type>/<entity_id> <bump_type>:
 //Adds metrics for “tries“ and “importance” to the “CaptchasTooManyFailed” timeseries using the provided time as the precise time for the data-point and with Customer(3110686369) as a dimensions.  This also establishes a link between the customer entity in the historical store and this particular timeseries.
 {
   "series": "CaptchasTooManyFailed",
-  "origin": "as.cep3",
+  "source": "as.cep3",
   "occurred_at": "2014-01-19T12:56:48.442Z",
-  "relations": [{"REFERENCES": "Customer/3110686369"}],
+  "involves": [{"REFERENCES": "Customer/3110686369"}],
   "aspects": {
     "ts_data": {"tries":1, "importance":3,}
   }
@@ -415,9 +415,9 @@ action:entity | Stream Item | <bump_type>:<entity_type>/<entity_id> <bump_type>:
 //Does the same as the one above except it references more entities in the historical store (Customer/IP)
 {
   "series": "CaptchasTooManyFailed",
-  "origin": "as.cep3",
+  "source": "as.cep3",
   "occurred_at": "2014-01-19T12:56:48.442Z",
-  "relations": [
+  "involves": [
     {"AFFECTS": "Customer/3110686369"},
     {"REFERENCES": "IP/192.168.1.1"}
   ],
@@ -448,9 +448,9 @@ The ability to store a vast amount of such data and link it to business-entities
 Property | Type | Description
 -------- | ---- | -----------
 series | String | The Time-Series label/name. First time a series label is used the timeseries is instantiated and should require no additional preparation.
-origin | String | Where is the datapoint originated from (Source System). The origin becomes a dimension in the time-series entry. Examples: com.activitystream.webserver1	(top_level_domain.domain.server) processing-line-1.scale-1.weight-meter-1 (machine.component.meter)
-occurred_at | ISO Date | ISO serialized datetime representing the exact time that the event occurred at the origin/source system. *Handling of data-points in AS differs from other events messages and a default occurred_at value is not provided. This means that the originating system must always provide the correct “measurement time” for data-points.
-relations | List<relation> | A link between the Entity and the Time-series is created the first time the entity is mentioned in conjunction with the time-series. Relation format: [{"type":"<entity_type>/<entity_id>"}]  Supported types are: - AFFECTS - The entity that the time series value afects (like temperature) - REFERENCES - Entity not directly involved in the ts data but should be Relationship information is  added to the timeseries data as a dimensions, much in the same way as the classification dimensions, but the difference is that entities listed here, and residing in the historical-graph,  are associated/linked with the timeseries for further/later processing.
+source | String | Where is the datapoint originated from (Source System). The source becomes a dimension in the time-series entry. Examples: com.activitystream.webserver1	(top_level_domain.domain.server) processing-line-1.scale-1.weight-meter-1 (machine.component.meter)
+occurred_at | ISO Date | ISO serialized datetime representing the exact time that the event occurred at the source system. *Handling of data-points in AS differs from other events messages and a default occurred_at value is not provided. This means that the originating system must always provide the correct “measurement time” for data-points.
+involves | List<role> | A link between the Entity and the Time-series is created the first time the entity is mentioned in conjunction with the time-series. Relation format: [{"type":"<entity_type>/<entity_id>"}]  Supported types are: - AFFECTS - The entity that the time series value afects (like temperature) - REFERENCES - Entity not directly involved in the ts data but should be Relationship information is  added to the timeseries data as a dimensions, much in the same way as the classification dimensions, but the difference is that entities listed here, and residing in the historical-graph,  are associated/linked with the timeseries for further/later processing.
 aspects | Map | The data-point information is separated into 1 to 3 different aspects depending on the nature/purpose of the information. These are some of the same aspects available for AS Event Messages and are documented below.
 ts_data | Map | A Key/Value pair representing metric and a value pairs for the time-series where the value is always numeric (double).
 classification | Map | A key value pair representing a dimension and the corresponding dimension values.  Dimensions are useful for querying, aggregating and faceting time-series data. 

@@ -8,7 +8,7 @@ Each remote-event is represented by a single or more event-messages. The event-m
 Simple event-message reporting a page-view:
 {
   "type": "as.web.page.browse",
-  "origin": "com.activitystream.www",   
+  "source": "com.activitystream.www",
   "occurred_at": "2014-11-10T12:01:02.345Z",
   "roles": [
     {"ACTOR":"Session/KJ982KJ2"},
@@ -36,8 +36,8 @@ Simple event-message reporting a page-view:
 Property | Type | Description\*
 -------- | ---- | -----------
 **type** | String | The event-type </br>*Defaults to message key when received via message queue.*
-**origin** | String | What system+server or service sent the event
-**roles** | List\<[Role](#roles-event-relations)\> | All entities involved in the event.
+**source** | String | What system+server or service sent the event
+**involves** | List\<[Role](#roles-event-relations)\> | All entities involved in the event.
 occurred_at\*| DateTime | ISO 8601 serialized date-time when the event occurred.</br>\*Defaults to local time when received by AS.
 aspects*| Map\<[Aspect](#aspects),Map\>| Aspects do, optionally, contain event information that Activity Stream knows how to enrich, analyse and represent. List of all [available aspects](#aspects)
 properties | JSON | Any JSON structure containing additional event information in a custom format.

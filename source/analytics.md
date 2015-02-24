@@ -36,7 +36,7 @@ List of generic queries for event analytics
 ##Dimensions & metrics fields
 Property | Type | Description
 -------- | ----------- | -----------
-origin | D | The system/server that submitted the data-points
+source | D | The system/server that submitted the data-points
 {entity-type} | D | The entity type of entities related to the data-points
 {dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
 value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
@@ -51,7 +51,7 @@ duration | M |
 Property | Description
 -------- | -----------
 {series} | The series name that you specified in the message
-{dimensions} | list of dimensions to group by. This is either the 'metric' dimension, origin, related entity types or any value from the dimensions section in your [data-point message](/as-api.html#data-point-message-properties).
+{dimensions} | list of dimensions to group by. This is either the 'metric' dimension, source, related entity types or any value from the dimensions section in your [data-point message](/as-api.html#data-point-message-properties).
 {metric} | Metrics to include and the aggregation to user with simple time-series this is either value or count. </br>Metric calculations for aggregated results: sum:, min:, max:
 {granularity} | The aggregation period/duration - defaults to a day</br> Named values: "all", "none", "minute", "fifteen_minute", "thirty_minute", "hour", "day"</br>ISO 8601 Period examples: P2W = 2 Weeks, P3M = 3 Months, PT1H = 1 Hour, PT1H30M = 1 Hour and 30 minutes, PT0.750S = 750 milliseconds</br>The period specified can not be shorter than the minimum granularity of the time-series which is, by default, 1 minute in AS Analytics.</br>(Finer grained results can only be attained in the AS Event Processor for new/incoming test results).
 {from} | defaults to today@midnight (see period section for fixed offsets) </br>Period example: “P-1D” can be used to start exactly 24 hours ago.
@@ -63,7 +63,7 @@ Property | Description
 ##Dimensions & metrics fields
 Property | Type | Description
 -------- | ----------- | -----------
-origin | D | The system/server that submitted the data-points
+source | D | The system/server that submitted the data-points
 {entity-type} | D | The entity type of entities related to the data-points
 {dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
 value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
@@ -78,7 +78,7 @@ List of custom purchasing queries
 ##Dimensions & metrics fields
 Property | Type | Description
 -------- | ----------- | -----------
-origin | D | The system/server that submitted the data-points
+source | D | The system/server that submitted the data-points
 {entity-type} | D | The entity type of entities related to the data-points
 {dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
 value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
@@ -101,7 +101,7 @@ List of custom queries for Web analytics
 ##Dimensions & metrics fields
 Property | Type | Description
 -------- | ----------- | -----------
-origin | D | The system/server that submitted the data-points
+source | D | The system/server that submitted the data-points
 {entity-type} | D | The entity type of entities related to the data-points
 {dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
 value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
@@ -119,7 +119,7 @@ List of custom queries for AB Testing analytics
 ##Dimensions & metrics fields
 Property | Type | Description
 -------- | ----------- | -----------
-origin | D | The system/server that submitted the data-points
+source | D | The system/server that submitted the data-points
 ab_test | D |
 outcome | D |
 count | M | Return the number of data-point entries in the aggregated period (See above)
@@ -138,7 +138,7 @@ List of custom queries for CEI analytics
 ##Dimensions & metrics fields
 Property | Type | Description
 -------- | ----------- | -----------
-origin | D | The system/server that submitted the data-points
+source | D | The system/server that submitted the data-points
 {entity-type} | D | The entity type of entities related to the data-points
 {dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
 value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
@@ -155,7 +155,7 @@ List of custom queries for Observation analytics
 ##Dimensions & metrics fields
 Property | Type | Description
 -------- | ----------- | -----------
-origin | D | The system/server that submitted the data-points
+source | D | The system/server that submitted the data-points
 {entity-type} | D | The entity type of entities related to the data-points
 {dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
 value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
@@ -171,7 +171,7 @@ duration | M |
 ##Dimensions & metrics fields
 Property | Type | Description
 -------- | ----------- | -----------
-origin | D | The system/server that submitted the data-points
+source | D | The system/server that submitted the data-points
 {entity-type} | D | The entity type of entities related to the data-points
 {dimension} | D | Any {key} part of the dimension aspect in the submitted data-points
 value | M | The {value} part of the dimension aspect in the submitted data-points ("size:
