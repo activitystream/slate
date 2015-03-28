@@ -1,5 +1,5 @@
 ---
-title: Tripcreator samples
+title: Trip Creator Examples
 
 language_tabs:
 
