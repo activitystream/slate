@@ -51,8 +51,8 @@ Example of a entity-message that sets various aspects for an Artist
 Property | Type | Description
 -------- | ---- | -----------
 entity_ref | EntityRef | {entity-type}/{entity_id} (examples: "Employee/stefanb")
-links | List\<EntityRelation\> | A list of entity links (relations) to be added for the entity (Always additive)
-properties | JSON | Any custom properties you might want to keep for the entity.
+relations | List\<EntityRelation\> | A list of entity relations (links) to be added for the entity (Always additive)
+properties | JSON | Any custom properties you might want to store with the entity.
 aspects | Map<Aspect,Map>| Aspects used to describe the entity
 acl | List\<AccessRule\> | Access Control List</br>*See [access control](#access-control) for details*
  | |  **Following are read-only properties**

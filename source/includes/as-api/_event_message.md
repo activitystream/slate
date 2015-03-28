@@ -10,7 +10,7 @@ Simple event-message reporting a page-view:
   "type": "as.web.page.browse",
   "source": "com.activitystream.www",
   "occurred_at": "2014-11-10T12:01:02.345Z",
-  "roles": [
+  "involves": [
     {"ACTOR":"Session/KJ982KJ2"},
   ],
   "aspects": {

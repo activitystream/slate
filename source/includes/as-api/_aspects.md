@@ -44,7 +44,7 @@ properties | JSON | Free format JSON structure with additional information.
 **Applies to:** [`Events`]()</br>
 **Enhanced by:** [`Dimensions*`](), [`Timed**`]()
 
-*\*Use the classification aspect to add dimensions to the AB_Test outcome.*</br>
+*\*Use the dimensions aspect to add dimensions to the AB_Test outcome.*</br>
 *\*Use the timed aspect to report how lon the AB test took.*
 
 ### Additional queries and interfaces
@@ -289,14 +289,13 @@ income | String | XXX Range
 housing | String | `Partially Owned`, `Fully Owned`, `Rent`, `Rent-Free`, **Other**
 properties | JSON | Free format JSON structure with custom information
 
-**Applies to:** [`Entities`]() (Preferably entities that represent individuals)</br>
+**Applies to:** [`Entities`]()
 **Enhanced with:** [`Locale*`](#locale)  [`Timed*`](#timed)
 
 ### Additional queries and interfaces
 * See [Entities](#entities) for information on updating entities in AS.
-* See [Update](#update) for information on how to update entities with event messages.
 
-## Dimensions (Classification)
+## Dimensions (Metrics/Facts)
 ```shell
 A incomplete login-message showing use of the dimensions aspect:
 {
@@ -314,14 +313,13 @@ A incomplete login-message showing use of the dimensions aspect:
   }
 }
 ```
-A list of dimension+value pairs used to enhance other aspects. The values in dimensions are, for example, added to all time-series that are created for the event.
-
+All values in dimensions are added to all time-series that are created for the event.
 In that way AB test results, page-views, purchases or any other aspect that automatically generated time-series do get extra dimensions for slicing and dicing.
 
 Field | Type | Description
 ----- | ---- | -----------
 key   | String | The key in the "{**key**}":{value} pair
-value | Double | The value in the "{key}":{**value**} pair
+value | Object | The value in the "{key}":{**value**} pair (Can be String a Numeric or a list of such values)
 
 **Applies to:** [`Events`](), [`Time-Series Data`](), [`Event-Types`]()</br>
 **Enhances:** [`TS Data`](#ts-data-data-points)
@@ -879,7 +877,7 @@ In addition to be registered in the AS event-entity graph the event updates a ti
 
 **Please note:** For high frequency, fixed interval, time-series we recommend using the DataPoint message rather than sending in regular events with the ts_data aspect.
 
-Additional dimensions are added from Locale, Client Device and GeoLocation. Additional/manual dimensions can be set using the Classification aspect.
+Additional dimensions are added from Locale, Client Device and GeoLocation. Additional/manual dimensions can be set using the dimensions aspect.
 
 ## Transaction
 
@@ -897,9 +895,4 @@ card_exp  | String | Expiration data
 properties | JSON | Any JSON structure containing customer/transaction specific information
 
 **Applies to:** [`TSData`]()</br>
-**Enhanced by:** [`dimensions`](#dimensions-classification)
-
-
-## Update
-Event sourcing
-This aspect allows Entities to be updated as a part of any event message. Please se the Entity [Update Message](#update-message) for details on how entities can be updated.
+**Enhanced by:** [`dimensions`](#dimensions-metricsfacts)
