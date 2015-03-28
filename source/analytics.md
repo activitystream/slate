@@ -10,10 +10,7 @@ toc_footers:
   - <a href='/provisioning.html#'>Provisioning API</a>
   - <a href='/graph.html#'>SQL Graph Queries</a>
   - Analytic Queries
-  - <a href='/as-catalog.html#'>The AS Event-Type Catalog</a>
-  - <a href='/recipes.html#'>Recipes</a>
-  - <a href='/details.html#'>Details & references</a>
-  
+
 includes:
 
 search: true
