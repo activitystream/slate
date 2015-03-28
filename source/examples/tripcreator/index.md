@@ -15,13 +15,15 @@ includes:
 
 search: true
 ---
-#Event Messages
+#Events
 ##Plan Creation
 ##Plan Changes
 ##Pageviews
 
-#Entity Messages
+#Entities
 ##Examples
-##Updating Entities
+##Updating Entities via messages
+##Updating Entities via REST
 
 #Analytics Queries
+#Historical Queries
