@@ -1,4 +1,4 @@
-# Event Involvement (Roles)
+# Event Relations (Involves)
 
 ## Role properties
 

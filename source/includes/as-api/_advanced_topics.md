@@ -6,4 +6,3 @@
 ## Why and how to use PROXY_FOR
 ## Deterministic UUIDs
 ## Live Events via Websocket
-

@@ -18,7 +18,6 @@ includes:
   - as-api/aspects
   - as-api/comments
   - as-api/bump
-  - as-api/activity_stream
   - as-api/advanced_topics
 
 search: true
@@ -33,22 +32,23 @@ Please familiarize yourself with the following before you start constructing you
 <img align="right" src="/images/event-diagram-1.png">
 A event is any event or action reported to Activity Stream from an external systems via an event-message.
 Each event becomes and item in the activity stream and is associated with all the entities involved in or by the event.
-All events represent a specific [Action]() which are created dynamically on first use (just-in-time).
+All events represent a specific Action which are created dynamically on first use (just-in-time).
 
 ### [Entities](#introduction-to-entities)
 A instance of a User, Product, WebPage and Order are all examples of entities.</br>
-These (Business)entities are automatically created, just-in-time, when referenced by an event and then the event, as well as all future events, are linked to the entity.
+Entity types and entity instances are automatically created, just-in-time, when referenced by an event and then the event is linked to the entity.
 
-That way each event becomes a part of the entities history, its activity stream, that reflects the action reported by the event and the role that the entity played in the event.
+That way each event becomes a part of the entities history, its activity stream, that reflects the actions reported by any event that involves the entity.
 
-### [Roles (Event Relations)](#roles-event-relations)
-The entities involved in an event all have respective roles.
+### [Event Relation (Role)](#event-relations-involves)
+All entities involved in an event have a role that explains what part the entity "played" in the event.
 </br>The "ACTOR" is, for example, the entity responsible for triggering the event and
 </br>the "AFFECTS" role is used for relations to all entities directly affected by the event while
 </br>the "REFERENCES" role is used for entities involved in the event but have no real bearing on the event and are not affected by it.
-</br>[Common roles]() are built into Activity Stream but custom [Roles and sub-roles can defined on the fly]().
 
-### [Links (Entity Relations)](#links-entity-relations)
+Common ([Preddfined](#predefined-roles)) roles, are built into Activity Stream but [custom](#custom-roles) Roles and sub-roles can defined on the fly.
+
+### [Entity Relation (Link)](#entity-relations-links)
 Any entity can be linked to any other entity and the link between the entities can be **typed**, have **properties** and **weight**.
 </br>That way a Customer can, for example, be a "OWNER" of a Car or be synonymous, in terms of event history, with his personal mobile phone. [Common Link types](#predefined-link-types) are built into Activity Stream but [custom Link-Types can defined on the fly](#custom-link-types).
 
