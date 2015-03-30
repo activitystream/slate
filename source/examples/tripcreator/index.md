@@ -12,18 +12,12 @@ toc_footers:
   - <a href='https://tripcreator.activitystream.com'>tripcreator.activitystream.com</a>
 
 includes:
+  - /examples/tripcreator/events
+  - /examples/tripcreator/entities
+  - /examples/tripcreator/analytic-queries
+  - /examples/tripcreator/historical-queries
 
 search: true
 ---
-#Events
-##Plan Creation
-##Plan Changes
-##Pageviews
 
-#Entities
-##Examples
-##Updating Entities via messages
-##Updating Entities via REST
-
-#Analytics Queries
-#Historical Queries
+#Trip Creator

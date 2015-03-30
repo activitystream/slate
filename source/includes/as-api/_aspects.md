@@ -98,6 +98,34 @@ content | Base64 | The file contents***
 ### Additional queries and interfaces
 * See [Events](#events) for information on sending the event to AS.
 
+## Classification
+```shell
+Entity snippet showing the Classification aspect
+{
+  "entity_ref": "Product/290209092",
+  "aspects": {
+    "classification": {
+      "make":"Apple",
+      "model":"iPhone",
+      "flavor":"6+ Gold",
+      "year": 2015
+    }
+  }
+}
+```
+Used to classify products
+
+Field | Type | Description
+----- | ---- | -----------
+make | String | The make/brand of the product (BMW)
+model | String | The model of the product (316)
+flavor | String | The version/flavor of the product (i)
+size | String | The size (if sized)
+year | Integer | The year of production (2015)
+categories | List\<String\> | The product categories
+
+**Applies to:** `Entities`
+
 ## Client Device
 ```shell
 A partial login-message illustrating the use of the client_device aspect:
