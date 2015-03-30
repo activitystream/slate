@@ -52,19 +52,19 @@ queryType | **groupBY**, topN, timeseries (See query type information [here](/an
 ###Available information for plan.created (at this point)
 Dimension | Description
 -------- | -----------
-tag | The tags assigned to the event message [Tags Aspect] 
-country | The country that the user is from [ClientIP Aspect]  
-city | The city that the user is from [ClientIP Aspect] 
-adults | The number of adults [Custom from Dimension Aspect] 
-children | The number of children [Custom from Dimension Aspect] 
-rooms | The number of rooms [Custom from Dimension Aspect] 
-budget | The budget [Custom from Dimension Aspect]
-coord.geo | The geo coordinates [ClientIP Aspect]
-dma | Designated Market Area [ClientIP Aspect]
-dma_code | Designated Market Area Code [ClientIP Aspect]
-ip | The client IP [ClientIP Aspect]
-isp | The client Internet Service Provider [ClientIP Aspect] 
-organization | The client Internet Organization [ClientIP Aspect]
+tag | The tags assigned to the event message [Tags Aspect](/as-api.html#tags) 
+country | The country that the user is from [ClientIP Aspect](/as-api.html#client-ip)  
+city | The city that the user is from [ClientIP Aspect](/as-api.html#client-ip) 
+adults | The number of adults [Custom from Dimension Aspect](/as-api.html#dimensions-metricsfacts) 
+children | The number of children [Custom from Dimension Aspect](/as-api.html#dimensions-metricsfacts) 
+rooms | The number of rooms [Custom from Dimension Aspect](/as-api.html#dimensions-metricsfacts) 
+budget | The budget [Custom from Dimension Aspect](/as-api.html#dimensions-metricsfacts)
+coord.geo | The geo coordinates [ClientIP Aspect](/as-api.html#client-ip)
+dma | Designated Market Area [ClientIP Aspect](/as-api.html#client-ip)
+dma_code | Designated Market Area Code [ClientIP Aspect](/as-api.html#client-ip)
+ip | The client IP [ClientIP Aspect](/as-api.html#client-ip)
+isp | The client Internet Service Provider [ClientIP Aspect](/as-api.html#client-ip) 
+organization | The client Internet Organization [ClientIP Aspect](/as-api.html#client-ip)
 
 Metric | Description
 -------- | -----------

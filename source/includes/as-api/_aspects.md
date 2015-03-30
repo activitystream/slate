@@ -113,7 +113,7 @@ Entity snippet showing the Classification aspect
   }
 }
 ```
-Used to classify products
+Used for product classify 
 
 Field | Type | Description
 ----- | ---- | -----------
