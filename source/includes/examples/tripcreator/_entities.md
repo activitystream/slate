@@ -30,11 +30,13 @@ I need minor assistance to complete these examples
 Field | Type | Description
 ----- | ---- | -----------
 **entity_ref** | entity_ref | <Entity_Type>/<Entity_ID> where Entity_ID is the foreign key in your model and Entity_Type is, most often, your Table name
-aspects | Map | information formatted especially for activity stream and in accordance to the AS [Aspects]()
-presentation | Aspect | The presentation aspects holds common "human readable" and presentation information [Presentation Aspect]() 
-dimensions | Aspect | Additional/generic amount information for the test outcome [Dimensions Aspect]()
-tags | Aspect | Additional/generic amount information for the test outcome [Tags Aspect]()
+aspects | Map | information formatted especially for activity stream and in accordance to the AS [Aspects](/as-api.html#aspects)
+presentation | Aspect | The presentation aspects holds common "human readable" and presentation information [Presentation Aspect](/as-api.html#presentation) 
+dimensions | Aspect | Additional/generic amount information for the test outcome [Dimensions Aspect](/as-api.html#dimensions-metricsfacts)
+tags | Aspect | Additional/generic amount information for the test outcome [Tags Aspect](/as-api.html#tags)
 properties | JSON | Free format JSON structure with additional information taht you would like to store in Acitivy Stream.
+
+**\*Available Aspects:** [`Attachments`](/as-api.html#attachments), [`Classification`](/as-api.html#classification), [`Dimensions`](/as-api.html#dimensions), [`Demography`](/as-api.html#demography), [`GEO Location`](/as-api.html#geo-locations),  [`Presentation`](/as-api.html#presentation), [`Summary`](/as-api.html#summary), [`Tags`](/as-api.html#tags)
 
 ##Accommodation
 ##Car

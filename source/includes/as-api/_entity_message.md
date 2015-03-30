@@ -60,7 +60,7 @@ acl | List\<AccessRule\> | Access Control List</br>*See [access control](#access
 *\_registered_at* | DateTime | ISO Date when entity registered
 *\_last_updated* | DateTime | ISO Date when entity information was last updated
 
-**Available Aspects:** [`Attachments`](#attachments), [`Dimensions`](#dimensions), [`Demography`](#demography), [`GEO Location`](#geo-locations),  [`Presentation`](#presentation), [`Summary`](#summary), [`Tags`](#tags), [`Timed`](#timed) 
+**Available Aspects:** [`Attachments`](#attachments), [`Classification`](#classification), [`Dimensions`](#dimensions), [`Demography`](#demography), [`GEO Location`](#geo-locations),  [`Presentation`](#presentation), [`Summary`](#summary), [`Tags`](#tags), [`Timed`](#timed) 
 
 ## Update via Message Queue
 ```shell
