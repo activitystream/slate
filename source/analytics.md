@@ -28,7 +28,7 @@ RAW queries for full control
 #Event Analytics
 List of generic queries for event analytics
 
-##Event Queries
+##Event Analytics
 
 ##Dimensions & metrics fields
 Property | Type | Description
@@ -40,9 +40,9 @@ value | M | The {value} part of the dimension aspect in the submitted data-point
 count | M | Return the number of data-point entries in the aggregated period (See above)
 duration | M |
 
-#Times-Series Analytics
+#Times-Series
 
-##Time-Series Queries
+##Times-Series Analytic
 `/api/analytics/timeseries/{series}>/{dimensions}[,..]/[aggr:]{metric}[,..]/{granularity}/{from}/{to}?{dimension}={filter}[,…]&sort={metric}&limit={limit}?apikey=<api_key>`
 
 Property | Description
@@ -56,6 +56,10 @@ Property | Description
 {filter} | One or more dimensions/metric filter (regular expressions allowed). Results can be filtered by any dimension and one or multiple, comma separated, values. Regular expressions can also be used in filters.</br>
 {sort} | sort=<metric> or for descending sort=-<metric></br>order and limit can be used to affect the results.</br>descending order: &order=-<field>
 {limit} | limit=<count>   (offset/paging is still missing). Ascending order and only 5 results: &order=<field>[..]&limit=5
+
+Query Type | Description
+-------- | -----------
+
 
 ##Dimensions & metrics fields
 Property | Type | Description
