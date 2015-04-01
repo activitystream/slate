@@ -76,12 +76,18 @@ message_key | as.api.entity
 
 ## Entity API
 
-###Update an entity [POST]
+###Update or add an entity (Asynchronous) [POST]\*
 https://`{tenant-label}`.activitystream.com/api/collector/v1/entities?apikey=`{api-key}`
+\*Requests are relayed via message queue 
 
 ###Check if entity-message is validate [POST]\*
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/validate?apikey=`{api-key}`
 \*Nothing gets persisted
+
+###Update an entity (Synchronous) [PUT]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`?apikey=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/?apikey=`{api-key}`\*
+\*Map must contain valid entity_ref 
 
 ###Fetch a single entity by entity reference [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`?apikey=`{api-key}`
