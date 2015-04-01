@@ -45,11 +45,11 @@ Returns this:
 {
 }
 ```
-`POST` `https://{tenant-label}.activitystream.com/api/collector/v1/bumps?api_key={api-key}`
+`POST` `https://{tenant-label}.activitystream.com/api/collector/v1/bumps?apikey={api-key}`
 `Headers` `Content-Type: application/json`
 
 ###Check if event-message is validate (Nothing gets persisted)
-`POST` `https://{tenant-label}.activitystream.com/api/v1/bumps/validate?api_key={api-key}`
+`POST` `https://{tenant-label}.activitystream.com/api/v1/bumps/validate?apikey={api-key}`
 
 ###Request properties
 Property | Description
@@ -75,10 +75,10 @@ message_key | as.api.bump
 ## Bump API
 
 ###Fetch all the bumps made by a certain entity:
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/bumped?page={page-nr}&pagesize={items-on-page}&filter={filter}&api_key={api-key}`
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/bumped?page={page-nr}&pagesize={items-on-page}&filter={filter}&apikey={api-key}`
 
 ###Fetch all the bumps for a certain entity:
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/bumps?page={page-nr}&pagesize={items-on-page}&filter={filter}&api_key={api-key}`
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/bumps?page={page-nr}&pagesize={items-on-page}&filter={filter}&apikey={api-key}`
 
 Property | Description
 -------- | -----------

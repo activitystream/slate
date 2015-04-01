@@ -58,11 +58,11 @@ Returns this:
 }
 ```
 ###Submit Timeseries Data (Datapoints) [POST]:
-https://`{tenant-label}`.activitystream.com/api/collector/v1/data-points?api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/collector/v1/data-points?apikey=`{api-key}`
 `Headers` `Content-Type: application/json`
 
 ###Check if event-message is validate [POST] (Nothing gets persisted):
-https://`{tenant-label}`.activitystream.com/api/v1/data-points/validate?api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/data-points/validate?apikey=`{api-key}`
 
 ###Request properties
 Property | Description
@@ -88,28 +88,28 @@ message_key | as.api.datapoint
 ## TS - Metadata API
 
 ###Fetch a list of all available time-series [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/time-series?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/time-series?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&apikey=`{api-key}`
 
 ###Fetch all the metadata for a certain time-series [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`?api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`?apikey=`{api-key}`
 
 ###Save aspect information and properties for a single timeseries [PUT]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`?api_key={api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`?apikey={api-key}`
 
 ###Fetch all the metrics that have been used in a certain time-series [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`/metrics?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`/metrics?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&apikey=`{api-key}`
 
 ###Fetch all the dimensions that have been used in a certain time-series [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`/dimensions?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`/dimensions?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&apikey=`{api-key}`
 
 ###Fetch all the source that have submitted data into a certain time-series [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`/source?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`/source?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&apikey=`{api-key}`
 
 ###Fetch all the entities active in a certain time-series [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`/entities?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/time-series/`{time-series}`/entities?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&apikey=`{api-key}`
 
 ###Fetch all the timeseries active for a certain entity [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/time-series?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/time-series?page=`{page-nr}`&pagesize=`{items-on-page}`&filter=`{filter}`&apikey=`{api-key}`
 
 Property | Description
 -------- | -----------

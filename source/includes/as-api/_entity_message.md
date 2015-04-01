@@ -77,23 +77,23 @@ message_key | as.api.entity
 ## Entity API
 
 ###Update an entity [POST]
-https://`{tenant-label}`.activitystream.com/api/collector/v1/entities?api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/collector/v1/entities?apikey=`{api-key}`
 
 ###Check if entity-message is validate [POST]\*
-https://`{tenant-label}`.activitystream.com/api/v1/entities/validate?api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/validate?apikey=`{api-key}`
 \*Nothing gets persisted
 
 ###Fetch a single entity by entity reference [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`?api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`?apikey=`{api-key}`
 
 ###Fetch a list of entity by a entity type [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`?page=`{page-nr}`&size=`{items-on-page}`&q=`{filter}`&api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`?page=`{page-nr}`&size=`{items-on-page}`&q=`{filter}`&apikey=`{api-key}`
 
 ###Fetch a single entity by Stream ID [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{stream-id}`?api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{stream-id}`?apikey=`{api-key}`
 
 ###List of Links (Entity Relations) for the entity [GET]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/links?type=`{link-types}`&direction=`{link-direction}`&page=`{page-nr}`&size=`{items-on-page}`&q=`{filter}`&api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/links?type=`{link-types}`&direction=`{link-direction}`&page=`{page-nr}`&size=`{items-on-page}`&q=`{filter}`&apikey=`{api-key}`
 
 Property | Description
 -------- | -----------

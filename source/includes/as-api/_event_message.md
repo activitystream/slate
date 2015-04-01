@@ -73,14 +73,14 @@ message_key | event-type signature ("as.web.page.browse" in the example above)
 ## Event API
 
 ###Check if event-message is valid [POST]\*:
-https://`{tenant-label}`.activitystream.com/api/v1/as/events/validate?api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/events/validate?apikey=`{api-key}`
 </br>\*Nothing gets persisted
 
 ###Asynchronously Persist Event [POST]:
-https://`{tenant-label}`.activitystream.com/api/collector/v1/events?api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/collector/v1/events?apikey=`{api-key}`
 
 ###Synchrnously Persist Event [POST]:
-https://`{tenant-label}`.activitystream.com/api/v1/as/events?api_key=`{api-key}`
+https://`{tenant-label}`.activitystream.com/api/v1/as/events?apikey=`{api-key}`
 
 ###Fetch a single event [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/events/`{stream-id}`

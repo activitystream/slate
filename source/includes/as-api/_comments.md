@@ -56,7 +56,7 @@ Returns this:
 ###Request properties
 Property | Description
 -------- | -----------
-api_key  | Your API (unless pre-authenticated)
+apikey  | Your API (unless pre-authenticated)
    
 ## Send via Message Queue
 ```shell
