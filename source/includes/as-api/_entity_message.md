@@ -87,7 +87,7 @@ https://`{tenant-label}`.activitystream.com/api/v1/as/entities/validate?apikey=`
 ###Update an entity (Synchronous) [PUT]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`?apikey=`{api-key}`
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/?apikey=`{api-key}`\*
-\*Map must contain valid entity_ref 
+\*JSON must contain valid entity_ref 
 
 ###Fetch a single entity by entity reference [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`?apikey=`{api-key}`
@@ -97,6 +97,12 @@ https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`?p
 
 ###Fetch a single entity by Stream ID [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{stream-id}`?apikey=`{api-key}`
+
+###Fetch a list of entities by a comma separated list of entity references [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/?ids=`<entity-type>`/`<entitiy-id>`,`<entity-type>`/`<entity-id>`...&apikey=`{api-key}`
+
+###Fetch a list of entities by a comma separated list of entity ids [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/?ids=`<entity-id>',<entity-id>'...&apikey=`{api-key}`
 
 ###List of Links (Entity Relations) for the entity [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/entities/`{entity-type}`/`{entity-id}`/links?type=`{link-types}`&direction=`{link-direction}`&page=`{page-nr}`&size=`{items-on-page}`&q=`{filter}`&apikey=`{api-key}`
