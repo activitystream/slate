@@ -1,10 +1,11 @@
 # Time-Series
 ##Introduction to time-series and data-points
-Time-series consist of data-point entries that can be reported individually, in batches or as an integrated part of an event-messages using the ts_data aspect.
+Activity Stream includes a real-time analytics store that is capable of storing data-points with multiple dimensions and metrics.
 
-Activity Stream includes a real-time analytics store that is capable of storing data-points with multiple dimensions which are available for querying as soon as submitted.
+Time-series consist of data-points that can be reported individually, in batches or as an integrated part of an event-messages using the ts_data aspect.
 
-Think of the AS time series as a OLAP/Cube which is updated continuously and can be sliced and diced at will.
+All data-points are available for querying as soon as submitted.
+All data-points are available for querying as soon as submitted.
 
 ## Data-point-message properties
 ```shell

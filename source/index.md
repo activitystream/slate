@@ -14,7 +14,6 @@ includes:
 search: true
 ---
 
-
 # Introduction
 Here you will find the documentation for the Activity Stream platform.</br>
 We hope it will help you get quickly up-to-speed and provide you with enough information to tak full advantage of our platform.

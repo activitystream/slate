@@ -15,8 +15,8 @@ A comment message using explicit setters:
   "comment":"This car is not worth much is it mrs. Linda! It looks worthless to me", 
   "involves": [
     {"COMMENTS":"Employee/stefanb"}, 
-    {"COMMENTED_ON":"Vehicle/VF058"}
-    {"MENTIONS":"Employee/linda"}, 
+    {"COMMENTED_ON":"Vehicle/VF058"},
+    {"MENTIONS":"Employee/linda"}
   ],
   "aspects":{"tags":["car","worthless"]}
 }
