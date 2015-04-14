@@ -83,19 +83,16 @@ Returns a list comments made on a single entity
 ```
 
 ###Single comment:
-`GET` `https://<tenant>.activitystream.com/api/v1/as/comments/{stream-id}`
+`GET` `https://<tenant>.activitystream.com/api/v1/as/comment/{stream-id}`
 
-###List of comments related to a single event:
-`GET` `https://<tenant>.activitystream.com/api/v1/as/events/{stream-id}/comments?page={page-nr}&pagesize={items-on-page}&filter={filter}` 
+###List of comments related to a single event (or stream item):
+`GET` `https://<tenant>.activitystream.com/api/v1/as/comments/{stream-id}?page={page-nr}&size={items-on-page}`
 
 ###List of comments related to a single entity:
-`GET` `https://<tenant>.activitystream.com/api/v1/as/entities/{entity-type}/{entity-id}/comments?page={page-nr}&pagesize={items-on-page}&filter={filter}` 
-
-###List of comments related to a single stream item (of any type):
-`GET` `https://<tenant>.activitystream.com/api/v1/as/streamitem/{stream-id}/comments?page={page-nr}&pagesize={items-on-page}&filter={filter}` 
+`GET` `https://<tenant>.activitystream.com/api/v1/as/comments/{entity-type}/{entity-id}?page={page-nr}&size={items-on-page}`
 
 ###List of comments tagged with a particular tag:
-`GET` `https://<tenant>.activitystream.com/api/v1/as/tags/{tag}/comments?page={page-nr}&pagesize={items-on-page}&filter={filter}` 
+`GET` `https://<tenant>.activitystream.com/api/v1/as/comments/tags/{tag}?page={page-nr}&size={items-on-page}`
 
 ### Query Properties
 Property | Description
@@ -105,7 +102,6 @@ Property | Description
 {page-nr} | The page number to fetch. 1 is the first page and also the default value.
 {items-on-page} | Specifies how many items should be on each page. 20 is the default value and 300 is the maximum value.
 {stream-id} | The internal ID used by Activity Stream. This is a named UUID version of the {entity-ref}
-{filter} | A SQL filter (where clause) to apply to the result set. Please read [SQL]() for further information on the graph enabled SQL dialect that we use
 {tenant-label} | Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
 {tag} | The value of the tag (#somestuff) to look up comments for
 
