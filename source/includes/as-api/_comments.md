@@ -42,7 +42,7 @@ aspects| Map\<Aspect,JSON\>| Aspects optionally contain information that enhance
 
 **Valid aspects:** [`Attachments`]() [`ClientDevice`]() [`ClientIp`]() [`GeoLocation`]() [`Locale`]() [`Tags`]()  
 
-## Send via REST API
+## Send via REST API (Synchronous)
 ```shell
 Returns this:
 {
@@ -50,9 +50,10 @@ TBD
 }
 ```
 `POST` `https://<tenant>.activitystream.com/api/v1/comments`
+## Send via REST API (Asynchronous)
 
 ###Check if comment-message is validate (Nothing gets persisted)
-`POST` `https://<tenant>.activitystream.com/api/v1/comments/validate`
+`POST` `https://<tenant>.activitystream.com/api/collector/v1/comments`
 
 ###Request properties
 Property | Description
