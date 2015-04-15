@@ -96,6 +96,10 @@ Returns a list comments made on a single entity
 ###List of comments tagged with a particular tag:
 `GET` `https://<tenant>.activitystream.com/api/v1/as/comments/tags/{tag}?page={page-nr}&size={items-on-page}`
 
+###List of comments made by a user:
+`GET` `https://<tenant>.activitystream.com/api/v1/as/comments/{entity-type}/{entity-id}?page={page-nr}&size={items-on-page}&type={type}`
+
+
 ### Query Properties
 Property | Description
 -------- | -----------
@@ -106,6 +110,7 @@ Property | Description
 {stream-id} | The internal ID used by Activity Stream. This is a named UUID version of the {entity-ref}
 {tenant-label} | Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
 {tag} | The value of the tag (#somestuff) to look up comments for
+{type} | COMMENTS = comments made by the entity, COMMENTED_ON = comments made regarding the entity, MENTIONS = comments that mention the entity  
 
 ## Additional queries and interfaces
 * See [Streaming updates]() for information on how to subscribe to streaming event updates.
