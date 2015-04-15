@@ -110,7 +110,7 @@ Property | Description
 {stream-id} | The internal ID used by Activity Stream. This is a named UUID version of the {entity-ref}
 {tenant-label} | Each Activity Stream customer gets a tenant id. usually this matches the entity part of your email address.
 {tag} | The value of the tag (#somestuff) to look up comments for
-{type} | COMMENTS = comments made by the entity, COMMENTED_ON = comments made regarding the entity, MENTIONS = comments that mention the entity  
+{type} | `COMMENTS` = comments made by the entity, `COMMENTED_ON` = comments made regarding the entity, `MENTIONS` = comments that mention the entity  
 
 ## Additional queries and interfaces
 * See [Streaming updates]() for information on how to subscribe to streaming event updates.
