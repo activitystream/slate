@@ -52,7 +52,7 @@ TBD
 `POST` `https://<tenant>.activitystream.com/api/v1/as/comments`
 ## Send via REST API (Asynchronous)
 `POST` `https://<tenant>.activitystream.com/api/collector/v1/comments`
-###Check if comment-message is validate (Nothing gets persisted)
+## Validate Comment Message (Nothing gets persisted)
 `POST` `https://<tenant>.activitystream.com/api/v1/as/comments/validate`
 
 ###Request properties
