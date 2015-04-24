@@ -36,7 +36,7 @@ Property | Type | Description
 -------- | ---- | -----------
 source | String | Where is the comment originated from? A period separated list representing a source hierarchy. It’s a good rule to structure the source string so that it ranges from the least_specific.to_the.most_specific.
 comment | String | Embedding implicit tags: Tags can be embedded in the comment using the hash tag (#). Embedding implicit relations: The comment it self special characters: @refID looks for an entity referencewith the User/refID or the Employee/refID signatures and automatically adds  “MENTIONES” relations. Examples: Stefán@Employee/stefanb @Customer/311068 @Vehicle/VF058 @stream_id
-entities | List\<relation\> | Every comment is related to at least two entities, the entity responsible for making the comment and the business entity that the comment belongs to. Comments can also reference other users or other entities. [ {"type":"entity_type/entity_ref"},   {"type":"stream_id"}] Supported types are: COMMENTS 		- the entity that makes the comment COMMENTED_ON 	- the entities that the comment applies to MENTIONES		- entities referenced or discussed in the comment See Event/Entity Relations for details.
+entities | List\<relation\> | Every comment is related to at least two entities, the entity responsible for making the comment and the business entity that the comment belongs to. Comments can also reference other users or other entities. [ {"TYPE":"entity_type/entity_id"},   {"TYPE":"stream_id"}] Supported types are: COMMENTS 		- the entity that makes the comment COMMENTED_ON 	- the entities that the comment applies to MENTIONES		- entities referenced or discussed in the comment See Event/Entity Relations for details.
 occurred_at| DateTime | The exact time that the comment was made (ISO 8601 serialized).</br>*Defaults to local time when received by AS.*
 aspects| Map\<Aspect,JSON\>| Aspects optionally contain information that enhance the comment.</br>*See list of [available aspects](#aspects)*
 
@@ -96,7 +96,7 @@ Returns a list comments made on a single entity
 ###List of comments tagged with a particular tag:
 `GET` `https://<tenant>.activitystream.com/api/v1/as/comments/tags/{tag}?page={page-nr}&size={items-on-page}`
 
-###List of comments made by a user:
+###List of comments made by a user or mention a user (user = entity):
 `GET` `https://<tenant>.activitystream.com/api/v1/as/comments/{entity-type}/{entity-id}?page={page-nr}&size={items-on-page}&type={type}`
 
 
