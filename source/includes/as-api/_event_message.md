@@ -47,7 +47,7 @@ Simple event-message reporting a page-view:
 Property | Type | Description\*
 -------- | ---- | -----------
 **event** | String | The event(type) signature</br>*Defaults to message key when received via message queue.*
-**involves** | List\<[Role](#roles-event-relations)\> | All entities involved in the event.
+**involves** | List\<[Role](#event-involvement-roles)\> | All entities involved in the event.
 occurred_at\*| DateTime | ISO 8601 serialized date-time when the event occurred.</br>\*Defaults to local time when received by AS.
 properties | JSON | Any JSON structure containing additional, free-format, event information.
 source | String | What system+server or service sent the event </br>\*Defaults to \<tenant\>.unspecified when received by AS.

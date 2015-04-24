@@ -8,13 +8,13 @@ Relations messages, as detailed here, can be sent to link any Entities in Activi
 Simple link-message explicitly defining a 1:1 link between an email and a customer
 {
   "entity_ref":"Customer/3110686369",
-  "relation": {"AKA":"Email/stefan@activitystream.com"}
+  "relations": [{"AKA":"Email/stefan@activitystream.com"}]
 }
 
 An example of a more detailed relations-message with the option of specifying multiple relations in a single message:
 {
   "entity_ref":"Customer/3110686369",
-  "relation": [
+  "relations": [
     {
       "AKA":"Email/stefan@activitystream.com",
       "properties":{ "any":"thing" },
@@ -28,23 +28,23 @@ An example of a more detailed relations-message with the option of specifying mu
 
 Property | Type | Description
 -------- | ---- | -----------
-**entity_ref**|String|A reference for the source/parent entity 
-**relation**|\<EntityRelation\>|Format: "\<RELATIONS-TYPE\>":"\<entity-reference\>" </br>\*See the list of relation-types below
+relation|\<EntityRelation\>|Format: "\<LINK-TYPE\>":"\<entity-reference\>" </br>\*See the list of link-types below
+properties | JSON | Any valid JSON structure .
 active_from | DateTime | ISO Date This relations is active from the given date
 active_until | ISO Date | This relations is active until the given date 
 weight | Double | An additional weight for the relationship (used for advanced graph mining)
-properties | JSON | Any valid JSON structure .
+
 
 **Valid aspects:** None
 
-## Predefined Relationship Types
-* Abstract Types (Primary)
+## Predefined Link Types
+* Abstract Link Types (Primary types not used directly)
   * **IS**		 		    Exclusive 1:1 relations
   * **KNOWS**				Definitive relationship
   * **KNOWS_OF**			Should know of it's existence
 </br></br>
 
-* Basic Relationship Types:
+* Basic Link Types:
   * **AKA**                 exclusive 1:1 relations (Extends IS) (**A**lso **K**now **A**s)
   * **PROXY_FOR**          	exclusive 1:1 relations (Extends **IS**) (WebSession can be a proxy for a user)
   * **PART_OF**  			non-exclusive relationship (Extends **KNOWS**) (Membership, employment)
@@ -53,7 +53,7 @@ properties | JSON | Any valid JSON structure .
   * **ASSOCIATED_WITH**		Has social relations to (Extends **KNOWS**)
   * **ON_BEHALF_OF**		non-exclusive relations (Extends **KNOWS_OF**)
   * **HAS_RELATIONS_TO**	Has other relations to (Extends **KNOWS_OF**) (other more distant relations)
-</br></br>
+</br>
 
 ## Custom Relationship Types
 You can subclass any relationship type by adding your own type name to the end of the the relationship type you would like to subclass/extend: "RELATED_TO:MOTHER".
