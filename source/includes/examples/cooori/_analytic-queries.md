@@ -26,7 +26,7 @@ queryType | **groupBY**, topN, timeseries (See query type information [here](/an
 ##study.events broken down by various things: 
 
 ###By Group
-[https://cooori.activitystream.com/api/analytics/events/all/country/count/all/2015-03-20?type=plan.created](https://cooori.activitystream.com/api/analytics/events/all/country/count/all/2015-03-20?type=plan.created)
+[https://cooori.activitystream.com/api/analytics/events/all/country/count/all/2015-03-20?type=plan.created](https://cooori.activitystream.com/api/analytics/events/all/country/count/all/2015-03-20?type=completed)
 
 
 ###Available information for plan.created (at this point)
