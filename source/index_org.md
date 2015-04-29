@@ -227,7 +227,7 @@ properties | JSON | Any custom properties you might want to keep for the entity.
 ## Update Message
 ```javascript
 {
-  "type": "as.entity.update",
+  "event": "as.entity.update",
   "source": "as.provisioning.crud",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "involves": [
