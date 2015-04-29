@@ -26,7 +26,7 @@ Entity messages can be sent via message queue or via REST API (See below)
 ##Badge
 ##Student
 ##Group
-##Studie Item
+##Study Item
 ##Session
 ##Material
 ##Employee
