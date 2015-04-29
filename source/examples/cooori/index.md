@@ -1,5 +1,5 @@
 ---
-title: Trip Creator Examples
+title: Cooori Creator Examples
 
 language_tabs:
 
@@ -20,4 +20,4 @@ includes:
 search: true
 ---
 
-#Trip Creator
+#Cooori
