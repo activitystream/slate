@@ -1,5 +1,5 @@
 ---
-title: Cooori Creator Examples
+title: Cooori Examples
 
 language_tabs:
 
