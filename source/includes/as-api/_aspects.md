@@ -168,7 +168,7 @@ Based on user_agent string and is only used for web/browser originated events.
 Field | Type | Description
 ----- | ---- | -----------
 user_agent | String | The user agent (browser) used by the ACTOR when causing the parent event to be produced
-bind_to* | String | Common or long-lived information, like this, may be moved to the ACTOR entity if it applies to all events from the actor.</br>In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the section. Multiple entries are stored for slow changing aspects to keep complete auditing log.
+track_for* | String | Common or long-lived information, like this, may be moved to the ACTOR entity if it applies to all events from the actor.</br>In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the section. Multiple entries are stored for slow changing aspects to keep complete auditing log.
  | |  **Following are read-only properties**
 *\_device_vendor* | String |
 *\_device_type* | String |
@@ -232,7 +232,7 @@ If the event is originated over public Internet and the IP address is provided t
 Field | Type | Description
 ----- | ---- | -----------
 ip | IP Address | The IP address used by the ACTOR when causing the parent to be produced
-bind_to* | String | Common or long-lived information, like this, may be moved to the ACTOR entity if it applies to all events from the actor.</br> In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the section. Multiple entries are stored for slow changing aspects to keep complete auditing log.
+track_for* | String | Common or long-lived information, like this, may be moved to the ACTOR entity if it applies to all events from the actor.</br> In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the section. Multiple entries are stored for slow changing aspects to keep complete auditing log.
  | |  **Following are read-only properties**
 *\_isp* | String | Name of the ISP if it could be resolved for the IP
 *\_organization* | String | Name of the Organization the IP if it could be resolved for the IP
@@ -366,7 +366,7 @@ A incomplete login-failed-message showing use of the geo_location aspect:
   "aspects": {
     "geo_location": {
       "latlong":"64.135338,-21.895210",
-      "bind_to":"ACTOR"
+      "track_for":"ACTOR"
     }
   }
 }
@@ -380,12 +380,12 @@ A incomplete route-set-message showing use of the geo_location aspect with multi
     "geo_location": [
     {
       "latlong":"64.135338,-21.895210",
-      "bind_to":"ACTOR",
+      "track_for":"ACTOR",
       "type":"from"
     },
     {
       "latlong":"-21.895210,64.135338",
-      "bind_to":"ACTOR",
+      "track_for":"ACTOR",
       "type":"to"
     }
     ]
@@ -399,7 +399,7 @@ After enrichment* the aspect returns location specific information.
 Field | Type | Description
 ----- | ---- | -----------
 **latlong**| String | "double,double" with "latitude,longitude"
-bind_to* | String | Common or long-lived information like this may be associated with linked entities, especially if it applies to all events related to that entity (usually the actor). In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the session. Multiple entries are stored for slow changing aspects to keep complete location log.
+track_for* | String | Common or long-lived information like this may be associated with linked entities, especially if it applies to all events related to that entity (usually the actor). In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the session. Multiple entries are stored for slow changing aspects to keep complete location log.
 action | String | Presentation/processing  tags: **from** (location), **to** (destination), **residence**, **work**, **temporary**
 accuracy | Integer | A 0..10 rating for the accuracy of this location.  This is not the geolocation-accuracy (resolution) but how reliably the bound entity can be associated with that location. 10 means that it/he was positively there. 0 mean that it’s a vague guess.
  | |  **Following are read-only properties**
@@ -771,7 +771,7 @@ batch_id | String | External batch id which can be used, when supplied with sour
 ```
 Use the Setting aspect to track changes for configuration/settings. Multiple settings can attached to a single event and you can always ask for the settings as they were at a specific time for the associated entity.
 
-\**Please note that the settings are associated with the “AFFECTS” entity if available or the “ACTOR" entity if no ‘bind_to’ target is specified.*
+\**Please note that the settings are associated with the “AFFECTS” entity if available or the “ACTOR" entity if no ‘track_for’ target is specified.*
 
 "setting"="new_value"
 Name of the setting that is affected and the new/current value for the setting.

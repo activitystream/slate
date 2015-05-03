@@ -222,7 +222,7 @@ In that way AB test results, page-views, purchases or any other aspect that auto
   "aspects": {
     "geo_location": {
       "latlong":"64.135338,-21.895210",
-      "bind_to":"ACTOR"
+      "track_for":"ACTOR"
     }
   }
 }
@@ -236,7 +236,7 @@ radius | Double | Area affected
 coordinates | Double[] | List of double values [lat,long] / [double, double] representing a single point. Add more coordinate pairs to represent a line and make sure to close it with the initial coordinate when representing an area. The initial point is used as a reference in the latlong field.
 type | String | Presentation/processing  tags: from (location), to (destination)
 accuracy | Integer | A 0..10 rating for the accurary of this location.  This is not the geolocation-acuration (resolution) but how reliably the bound entity can be associated with that location. 10 means that it/he was positively there. 0 mean that it’s a vague guess.
-bind_to* | String | Common or long-lived information like this may be moved to the ACTOR entity if it applies to all events from the actor. In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the section. Multiple entries are stored for slow changing aspects to keep complete auditing log. * Defaults to the ACTOR entity
+track_for* | String | Common or long-lived information like this may be moved to the ACTOR entity if it applies to all events from the actor. In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the section. Multiple entries are stored for slow changing aspects to keep complete auditing log. * Defaults to the ACTOR entity
 
 **Applies to:** `Events` `Entities`
 ## Grouped
@@ -504,7 +504,7 @@ batch_id | String | External batch id which can be used, when supplied with sour
 ```
 Use the Setting aspect to track changes for configuration/settings. Multiple settings can attached to a single event and you can always ask for the settings as they were at a specific time for the associated entity.
 
-\**Please note that the settings are associated with the “AFFECTS” entity if available or the “ACTOR" entity if no ‘bind_to’ target is specified.*
+\**Please note that the settings are associated with the “AFFECTS” entity if available or the “ACTOR" entity if no ‘track_for’ target is specified.*
 
 "setting"="new_value"
 Name of the setting that is affected and the new/current value for the setting.
