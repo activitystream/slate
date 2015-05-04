@@ -12,7 +12,7 @@ Event message can include multiple aspects or none at all but it’s good to kee
   "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
-    {"ACTOR":"Session/KJ982KJ2", "proxy_for":"Customer/311068"},
+    {"ACTOR":"Session/KJ982KJ2", "PROXY_FOR":"Customer/311068"},
     {"AFFECTS":"Cart/23498239"}
   ],
   "aspects": {
@@ -89,7 +89,7 @@ properties | JSON | Free format JSON structure with custom information
   "entities": [
     {
       "ACTOR":"Session/S434F4K223J",
-      "proxy_for":"Customer/311068"
+      "PROXY_FOR":"Customer/311068"
     }
   ],
   "aspects": {
@@ -112,7 +112,7 @@ Based on browser string and is only used for web/browser originated events.
   "entities": [
     {
       "ACTOR":"Session/S434F4K223J",
-      "proxy_for":"Customer/311068"
+      "PROXY_FOR":"Customer/311068"
     }
   ],
   "aspects": {
@@ -563,7 +563,7 @@ An array of strings used to further classify events in the activity stream. You 
   "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "involves": [
-    {"ACTOR":"Session/9fa660bb-9c43-4214-b603-882453ccf088", "proxy_for":"User/311068"}
+    {"ACTOR":"Session/9fa660bb-9c43-4214-b603-882453ccf088", "PROXY_FOR":"User/311068"}
   ],
   "aspects": {
     "timed": {"begins":"2014-02-23T11:50:00.000Z", "ends":"2014-02-23T12:00:00.000Z"}

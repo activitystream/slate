@@ -68,7 +68,7 @@ For a developer it may help to think of Activity Stream as a centralized system-
   "source": "com.activitystream.www",
   "occurred_at": "2014-11-10T12:01:02.345Z",
   "entities": [
-    {"ACTOR":"Session/KJ982KJ2", "proxy_for":"Customer/311068"},
+    {"ACTOR":"Session/KJ982KJ2", "PROXY_FOR":"Customer/311068"},
   ],
   "aspects": {
     "pageview": {

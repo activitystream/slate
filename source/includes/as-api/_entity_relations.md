@@ -49,6 +49,7 @@ weight | Double | An additional weight for the relationship (used for advanced g
   * **PROXY_FOR**          	exclusive 1:1 relations (Extends **IS**) (WebSession can be a proxy for a user)
   * **PART_OF**  			non-exclusive relationship (Extends **KNOWS**) (Membership, employment)
   * **BELONGS_TO**			non-exclusive relationship (Extends **KNOWS**) (describes ownership/possession)
+  * **REL_SUPPLIED_BY**	    on-exclusive relationship (Extends **KNOWS**) (describes responsibility)
   * **RELATED_TO**			Family relations (Extends **KNOWS**)
   * **ASSOCIATED_WITH**		Has social relations to (Extends **KNOWS**)
   * **ON_BEHALF_OF**		non-exclusive relations (Extends **KNOWS_OF**)

@@ -9,7 +9,7 @@ A partial purchase-message illustrating the use of the ab_testing aspect:
   "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
-    {"ACTOR":"Session/KJ982KJ2", "proxy_for":"Customer/311068"},
+    {"ACTOR":"Session/KJ982KJ2", "PROXY_FOR":"Customer/311068"},
     {"AFFECTS":"Cart/23498239"}
   ],
   "aspects": {
@@ -136,7 +136,7 @@ A partial login-message illustrating the use of the client_device aspect:
   "entities": [
     {
       "ACTOR":"Session/S434F4K223J",
-      "proxy_for":"Customer/311068"
+      "PROXY_FOR":"Customer/311068"
     }
   ],
   "aspects": {
@@ -154,7 +154,7 @@ Same partial message showing the use of the client_device shorthand:
   "entities": [
     {
       "ACTOR":"Session/S434F4K223J",
-      "proxy_for":"Customer/311068"
+      "PROXY_FOR":"Customer/311068"
     }
   ],
   "aspects": {
@@ -200,7 +200,7 @@ A partial login-message illustrating the use of the client_ip aspect:
   "entities": [
     {
       "ACTOR":"Session/S434F4K223J",
-      "proxy_for":"Customer/311068"
+      "PROXY_FOR":"Customer/311068"
     }
   ],
   "aspects": {
@@ -218,7 +218,7 @@ Same partial message showing the use of the client_ip shorthand:
   "entities": [
     {
       "ACTOR":"Session/S434F4K223J",
-      "proxy_for":"Customer/311068"
+      "PROXY_FOR":"Customer/311068"
     }
   ],
   "aspects": {
@@ -631,7 +631,7 @@ A complete web-page-viewed-message showing the use of the messaging aspect:
   "action": "as.web.page.browse",
   "source": "com.activitystream.www",
   "entities": [
-    {"ACTOR":"Session/32948429384239", "proxy_for": "Customer/311068"}
+    {"ACTOR":"Session/32948429384239", "PROXY_FOR": "Customer/311068"}
   ],
   "aspects": {
     "pageview": {
@@ -841,7 +841,7 @@ An array of strings used to further classify events in the activity stream. You 
   "source": "com.activitystream.www",
   "occurred_at": "2014-02-23T12:00:00.000Z",
   "involves": [
-    {"ACTOR":"Session/9fa660bb-9c43-4214-b603-882453ccf088", "proxy_for":"User/311068"}
+    {"ACTOR":"Session/9fa660bb-9c43-4214-b603-882453ccf088", "PROXY_FOR":"User/311068"}
   ],
   "aspects": {
     "timed": {"begins":"2014-02-23T11:50:00.000Z", "ends":"2014-02-23T12:00:00.000Z"}
