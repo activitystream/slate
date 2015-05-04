@@ -502,7 +502,10 @@ Generic purchase information. Items in the list will get the appropriate relatio
 
 Field | Type | Description
 ----- | ---- | -----------
-item | action:entity_ref | < action >:< entity_ref > (PURCHASED, RENTED, LEASED, GOT, RETURNED, WON, CARTED, UN_CARTED, RESERVED, CANCELLED, UNAVAILABLE)
+line_type | String | PURCHASED, RENTED, LEASED, GOT, RETURNED, WON, CARTED, UN_CARTED, RESERVED, CANCELLED, UNAVAILABLE, PURCHASE_USED
+product | <entity_ref> | entity_ref = "Product/2989282"
+variant | String | Product variant when applicable
+supplier | <entity_ref> | entity_ref = "Product/2989282"
 item_count | Double | Number of items
 item_price | Double | Price of individual item (Use the [localize](#locale) aspect to control currency)
 variant | String | Product variant when applicable
@@ -513,16 +516,15 @@ discount_percentage | Double | Discount % to be subtracted from the total item p
 tax_percentage | Double | Tax % to be added to the item price (total price + fees - discount)
 total_in_stock | Double | How many items still in stock
 total_for_sale | Double | How many items were (max) for sale
-active_from | DateFrom | Active from date 
-active_until | DateFrom | Active until date 
+valid_from | DateFrom | Valid/Active from date 
+valid_until | DateFrom | Valid/Active until date 
 accounting_key | String |  
 description | String | Text description of the item bought
 properties | JSON | JSON containing customer specific information
-variant | String | Product variant when applicable
-\_total|Double|N/A
-\_fees|Double|N/A
-\_tax|Double|N/A
-\_discount|Double|N/A
+\_total | Double | N/A
+\_fees | Double | N/A
+\_tax | Double | N/A
+\_discount | Double | N/A
 
 
 **Applies to:** [`Events`]()</br>
