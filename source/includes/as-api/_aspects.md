@@ -488,16 +488,15 @@ Please note that “re:”, “fwd:” etc. are removed from the group string if
 
 ## Items (xCommerce)
 ```shell
-A incomplete purchase-completed-message showing use of the items aspect:
+A fairly complete purchase message with composite product and currency information:
 {
-  "action": "as.ec.cart.purchase.completed",
-  "source": "com.activitystream.www",
-  "occurred_at": "2014-02-23T12:00:00.000Z",
+  "action": "as.xcommerce.purchase.completed",
+  "source": "ticketsales.web",
   "entities": [{"ACTOR":"Session/311068"}],
   "aspects": {
     "items": [
       {
-        "BOUGHT":"Event/3982928",
+        "BOUGHT":["Event/3982928","Venue/3982928","Artis/3982928"],
         "variant":"VIP Pass",
         "item_count":3,
         "item_price":75
@@ -506,9 +505,14 @@ A incomplete purchase-completed-message showing use of the items aspect:
         "RENTED":"Event/3982928",
         "variant":"Parking",
         "item_count":1,
-        "item_price":25
+        "item_price":25,
+        "valid_from":"<iso-date-time>",
+        "valid_until":"<iso-date-time>"
       }
-    ]
+    ],
+    "locale":{
+      "currency":"USD"
+    }
   }
 }
 ```
@@ -516,22 +520,20 @@ Generic purchase information. Items in the list will get the appropriate relatio
 
 Field | Type | Description
 ----- | ---- | -----------
-line_type | String | PURCHASED, RENTED, LEASED, GOT, RETURNED, WON, CARTED, UN_CARTED, RESERVED, CANCELLED, UNAVAILABLE, PURCHASE_USED
-product | <entity_ref> | entity_ref = "Product/2989282"
-variant | String | Product variant when applicable
+\<type\> |\<entity\> | Line item information </br> \<type\>: PURCHASED, RENTED, LEASED, GOT, RETURNED, WON, CARTED, UN_CARTED, RESERVED, CANCELLED, UNAVAILABLE, PURCHASE_USED, PROCESSING_ONLY </br> \<entity\>: Entity reference(s) (can be a list for composite products)
+variant | String | Product variant when/if applicable
 item_count | Double | Number of items
 item_price | Double | Price of individual item (Use the [localize](#locale) aspect to control currency)
-variant | String | Product variant when applicable
-serial_numbers | String[] | Serial numbers of purchased items (if available)
-fee_fixed | Double | Fixed cost added on top of total price (item_count x fixed_fee)
-fee_percentage | Double | Variable cost added on top of total price (item_count x fee_percentage)
-discount_percentage | Double | Discount % to be subtracted from the total item price (total price + fees)
-tax_percentage | Double | Tax % to be added to the item price (total price + fees - discount)
+serial_numbers | String[] | Serial numbers of purchased items (when/if available)
+fee_fixed | Double | Fixed per-item cost, added on top of the item price </br>(item price + item fees - discount = total item price)
+fee_percentage | Double | Variable per-item cost added on top of total price </br>(item price + item fees - discount = total item price)
+discount_percentage | Double | Discount % to be subtracted from the total-item-price</br>(item price + item fees - discount = total item price)
+tax_percentage | Double | Tax % to be added to the item price
 total_in_stock | Double | How many items still in stock
 total_for_sale | Double | How many items were (max) for sale
 valid_from | DateFrom | Valid/Active from date 
 valid_until | DateFrom | Valid/Active until date 
-accounting_key | String |  
+accounting_key | String | The accounting key to use for accounting based analytics  
 description | String | Text description of the item bought
 dimensions | MAP | MAP containing additional dimensions for analytics
 properties | JSON | JSON containing customer specific information
