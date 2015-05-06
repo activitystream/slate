@@ -8,8 +8,8 @@ toc_footers:
   - <h3>Documentation Index</h3>
   - <a href='/as-api.html#'>Activity Stream API</a>
   - <a href='/provisioning.html#'>Provisioning API</a>
-  - <a href='/graph.html#'>SQL Graph Queries</a>
   - Analytic Queries
+  - <a href='/recipes.html#'>Recipes</a>
 
 includes:
 

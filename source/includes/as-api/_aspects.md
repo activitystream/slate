@@ -356,6 +356,20 @@ value | Object | The value in the "{key}":{**value**} pair (Can be String a Nume
 * See [Entities](#entities) for information on updating entities in AS.
 * See [TS Data](#ts-data-data-points) for an example showing use with timeseries data.
 
+## Entities
+Generic entity information and entity lifecycle. Event sourcing 
+
+Field | Type | Description
+----- | ---- | -----------
+action | String | CREATES, UPDATES, REMOVES, VERIFIES, REVIVES
+entity | <entity_ref> | entity_ref = "Product/2989282"
+aspects | <Aspects> | Entity Aspects
+links | <Links> | Entity Links
+properties | JSON | JSON containing customer specific information
+
+**Applies to:** [`Events`]()</br>
+
+
 ## Geo Locations
 ```shell
 A incomplete login-failed-message showing use of the geo_location aspect:
@@ -505,7 +519,6 @@ Field | Type | Description
 line_type | String | PURCHASED, RENTED, LEASED, GOT, RETURNED, WON, CARTED, UN_CARTED, RESERVED, CANCELLED, UNAVAILABLE, PURCHASE_USED
 product | <entity_ref> | entity_ref = "Product/2989282"
 variant | String | Product variant when applicable
-supplier | <entity_ref> | entity_ref = "Product/2989282"
 item_count | Double | Number of items
 item_price | Double | Price of individual item (Use the [localize](#locale) aspect to control currency)
 variant | String | Product variant when applicable
@@ -520,6 +533,7 @@ valid_from | DateFrom | Valid/Active from date
 valid_until | DateFrom | Valid/Active until date 
 accounting_key | String |  
 description | String | Text description of the item bought
+dimensions | MAP | MAP containing additional dimensions for analytics
 properties | JSON | JSON containing customer specific information
 \_total | Double | N/A
 \_fees | Double | N/A

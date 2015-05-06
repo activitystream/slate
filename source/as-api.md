@@ -9,6 +9,7 @@ toc_footers:
   - Activity Stream API
   - <a href='/provisioning.html#'>Provisioning API</a>
   - <a href='/analytics.html#'>Analytic Queries</a>
+  - <a href='/recipes.html#'>Recipes</a>
 
 includes:
   - as-api/event_message

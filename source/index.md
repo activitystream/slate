@@ -2,12 +2,14 @@
 title: AS API
 
 language_tabs:
-
+  - javascript
+  
 toc_footers:
   - <h3>Documentation Index</h3>
   - <a href='/as-api.html#'>The Activity Stream API</a>
   - <a href='/provisioning.html#'>Provisioning API</a>
   - <a href='/analytics.html#'>Analytic Queries</a>
+  - <a href='/recipes.html#'>Recipes</a>
 
 includes:
 
