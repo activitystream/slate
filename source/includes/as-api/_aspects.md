@@ -370,81 +370,6 @@ properties | JSON | JSON containing customer specific information
 **Applies to:** [`Events`]()</br>
 
 
-## Location
-```shell
-A incomplete login-failed-message showing use of the location aspect:
-{
-  "action": "as.auth.failed",
-  "source": "com.activitystream.www",
-  "entities": [{"ACTOR":"Username/stefanb"}],
-  "aspects": {
-    "location": {
-      "latlong":"64.135338,-21.895210",
-      "track_for":"ACTOR"
-    }
-  }
-}
-
-A incomplete route-set-message showing use of the location aspect with multiple values:
-{
-  "action": "as.fleet.route.set",
-  "source": "com.activitystream.www",
-  "entities": [{"ACTOR":"Username/stefanb"}],
-  "aspects": {
-    "location": [
-    {
-      "latlong":"64.135338,-21.895210",
-      "track_for":"ACTOR",
-      "type":"from"
-    },
-    {
-      "latlong":"-21.895210,64.135338",
-      "track_for":"ACTOR",
-      "type":"to"
-    }
-    ]
-  }
-}
-```
-If an event specifies a (geo) location then Activity Stream resolves it and provides additional information for it.
-
-After enrichment* the aspect returns location specific information.
-
-Field | Type | Description
------ | ---- | -----------
-**latlong**| String | "double,double" with "latitude,longitude"
-track_for* | String | Common or long-lived information like this may be associated with linked entities, especially if it applies to all events related to that entity (usually the actor). In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the session. Multiple entries are stored for slow changing aspects to keep complete location log.
-type | String | Presentation/processing  tags: **from** (location), **to** (destination), **residence**, **work**, **temporary**
-accuracy | Integer | A 0..10 rating for the accuracy of this location.  This is not the geolocation-accuracy (resolution) but how reliably the bound entity can be associated with that location. 10 means that it/he was positively there. 0 mean that it’s a vague guess.
- | |  **Following are read-only or resolved properties**
-*\_street*|String|
-*\_street_no*|String|
-*\_postal_code*|String|
-*\_city*|String|
-*\_dma_code*|String|
-*\_metro_code*|String|
-*\_region*|String|
-*\_region_code*|String|
-*\_area*|String|
-*\_area_code*|String|
-*\_country*|String|
-*\_country_code*|String|
-*\_continent*|String|
-*\_organization*|String|
-
-**Applies to:** [`Events`](), [`Entities`]()</br>
-**Enhanced by:** [`Timed`](#timed), [`Locale`](#timed)
-
-*It depends on subscription whether location is enriched or not and is always quantity based *
-
-<!--
-radius|Double | Area affected
-coordinates|Double[] | List of double values [lat,long] / [double, double] representing a single point. Add more coordinate pairs to represent a line and make sure to close it with the initial coordinate when representing an area. The initial point is used as a reference in the latlong field.
--->
-
-### Additional queries and interfaces
-* See [Events](#events) for information on updating entities in AS.
-
 ## Grouped
 ```shell
 A incomplete email-sent-message showing use of the grouped aspect:
@@ -577,6 +502,81 @@ timezone | String | The time zone ID. (time zones in the tz database) Sample tim
 
 **Applies to:** [`Events`]() [`Entities`]()</br>
 **Enhances:** [`items`](##items-xcommerce) [`transaction`](#transaction) [`gelolocation`](#gelo-location)
+
+## Location
+```shell
+A incomplete login-failed-message showing use of the location aspect:
+{
+  "action": "as.auth.failed",
+  "source": "com.activitystream.www",
+  "entities": [{"ACTOR":"Username/stefanb"}],
+  "aspects": {
+    "location": {
+      "latlong":"64.135338,-21.895210",
+      "track_for":"ACTOR"
+    }
+  }
+}
+
+A incomplete route-set-message showing use of the location aspect with multiple values:
+{
+  "action": "as.fleet.route.set",
+  "source": "com.activitystream.www",
+  "entities": [{"ACTOR":"Username/stefanb"}],
+  "aspects": {
+    "location": [
+    {
+      "latlong":"64.135338,-21.895210",
+      "track_for":"ACTOR",
+      "type":"from"
+    },
+    {
+      "latlong":"-21.895210,64.135338",
+      "track_for":"ACTOR",
+      "type":"to"
+    }
+    ]
+  }
+}
+```
+If an event specifies a (geo) location then Activity Stream resolves it and provides additional information for it.
+
+After enrichment* the aspect returns location specific information.
+
+Field | Type | Description
+----- | ---- | -----------
+**latlong**| String | "double,double" with "latitude,longitude"
+track_for* | String | Common or long-lived information like this may be associated with linked entities, especially if it applies to all events related to that entity (usually the actor). In web context then this is used to apply certain redundant information to the Session entity. There it would be stored only once per session or a few time if it changes during the session. Multiple entries are stored for slow changing aspects to keep complete location log.
+type | String | Presentation/processing  tags: **from** (location), **to** (destination), **residence**, **work**, **temporary**
+accuracy | Integer | A 0..10 rating for the accuracy of this location.  This is not the geolocation-accuracy (resolution) but how reliably the bound entity can be associated with that location. 10 means that it/he was positively there. 0 mean that it’s a vague guess.
+ | |  **Following are read-only or resolved properties**
+*\_street*|String|
+*\_street_no*|String|
+*\_postal_code*|String|
+*\_city*|String|
+*\_dma_code*|String|
+*\_metro_code*|String|
+*\_region*|String|
+*\_region_code*|String|
+*\_area*|String|
+*\_area_code*|String|
+*\_country*|String|
+*\_country_code*|String|
+*\_continent*|String|
+*\_organization*|String|
+
+**Applies to:** [`Events`](), [`Entities`]()</br>
+**Enhanced by:** [`Timed`](#timed), [`Locale`](#timed)
+
+*It depends on subscription whether location is enriched or not and is always quantity based *
+
+<!--
+radius|Double | Area affected
+coordinates|Double[] | List of double values [lat,long] / [double, double] representing a single point. Add more coordinate pairs to represent a line and make sure to close it with the initial coordinate when representing an area. The initial point is used as a reference in the latlong field.
+-->
+
+### Additional queries and interfaces
+* See [Events](#events) for information on updating entities in AS.
 
 ## Messaging
 ```shell
