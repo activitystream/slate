@@ -534,7 +534,7 @@ total_for_sale | Double | How many items were (max) for sale
 valid_from | DateFrom | Valid/Active from date 
 valid_until | DateFrom | Valid/Active until date 
 accounting_key | String | The accounting key to use for accounting based analytics  
-description | String | Text description of the item bought
+description | String | Text description of the "line item" (summary)
 dimensions | MAP | MAP containing additional dimensions for analytics
 properties | JSON | JSON containing customer specific information
 \_total | Double | N/A

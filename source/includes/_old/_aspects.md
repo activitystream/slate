@@ -162,8 +162,7 @@ affects | String[] | List of the entities that should be affected by this. (ACTO
 ## Demography
 ```javascript
 {
-  "entity_type": "Customer",
-  "entity_id": "311068",
+  "entity_ref": "Customer/311068",
   "aspects": {
     "Demography": [
       {
