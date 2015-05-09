@@ -1,4 +1,4 @@
-# Entity Links
+# Entity Relations
 Business Entities, in the Event-Entity-Graph, can be related to each other in multiple ways. The relationships can be described using a Relationship-Type and Relationship-Weight which  allows for advanced graph mining based on both the events related to an entity and the entity relationship to other entities.
 
 Relations messages, as detailed here, can be sent to link any Entities in Activity Stream.

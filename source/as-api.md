@@ -24,32 +24,33 @@ includes:
 search: true
 ---
 # Introduction
-This documentation will help you send events to Activity Stream from any data source using REST API or a Message Queue. It will explain the basics and get you going quickly but will also provide you with the details needed to take full advantage of the Activity Stream platform.
+This documentation will help you send events to Activity Stream from any data source using REST API or a Message Queue. 
+It will explain the basics and get you going quickly but will also provide you with the details needed to take full advantage of the Activity Stream platform.
 
 ## Main concepts
 Please familiarize yourself with the following before you start constructing your event-messages.
 
-### [Events](#introduction-to-events)
+### [Event](#introduction-to-events)
 <img align="right" src="/images/event-diagram-1.png">
 A event is any event or action reported to Activity Stream from an external systems via an event-message.
 Each event becomes and item in the activity stream and is associated with all the entities involved in or by the event.
 All events represent a specific Action which are created dynamically on first use (just-in-time).
 
-### [Entities](#introduction-to-entities)
+### [Entity](#introduction-to-entities)
 A instance of a User, Product, WebPage and Order are all examples of entities.</br>
 Entity types and entity instances are automatically created, just-in-time, when referenced by an event and then the event is linked to the entity.
 
 That way each event becomes a part of the entities history, its activity stream, that reflects the actions reported by any event that involves the entity.
 
-### [Event Relation (Role)](#event-relations-involves)
-All entities involved in an event have a role that explains what part the entity "played" in the event.
+### [Role](#event-relations)
+All entities involved in an event have a role that declares what part they "played" in the event.
 </br>The "ACTOR" is, for example, the entity responsible for triggering the event and
 </br>the "AFFECTS" role is used for relations to all entities directly affected by the event while
 </br>the "REFERENCES" role is used for entities involved in the event but have no real bearing on the event and are not affected by it.
 
 Common ([Preddfined](#predefined-roles)) roles, are built into Activity Stream but [custom](#custom-roles) Roles and sub-roles can defined on the fly.
 
-### [Entity Relation (Link)](#entity-relations-links)
+### [Relation](#entity-relations)
 Any entity can be linked to any other entity and the link between the entities can be **typed**, have **properties** and **weight**.
 </br>That way a Customer can, for example, be a "OWNER" of a Car or be synonymous, in terms of event history, with his personal mobile phone. [Common Link types](#predefined-link-types) are built into Activity Stream but [custom Link-Types can defined on the fly](#custom-link-types).
 

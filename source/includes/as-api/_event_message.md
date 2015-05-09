@@ -52,7 +52,6 @@ occurred_at\*| DateTime | ISO 8601 serialized date-time when the event occurred.
 properties | JSON | Any JSON structure containing additional (free-format) event information.
 source | String | What system+server or service sent the event </br>\*Defaults to \<tenant\>.unspecified when received by AS.
 aspects*| Map\<[Aspect](#aspects),Map\>| Aspects do, optionally, contain event information that Activity Stream knows how to enrich, analyse and represent. List of all [available aspects](#aspects)
- | |  **Following are advanced properties**
 importance | Integer | The event importance (priority/severity) setting ranging from 0 .. 5.</br>The importance of the Event Type is used if not provided with the event.
 acl | List\<AccessRule\> | Access Control List</br>See [access control](#access-control) for details
 token | String | Use defaults for this message that have been pre-registered with a token.</br>See [token based defaults](#message-defaults-using-token)

@@ -1,4 +1,4 @@
-# Event Involvement
+# Event Relations
 ## Role properties
 ```shell
 A simple abuse report:
