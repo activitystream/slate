@@ -578,7 +578,7 @@ coordinates|Double[] | List of double values [lat,long] / [double, double] repre
 ### Additional queries and interfaces
 * See [Events](#events) for information on updating entities in AS.
 
-## Messaging
+## Messaging (Email)
 ```shell
 A complete email-sent-message showing the use of the messaging aspect:
 {

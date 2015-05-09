@@ -1,4 +1,4 @@
-# Entity Relations (Links)
+# Entity Links
 Business Entities, in the Event-Entity-Graph, can be related to each other in multiple ways. The relationships can be described using a Relationship-Type and Relationship-Weight which  allows for advanced graph mining based on both the events related to an entity and the entity relationship to other entities.
 
 Relations messages, as detailed here, can be sent to link any Entities in Activity Stream.
@@ -28,12 +28,11 @@ An example of a more detailed relations-message with the option of specifying mu
 
 Property | Type | Description
 -------- | ---- | -----------
-relation|\<EntityRelation\>|Format: "\<LINK-TYPE\>":"\<entity-reference\>" </br>\*See the list of link-types below
+link|\<link\>|\<TYPE\>:\<entity_ref\> - or - \<TYPE\>:\{entity\} </br>\*See the list of link-types below
 properties | JSON | Any valid JSON structure .
 active_from | DateTime | ISO Date This relations is active from the given date
 active_until | ISO Date | This relations is active until the given date 
 weight | Double | An additional weight for the relationship (used for advanced graph mining)
-
 
 **Valid aspects:** None
 
@@ -49,10 +48,10 @@ weight | Double | An additional weight for the relationship (used for advanced g
   * **PROXY_FOR**          	exclusive 1:1 relations (Extends **IS**) (WebSession can be a proxy for a user)
   * **PART_OF**  			non-exclusive relationship (Extends **KNOWS**) (Membership, employment)
   * **BELONGS_TO**			non-exclusive relationship (Extends **KNOWS**) (describes ownership/possession)
-  * **REL_SUPPLIED_BY**	    on-exclusive relationship (Extends **KNOWS**) (describes responsibility)
+  * **SUPPLIED_BY**	        non-exclusive relationship (Extends **KNOWS**) (describes responsibility)
   * **RELATED_TO**			Family relations (Extends **KNOWS**)
   * **ASSOCIATED_WITH**		Has social relations to (Extends **KNOWS**)
-  * **ON_BEHALF_OF**		non-exclusive relations (Extends **KNOWS_OF**)
+  * **ON_BEHALF_OF**		non-exclusive relations (Extends **KNOWS_OF**) (Employee on behalf of a customer)
   * **HAS_RELATIONS_TO**	Has other relations to (Extends **KNOWS_OF**) (other more distant relations)
 </br>
 
