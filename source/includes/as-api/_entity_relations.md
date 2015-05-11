@@ -28,7 +28,7 @@ An example of a more detailed relations-message with the option of specifying mu
 
 Property | Type | Description
 -------- | ---- | -----------
-link|\<link\>|\<TYPE\>:\<entity_ref\> - or - \<TYPE\>:\{entity\} </br>\*See the list of link-types below
+link|\<link\>|\<LINK-TYPE\>:\<entity_ref\> - or - \<LINK-TYPE\>:\{entity\} </br>\*See the list of link-types below
 properties | JSON | Any valid JSON structure .
 active_from | DateTime | ISO Date This relations is active from the given date
 active_until | ISO Date | This relations is active until the given date 

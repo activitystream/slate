@@ -24,8 +24,8 @@ In other occasions the event is linked to numerous entities and their involvemen
 
 Property | Description
 -------- | -----------
-**involved**|"`ROLE`":"`entity_ref`" - or - "`ROLE`":{`entity`} 
-link(s)|"`TYPE`":"`entity_ref`" - or - "`TYPE`":{`entity`} </br>Defines a secondary entity that is fronted by the primary entity of the role</br>It is, for example, used as a shorthand for linking a WebSession to a User (then the WebSession is the ACTOR but it's really a PROXY_FOR a User)
+**involved**|"`ROLE-TYPE`":"`entity_ref`" - or - "`ROLE-TYPE`":{`entity`} 
+link(s)|"`LINK-TYPE`":"`entity_ref`" - or - "`LINK-TYPE`":{`entity`} </br>Defines a secondary entity that is fronted by the primary entity of the role</br>It is, for example, used as a shorthand for linking a WebSession to a User (then the WebSession is the ACTOR but it's really a PROXY_FOR a User)
 
 ## Predefined Roles
 ```shell
@@ -37,7 +37,7 @@ Linking two entities:
   ]
   ...
 ```
-* Basic Roles:
+* Basic Roles Types:
   * **ACTOR**            The Entity responsible for causing the event
   * **AFFECTS**          Event affects the referenced Entity
   * **INVOLVES**         Entity is involved in event (not directly affected)
@@ -45,7 +45,7 @@ Linking two entities:
   * **REFERENCES**       Entity is referenced in the event (not involved or directly affected)
 </br>
 </br>
-* Event Sourcing Roles (Used when reporting entity registration (CRUD) changes):
+* Event Sourcing Roles Types (Used when reporting entity registration (CRUD) changes):
   * **CREATES**          The affected entity is created as a consequence of this event
   * **UPDATES**          The affected entity is updated as a consequence of this event
   * **REMOVES**          The affected entity is removed/deleted as a consequence of this event
