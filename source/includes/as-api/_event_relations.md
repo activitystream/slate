@@ -25,7 +25,7 @@ In other occasions the event is linked to numerous entities and their involvemen
 Property | Description
 -------- | -----------
 **involved**|"`ROLE-TYPE`":"`entity_ref`" - or - "`ROLE-TYPE`":{`entity`} 
-link(s)|"`LINK-TYPE`":"`entity_ref`" - or - "`LINK-TYPE`":{`entity`} </br>Defines a secondary entity that is fronted by the primary entity of the role</br>It is, for example, used as a shorthand for linking a WebSession to a User (then the WebSession is the ACTOR but it's really a PROXY_FOR a User)
+embedded link(s)|"`LINK-TYPE`":"`entity_ref`" - or - "`LINK-TYPE`":{`entity`} </br>Defines a secondary entity that is fronted by the primary entity of the role</br>It is, for example, used as a shorthand for linking a WebSession to a User (then the WebSession is the ACTOR but it's really a PROXY_FOR a User)
 
 ## Predefined Roles
 ```shell

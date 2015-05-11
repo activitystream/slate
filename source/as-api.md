@@ -37,9 +37,8 @@ Each event becomes and item in the activity stream and is associated with all th
 All events represent a specific Action which are created dynamically on first use (just-in-time).
 
 ### [Entity](#introduction-to-entities)
-A instance of a User, Product, WebPage and Order are all examples of entities.</br>
-Entity types and entity instances are automatically created, just-in-time, when referenced by an event and then the event is linked to the entity.
-
+Good examples of business entities are Users, Products, WebPages and Orders.</br>
+Entity types and entity instances are automatically created the first time they are referenced by an event. 
 That way each event becomes a part of the entities history, its activity stream, that reflects the actions reported by any event that involves the entity.
 
 ### [Role - Event Relations](#event-relations)
