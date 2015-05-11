@@ -55,7 +55,7 @@ weight | Double | An additional weight for the relationship (used for advanced g
   * **HAS_RELATIONS_TO**	Has other relations to (Extends **KNOWS_OF**) (other more distant relations)
 </br>
 
-## Custom Relationship Types
+## Custom Link Types
 You can subclass any relationship type by adding your own type name to the end of the the relationship type you would like to subclass/extend: "RELATED_TO:MOTHER".
 </br>Once the "MOTHER" subclass is created "MOTHER" becomes a reserved keyword for this relations type and it will always and only extend "RELATED_TO".
 

@@ -41,7 +41,7 @@ Good examples of business entities are Users, Products, WebPages and Orders.</br
 Entity types and entity instances are automatically created the first time they are referenced by an event. 
 That way each event becomes a part of the entities history, its activity stream, that reflects the actions reported by any event that involves the entity.
 
-### [Role - Event Relations](#event-relations)
+### [Event Relations (Role)](#event-relations)
 All entities involved in an event have a role that declares what part they "played" in the event.
 </br>The "ACTOR" is, for example, the entity responsible for triggering the event and
 </br>the "AFFECTS" role is used for relations to all entities directly affected by the event while
@@ -49,9 +49,9 @@ All entities involved in an event have a role that declares what part they "play
 
 Common ([Predefined](#predefined-roles)) roles, are built into Activity Stream but [custom](#custom-roles) Roles and sub-roles can defined on the fly.
 
-### [Link - Entity Relations](#entity-relations)
+### [Entity Relations (Link)](#entity-relations)
 Any entity can be linked to any other entity and the link between the entities can be **typed**, have **properties** and **weight**.
 </br>That way a Customer can, for example, be a "OWNER" of a Car or be synonymous, in terms of event history, with his personal mobile phone. [Common Link types](#predefined-link-types) are built into Activity Stream but [custom Link-Types can defined on the fly](#custom-link-types).
 
 ### [Aspects](#aspects)
-Aspects are commonly used message extensions which have rich support in Activity Stream in regards to processing and representation.
+Aspects are message extensions which unlock rich support in Activity Stream, booth in regards to processing and presentation.
