@@ -19,6 +19,7 @@ includes:
   - as-api/aspects
   - as-api/comments
   - as-api/bump
+  - as-api/provisioning
   - as-api/advanced_topics
 
 search: true

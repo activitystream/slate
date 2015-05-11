@@ -41,8 +41,8 @@ metric | Double | Additional/generic metric information for the test outcome
 amount | Double | Additional/generic amount information for the test outcome
 properties | JSON | Free format JSON structure with additional information.
 
-**Applies to:** [`Events`]()</br>
-**Enhanced by:** [`Dimensions*`](), [`Timed**`]()
+**Applies to:** [`Events`](#introduction-to-events)</br>
+**Enhanced by:** [`Dimensions*`](#dimensions-metricsfacts), [`Timed**`](#timed)
 
 *\*Use the dimensions aspect to add dimensions to the AB_Test outcome.*</br>
 *\*Use the timed aspect to report how lon the AB test took.*
@@ -90,8 +90,8 @@ mime_type | String | Explicitly specifies the document type (Ignoring the file e
 properties | JSON | Free format JSON structure with custom information
 content | Base64 | The file contents***
 
-**Applies to:** [`Events`]()</br>
-**Enhances:** [`Messaging`]()
+**Applies to:** [`Events`](#introduction-to-events)</br>
+**Enhances:** [`Messaging`](#messaging-email)
 
 *** Storing of file contents, as well as email contents, depends on your AS subscription
 
@@ -242,7 +242,7 @@ track_for* | String | Common or long-lived information, like this, may be moved 
 
 * Needs updating
 
-**Applies to:** [`Events`]()</br>
+**Applies to:** [`Events`](#introduction-to-events)</br>
 
 ### Additional queries and interfaces
 * See [Events](#events) for information on sending the event to AS.
@@ -278,7 +278,7 @@ intent | Float | Is the target entity doing good or bad things</br>evil <-> good
 affects* | String[] | List of the entities that should be affected by this. (ACTOR/AFFECTS etc.)</br>\* ACTOR is the default target for profiling values.
 duration | Long | For how long does this affect the target (days)
 
-**Applies to:** [`Events`](), [`Entities`]() (via Event-Types and Events), [`Event-Types`]()</br>
+**Applies to:** [`Events`](#introduction-to-events), [`Entities`](#introduction-to-entities) (via Event-Types and Events), [`Event-Types`]()</br>
 
 ### Additional queries and interfaces
 * See [Events](#events) for information on sending the event to AS.
@@ -317,7 +317,7 @@ income | String | XXX Range
 housing | String | `Partially Owned`, `Fully Owned`, `Rent`, `Rent-Free`, **Other**
 properties | JSON | Free format JSON structure with custom information
 
-**Applies to:** [`Entities`]()
+**Applies to:** [`Entities`](#introduction-to-entities)
 **Enhanced with:** [`Locale*`](#locale)  [`Timed*`](#timed)
 
 ### Additional queries and interfaces
@@ -349,7 +349,7 @@ Field | Type | Description
 key   | String | The key in the "{**key**}":{value} pair
 value | Object | The value in the "{key}":{**value**} pair (Can be String a Numeric or a list of such values)
 
-**Applies to:** [`Events`](), [`Time-Series Data`](), [`Event-Types`]()</br>
+**Applies to:** [`Events`](#introduction-to-events), [`Time-Series Data`](), [`Event-Types`]()</br>
 **Enhances:** [`TS Data`](#ts-data-data-points)
 
 ### Additional queries and interfaces
@@ -367,7 +367,7 @@ aspects | <Aspects> | Entity Aspects
 links | <Links> | Entity Links
 properties | JSON | JSON containing customer specific information
 
-**Applies to:** [`Events`]()</br>
+**Applies to:** [`Events`](#introduction-to-events)</br>
 
 
 ## Grouped
@@ -406,7 +406,7 @@ Make sure all messages meant to be collapsed together share the same group and s
 
 Please note that “re:”, “fwd:” etc. are removed from the group string if found.
 
-**Applies to:** [`Events`]()</br>
+**Applies to:** [`Events`](#introduction-to-events)</br>
 
 ### Additional queries and interfaces
 * See [Events](#events) for information on updating entities in AS.
@@ -468,7 +468,7 @@ properties | JSON | JSON containing customer specific information
 \_discount | Double | N/A
 
 
-**Applies to:** [`Events`]()</br>
+**Applies to:** [`Events`](#introduction-to-events)</br>
 **Enhanced by:** [`Locale`](#timed), [`transaction`](#transaction)
 
 ## Locale
@@ -500,7 +500,7 @@ locale | String | Java locale addressing both language and country. Language: IS
 currency | String | 3 letter currency code (ISO 4217).  Sample currency code: “USD”
 timezone | String | The time zone ID. (time zones in the tz database) Sample timezone ID: “America/Phoenix”
 
-**Applies to:** [`Events`]() [`Entities`]()</br>
+**Applies to:** [`Events`](#introduction-to-events) [`Entities`](#introduction-to-entities)</br>
 **Enhances:** [`items`](##items-xcommerce) [`transaction`](#transaction) [`gelolocation`](#gelo-location)
 
 ## Location
@@ -565,7 +565,7 @@ accuracy | Integer | A 0..10 rating for the accuracy of this location.  This is 
 *\_continent*|String|
 *\_organization*|String|
 
-**Applies to:** [`Events`](), [`Entities`]()</br>
+**Applies to:** [`Events`](#introduction-to-events), [`Entities`](#introduction-to-entities)</br>
 **Enhanced by:** [`Timed`](#timed), [`Locale`](#timed)
 
 *It depends on subscription whether location is enriched or not and is always quantity based *
@@ -628,7 +628,7 @@ properties |  for |  for containing additional, customer specific, information
 group | Boolean | Add grouping/collapsing information for the event (default is true)
 content | Base64 | The email contents***
 
-**Enhance by:** [`Attachments`](), [`Locale`](), [`Dimensions`}(), [`**Collapsable`](), [`Access Control`]()</br>
+**Enhance by:** [`Attachments`](), [`Locale`](), [`Dimensions`](#dimensions-metricsfacts), [`**Collapsable`](), [`Access Control`]()</br>
 
 *All emails are created using the entity type Email.  Relations between email addresses and business entities (employees, customer, partners etc.) can be explicitly created using the Entity API.
 
@@ -638,7 +638,7 @@ content | Base64 | The email contents***
 
 This aspect has not been implemented
 
-**Applies to:** [`Events`]()</br>
+**Applies to:** [`Events`](#introduction-to-events)</br>
 
 ## Page View
 ```shell
@@ -690,8 +690,8 @@ protocol | String | Defaults to HTTP
 page_content | List<Relations> | List of content Items/Entities types: FEATURED, LISTED, RELATED, TEASED, ADVERTISED
 
 
-**Applies to:** [`Events`]()</br>
-**Enhance by:** [`Timed`](), [`Dimensions`]()
+**Applies to:** [`Events`](#introduction-to-events)</br>
+**Enhance by:** [`Timed`](#timed), [`Dimensions`](#dimensions-metricsfacts)
 
 ## Presentation
 ```shell
@@ -743,7 +743,7 @@ icon | String | URL pointing to a default icon/logo used to represent the entity
 
 * All URLs can, with use of  templating, be based on values from the source or the event_type record.
 
-**Applies to:** [`Events`](), [`Entities`](), [`Event-Types`]()</br>
+**Applies to:** [`Events`](#introduction-to-events), [`Entities`](#introduction-to-entities), [`Event-Types`](), [`Entity-Types`]()</br>
 
 ## Resolvable
 ```shell
@@ -772,7 +772,7 @@ Field | Type | Description
 external_id | String | When external systems need to find individual events based on their own event ID then they can supply it using this aspect.</br>*external_id is unique within the source and needs source information to be resolved.
 batch_id | String | External batch id which can be used, when supplied with source, to resolve a whole batch of events.</br>*batch_id is resolved with source information.
 
-**Applies to:** [`Events`]()</br>
+**Applies to:** [`Events`](#introduction-to-events)</br>
 
 ## Settings
 ```shell
@@ -798,7 +798,7 @@ Use the Setting aspect to track changes for configuration/settings. Multiple set
 "setting"="new_value"
 Name of the setting that is affected and the new/current value for the setting.
 
-**Applies to:** [`Events`](), [`Entities`]() (Indirectly via events)</br>
+**Applies to:** [`Events`](#introduction-to-events), [`Entities`](#introduction-to-entities) (Indirectly via events)</br>
 
 ## Summary
 ```shell
@@ -828,7 +828,7 @@ properties | JSON | JSON containing additional, customer specific, information
 
 Please note that the action (“as.app.reward.unlocked” in this case) can also have title information attached to it and that storing a common template there can be more efficient than storing redundant strings with every event.
 
-**Applies to:** [`Events`](), [`Entities`]()</br>
+**Applies to:** [`Events`](#introduction-to-events), [`Entities`](#introduction-to-entities)</br>
 **Compliments:** [`Presentation`]()
 
 ## Tags
@@ -847,7 +847,7 @@ Please note that the action (“as.app.reward.unlocked” in this case) can also
 An array of strings used to further classify events in the activity stream. You can use any tag you like but keep in mind that a small set (low cardinality) of tags is commonly more useful than a large set of tags.
 
 
-**Applies to:** [`Events`](), [`Entities`]()</br>
+**Applies to:** [`Events`](#introduction-to-events), [`Entities`](#introduction-to-entities)</br>
 
 ## Timed
 ```shell
@@ -896,7 +896,7 @@ ends | ISO Date |
 duration | Long | Milliseconds
 type | String | Any custom type ("Duration" for example)
 
-**Applies to:** [`Events`]() [`Entities`]()</br>
+**Applies to:** [`Events`](#introduction-to-events) [`Entities`](#introduction-to-entities)</br>
 **Enhances:** [`Pageview`](), [`AB_Test`]()</br>
 
 ## TS Data (Data-Points)
