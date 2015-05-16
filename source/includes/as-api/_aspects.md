@@ -449,9 +449,9 @@ Field | Type | Description
 variant | String | Product variant when/if applicable
 item_count | Double | Number of items
 item_price | Double | Price of individual item (Use the [localize](#locale) aspect to control currency)
-serial_numbers | String[] | Serial numbers of purchased items (when/if available)
-fee_fixed | Double | Fixed per-item cost, added on top of the item price </br>(item price + item fees - discount = total item price)
-fee_percentage | Double | Variable per-item cost added on top of total price </br>(item price + item fees - discount = total item price)
+serial_numbers | String[<entity-ref>] | Serial numbers of purchased items (when/if available) like: Ticket/198198918 or Serial/AS-198198918
+commission_fixed | Double | Fixed per-item cost, added on top of the item price </br>(item price + item fees - discount = total item price)
+commission_percentage | Double | Variable per-item cost added on top of total price </br>(item price + item fees - discount = total item price)
 discount_percentage | Double | Discount % to be subtracted from the total-item-price</br>(item price + item fees - discount = total item price)
 tax_percentage | Double | Tax % to be added to the item price
 total_in_stock | Double | How many items still in stock
