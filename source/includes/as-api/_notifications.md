@@ -8,15 +8,20 @@ Someone mentions you in a comment
 - Stream item comment: "{entity-label} mentioned you in a comment regarding {stream-item-label}"
 - Entity comment: "{entity-label} mentioned you in a comment regarding {entity-label}" 
 
+###ADDITION
+Someone adds something to an item that you are following 
+
+- Comment: "{entity-label} comments on a conversation you are following" 
+
 ###CORRESPONDENCE 
 Email/Messaging (TO/CC/BCC) - A message is received that includes you as a recipient
 
-- "You have a new message from {from-entity-label}, the subject is {subject...}"
+- "You have a new message from {from-entity-label}: '{subject...}'"
 
 ###NOTIFICATION
 A Notification is created for you because of a event subscription you created
 
- - "{subscription-label} notification regarding {stream-item-label}"
+ - "{subscription-label} notification regarding {stream-item-label}" 
  
 ###FOLLOWS
 Someone follows you or an entity that you create or manage
