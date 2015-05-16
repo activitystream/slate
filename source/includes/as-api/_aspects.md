@@ -445,7 +445,7 @@ Generic purchase information. Items in the list will get the appropriate relatio
 
 Field | Type | Description
 ----- | ---- | -----------
-\<type\> |\<entity\> | Line item information </br> \<type\>: PURCHASED, RENTED, LEASED, GOT, RETURNED, WON, CARTED, UN_CARTED, RESERVED, CANCELLED, UNAVAILABLE, PURCHASE_USED, PROCESSING_ONLY </br> \<entity\>: Entity reference(s) (can be a list for composite products)
+\<type\> |\<entity\> | Line item information </br> \<type\>: PURCHASED, RENTED, LEASED, GOT, RETURNED, WON, CARTED, UN_CARTED, RESERVED, CANCELLED, UNAVAILABLE, PURCHASE_USED, PROCESSING_ONLY, INVENTORY_ONLY </br> \<entity\>: Entity reference(s) (can be a list for composite products)
 variant | String | Product variant when/if applicable
 item_count | Double | Number of items
 item_price | Double | Price of individual item (Use the [localize](#locale) aspect to control currency)
