@@ -12,6 +12,7 @@ Someone mentions you in a comment
 Someone adds something to an item that you are following 
 
 - Comment: "{entity-label} comments on a conversation you are following" 
+- Entity: "{entity-label} added <item> to <target-entity-label>"
 
 ###CORRESPONDENCE 
 Email/Messaging (TO/CC/BCC) - A message is received that includes you as a recipient
