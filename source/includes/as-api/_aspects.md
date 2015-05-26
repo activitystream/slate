@@ -421,7 +421,8 @@ A fairly complete purchase message with composite product and currency informati
   "aspects": {
     "items": [
       {
-        "BOUGHT":["Event/3982928","Venue/3982928","Artis/3982928"],
+        "BOUGHT":"Event/3982928",
+        "affiliates":["Venue/3982928","Artis/3982928"],
         "variant":"VIP Pass",
         "item_count":3,
         "item_price":75
@@ -446,6 +447,7 @@ Generic purchase information. Items in the list will get the appropriate relatio
 Field | Type | Description
 ----- | ---- | -----------
 \<type\> |\<entity\> | Line item information </br> \<type\>: PURCHASED, RENTED, LEASED, GOT, RETURNED, WON, CARTED, UN_CARTED, RESERVED, CANCELLED, UNAVAILABLE, PURCHASE_USED, PROCESSING_ONLY, INVENTORY_ONLY </br> \<entity\>: Entity reference(s) (can be a list for composite products)
+affiliate|\<entity\> | Affiliated entities that are responsible for the sale or the product
 variant | String | Product variant when/if applicable
 item_count | Double | Number of items
 item_price | Double | Price of individual item (Use the [localize](#locale) aspect to control currency)
