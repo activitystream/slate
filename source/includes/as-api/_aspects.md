@@ -653,7 +653,7 @@ A complete web-page-viewed-message showing the use of the messaging aspect:
   ],
   "aspects": {
     "pageview": {
-      "path":"http://www.yoursite.com/cat/prod-cat/product",
+      "path":"/cat/prod-cat/product",
       "path_properties":{
         "event":2928293
       },
@@ -668,7 +668,7 @@ A complete web-page-viewed-message showing the use of the messaging aspect:
       ]
     },
     "dimensions": {
-      "type":"Event Page"
+      "page_type":"Event Page"
     }
   }
 }
