@@ -16,7 +16,7 @@ Sent when the AB test starts
     }
   }
 }
-A partial purchase-message illustrating the use of the ab_testing aspect:
+A partial purchase-message illustrating the use of the ab_testing aspect (AB test ends):
 {
   "action": "as.ec.cart.purchased",
   "entities": [
@@ -31,7 +31,9 @@ A partial purchase-message illustrating the use of the ab_testing aspect:
       "amount":"730",
       "properties":{"some":true}
     }
+    ...
   }
+  ...
 }
 ```
 The ab_test aspect is used to store AB Test results. Analytics for AB Tests is immediately available as well as real-time dashboards tailored for AB testing.
