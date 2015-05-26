@@ -3,14 +3,24 @@ Aspects are commonly used event and entity extensions which have rich support in
 
 ## AB Testing
 ```shell
+Sent when the AB test starts
+{
+  "action": "as.ec.cart.shopping",
+  "entities": [
+    {"ACTOR":"Customer/311068"}
+  ],
+  "aspects": {
+    "ab_test": {
+      "id":"checkout_process",
+      "variant":"no-captcha",
+    }
+  }
+}
 A partial purchase-message illustrating the use of the ab_testing aspect:
 {
   "action": "as.ec.cart.purchased",
-  "source": "com.activitystream.www",
-  "occurred_at": "2014-02-23T12:00:00.000Z",
   "entities": [
-    {"ACTOR":"Session/KJ982KJ2", "PROXY_FOR":"Customer/311068"},
-    {"AFFECTS":"Cart/23498239"}
+    {"ACTOR":"Customer/311068"}
   ],
   "aspects": {
     "ab_test": {
@@ -20,13 +30,7 @@ A partial purchase-message illustrating the use of the ab_testing aspect:
       "metric":"7",
       "amount":"730",
       "properties":{"some":true}
-    },
-    "dimensions":{
-      "theme":"blue"
-    },
-    "timed":{
-      "duration":62323
-    },
+    }
   }
 }
 ```
