@@ -446,12 +446,12 @@ Generic purchase information. Items in the list will get the appropriate relatio
 
 Field | Type | Description
 ----- | ---- | -----------
-\<type\> |\<entity\> | Line item information </br> \<type\>: PURCHASED, RENTED, LEASED, GOT, RETURNED, WON, CARTED, UN_CARTED, RESERVED, CANCELLED, UNAVAILABLE, PURCHASE_USED, PROCESSING_ONLY, INVENTORY_ONLY </br> \<entity\>: Entity reference(s) (can be a list for composite products)
-affiliate|\<entity\> | Affiliated entities that are responsible for the sale or the product. Entity reference or references                                                                                                                                        
+\<type\> | \<entity-ref\> | (SKU)  Line item information </br> \<type\>: PURCHASED, RENTED, LEASED, GOT, RETURNED, WON, CARTED, UN_CARTED, RESERVED, CANCELLED, UNAVAILABLE, PURCHASE_USED, PROCESSING_ONLY, INVENTORY_ONLY </br> \<entity\>: Entity reference(s) (can be a list for composite products)
+affiliate| \<entity-ref\> | Affiliated entities that are responsible for the sale or the product. Entity reference or references                                                                                                                                        
 variant | String | Product variant when/if applicable
 item_count | Double | Number of items
 item_price | Double | Price of individual item (Use the [localize](#locale) aspect to control currency)
-serial_numbers | String[<entity-ref>] | Serial numbers of purchased items (when/if available) like: Ticket/198198918 or Serial/AS-198198918
+serial_numbers | \<entity-ref\> | Serial numbers of purchased items (when/if available) like: Ticket/198198918 or Serial/AS-198198918
 commission_fixed | Double | Fixed per-item cost, added on top of the item price </br>(item price + item fees - discount = total item price)
 commission_percentage | Double | Variable per-item cost added on top of total price </br>(item price + item fees - discount = total item price)
 discount_percentage | Double | Discount % to be subtracted from the total-item-price</br>(item price + item fees - discount = total item price)
