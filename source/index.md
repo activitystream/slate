@@ -6,9 +6,10 @@ language_tabs:
   
 toc_footers:
   - <h3>Documentation Index</h3>
-  - <a href='/as-api.html#'>The Activity Stream API</a>
+  - <a href='/as-api.html#'>Activity Stream API</a>
   - <a href='/provisioning.html#'>Provisioning API</a>
   - <a href='/analytics.html#'>Analytic Queries</a>
+  - <a href='/as-catalog.html#'>AS Event Catalog</a>
   - <a href='/recipes.html#'>Recipes</a>
 
 includes:

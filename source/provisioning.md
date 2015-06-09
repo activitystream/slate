@@ -9,6 +9,7 @@ toc_footers:
   - <a href='/as-api.html#'>Activity Stream API</a>
   - Provisioning API
   - <a href='/analytics.html#'>Analytic Queries</a>
+  - <a href='/as-catalog.html#'>AS Event Catalog</a>  
   - <a href='/recipes.html#'>Recipes</a>
 
 includes:
