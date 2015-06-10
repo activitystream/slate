@@ -10,7 +10,7 @@ The following samples are based on Zendesk tickets but they can be implemented f
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/some@customer.com", "RELAYED_BY":"Email/employee@company.com"},*
-        {"AFFECTS:CREATES":{"entity_ref":"Ticket/6", "AKA":"SupportTicket/<external_id>"}, **
+        {"AFFECTS:CREATES":"Ticket/6"}
         {"AFFECTS:ASSIGNED_TO":"Email/employee@company.com"}
     ],
     "aspects":{
@@ -38,7 +38,7 @@ The following samples are based on Zendesk tickets but they can be implemented f
     }
 }
 * Use RELAYED_BY if the action was relayed by an intermediary (employee on behalf of a customer) 
-** Remove or replace the "AKA:SupportTicket" section if internal ticket number is not in use
+** Add a "AKA:SupportTicket" section if internal ticket number is in use
 ```
 Sent when a ticket is created
 ###Fields
