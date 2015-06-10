@@ -9,7 +9,7 @@ The following samples are based on Zendesk tickets but they can be implemented f
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
-        {"ACTOR":"Email/some@customer.com", "REL_PROXIED_BY":"Email/employee@company.com"},*
+        {"ACTOR":"Email/some@customer.com", "RELAYED_BY":"Email/employee@company.com"},*
         {"AFFECTS:CREATES":{"entity_ref":"Ticket/6", "AKA":"SupportTicket/<external_id>"}, **
         {"AFFECTS:ASSIGNED_TO":"Email/employee@company.com"}
     ],
@@ -37,7 +37,7 @@ The following samples are based on Zendesk tickets but they can be implemented f
         "in_business_hours": "true"
     }
 }
-* Use REL_PROXIED_BY if the action was relayed by an intermediary (employee on behalf of a customer) 
+* Use RELAYED_BY if the action was relayed by an intermediary (employee on behalf of a customer) 
 ** Remove or replace the "AKA:SupportTicket" section if internal ticket number is not in use
 ```
 Sent when a ticket is created
