@@ -1,10 +1,10 @@
-# xCommerce
+# Commerce
 ##Purchasing
 Lets start with a small message and then continue adding information to it to make ite as complete as can be
 ## Smallest possible purchase message.
 ```json
 {
-  "event": "as.xcommerce.purchase.completed",
+  "event": "as.commerce.purchase.completed",
   "involves": [
     {"ACTOR":"Customer/1981"}
   ],
@@ -21,7 +21,7 @@ Lets start with a small message and then continue adding information to it to ma
 ## Purchase - With currency information
 ```json
 {
-  "event": "as.xcommerce.purchase.completed",
+  "event": "as.commerce.purchase.completed",
   "involves": [
     {"ACTOR":"Customer/1981"}
   ],
@@ -41,7 +41,7 @@ Lets start with a small message and then continue adding information to it to ma
 ## Purchase - With inventory and source information
 ```json
 {
-  "event": "as.xcommerce.purchase.completed",
+  "event": "as.commerce.purchase.completed",
   "source": "company.web",
   "involves": [
     {"ACTOR":"Customer/1981"}
@@ -63,7 +63,7 @@ Lets start with a small message and then continue adding information to it to ma
 ## Purchase - Composite items, fee and an invoice 
 ```json
 {
-  "event": "as.xcommerce.purchase.completed",
+  "event": "as.commerce.purchase.completed",
   "source": "company.web",
   "involves": [
     {"ACTOR":"Customer/1981"},

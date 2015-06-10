@@ -10,7 +10,6 @@ toc_footers:
   - <a href='/provisioning.html#'>Provisioning API</a>
   - Analytic Queries
   - <a href='/as-catalog.html#'>AS Event Catalog</a>  
-  - <a href='/recipes.html#'>Recipes</a>
 
 includes:
 
