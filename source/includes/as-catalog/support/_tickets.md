@@ -10,14 +10,14 @@ The following samples are based on Zendesk tickets but they can be implemented f
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/some@customer.com", "RELAYED_BY":"Email/employee@company.com"},*
-        {"AFFECTS:CREATES":"Ticket/6"}
+        {"AFFECTS:CREATES":"Ticket/6"},
         {"AFFECTS:ASSIGNED_TO":"Email/employee@company.com"}
     ],
     "aspects":{
         "dimensions":{
             "ticket_type":"Ticket",
             "ticket_status":"Pending",
-            "ticket_group": "Support"
+            "ticket_group": "Support",
             "ticket_via": "Web Form"
         },
         "summary":{
@@ -95,9 +95,9 @@ Property | Type | Description
         {"AFFECTS:UPDATES":"Ticket/6"}
     ],
     "properties":{
-        "priority": '',
+        "priority": 'High',
     },
-    "importance":<new importance>
+    "importance":3
 }
 ```
 Sent when a ticket is escalated (Made more important)
@@ -112,9 +112,9 @@ Sent when a ticket is escalated (Made more important)
         {"AFFECTS:UPDATES":"Ticket/6"}
     ],
     "properties":{
-        "priority": '',
+        "priority": 'Normal',
     },
-    "importance":<new importance>
+    "importance":2
 }
 ```
 Sent when a ticket is de-escalated (Made less important)
@@ -212,5 +212,27 @@ Sent when ticket other information is updated
 ```
 Sent when ticket resolution is rated
 ##Comment.added
-as.support.ticket.comment.new
+```shell
+{
+    "type":"as.support.ticket.comment.new",
+    "origin":"zendesk",
+    "occurred_at":"2015-06-04T17:24:13+01:00",
+    "relations":[
+        {"ACTOR":"Email/employee@company.com"},
+        {"AFFECTS":"Ticket/6"}
+    ],
+    "aspects":{
+        "messaging": {
+          "subject":"Some title",
+          "from":"Email/employee@company.com",
+          "to":[
+            {"Email/some@custoemr.com"},
+            {"Email/some.other@customer.com"}
+          ],
+          "url": "%some-url-pointing-to-a-original-copy-of-the-email$"
+        },
+        ...
+    }
+}
+```
 Sent when a comment is added to the ticket
