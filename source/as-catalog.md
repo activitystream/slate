@@ -16,5 +16,6 @@ toc_footers:
 
 includes:
   - as-catalog/support/tickets
+  - as-catalog/commerce/_purchasing
 
 ---

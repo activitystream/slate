@@ -1,7 +1,13 @@
 # Commerce
-##Purchasing
+
+##Item put in cart
+##Item removed from cart
+##Cart Purchase Starts
+##Cart Purchase Completed
+
+## Examples
 Lets start with a small message and then continue adding information to it to make ite as complete as can be
-## Smallest possible purchase message.
+### Smallest possible purchase message.
 ```json
 {
   "event": "as.commerce.purchase.completed",
@@ -18,7 +24,7 @@ Lets start with a small message and then continue adding information to it to ma
 }
 ```
 
-## Purchase - With currency information
+### With currency information
 ```json
 {
   "event": "as.commerce.purchase.completed",
@@ -38,7 +44,7 @@ Lets start with a small message and then continue adding information to it to ma
 }
 ```
 
-## Purchase - With inventory and source information
+### With inventory and source information
 ```json
 {
   "event": "as.commerce.purchase.completed",
@@ -60,7 +66,7 @@ Lets start with a small message and then continue adding information to it to ma
   }
 }
 ```
-## Purchase - Composite items, fee and an invoice 
+### Composite items, fee and an invoice 
 ```json
 {
   "event": "as.commerce.purchase.completed",
