@@ -1,12 +1,44 @@
 # Commerce
 
-##Item put in cart
-##Item removed from cart
-##Cart Purchase Starts
-##Cart Purchase Completed
+##Item Added
+as.commerce.cart.item.added
+Sent when item(s) are added to the cart
+
+##Item Removed
+as.commerce.cart.item.removed
+Sent when item(s) are removed from the cart
+
+##Item Changed
+as.commerce.cart.item.updated
+Sent when item(s) are changed in the cart
+
+##Purchase Starts
+as.commerce.cart.purchase.starts
+Sent when purchase process starts
+
+##Purchase Completed
+as.commerce.cart.purchase.ends
+Sent when purchase process ends
+
+##Payment Starts
+as.commerce.cart.payment.starts
+Sent when purchase process ends
+
+##Payment Completed
+as.commerce.cart.payment.ends
+Sent when purchase process ends
+
+##Coupon Added
+as.commerce.cart.coupon.added
+Sent when coupon is added for the purchase
+
+##Coupon Removed
+as.commerce.cart.coupon.removed
+Sent when coupon is removed from the purchase
 
 ## Examples
 Lets start with a small message and then continue adding information to it to make ite as complete as can be
+
 ### Smallest possible purchase message.
 ```json
 {
