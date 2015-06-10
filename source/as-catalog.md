@@ -13,7 +13,6 @@ toc_footers:
   - <a href='/provisioning.html#'>Provisioning API</a>
   - <a href='/analytics.html#'>Analytic Queries</a>
   - The AS Event-Type Catalog
-  - <a href='/recipes.html#'>Recipes</a>
 
 includes:
   - as-catalog/support/tickets
