@@ -2,7 +2,7 @@
 Activity stream tracks and services support tickets in various ways.
 The following samples are based on Zendesk tickets but they can be implemented for any ticketing system using Activity Stream [event messages](/as-api.html#introduction-to-events).
 
-##Ticket.New
+##Ticket New
 ```shell
 {
     "type":"as.support.ticket.new",
@@ -58,7 +58,7 @@ Property | Type | Description
 importance | Integer | The importance for the ticket (Ranging from 0 - 5)
 properties | Map | Any other custom  properties to store with the ticket 
 
-##Ticket.Assigned
+##Ticket Assigned
 ```shell
 {
     "type":"as.support.ticket.assigned",
@@ -84,49 +84,76 @@ Property | Type | Description
  | **ASSIGNED_TO** | The entity that the ticket was assigned to (if set)
 
 
-##Ticket.Escalated
+##Ticket Promoted
 ```shell
 {
-    "type":"as.support.ticket.escalated",
+    "type":"as.support.ticket.promoted",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}
+        {"AFFECTS:UPDATES":"Ticket/6"}*
     ],
     "properties":{
         "priority": 'High',
     },
     "importance":3
 }
+* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
-Sent when a ticket is escalated (Made more important)
-##Ticket.De-Escalated
+Sent when a ticket is promoted (Made more important)
+###Fields
+Property | Type | Description
+-------- | ----------- | -----------
+**type** | Fixed | **as.support.ticket.new**
+**origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
+**occurred_at** | ISO-Date | The date+time that the ticket was created 
+**[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
+ | **ACTOR** | The entity responsible for creating the ticket
+ | AFFECTS | The ticket (entity) that the comment is regarding
+properties | Map | Any other custom  properties to store with the ticket 
+importance | Integer | The importance for the ticket (Ranging from 0 - 5)
+
+
+##Ticket Demoted
 ```shell
 {
-    "type":"as.support.ticket.de-escalated",
+    "type":"as.support.ticket.demoted",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}
+        {"AFFECTS:UPDATES":"Ticket/6"}*
     ],
     "properties":{
         "priority": 'Normal',
     },
     "importance":2
 }
+* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
-Sent when a ticket is de-escalated (Made less important)
-##Tickket.Solved
-```shell
+Sent when a ticket is demoted (Made less important)
+###Fields
+Property | Type | Description
+-------- | ----------- | -----------
+**type** | Fixed | **as.support.ticket.new**
+**origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
+**occurred_at** | ISO-Date | The date+time that the ticket was created 
+**[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
+ | **ACTOR** | The entity responsible for creating the ticket
+ | AFFECTS | The ticket (entity) that the comment is regarding
+properties | Map | Any other custom  properties to store with the ticket 
+importance | Integer | The importance for the ticket (Ranging from 0 - 5)
+
+##Tickket Solved
+```shell  
 {
     "type":"as.support.ticket.solved",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}
+        {"AFFECTS:UPDATES":"Ticket/6"}*
     ],
     "aspects":{
         "dimensions":{
@@ -134,9 +161,22 @@ Sent when a ticket is de-escalated (Made less important)
         }
     }    
 }
+* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
 Sent when a ticket is marked as solved
-##Ticket.Closed
+###Fields
+Property | Type | Description
+-------- | ----------- | -----------
+**type** | Fixed | **as.support.ticket.new**
+**origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
+**occurred_at** | ISO-Date | The date+time that the ticket was created 
+**[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
+ | **ACTOR** | The entity responsible for creating the ticket
+ | AFFECTS | The ticket (entity) that the comment is regarding
+[aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
+ | [dimensions](/as-api.html#dimensions-metricsfacts) | Additional information added for analytics processing  
+
+##Ticket Closed
 ```shell
 {
     "type":"as.support.ticket.closed",
@@ -144,7 +184,7 @@ Sent when a ticket is marked as solved
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}
+        {"AFFECTS:UPDATES":"Ticket/6"}*
     ],
     "aspects":{
         "dimensions":{
@@ -152,9 +192,23 @@ Sent when a ticket is marked as solved
         }
     }    
 }
+* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
 Sent when a ticket is closed
-##Ticket.Re-Opened
+###Fields
+Property | Type | Description
+-------- | ----------- | -----------
+**type** | Fixed | **as.support.ticket.new**
+**origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
+**occurred_at** | ISO-Date | The date+time that the ticket was created 
+**[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
+ | **ACTOR** | The entity responsible for creating the ticket
+ | AFFECTS | The ticket (entity) that the comment is regarding
+[aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
+ | [dimensions](/as-api.html#dimensions-metricsfacts) | Additional information added for analytics processing  
+ 
+
+##Ticket Re-Opened
 ```shell
 {
     "type":"as.support.ticket.re-opened",
@@ -162,7 +216,7 @@ Sent when a ticket is closed
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}
+        {"AFFECTS:UPDATES":"Ticket/6"}*
     ],
     "aspects":{
         "dimensions":{
@@ -170,9 +224,22 @@ Sent when a ticket is closed
         }
     }    
 }
+* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
 Sent when a ticket is re-opened
-##Ticket.Updated
+###Fields
+Property | Type | Description
+-------- | ----------- | -----------
+**type** | Fixed | **as.support.ticket.new**
+**origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
+**occurred_at** | ISO-Date | The date+time that the ticket was created 
+**[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
+ | **ACTOR** | The entity responsible for creating the ticket
+ | AFFECTS | The ticket (entity) that the comment is regarding
+[aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
+ | [dimensions](/as-api.html#dimensions-metricsfacts) | Additional information added for analytics processing  
+
+##Ticket Updated
 ```shell
 {
     "type":"as.support.ticket.updated",
@@ -180,13 +247,24 @@ Sent when a ticket is re-opened
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}
+        {"AFFECTS:UPDATES":"Ticket/6"}*
     ],
     ...
 }
+* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
 Sent when ticket other information is updated
-##Ticket.Support Rating
+###Fields
+Property | Type | Description
+-------- | ----------- | -----------
+**type** | Fixed | **as.support.ticket.new**
+**origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
+**occurred_at** | ISO-Date | The date+time that the ticket was created 
+**[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
+ | **ACTOR** | The entity responsible for creating the ticket
+ | AFFECTS | The ticket (entity) that the comment is regarding
+
+##Ticket Rated
 ```shell
 {
     "type":"as.support.ticket.rated",
@@ -194,7 +272,7 @@ Sent when ticket other information is updated
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}
+        {"AFFECTS:UPDATES":"Ticket/6"}*
     ],
     "aspects":{
         "dimensions":{
@@ -209,9 +287,22 @@ Sent when ticket other information is updated
     },
     ...
 }
+* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
-Sent when ticket resolution is rated
-##Comment.added
+Sent when the ticket resolution/support is rated
+###Fields
+Property | Type | Description
+-------- | ----------- | -----------
+**type** | Fixed | **as.support.ticket.new**
+**origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
+**occurred_at** | ISO-Date | The date+time that the ticket was created 
+**[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
+ | **ACTOR** | The entity responsible for creating the ticket
+ | AFFECTS | The ticket (entity) that the comment is regarding
+[aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
+ | [dimensions](/as-api.html#dimensions-metricsfacts) | Additional information added for analytics processing  
+
+##Comment Added
 ```shell
 {
     "type":"as.support.ticket.comment.new",
@@ -236,3 +327,15 @@ Sent when ticket resolution is rated
 }
 ```
 Sent when a comment is added to the ticket
+
+###Fields
+Property | Type | Description
+-------- | ----------- | -----------
+**type** | Fixed | **as.support.ticket.new**
+**origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
+**occurred_at** | ISO-Date | The date+time that the ticket was created 
+**[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
+ | **ACTOR** | The entity responsible for creating the ticket
+ | AFFECTS | The ticket (entity) that the comment is regarding
+[aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
+ | [messaging](/as-api.html##messaging-email) | The comment (message) information  
