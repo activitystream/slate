@@ -20,20 +20,20 @@ The following samples are based on Zendesk tickets but they can be implemented f
             "ticket_group": "Support",
             "ticket_via": "Web Form"
         },
-        "summary":{
-            "title":"do we have org fields now?",
-            "content":"----------------------------------------------\n\nPetar, Jun 4, 17:24\n\nasfasfasfd"
+        "presentation":{
+            "label": "Ticket 6, do we have org fields now?",
+            "description":"----------------------------------------------\n\nPetar, Jun 4, 17:24\n\nasfasfasfd",
+            "details_url":"https://devactivitystream.zendesk.com/agent/tickets/6"
         },
         "timed":{
             "ends":"<ISO Date>",
             "type":"Due"
         }
     },
-    "importance":1,
+    "importance":3,
     "properties":{
-        "priority": '',
+        "priority": 'High',
         "score":72,
-        "ticket_url": "https://devactivitystream.zendesk.com/agent/tickets/6",
         "in_business_hours": "true"
     }
 }
@@ -53,7 +53,7 @@ Property | Type | Description
  | ASSIGNED_TO | The entity that the ticket was assigned to (if set)
 [aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
  | [dimensions](/as-api.html#dimensions-metricsfacts) | Additional information added for analytics processing  
- | [summary](/as-api.html#summary) | Added to contain main ticket content 
+ | [presentation](/as-api.html#presentation) | Presentation and content information 
  | [timed](/as-api.html#timed) | The due date set as ends 
 importance | Integer | The importance for the ticket (Ranging from 0 - 5)
 properties | Map | Any other custom  properties to store with the ticket 
