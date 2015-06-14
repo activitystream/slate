@@ -15,7 +15,7 @@ toc_footers:
   - The AS Event-Type Catalog
 
 includes:
-  - as-catalog/support/tickets
-  - as-catalog/commerce/_purchasing
+  - as/pm/_ticket
+  - as/commerce/_purchase
 
 ---

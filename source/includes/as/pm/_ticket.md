@@ -1,11 +1,11 @@
-# Support Tickets
-Activity stream tracks and services support tickets in various ways.
+# Tickets & Issues
+Activity stream tracks and services tickets and issues in various ways.
 The following samples are based on Zendesk tickets but they can be implemented for any ticketing system using Activity Stream [event messages](/as-api.html#introduction-to-events).
 
 ##Ticket New
 ```shell
 {
-    "type":"as.support.ticket.new",
+    "type":"as.pm.ticket.new",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
@@ -15,10 +15,11 @@ The following samples are based on Zendesk tickets but they can be implemented f
     ],
     "aspects":{
         "dimensions":{
-            "ticket_type":"Ticket",
+            "ticket_type":"Support Ticket",
             "ticket_status":"Pending",
             "ticket_group": "Support",
-            "ticket_via": "Web Form"
+            "ticket_via": "Web Form",
+            "ticket_locked": false
         },
         "presentation":{
             "label": "Ticket 6, do we have org fields now?",
@@ -44,7 +45,7 @@ Sent when a ticket is created
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.support.ticket.new**
+**type** | Fixed | **as.pm.ticket.new**
 **origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
 **occurred_at** | ISO-Date | The date+time that the ticket was created 
 **[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
@@ -61,7 +62,7 @@ properties | Map | Any other custom  properties to store with the ticket
 ##Ticket Assigned
 ```shell
 {
-    "type":"as.support.ticket.assigned",
+    "type":"as.pm.ticket.assigned",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
@@ -75,7 +76,7 @@ Sent when a ticket is assigned to a new group or a new individual.
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.support.ticket.assigned**
+**type** | Fixed | **as.pm.ticket.assigned**
 **origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
 **occurred_at** | ISO-Date | The date+time that the ticket was created 
 **[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
@@ -87,7 +88,7 @@ Property | Type | Description
 ##Ticket Promoted
 ```shell
 {
-    "type":"as.support.ticket.promoted",
+    "type":"as.pm.ticket.promoted",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
@@ -105,7 +106,7 @@ Sent when a ticket is promoted (Made more important)
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.support.ticket.new**
+**type** | Fixed | **as.pm.ticket.promoted**
 **origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
 **occurred_at** | ISO-Date | The date+time that the ticket was created 
 **[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
@@ -118,7 +119,7 @@ importance | Integer | The importance for the ticket (Ranging from 0 - 5)
 ##Ticket Demoted
 ```shell
 {
-    "type":"as.support.ticket.demoted",
+    "type":"as.pm.ticket.demoted",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
@@ -136,7 +137,7 @@ Sent when a ticket is demoted (Made less important)
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.support.ticket.new**
+**type** | Fixed | **as.pm.ticket.demoted**
 **origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
 **occurred_at** | ISO-Date | The date+time that the ticket was created 
 **[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
@@ -148,7 +149,7 @@ importance | Integer | The importance for the ticket (Ranging from 0 - 5)
 ##Tickket Solved
 ```shell  
 {
-    "type":"as.support.ticket.solved",
+    "type":"as.pm.ticket.solved",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
@@ -167,7 +168,7 @@ Sent when a ticket is marked as solved
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.support.ticket.new**
+**type** | Fixed | **as.pm.ticket.solved**
 **origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
 **occurred_at** | ISO-Date | The date+time that the ticket was created 
 **[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
@@ -179,7 +180,7 @@ Property | Type | Description
 ##Ticket Closed
 ```shell
 {
-    "type":"as.support.ticket.closed",
+    "type":"as.pm.ticket.closed",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
@@ -198,7 +199,7 @@ Sent when a ticket is closed
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.support.ticket.new**
+**type** | Fixed | **as.pm.ticket.closed**
 **origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
 **occurred_at** | ISO-Date | The date+time that the ticket was created 
 **[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
@@ -211,7 +212,7 @@ Property | Type | Description
 ##Ticket Re-Opened
 ```shell
 {
-    "type":"as.support.ticket.re-opened",
+    "type":"as.pm.ticket.re-opened",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
@@ -230,7 +231,7 @@ Sent when a ticket is re-opened
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.support.ticket.new**
+**type** | Fixed | **as.pm.ticket.new**
 **origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
 **occurred_at** | ISO-Date | The date+time that the ticket was created 
 **[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
@@ -242,7 +243,7 @@ Property | Type | Description
 ##Ticket Updated
 ```shell
 {
-    "type":"as.support.ticket.updated",
+    "type":"as.pm.ticket.updated",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
@@ -257,7 +258,7 @@ Sent when ticket other information is updated
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.support.ticket.new**
+**type** | Fixed | **as.pm.ticket.updated**
 **origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
 **occurred_at** | ISO-Date | The date+time that the ticket was created 
 **[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
@@ -267,7 +268,7 @@ Property | Type | Description
 ##Ticket Rated
 ```shell
 {
-    "type":"as.support.ticket.rated",
+    "type":"as.pm.ticket.rated",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
@@ -293,7 +294,7 @@ Sent when the ticket resolution/support is rated
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.support.ticket.new**
+**type** | Fixed | **as.pm.ticket.rated**
 **origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
 **occurred_at** | ISO-Date | The date+time that the ticket was created 
 **[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
@@ -305,7 +306,7 @@ Property | Type | Description
 ##Comment Added
 ```shell
 {
-    "type":"as.support.ticket.comment.new",
+    "type":"as.pm.ticket.comment.new",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
@@ -331,7 +332,7 @@ Sent when a comment is added to the ticket
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.support.ticket.new**
+**type** | Fixed | **as.pm.ticket.comment.new**
 **origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
 **occurred_at** | ISO-Date | The date+time that the ticket was created 
 **[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
