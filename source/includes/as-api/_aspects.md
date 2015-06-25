@@ -74,7 +74,8 @@ A partial email-sent-message illustrating the use of the attachments aspect:
         "url":"http://www.mbl.is/tncache/frimg/dimg_cache/e370x247/7/34/7343072.jpg",
         "description":"John and Suzie doing math",
         "size":3445,
-        "properties":{"smu":"fleh"}
+        "properties":{"smu":"fleh"},
+        "metadata":{"width":800, "height":600},
       }
     ]
   }
@@ -84,15 +85,14 @@ List of attachments associated with the event.
 
 Field | Type | Description
 ----- | ---- | -----------
-**url** | String | A URL pointing to the attached document (Binary storage available soon).
+**url** | String | An external URL pointing to a softly-attached document  
+fingerprint | String | A file id for file stored in Activity Stream
 filename | String | An alternative filename for the file (Ignoring filename in URL).
 description | String | Content description
-width | Double | With in pixels if this is an image/video.
-height | Double | Height in pixels if this is an image/video.
 size | Double | File size in Bytes  (Used to warn of large content)
 created | DateTime | ISO Date Time when the file was created (Used if missing from file information)
 updated | DateTime | ISO Date Time when the file was updated (Used if missing from file information)
-mime_type | String | Explicitly specifies the document type (Ignoring the file extensions).
+metadata | JSON | Fixed list of file-type-specific information (width, height, bitrate etc)
 properties | JSON | Free format JSON structure with custom information
 content | Base64 | The file contents***
 
