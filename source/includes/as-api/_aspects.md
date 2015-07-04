@@ -74,7 +74,8 @@ A partial email-sent-message illustrating the use of the attachments aspect:
         "url":"http://www.mbl.is/tncache/frimg/dimg_cache/e370x247/7/34/7343072.jpg",
         "description":"John and Suzie doing math",
         "size":3445,
-        "properties":{"smu":"fleh"}
+        "properties":{"smu":"fleh"},
+        "metadata":{"width":800, "height":600},
       }
     ]
   }
@@ -84,16 +85,14 @@ List of attachments associated with the event.
 
 Field | Type | Description
 ----- | ---- | -----------
-**url** | String | A URL pointing to the attached document or a fingerprint for locally stored files
-filename | String | An filename (Higher prescience than the filename in URL).
-description | String | Content description (searchable)
-profile | String | a usage label (small|medium|original) 
-width | Double | With in pixels if this is an image/video.
-height | Double | Height in pixels if this is an image/video.
+**url** | String | An external URL pointing to a softly-attached document  
+fingerprint | String | A file id for file stored in Activity Stream
+filename | String | An alternative filename for the file (Ignoring filename in URL).
+description | String | Content description
 size | Double | File size in Bytes  (Used to warn of large content)
 created | DateTime | ISO Date Time when the file was created (Used if missing from file information)
 updated | DateTime | ISO Date Time when the file was updated (Used if missing from file information)
-mime_type | String | Explicitly specifies the document type (Ignoring the file extensions).
+metadata | JSON | Fixed list of file-type-specific information (width, height, bitrate etc)
 properties | JSON | Free format JSON structure with custom information
 content | Base64 | The file contents***
 
@@ -317,7 +316,7 @@ birth_year | Integer | 19+ ... 2014
 ethnicity | String | `White`, `Hispanic` / `Latino`, `Black` / `African American`, `Native American` / `American Indian`, `Asian` / `Pacific Islander`, `Multiracial`, `Other`
 marital_status | String | `Single` (never married), `Married` or `In-Partnership`, `Widowed`, `Divorced`, `Separated`, `Other`
 education | String | `No schooling`, `Nursery school`, `Primary school` (up to 11th grade), `No diploma` (12th grade), `High school` (graduate/GED), Some `College credit` (No degree), `Associate degree` (AA, AS), `Bachelor's degree` (BA, AB, BS), `Master's degree` (MA, MS, MEng, MEd, MSW, MBA), `Professional degree` (MD, DDS, DVM, LLB, JD), `Doctorate degree` (PhD, EdD)
-family_size | Integer | 1 .. XX
+family_size | String | 1 .. XX
 employment | String | `Employed`, `Self-employed`, `Out of work and looking`, `Out of work not looking`, `A homemaker`, `A student`, `Military`, `Retired`, `Unable` to work, `Other`
 disability | String |
 income | String | XXX Range
@@ -598,6 +597,7 @@ A complete email-sent-message showing the use of the messaging aspect:
   ],
   "aspects": {
     "messaging": {
+      "subject":"Some title #3983#", <- notice the tracking token
       "from":"Email/stefan@activitystream.com",
       "to":[
         {"Email/linda@activitystream.com", "belongs_to":"Customer/181271"},
@@ -605,9 +605,6 @@ A complete email-sent-message showing the use of the messaging aspect:
       ],
       "dated": "2014-01-29T12:00:00.001Z",
       "url": "%some-url-pointing-to-a-server-copy-of-the-email$"
-    },
-    "content": {
-      "subject":"Some title #3983#", <- notice the tracking token
     },
     "attachments": [
       {
@@ -629,15 +626,15 @@ Events that represent emails, or similar communications, can provide recipient a
 
 Field | Type | Description
 ----- | ---- | -----------
+subject | String |
 **from** | String | The event will be linked with the entities with the role set to "MESSAGE_FROM"
 **to** | String[] | The event will be linked with all listed entities with the role set to "MESSAGE_TO"
 cc | String[] | The event will be linked with all listed entities with the role set to "MESSAGE_CC"
 bcc | String[] | The event will be linked with all listed entities with the role set to "MESSAGE_BCC"
-subject | <Content> | Use the content aspect (Title)*
-content | <Content> | Use the content aspect (Content)*
-attachments | <Attachments> | Use the content aspect (Content)*
 url | String | A fully qualified URL pointing to the email on the email server.
 properties |  for |  for containing additional, customer specific, information
+group | Boolean | Add grouping/collapsing information for the event (default is true)
+content | Base64 | The email contents***
 
 **Enhance by:** [`Attachments`](), [`Locale`](), [`Dimensions`](#dimensions-metricsfacts), [`**Collapsable`](), [`Access Control`]()</br>
 
@@ -811,7 +808,7 @@ Name of the setting that is affected and the new/current value for the setting.
 
 **Applies to:** [`Events`](#introduction-to-events), [`Entities`](#introduction-to-entities) (Indirectly via events)</br>
 
-## Content
+## Summary
 ```shell
 {
   "action": "as.rewards.unlocked",
@@ -821,7 +818,7 @@ Name of the setting that is affected and the new/current value for the setting.
     {"ACTOR":"Session/9fa660bb-9c43-4214-b603-882453ccf088"}
   ],
   "aspects": {
-  "content": {
+  "summary": {
     "title":"Stefán has now unlocked the 'Ignorant dude' trophy",
     "subtitle":"by answering 30 questions incorrectly",
     "content":"One awesome dry spell!"}
@@ -832,10 +829,9 @@ Used to store customized title & summary information.
 
 Field | Type | Description
 ----- | ---- | -----------
-title/subject | String |
-subtitle | String  |
-summary | String  |
-content | Base64  |
+title | String
+subtitle | String
+content | String
 properties | JSON | JSON containing additional, customer specific, information
 
 Please note that the action (“as.app.reward.unlocked” in this case) can also have title information attached to it and that storing a common template there can be more efficient than storing redundant strings with every event.
