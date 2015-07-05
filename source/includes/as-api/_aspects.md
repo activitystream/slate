@@ -669,14 +669,8 @@ A complete web-page-viewed-message showing the use of the messaging aspect:
   ],
   "aspects": {
     "pageview": {
-      "path":"/cat/prod-cat/product#section",
-      "path_properties":{
-        "event":2928293
-      },
-      "referrer":"http://www.somesite.com/page/ad",
-      "referrer_properties":{
-        "campaign":2928293
-      },
+      "path":"/cat/prod-cat/product#section?event=2928293",
+      "referrer":"http://www.somesite.com/page/ad?campaign=2928293",
       "page_content": [
         {"FEATURED":"Event/2928293"},
         {"FEATURED":"Artist/232222"},
