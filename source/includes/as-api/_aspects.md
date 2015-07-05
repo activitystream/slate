@@ -94,12 +94,9 @@ created | DateTime | ISO Date Time when the file was created (Used if missing fr
 updated | DateTime | ISO Date Time when the file was updated (Used if missing from file information)
 metadata | JSON | Fixed list of file-type-specific information (width, height, bitrate etc)
 properties | JSON | Free format JSON structure with custom information
-content | Base64 | The file contents***
 
 **Applies to:** [`Events`](#introduction-to-events) [`Entities`](#introduction-to-entities)</br>
 **Enhances:** [`Messaging`](#messaging-email)
-
-*** Storing of file contents, as well as email contents, depends on your AS subscription
 
 ### Additional queries and interfaces
 * See [Events](#events) for information on sending the event to AS.
@@ -428,7 +425,7 @@ A fairly complete purchase message with composite product and currency informati
     "items": [
       {
         "BOUGHT":"Event/3982928",
-        "affiliates":["Venue/3982928","Artis/3982928"],
+        "associations":["Venue/3982928","Artis/3982928"],
         "variant":"VIP Pass",
         "item_count":3,
         "item_price":75
@@ -453,7 +450,7 @@ Generic purchase information. Items in the list will get the appropriate relatio
 Field | Type | Description
 ----- | ---- | -----------
 \<type\> | \<entity\> | (SKU)  Line item information </br> \<type\>: PURCHASED, RENTED, LEASED, GOT, RETURNED, WON, CARTED, UN_CARTED, RESERVED, CANCELLED, UNAVAILABLE, PURCHASE_USED, PROCESSING_ONLY, INVENTORY_ONLY </br> \<entity\>: Entity reference(s) (can be a list for composite products)
-affiliate| \<entity\> | Affiliated entities that are responsible for the sale or the product. Entity reference or references                                                                                                                                        
+associates| \<entity\> | Associated entities that are responsible for the sale or the product. Entity reference or references                                                                                                                                        
 variant | String | Product variant when/if applicable
 item_count | Double | Number of items
 item_price | Double | Price of individual item (Use the [localize](#locale) aspect to control currency)
@@ -470,6 +467,7 @@ accounting_key | String | The accounting key to use for accounting based analyti
 description | String | Text description of the "line item" (summary)
 dimensions | MAP | MAP containing additional dimensions for analytics
 properties | JSON | JSON containing customer specific information
+currency | String | The currency for the amounts (defaults to the value in the locale aspect)
 \_total | Double | N/A
 \_fees | Double | N/A
 \_tax | Double | N/A
@@ -650,10 +648,22 @@ This aspect has not been implemented
 
 ## Page View
 ```shell
+A simple pageview message:
+{
+  "action": "as.web.page.view",
+  "source": "www.activitystream.com",
+  "entities": [
+    {"ACTOR":"Session/32948429384239", "PROXY_FOR": "Customer/311068"}
+  ]
+  "aspects": {
+    "pageview": "/cat/prod-cat/product?event=2928293"
+  }
+}
+
 A complete web-page-viewed-message showing the use of the messaging aspect:
 {
   "action": "as.web.page.browse",
-  "source": "com.activitystream.www",
+  "source": "www.activitystream.com",
   "entities": [
     {"ACTOR":"Session/32948429384239", "PROXY_FOR": "Customer/311068"}
   ],
@@ -667,6 +677,11 @@ A complete web-page-viewed-message showing the use of the messaging aspect:
       "referrer_properties":{
         "campaign":2928293
       },
+      "sections": {
+        "base":10901,
+        "#section":10901,
+        "#section2":2045
+      }
       "page_content": [
         {"FEATURED":"Event/2928293"},
         {"RELATED":"Artist/232222"},
@@ -690,12 +705,12 @@ Field | Type | Description
 path_properties | JSON | Custom request properties for the page path
 referrer | String | (id) The referrer URL (Where the request is originated/redirected from) (Mapped to a Page Entity) Please note: Everything after ? will be removed and added to the reference  properties (not pageview properties).
 referrer_properties | JSON | Custom request properties of the referrer URL
-keyword | String | Search term
+keyword | String | Search terms
 method | String | **GET**, POST, PUT, DELETE, PATCH (Defaults to GET)
 response_code | Integer | HTTP Response code (Defaults to 200)
 size | integer | Size of response in bytes
 protocol | String | Defaults to HTTP
-page_content | List<Relations> | List of content Items/Entities types: FEATURED, LISTED, RELATED, TEASED, ADVERTISED
+page_content | List<Relations> | List of content Items/Entities types: FEATURED, LISTED, RELATED, ADVERTISED, TEASED 
 
 
 **Applies to:** [`Events`](#introduction-to-events)</br>
