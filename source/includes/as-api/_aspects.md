@@ -669,7 +669,7 @@ A complete web-page-viewed-message showing the use of the messaging aspect:
   ],
   "aspects": {
     "pageview": {
-      "path":"/cat/prod-cat/product",
+      "path":"/cat/prod-cat/product#section",
       "path_properties":{
         "event":2928293
       },
@@ -677,19 +677,11 @@ A complete web-page-viewed-message showing the use of the messaging aspect:
       "referrer_properties":{
         "campaign":2928293
       },
-      "sections": {
-        "base":10901,
-        "#section":10901,
-        "#section2":2045
-      }
       "page_content": [
         {"FEATURED":"Event/2928293"},
-        {"RELATED":"Artist/232222"},
+        {"FEATURED":"Artist/232222"},
         {"RELATED":"Venue/2424232"}
       ]
-    },
-    "dimensions": {
-      "page_type":"Event Page"
     }
   }
 }
