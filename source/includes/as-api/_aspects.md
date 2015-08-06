@@ -110,7 +110,7 @@ Entity snippet showing the Classification aspect
     "classification": {
       "make":"Apple",
       "model":"iPhone",
-      "flavor":"6+ Gold",
+      "variant":"6+ Gold",
       "year": 2015
     }
   }
@@ -122,7 +122,7 @@ Field | Type | Description
 ----- | ---- | -----------
 make | String | The make/brand of the product (BMW)
 model | String | The model of the product (316)
-flavor | String | The version/flavor of the product (i)
+variant | String | The version/variant of the product (i)
 size | String | The size (if sized)
 year | Integer | The year of production (2015)
 categories | List\<String\> | The product categories
