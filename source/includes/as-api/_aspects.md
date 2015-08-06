@@ -108,6 +108,7 @@ Entity snippet showing the Classification aspect
   "entity_ref": "Product/290209092",
   "aspects": {
     "classification": {
+      "type":"Mobile Phone",
       "make":"Apple",
       "model":"iPhone",
       "variant":"6+ Gold",
@@ -120,6 +121,7 @@ Used for product classify
 
 Field | Type | Description
 ----- | ---- | -----------
+type | String | Product Type
 make | String | The make/brand of the product (BMW)
 model | String | The model of the product (316)
 variant | String | The version/variant of the product (i)
@@ -691,7 +693,7 @@ Field | Type | Description
 path_properties | JSON | Custom request properties for the page path
 referrer | String | (id) The referrer URL (Where the request is originated/redirected from) (Mapped to a Page Entity) Please note: Everything after ? will be removed and added to the reference  properties (not pageview properties).
 referrer_properties | JSON | Custom request properties of the referrer URL
-keyword | String | Search terms
+keywords | String | Search terms
 method | String | **GET**, POST, PUT, DELETE, PATCH (Defaults to GET)
 response_code | Integer | HTTP Response code (Defaults to 200)
 size | integer | Size of response in bytes
