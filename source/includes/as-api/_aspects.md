@@ -127,7 +127,7 @@ model | String | The model of the product (316)
 variant | String | The version/variant of the product (i)
 size | String | The size (if sized)
 year | Integer | The year of production (2015)
-categories | List\<String\> | The product categories
+categories | String[]| The product categories
 
 **Applies to:** `Entities`
 
@@ -374,7 +374,6 @@ properties | JSON | JSON containing customer specific information
 
 **Applies to:** [`Events`](#introduction-to-events)</br>
 
-
 ## Grouped
 ```shell
 A incomplete email-sent-message showing use of the grouped aspect:
@@ -416,6 +415,10 @@ Please note that “re:”, “fwd:” etc. are removed from the group string if
 ### Additional queries and interfaces
 * See [Events](#events) for information on updating entities in AS.
 
+## Inventory (xCommerce)
+
+**Applies to:** [`Entities`](#introduction-to-entities)</br>
+
 ## Items (xCommerce)
 ```shell
 A fairly complete purchase message with composite product and currency information:
@@ -427,7 +430,6 @@ A fairly complete purchase message with composite product and currency informati
     "items": [
       {
         "BOUGHT":"Event/3982928",
-        "associations":["Venue/3982928","Artis/3982928"],
         "variant":"VIP Pass",
         "item_count":3,
         "item_price":75
@@ -511,7 +513,7 @@ timezone | String | The time zone ID. (time zones in the tz database) Sample tim
 **Applies to:** [`Events`](#introduction-to-events) [`Entities`](#introduction-to-entities)</br>
 **Enhances:** [`items`](##items-xcommerce) [`transaction`](#transaction) [`gelolocation`](#gelo-location)
 
-## Location
+## Geo Location
 ```shell
 A incomplete login-failed-message showing use of the location aspect:
 {
@@ -519,7 +521,7 @@ A incomplete login-failed-message showing use of the location aspect:
   "source": "com.activitystream.www",
   "entities": [{"ACTOR":"Username/stefanb"}],
   "aspects": {
-    "location": {
+    "geo_location": {
       "latlong":"64.135338,-21.895210",
       "track_for":"ACTOR"
     }
@@ -532,7 +534,7 @@ A incomplete route-set-message showing use of the location aspect with multiple 
   "source": "com.activitystream.www",
   "entities": [{"ACTOR":"Username/stefanb"}],
   "aspects": {
-    "location": [
+    "geo_location": [
     {
       "latlong":"64.135338,-21.895210",
       "track_for":"ACTOR",
@@ -698,7 +700,7 @@ method | String | **GET**, POST, PUT, DELETE, PATCH (Defaults to GET)
 response_code | Integer | HTTP Response code (Defaults to 200)
 size | integer | Size of response in bytes
 protocol | String | Defaults to HTTP
-page_content | List<Relations> | List of content Items/Entities types: FEATURED, LISTED, RELATED, ADVERTISED, TEASED 
+page_content | Relations[] | List of content Items/Entities types: FEATURED, LISTED, RELATED, ADVERTISED, TEASED
 
 
 **Applies to:** [`Events`](#introduction-to-events)</br>
