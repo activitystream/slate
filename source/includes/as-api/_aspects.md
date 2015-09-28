@@ -940,36 +940,6 @@ type | String | **`valid`**, `due`, `duration`, `total_duration` or any custom t
 **Applies to:** [`Events`](#introduction-to-events) [`Entities`](#introduction-to-entities)</br>
 **Enhances:** [`Pageview`](), [`AB_Test`]()</br>
 
-## TS Data (Data-Points)
-```shell
-Sample of a event message that piggybacks a timeseries entry
-{
-  "action": "as.sysops.status.report",
-  "source": "com.activitystream.server1",
-  "occurred_at": "2014-02-23T12:00:00.000Z",
-  "involves": [
-    {"ACTOR":"Demon/Sysops"}
-  ],
-  "aspects": {
-    "ts_data": {
-       "series":"sfsd",
-       "volume":3,
-       "free_disk_space_pc":92,
-       "machine_load":1.5
-    },
-    "dimensions": {
-      "machine_type":"virtual",
-      "instance_type":"small"
-    }
-  }
-}
-```
-In addition to be registered in the AS event-entity graph the event updates a time series with this data-point.
-
-**Please note:** For high frequency, fixed interval, time-series we recommend using the DataPoint message rather than sending in regular events with the ts_data aspect.
-
-Additional dimensions are added from Locale, Client Device and GeoLocation. Additional/manual dimensions can be set using the dimensions aspect.
-
 ## Transaction
 
 Field | Type | Description
@@ -986,5 +956,4 @@ card_number  | String | Obfuscated only (Meta card numbers only)
 card_exp  | String | Expiration data
 properties | JSON | Any JSON structure containing customer/transaction specific information
 
-**Applies to:** [`TSData`]()</br>
 **Enhanced by:** [`dimensions`](#dimensions-metricsfacts)
