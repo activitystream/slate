@@ -11,7 +11,7 @@ Access Control List is available to control who has access to the comment to acc
 ```shell
 A comment message using explicit setters:
 {
-  "source":"com.activitystream.www",
+  "origin":"com.activitystream.www",
   "comment":"This car is not worth much is it mrs. Linda! It looks worthless to me", 
   "involves": [
     {"COMMENTS":"Employee/stefanb"}, 
@@ -23,7 +23,7 @@ A comment message using explicit setters:
 
 Same comment using implicit/embedded setters: 
 {
-  "source":"com.activitystream.www",
+  "origin":"com.activitystream.www",
   "comment":"This #car is not worth much is it mrs. Linda@Employee/linda! It looks #worthless to me", 
   "involves": [
     {"COMMENTS":"Employee/stefanb"},
@@ -34,11 +34,12 @@ Same comment using implicit/embedded setters:
 
 Property | Type | Description
 -------- | ---- | -----------
-source | String | Where is the comment originated from? A period separated list representing a source hierarchy. It’s a good rule to structure the source string so that it ranges from the least_specific.to_the.most_specific.
+origin | String | Where is the comment originated from? A period separated list representing a source hierarchy. It’s a good rule to structure the source string so that it ranges from the least_specific.to_the.most_specific.
 comment | String | Embedding implicit tags: Tags can be embedded in the comment using the hash tag (#). Embedding implicit relations: The comment it self special characters: @refID looks for an entity referencewith the User/refID or the Employee/refID signatures and automatically adds  “MENTIONES” relations. Examples: Stefán@Employee/stefanb @Customer/311068 @Vehicle/VF058 @stream_id
-entities | List\<relation\> | Every comment is related to at least two entities, the entity responsible for making the comment and the business entity that the comment belongs to. Comments can also reference other users or other entities. [ {"TYPE":"entity_type/entity_id"},   {"TYPE":"stream_id"}] Supported types are: COMMENTS 		- the entity that makes the comment COMMENTED_ON 	- the entities that the comment applies to MENTIONES		- entities referenced or discussed in the comment See Event/Entity Relations for details.
+involves | List\<relation\> | Every comment is related to at least two entities, the entity responsible for making the comment and the business entity that the comment belongs to. Comments can also reference other users or other entities. [ {"TYPE":"entity_type/entity_id"},   {"TYPE":"stream_id"}] Supported types are: COMMENTS 		- the entity that makes the comment COMMENTED_ON 	- the entities that the comment applies to MENTIONES		- entities referenced or discussed in the comment See Event/Entity Relations for details.
 occurred_at| DateTime | The exact time that the comment was made (ISO 8601 serialized).</br>*Defaults to local time when received by AS.*
 aspects| Map\<Aspect,JSON\>| Aspects optionally contain information that enhance the comment.</br>*See list of [available aspects](#aspects)*
+acl | List\<AccessRule\> | Access Control List</br>See [access control](#access-control) for details
 
 **Valid aspects:** [`Attachments`]() [`ClientDevice`]() [`ClientIp`]() [`GeoLocation`]() [`Locale`]() [`Tags`]()  
 

@@ -50,7 +50,8 @@ Property | Type | Description\*
 **involves** | List\<[Involved](#event-involvement)\> | All business entities involved in the event. (customers, orders etc.) 
 occurred_at\*| DateTime | ISO 8601 serialized date-time when the event occurred.</br>\*Defaults to local time when received by AS.
 properties | JSON | Any JSON structure containing additional (free-format) event information.
-source | String | What system+server or service sent the event </br>\*Defaults to \<tenant\>.unspecified when received by AS.
+origin | String | What system+server or service sent the event </br>\*Defaults to \<tenant\>.unspecified when received by AS.
+description | String | A human readable description of what happened 
 aspects*| Map\<[Aspect](#aspects),Map\>| Aspects do, optionally, contain event information that Activity Stream knows how to enrich, analyse and represent. List of all [available aspects](#aspects)
 importance | Integer | The event importance (priority/severity) setting ranging from 0 .. 5.</br>The importance of the Event Type is used if not provided with the event.
 acl | List\<AccessRule\> | Access Control List</br>See [access control](#access-control) for details

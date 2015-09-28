@@ -698,6 +698,7 @@ referrer_properties | JSON | Custom request properties of the referrer URL
 keywords | String | Search terms
 method | String | **GET**, POST, PUT, DELETE, PATCH (Defaults to GET)
 response_code | Integer | HTTP Response code (Defaults to 200)
+duration | Integer | Seconds spent on page
 size | integer | Size of response in bytes
 protocol | String | Defaults to HTTP
 page_content | Relations[] | List of content Items/Entities types: FEATURED, LISTED, RELATED, ADVERTISED, TEASED
