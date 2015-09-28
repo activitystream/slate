@@ -19,7 +19,8 @@ The following samples are based on Zendesk tickets but they can be implemented f
             "ticket_status":"Pending",
             "ticket_group": "Support",
             "ticket_via": "Web Form",
-            "ticket_locked": false
+            "ticket_locked": false,
+            "ticket_priority": "high"
         },
         "presentation":{
             "label": "Ticket 6, do we have org fields now?",
@@ -33,7 +34,6 @@ The following samples are based on Zendesk tickets but they can be implemented f
     },
     "importance":3,
     "properties":{
-        "priority": 'High',
         "score":72,
         "in_business_hours": "true"
     }
@@ -95,8 +95,10 @@ Property | Type | Description
         {"ACTOR":"Email/employee@company.com"},
         {"AFFECTS":"Ticket/6"}*
     ],
-    "properties":{
-        "priority": 'High',
+    "aspects":{
+        "dimensions":{
+            "priority": "High",
+        }
     },
     "importance":3
 }
@@ -125,9 +127,11 @@ importance | Integer | The importance for the ticket (Ranging from 0 - 5)
         {"ACTOR":"Email/employee@company.com"},
         {"AFFECTS":"Ticket/6"}*
     ],
-    "properties":{
-        "priority": 'Normal',
-    },
+    "aspects":{
+        "dimensions":{
+            "priority": "Normal",
+        }
+    }
     "importance":2
 }
 ```
@@ -244,7 +248,7 @@ Property | Type | Description
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
         {"AFFECTS":"Ticket/6"}*
-    ],
+    ]
     ...
 }
 ```
