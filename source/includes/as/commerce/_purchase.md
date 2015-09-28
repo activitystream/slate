@@ -1,43 +1,43 @@
 # Commerce
 
-##Item Added
+##Item Added to Cart
 as.commerce.cart.item.added
 Sent when item(s) are added to the cart
 
 ###Fields
 
-##Item Removed
+##Item Removed from Cart
 as.commerce.cart.item.removed
 Sent when item(s) are removed from the cart
 
 ###Fields
 
-##Item Changed
-as.commerce.cart.item.updated
+##Item Changed in Cart
+as.commerce.cart.item.changed
 Sent when item(s) are changed in the cart
 
 ###Fields
 
 ##Purchase Starts
-as.commerce.cart.purchase.starts
+as.commerce.purchase.starts
 Sent when purchase process starts
 
 ###Fields
 
 ##Purchase Completed
-as.commerce.cart.purchase.ends
+as.commerce.purchase.completed
 Sent when purchase process ends
 
 ###Fields
 
 ##Payment Starts
-as.commerce.cart.payment.starts
+as.commerce.payment.starts
 Sent when purchase process ends
 
 ###Fields
 
 ##Payment Completed
-as.commerce.cart.payment.ends
+as.commerce.payment.completed
 Sent when purchase process ends
 
 ###Fields
