@@ -328,7 +328,7 @@ properties | JSON | Free format JSON structure with custom information
 ### Additional queries and interfaces
 * See [Entities](#entities) for information on updating entities in AS.
 
-## Dimensions (Metrics/Facts)
+## Dimensions
 ```shell
 A incomplete login-message showing use of the dimensions aspect:
 {
@@ -352,7 +352,7 @@ In that way AB test results, page-views, purchases or any other aspect that auto
 Field | Type | Description
 ----- | ---- | -----------
 key   | String | The key in the "{**key**}":{value} pair
-value | Object | The value in the "{key}":{**value**} pair (Can be String a Numeric or a list of such values)
+value | String | The value in the "{key}":{**value**} pair 
 
 **Applies to:** [`Events`](#introduction-to-events), [`Time-Series Data`](), [`Event-Types`]()</br>
 **Enhances:** [`TS Data`](#ts-data-data-points)
@@ -650,6 +650,33 @@ This aspect has not been implemented
 
 **Applies to:** [`Events`](#introduction-to-events)</br>
 
+## Metrics
+```shell
+A incomplete login-message showing use of the dimensions aspect:
+{
+  "action": "as.auth.login",
+  "source": "com.activitystream.www",
+  "occurred_at": "2014-02-23T12:00:00.000Z",
+  "entities": [
+    {"ACTOR":"User/311068"}
+  ],
+  "aspects": {
+    "metrics": {
+      "weight":32.0
+    }
+  }
+}
+```
+All values in metrics are added to all time-series that are created for the event.
+
+Field | Type | Description
+----- | ---- | -----------
+key   | String | The key in the "{**key**}":{value} pair
+value | Double | The value in the "{key}":{**value**} pair 
+
+**Applies to:** [`Events`](#introduction-to-events), [`Time-Series Data`](), [`Event-Types`]()</br>
+**Enhances:** [`TS Data`](#ts-data-data-points)
+
 ## Page View
 ```shell
 A simple pageview message:
@@ -908,7 +935,7 @@ Field | Type | Description
 begins | ISO Date |
 ends | ISO Date |
 duration | Long | Milliseconds
-type | String | Any custom type ("Duration" for example)
+type | String | **`valid`**, `due`, `duration` or any custom type
 
 **Applies to:** [`Events`](#introduction-to-events) [`Entities`](#introduction-to-entities)</br>
 **Enhances:** [`Pageview`](), [`AB_Test`]()</br>

@@ -28,7 +28,7 @@ The following samples are based on Zendesk tickets but they can be implemented f
         },
         "timed":{
             "ends":"<ISO Date>",
-            "type":"Due"
+            "type":"due"
         }
     },
     "importance":3,
