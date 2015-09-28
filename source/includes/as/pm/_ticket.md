@@ -289,7 +289,7 @@ Property | Type | Description
         }
     }
     ...
-}
+}                                                       
 ```
 Sent when the ticket resolution/support is rated
 ###Fields

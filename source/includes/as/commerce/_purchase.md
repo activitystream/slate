@@ -146,3 +146,101 @@ Lets start with a small message and then continue adding information to it to ma
 }
 ```
 
+##Complete example
+```
+{
+  "occurred_at": "2015-09-28T11:41:17.9900000+02:00",
+  "involves": [
+    {
+      "ACTOR:BUYER": {
+        "entity_ref": "Customer/5-1188286",
+        "AKA": [
+          "Phone/+47-"
+        ],
+        "aspects": {
+          "presentation": "Gunnar Halvorsen",
+          "address": {
+            "address": "Granlibk 18",
+            "address2": "",
+            "zip_code": "4026",
+            "city": "Stavanger",
+            "country": "Norge"
+          }
+        }
+      }
+    },
+    {
+      "INVOLVES:BOUGHT_FOR": "Customer/5-1188286"
+    },
+    {
+      "INVOLVES": "Order/5-13046892"
+    }
+  ],
+  "origin": "billettportalen.no.direct",
+  "aspects": {
+    "items": [
+      {
+        "PURCHASED": {
+          "entity_ref": "EventDate/5-33362",
+          "label": "Vamp",
+          "aspects": {
+            "timed": {
+              "begins": "2015-11-25T21:15:00.0000000+01:00"
+            }
+          },
+          "relations": [
+            {
+              "PART_OF": "Event/5-10654"
+            },
+            {
+              "SUPPLIED_BY": "Organizer/5-1225"
+            },
+            {
+              "HOSTED_AT": {
+                "entity_ref": "Hall/5-408",
+                "relations": [
+                  {
+                    "LOCATED_AT": {
+                      "entity_ref": "Venue/5-456",
+                      "label": "Stavanger konserthus"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "involves": [
+          {
+            "CREATES": "Ticket/5-20480870"
+          },
+          {
+            "SOLD_BY": "Reseller/5-1029"
+          }
+        ],
+        "variant": "Ordinær",
+        "item_count": 1,
+        "item_price": 450,
+        "valid_from": "2015-11-25T21:15:00.0000000+01:00",
+        "serial_numbers": [
+          "BarCode/5-11002048087020758592",
+          "OrderBarCode/5-10001304689242471387"
+        ],
+        "description": "Vamp on 2015-11-25 21:15 (Amfi - 13/16)",
+        "currency": "NOK",
+        "price_category": "A",
+        "dimensions": {
+          "section": "Amfi",
+          "delivery_type": 2,
+          "event_type": "Musikk"
+        },
+        "properties": {
+          "row": "13",
+          "seat": "16"
+        }
+      }
+    ]
+  },
+  "type": "as.commerce.purchase.completed"
+} 
+```
