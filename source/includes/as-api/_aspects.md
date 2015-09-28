@@ -935,7 +935,7 @@ Field | Type | Description
 begins | ISO Date |
 ends | ISO Date |
 duration | Long | Milliseconds
-type | String | **`valid`**, `due`, `duration` or any custom type
+type | String | **`valid`**, `due`, `duration`, `total_duration` or any custom type
 
 **Applies to:** [`Events`](#introduction-to-events) [`Entities`](#introduction-to-entities)</br>
 **Enhances:** [`Pageview`](), [`AB_Test`]()</br>

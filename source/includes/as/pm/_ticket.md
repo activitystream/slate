@@ -271,15 +271,19 @@ Property | Type | Description
     ],
     "aspects":{
         "dimensions":{
-            "ticket_rating":3,
+            "ticket_rating":"3",
             "ticket_group": "Support",
             "ticket_type":"Ticket"
             "ticket_duration":<minutes>,
             "ticket_comments":<comment_count>,
             "ticket_assignments":<assignment_count>,
             "ticket_via": "Web Form"
+        },
+        "timed":{
+            "duration":<milliseconds>,
+            "type":"total_duration"
         }
-    },
+    }
     ...
 }
 ```
