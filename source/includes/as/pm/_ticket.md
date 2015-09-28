@@ -10,7 +10,7 @@ The following samples are based on Zendesk tickets but they can be implemented f
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/some@customer.com", "RELAYED_BY":"Email/employee@company.com"},*
-        {"AFFECTS:CREATES":"Ticket/6"},
+        {"AFFECTS":"Ticket/6"},
         {"AFFECTS:ASSIGNED_TO":"Email/employee@company.com"}
     ],
     "aspects":{
@@ -93,14 +93,13 @@ Property | Type | Description
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}*
+        {"AFFECTS":"Ticket/6"}*
     ],
     "properties":{
         "priority": 'High',
     },
     "importance":3
 }
-* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
 Sent when a ticket is promoted (Made more important)
 ###Fields
@@ -124,14 +123,13 @@ importance | Integer | The importance for the ticket (Ranging from 0 - 5)
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}*
+        {"AFFECTS":"Ticket/6"}*
     ],
     "properties":{
         "priority": 'Normal',
     },
     "importance":2
 }
-* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
 Sent when a ticket is demoted (Made less important)
 ###Fields
@@ -154,7 +152,7 @@ importance | Integer | The importance for the ticket (Ranging from 0 - 5)
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}*
+        {"AFFECTS":"Ticket/6"}*
     ],
     "aspects":{
         "dimensions":{
@@ -162,7 +160,6 @@ importance | Integer | The importance for the ticket (Ranging from 0 - 5)
         }
     }    
 }
-* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
 Sent when a ticket is marked as solved
 ###Fields
@@ -185,7 +182,7 @@ Property | Type | Description
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}*
+        {"AFFECTS":"Ticket/6"}*
     ],
     "aspects":{
         "dimensions":{
@@ -193,7 +190,6 @@ Property | Type | Description
         }
     }    
 }
-* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
 Sent when a ticket is closed
 ###Fields
@@ -217,7 +213,7 @@ Property | Type | Description
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}*
+        {"AFFECTS":"Ticket/6"}*
     ],
     "aspects":{
         "dimensions":{
@@ -225,7 +221,6 @@ Property | Type | Description
         }
     }    
 }
-* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
 Sent when a ticket is re-opened
 ###Fields
@@ -248,11 +243,10 @@ Property | Type | Description
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}*
+        {"AFFECTS":"Ticket/6"}*
     ],
     ...
 }
-* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
 Sent when ticket other information is updated
 ###Fields
@@ -273,7 +267,7 @@ Property | Type | Description
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
         {"ACTOR":"Email/employee@company.com"},
-        {"AFFECTS:UPDATES":"Ticket/6"}*
+        {"AFFECTS":"Ticket/6"}*
     ],
     "aspects":{
         "dimensions":{
@@ -288,7 +282,6 @@ Property | Type | Description
     },
     ...
 }
-* "UPDATES" can be used instead of the full qualifier "AFFECTS:UPDATES"
 ```
 Sent when the ticket resolution/support is rated
 ###Fields
