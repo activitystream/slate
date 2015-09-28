@@ -231,7 +231,7 @@ Lets start with a small message and then continue adding information to it to ma
         "price_category": "A",
         "dimensions": {
           "section": "Amfi",
-          "delivery_type": 2,
+          "delivery_type": "2",
           "event_type": "Musikk"
         },
         "properties": {
