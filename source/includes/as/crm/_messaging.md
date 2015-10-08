@@ -37,8 +37,8 @@ Property | Type | Description
 **origin** | String | Set to the identifier of the originating system
 **occurred_at** | ISO-Date | The date+time for when purchase occurred
 **[involves](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
- | **INVOLVES** | The message that bounced
- | **CONCERNS** | The customer to whom the message was sent
+ | **ACTOR** | The customer to whom the message was sent
+ | **CONCERNS** | The message that bounced
 [aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
  | [messaging](/as-api.html#messaging-email) | Email specific information
  | [presentation](/as-api.html#presentation) | Presentation and content information
@@ -58,8 +58,8 @@ Property | Type | Description
 **origin** | String | Set to the identifier of the originating system
 **occurred_at** | ISO-Date | The date+time for when purchase occurred
 **[involves](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
- | **INVOLVES** | The message that opened by the customer
- | **CONCERNS** | The customer who opened the message
+ | **ACTOR** | The customer who opened the message
+ | **CONCERNS** | The message that opened by the customer
 [aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
  | [messaging](/as-api.html#messaging-email) | Email specific information
  | [presentation](/as-api.html#presentation) | Presentation and content information
@@ -76,13 +76,34 @@ Sent when an email (that was sent by the company) is clicked by the user
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.crm.message.email.opened**
+**type** | Fixed | **as.crm.message.email.clicked**
 **origin** | String | Set to the identifier of the originating system
 **occurred_at** | ISO-Date | The date+time for when purchase occurred
 **[involves](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
- | **INVOLVES** | The message that the customer clicked
- | **CONCERNS** | The customer who clicked the message
+ | **ACTOR** | The customer who clicked the message
+ | **CONCERNS** | The message that the customer clicked
 [aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
+ | [messaging](/as-api.html#messaging-email) | Email specific information
+ | [presentation](/as-api.html#presentation) | Presentation and content information
+ | [dimensions](/as-api.html#classification) | Additional information added for analytics processing
+properties | Map | Any other custom properties to store with the ticket
+
+
+##Email Subscribed
+as.crm.message.email.subscribed
+
+Sent when the customer subscribes to a message type
+
+###Fields
+Property | Type | Description
+-------- | ----------- | -----------
+**type** | Fixed | **as.crm.message.email.subscribed**
+**origin** | String | Set to the identifier of the originating system
+**occurred_at** | ISO-Date | The date+time for when purchase occurred
+**[involves](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
+ | **ACTOR** | The customer who subscribed
+ | **CONCERNS** | The message series or group to which the customer subscribed
+ [aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
  | [messaging](/as-api.html#messaging-email) | Email specific information
  | [presentation](/as-api.html#presentation) | Presentation and content information
  | [dimensions](/as-api.html#classification) | Additional information added for analytics processing
@@ -90,20 +111,20 @@ properties | Map | Any other custom  properties to store with the ticket
 
 
 ##Email Unsubscribed
-as.crm.message.email.unsubscribe
+as.crm.message.email.unsubscribed
 
 Sent when the customer unsubscribes from a message type
 
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.crm.message.email.opened**
+**type** | Fixed | **as.crm.message.email.unsubscribed**
 **origin** | String | Set to the identifier of the originating system
 **occurred_at** | ISO-Date | The date+time for when purchase occurred
 **[involves](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
- | **INVOLVES** | The message from which the customer unsubscribed
- | **CONCERNS** | The customer who unsubscribed
-[aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
+ | **ACTOR** | The customer who unsubscribed
+ | **CONCERNS** | The message series or group from which the customer unsubscribed
+ [aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
  | [messaging](/as-api.html#messaging-email) | Email specific information
  | [presentation](/as-api.html#presentation) | Presentation and content information
  | [dimensions](/as-api.html#classification) | Additional information added for analytics processing
