@@ -17,5 +17,6 @@ toc_footers:
 includes:
   - as/pm/_ticket
   - as/commerce/_purchase
+  - as/crm/_messaging
 
 ---

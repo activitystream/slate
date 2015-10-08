@@ -117,17 +117,17 @@ Entity snippet showing the Classification aspect
   }
 }
 ```
-Used for product classify 
+Used to classify entities (e.g. product)
 
 Field | Type | Description
 ----- | ---- | -----------
-type | String | Product Type
-make | String | The make/brand of the product (BMW)
-model | String | The model of the product (316)
-variant | String | The version/variant of the product (i)
-size | String | The size (if sized)
+type | String | Type of entity (e.g. product, emai, etc.)
+make | String | The make or brand of entity
+model | String | The model of the entity
+variant | String | The version/variant of the entity
+size | String | The size of the entity (if sized)
 year | Integer | The year of production (2015)
-categories | String[]| The product categories
+categories | String[]| Categories to which the entity belongs
 
 **Applies to:** `Entities`
 
@@ -889,6 +889,7 @@ An array of strings used to further classify events in the activity stream. You 
 
 
 **Applies to:** [`Events`](#introduction-to-events), [`Entities`](#introduction-to-entities)</br>
+
 
 ## Timed
 ```shell
