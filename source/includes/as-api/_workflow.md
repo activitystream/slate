@@ -58,6 +58,6 @@ Currently the workflow actions can only be set vie the REST API.
 Property | Description
 -------- | -----------
 {stream_id} | The id of the stream item to set/get/delete workflow status for 
-{action} | Available actions: `view`,`acknowledge`,`claim`,`confirm`,`confirm`,`verify`,`assign`,`approve`,`complete`,`reject`,`closed`,`reopen`
+{action} | Available actions: `view`,`acknowledge`,`claim`,`verify`,`assign`,`approve`,`complete`,`confirm`,`reject`,`closed`,`reopen`
 
 **Att.** *These actions are always performed as current user
