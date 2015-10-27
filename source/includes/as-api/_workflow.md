@@ -3,21 +3,22 @@
 All stream items can include simple workflow information. A workflow action can be set by any user or employee that has access to the item in an activity stream.
 A workflow action triggers a corresponding/appropriate workflow status.
 
-Currently no rules are applied to state sequences other than a user can not set the same state multiple times in a row. (Future versions of Activity Stream may introduce more advanced workflow rules) 
+Currently only simple rules are applied to state sequence but future versions of Activity Stream may introduce more advanced workflow rules. 
 
 ## Available workflow actions
  
 ### VIEWED_BY
 Set automatically the first time a user looks at the details for a stream item that is using workflow.
+The viewed action does not trigger any state changes  
 
 ### ACKNOWLEDGED_BY
-Typically set by the user to acknowledge the issue.
+Typically set by the user to acknowledge the issue prior to any further action taking place.
 
 ### CLAIMED_BY
-Typically set by a user that is opting to address the issue.
+Typically set by a user that is opting to address the issue (self assigning).
 
 ### CONFIRMED_BY
-Typically set by a user that is confirming the issue.
+Typically set by a user that is confirming the issue or the resolution.
 
 ### ASSIGNED_BY
 Typically set by as user that is assigning the issue to a different user.
@@ -26,7 +27,7 @@ Typically set by as user that is assigning the issue to a different user.
 Typically set by as user that is completing the issue.
 
 ### APPROVED_BY
-Typically set by as user that is appoving the issue or its resolution.
+Typically set by as user that is approving the issue or its resolution.
 
 ### VERIFIED_BY
 Typically set by as user that is verifying the issue or its resolution.
