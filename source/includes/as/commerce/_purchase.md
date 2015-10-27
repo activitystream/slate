@@ -70,6 +70,12 @@ Sent when coupon is removed from the purchase
 
 ###Fields
 
+##Item Returned
+as.commerce.item.returned
+Sent when item(s) are returns
+
+###Fields
+
 ## Examples
 Lets start with a small message and then continue adding information to it to make ite as complete as can be
 
@@ -228,7 +234,7 @@ Lets start with a small message and then continue adding information to it to ma
         },
         "involves": [
           {
-            "CREATES": "Ticket/5-20480870"
+            "INVOLVES": "Ticket/5-20480870"
           },
           {
             "SOLD_BY": "Reseller/5-1029"

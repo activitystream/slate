@@ -127,6 +127,7 @@ model | String | The model of the entity
 variant | String | The version/variant of the entity
 size | String | The size of the entity (if sized)
 year | Integer | The year of production (2015)
+market | String | Primary market for the entity
 categories | String[]| Categories to which the entity belongs
 
 **Applies to:** `Entities`
