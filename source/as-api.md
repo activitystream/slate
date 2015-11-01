@@ -18,10 +18,11 @@ includes:
   - as-api/entity_relations
   - as-api/aspects
   - as-api/comments
-  - as-api/bump
   - as-api/workflow
-  - as-api/notifications
+  - as-api/bump
   - as-api/channels
+  - as-api/subscriptions
+  - as-api/notifications
   - as-api/provisioning
   - as-api/advanced_topics
 

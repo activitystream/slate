@@ -45,10 +45,10 @@ Handles channel membership (The users following the channel)
 `GET` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/followers`
 
 ###Join a channel
-`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/followers`
+`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/follow`
 
 ###Leave a channel
-`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/followers`
+`DELETE` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/follow`
 
 ## Channel Stream API
 The Stream for the Channel
