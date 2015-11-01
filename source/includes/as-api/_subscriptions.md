@@ -3,11 +3,9 @@
 
 ## Follow API
 
-###Get list of available channels
+###Get list of available all user subscriptions
 `GET` `https://{tenant-label}.activitystream.com/api/v1/as/following`
 
-###Get list of user channels
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/subscriptions`
 
 Subscription Attributes (Follows)
 Property | Description
