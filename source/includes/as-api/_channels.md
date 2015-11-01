@@ -24,33 +24,28 @@ Handles channel provisioning
 `DELETE` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}`
 
 ## Channel Monitor API
-Handles what the channel monitors (follows)
+Handles what the channel follows (monitors)
 
-###List monitors
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/monitors`
+###Channel Follows API
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/follows`
 
 ###Add monitor
-`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/monitors`
+`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/follows`
 
 ###Delete monitor
-`DELETE` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/monitors/{monitor_id}`
+`DELETE` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/follows/{type}/{id}`
 
-## Channel Users API
-Handles channel membership
+## Channel Followers API
+Handles channel membership (The users following the channel)
 
 ###List members
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/members`
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/followers`
 
 ###Join a channel
-`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/members`
+`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/followers`
 
 ###Leave a channel
-`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/members`
-
-###Set channels favorite status
-`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/favorite`
-
-`DELETE` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/favorite`
+`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/followers`
 
 ## Channel Stream API
 The Stream for the Channel
