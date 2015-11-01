@@ -1,13 +1,21 @@
-# Subscription
-##Introduction Subscription in AS
+# Subscriptions
+
+##Introduction Subscriptions in AS
+Subscriptions allow users to monitor the activity stream of any entity
 
 ## Follow API
 
 ###Get list of available all user subscriptions
 `GET` `https://{tenant-label}.activitystream.com/api/v1/as/following`
 
+###Subscribe to a entity
+`POST` `https://{tenant-label}.activitystream.com/api/v1/as/follow/{entity_type}/{entity_id}`
 
-Subscription Attributes (Follows)
+###Remove entity subscription
+`DELETE` `https://{tenant-label}.activitystream.com/api/v1/as/follow/{entity_type}/{entity_id}`
+
+##Subscription Attributes (Follows)
+
 Property | Description
 -------- | -----------
 min_importance | The importance that stream items must have to be included in the subsription
