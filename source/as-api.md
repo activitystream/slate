@@ -21,6 +21,7 @@ includes:
   - as-api/bump
   - as-api/workflow
   - as-api/notifications
+  - as-api/channels
   - as-api/provisioning
   - as-api/advanced_topics
 
