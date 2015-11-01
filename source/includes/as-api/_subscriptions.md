@@ -1,4 +1,5 @@
 # Subscriptions
+User subscriptions
 
 ##Introduction Subscriptions in AS
 Subscriptions allow users to monitor the activity stream of any entity
@@ -10,6 +11,10 @@ Subscriptions allow users to monitor the activity stream of any entity
 
 ###Subscribe to a entity
 `POST` `https://{tenant-label}.activitystream.com/api/v1/as/follow/{entity_type}/{entity_id}`
+
+###Check subscription to an entity
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/follow/{entity_type}/{entity_id}`
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/following/{entity_type}/{entity_id}`
 
 ###Remove entity subscription
 `DELETE` `https://{tenant-label}.activitystream.com/api/v1/as/follow/{entity_type}/{entity_id}`
