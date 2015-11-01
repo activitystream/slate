@@ -27,13 +27,16 @@ Handles channel provisioning
 Handles what the channel follows (monitors)
 
 ###Channel Follows API
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/follows`
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/following`
 
 ###Add monitor
-`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/follows`
+`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/following`
+
+###Add monitor
+`PUT` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/following/{type}/{id}`
 
 ###Delete monitor
-`DELETE` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/follows/{type}/{id}`
+`DELETE` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/following/{type}/{id}`
 
 ## Channel Members API
 Handles channel membership (The users following the channel)
