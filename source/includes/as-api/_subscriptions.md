@@ -6,15 +6,20 @@ Subscriptions allow users to monitor the activity stream of any entity
 
 ## Follow API
 
-###Get list of available all user subscriptions
+###Get list of available all subscriptions
 `GET` `https://{tenant-label}.activitystream.com/api/v1/as/following`
+
+###List of channel subscriptions
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/following-channels`
+
+###List of entity subscriptions
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/following-entities`
 
 ###Subscribe to a entity
 `POST` `https://{tenant-label}.activitystream.com/api/v1/as/follow/{entity_type}/{entity_id}`
 
 ###Check subscription to an entity
 `GET` `https://{tenant-label}.activitystream.com/api/v1/as/follow/{entity_type}/{entity_id}`
-`GET` `https://{tenant-label}.activitystream.com/api/v1/as/following/{entity_type}/{entity_id}`
 
 ###Remove entity subscription
 `DELETE` `https://{tenant-label}.activitystream.com/api/v1/as/follow/{entity_type}/{entity_id}`

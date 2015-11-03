@@ -114,10 +114,6 @@ All actions are performed in the name of the user that is logged in.
 Property | Description
 -------- | -----------
 {channel} | The label/id of the channel
-min_importance | The importance that stream items must have to be included in the subsription
-event_types | List of event types that are included as a part of the subscription (null includes all event types)
-tags | List of tags that the event must have (at least one) to be included in the subscription (null includes all stream items regardless of tags)
-filter | A Map containing additional filter information
 starred | Should the item be starred (favorite)
 list_index | Where should the item be in the list of things that are being followed
 
@@ -151,8 +147,7 @@ Get a list of what the channel follows ../wollowing and get this back.
  }
 ]
 ```
-Handles what the channel it self monitors (follows)
-Currently the API only supports the following of entities but next version will include Origin, Event Types and Actors as well. 
+Handles what the channel it self monitors (follows) 
 
 ###Channel Follows API
 `GET` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/follows`
@@ -162,17 +157,21 @@ Currently the API only supports the following of entities but next version will 
 
 ###Add monitor
 `PUT` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/follows/{type}/{id}`
+`POST` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/follows/{type}/{id}`
 
 ###Delete monitor
 `DELETE` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/follows/{type}/{id}`
 
 ###Subscription Attributes
 
-Property | Description
--------- | -----------
+Property | Description | Default
+-------- | ----------- | -----------
 {channel} | The label/id of the channel
 min_importance | The importance that stream items must have to be included in the subsription
 event_types | List of event types that are included as a part of the subscription (null includes all event types) *NOT WORKING*
+roles | List of roles that the entity plays in the event *NOT WORKING*
+degrees | Number of degrees viewed for the entity *NOT WORKING*
+relations | List of relation types traversed over (degrees) for the entity *NOT WORKING*
 tags | List of tags that the event must have (at least one) to be included in the subscription (null includes all stream items regardless of tags)
 filter | A Map containing additional filter information
 starred | Should the item be starred (favorite)
@@ -180,4 +179,23 @@ starred | Should the item be starred (favorite)
 ## Channel Stream API
 The Stream for the Channel
 
+### The latest activity stream entries
 `GET` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/activity-stream`
+
+### A brief of the latest activity stream entries
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/activity-stream/brief`
+
+### A brief for the activity stream entries of a specified period
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/activity-stream/{period}/brief`
+
+### A brief for the activity stream entries for a date range
+`GET` `https://{tenant-label}.activitystream.com/api/v1/as/channels/{channel}/activity-stream/{begin}/{end}/brief`
+
+###Request attributes
+
+Property | Description
+-------- | -----------
+{channel} | The label/id of the channel
+{period} | ISO period calculate form now 
+{begin} | ISO period starting point  
+{end} | ISO period ending point 
