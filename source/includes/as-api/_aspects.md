@@ -513,7 +513,7 @@ Field | Type | Description
 **wind_speed** | Double | Strength of wind in km/h
 **wind_direction** | Double | Direction of wind in degrees
 **cloud_level** | Double | Numeric indicator of cloud level
-**sky** | String | Description of sky (clear/cloudy)
+**description** | String | Textual description of weather conditions (e.g. "clear", "broken clouds", "light rain")
 
 
 ## Locale
