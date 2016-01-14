@@ -212,7 +212,7 @@ Property | Type | Description
 ##Ticket Re-Opened
 ```shell
 {
-    "type":"as.pm.ticket.re-opened",
+    "type":"as.pm.ticket.reopened",
     "origin":"zendesk",
     "occurred_at":"2015-06-04T17:24:13+01:00",
     "relations":[
@@ -230,7 +230,7 @@ Sent when a ticket is re-opened
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.pm.ticket.re-opened**
+**type** | Fixed | **as.pm.ticket.reopened**
 **origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
 **occurred_at** | ISO-Date | The date+time that the ticket was created 
 **[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
