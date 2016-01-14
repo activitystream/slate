@@ -230,7 +230,7 @@ Sent when a ticket is re-opened
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.pm.ticket.new**
+**type** | Fixed | **as.pm.ticket.re-opened**
 **origin** | String | Set to the identifier of the originating system (Here that is Zendesk)
 **occurred_at** | ISO-Date | The date+time that the ticket was created 
 **[relations](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
