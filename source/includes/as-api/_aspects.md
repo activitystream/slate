@@ -58,6 +58,20 @@ properties | JSON | Free format JSON structure with additional information.
 * See [Analytic queries](/analytics.html#ab-testing-analytics) for information on fetching ab-testing analytics.
 * See [Streaming updates]() for information on how to subscribe to streaming ab-testing events.
 
+## Address
+
+List of attachments associated with the event.
+
+Field | Type | Description
+----- | ---- | -----------
+address | String | First line of address
+address2 | String | Optional second line of address
+city | String | City
+country_code | String | Country code
+zip_code | String | Zip code
+
+**Applies to:** [`Entities`](#introduction-to-entities)</br>
+
 ## Attachments
 ```shell
 A partial email-sent-message illustrating the use of the attachments aspect:
@@ -418,6 +432,13 @@ Please note that “re:”, “fwd:” etc. are removed from the group string if
 
 ## Inventory (xCommerce)
 
+Information regarding inventory status of sold goods or services.
+
+Field | Type | Description
+----- | ---- | -----------
+in_stock | Double | Quantity of goods or service in stock
+reserved | Double | Quantity of goods or service that has been reserved
+
 **Applies to:** [`Entities`](#introduction-to-entities)</br>
 
 ## Items (xCommerce)
@@ -481,6 +502,19 @@ currency | String | The currency for the amounts (defaults to the value in the l
 
 **Applies to:** [`Events`](#introduction-to-events)</br>
 **Enhanced by:** [`Locale`](#timed), [`transaction`](#transaction)
+
+## Local Weather
+
+The Local Weather aspect contains information on weather near a city, zip code or geo-coordinates. Temperature, wind, humidity and cloud level are supported.
+
+Field | Type | Description
+----- | ---- | -----------
+**temperature** | Double | Temperature in Celcius degrees
+**wind_speed** | Double | Strength of wind in km/h
+**wind_direction** | Double | Direction of wind in degrees
+**cloud_level** | Double | Numeric indicator of cloud level
+**description** | String | Textual description of weather conditions (e.g. "clear", "broken clouds", "light rain")
+
 
 ## Locale
 ```shell
@@ -959,3 +993,5 @@ card_exp  | String | Expiration data
 properties | JSON | Any JSON structure containing customer/transaction specific information
 
 **Enhanced by:** [`dimensions`](#dimensions-metricsfacts)
+
+
