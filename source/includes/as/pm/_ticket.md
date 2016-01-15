@@ -148,7 +148,7 @@ Property | Type | Description
 properties | Map | Any other custom  properties to store with the ticket 
 importance | Integer | The importance for the ticket (Ranging from 0 - 5)
 
-##Tickket Solved
+##Ticket Solved
 ```shell  
 {
     "type":"as.pm.ticket.solved",
