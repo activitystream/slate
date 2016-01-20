@@ -36,8 +36,11 @@ Property | Type | Description
 **origin** | String | Set to the identifier of the originating system
 **occurred_at** | ISO-Date | The date+time for when purchase occurred
 **[involves](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
- | **ACTOR:BUYER** | The entity (buyer) making the purchase
- | **CREATES** | The Order created as a result of this purchase
+ | ACTOR:SOLD_TO | The entity (buyer) making the purchase
+ | INVOLVES:BOUGHT_FOR | The entity (recepient) who will own the purchased goods or services
+ | INVOLVES:DELIVERED_TO | Location where purchase is shipped, if applicable
+ | SOLD_BY | The entity (seller) who made the sale
+ | CREATES | The Order created as a result of this purchase
 [aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
  | [items](/as-api.html#items-xcommerce) | Items that were purchased
  | [client IP](/as-api.html#client-ip) | IP address of buyer if ecommerce transaction
