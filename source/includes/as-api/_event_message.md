@@ -97,6 +97,9 @@ https://`{tenant-label}`.activitystream.com/api/v1/as/events?apikey=`{api-key}`
 ###Fetch a single event [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/events/`{stream-id}`
 
+###Fetch multiple events [GET]:
+https://`{tenant-label}`.activitystream.com/api/v1/as/events/?id=`{stream-id}`[,`{stream-id}`...]
+
 ###Fetch a single event, related entities and enriched data [GET]:
 https://`{tenant-label}`.activitystream.com/api/v1/as/events/`{stream-id}`/detailed
 
