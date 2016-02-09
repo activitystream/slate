@@ -18,5 +18,6 @@ includes:
   - as/pm/_ticket
   - as/commerce/_purchase
   - as/crm/_messaging
+  - as/web/_browse
 
 ---
