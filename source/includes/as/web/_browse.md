@@ -109,7 +109,7 @@ Sent when the payment process is successfully completed
 ###Fields
 Property | Type | Description
 -------- | ----------- | -----------
-**type** | Fixed | **as.web.payment.started**
+**type** | Fixed | **as.web.payment.completed**
 **origin** | String | Set to the identifier of the originating system
 **occurred_at** | ISO-Date | The date+time for when purchase occurred
 **[involves](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
