@@ -37,9 +37,9 @@ Please familiarize yourself with the following before you start constructing you
 
 ### [Event](#introduction-to-events)
 <img align="right" src="/images/event-diagram-1.png">
-A event is any event or action reported to Activity Stream from an external systems via an event-message.
-Each event becomes and item in the activity stream and is associated with all the entities involved in or by the event.
-All events represent a specific Action which are created dynamically on first use (just-in-time).
+An event is any event or action reported to Activity Stream by external systems via an event-message.
+Each event becomes an item in the activity stream and is associated with all the entities involved in or by the event.
+All events represent a specific Action which is created dynamically on first use (just-in-time).
 
 ### [Entity](#introduction-to-entities)
 Good examples of business entities are Users, Products, WebPages and Orders.</br>
@@ -52,11 +52,11 @@ All entities involved in an event have a role that declares what part they "play
 </br>the "AFFECTS" role is used for relations to all entities directly affected by the event while
 </br>the "REFERENCES" role is used for entities involved in the event but have no real bearing on the event and are not affected by it.
 
-Common ([Predefined](#predefined-roles)) roles, are built into Activity Stream but [custom](#custom-roles) Roles and sub-roles can defined on the fly.
+Common ([Predefined](#predefined-roles)) roles are built into Activity Stream, but [custom](#custom-roles) Roles and sub-roles can be defined on the fly.
 
 ### [Entity Relations (Link)](#entity-relations)
 Any entity can be linked to any other entity and the link between the entities can be **typed**, have **properties** and **weight**.
-</br>That way a Customer can, for example, be a "OWNER" of a Car or be synonymous, in terms of event history, with his personal mobile phone. [Common Link types](#predefined-link-types) are built into Activity Stream but [custom Link-Types can defined on the fly](#custom-link-types).
+</br>That way a Customer can, for example, be a "OWNER" of a Car or be synonymous, in terms of event history, with his personal mobile phone. [Common Link types](#predefined-link-types) are built into Activity Stream but [custom Link-Types can be defined on the fly](#custom-link-types).
 
 ### [Aspects](#aspects)
-Aspects are message extensions which unlock rich support in Activity Stream, booth in regards to processing and presentation.
+Aspects are message extensions which unlock rich support in Activity Stream, both in terms of processing and presentation.
