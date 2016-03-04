@@ -30,8 +30,8 @@ Property | Type | Description
 -------- | ---- | -----------
 link|\<link\>|\<LINK-TYPE\>:\<entity_ref\> - or - \<LINK-TYPE\>:\{entity\} </br>\*See the list of link-types below
 properties | JSON | Any valid JSON structure .
-active_from | DateTime | ISO Date This relations is active from the given date
-active_until | ISO Date | This relations is active until the given date 
+active_from | DateTime | ISO Date This relation is active from the given date
+active_until | ISO Date | This relation is active until the given date 
 weight | Double | An additional weight for the relationship (used for advanced graph mining)
 
 **Valid aspects:** None

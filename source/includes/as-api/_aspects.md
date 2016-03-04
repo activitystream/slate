@@ -1,5 +1,5 @@
 #Aspects
-Aspects are commonly used event and entity extensions which have rich support in Activity Stream in regards to processing and representation. The offer a normalized/structured way to store common information in a way that makes it possible for us to build rich functionality and ui that meet common needs without restricting customization.
+Aspects are commonly used extensions of events and entities that have rich support in Activity Stream with regard to processing and representation. They offer a normalized/structured way to store common information in a way that makes it possible for us to build rich functionality and a ui that meet common needs without restricting customization.
 
 ## AB Testing
 ```shell
@@ -36,13 +36,13 @@ A partial purchase-message illustrating the use of the ab_testing aspect (AB tes
   ...
 }
 ```
-The ab_test aspect is used to store AB Test results. Analytics for AB Tests is immediately available as well as real-time dashboards tailored for AB testing.
+The ab_test aspect is used to store AB Test results. Analytics for AB Tests are immediately available as well as real-time dashboards tailored for AB testing.
 
 Field | Type | Description | Default
 ----- | ---- | ----------- | -------
 **id** | String | The AB Test ID. Valid ids contain lowercase strings and “_” only. (much like a field-name in a database table)
-**variant** | String | What variant of the test led to this event. Valid variant contain lowercase strings and "_" only.
-outcome | String | What was the outcome of the test. Valid outcome contain lowercase strings and "_" only.
+**variant** | String | What variant of the test led to this event. Valid variants contain lowercase strings and "_" only.
+outcome | String | What was the outcome of the test. Valid outcomes contain lowercase strings and "_" only.
 metric | Double | Additional/generic metric information for the test outcome
 amount | Double | Additional/generic amount information for the test outcome
 properties | JSON | Free format JSON structure with additional information.
@@ -51,7 +51,7 @@ properties | JSON | Free format JSON structure with additional information.
 **Enhanced by:** [`Dimensions*`](#dimensions-metricsfacts), [`Timed**`](#timed)
 
 *\*Use the dimensions aspect to add dimensions to the AB_Test outcome.*</br>
-*\*Use the timed aspect to report how lon the AB test took.*
+*\*Use the timed aspect to report how long the AB test took.*
 
 ### Additional queries and interfaces
 * See [Events](#events) for information on sending the event to AS.
@@ -135,7 +135,7 @@ Used to classify entities (e.g. product)
 
 Field | Type | Description
 ----- | ---- | -----------
-type | String | Type of entity (e.g. product, emai, etc.)
+type | String | Type of entity (e.g. product, email, etc.)
 make | String | The make or brand of entity
 model | String | The model of the entity
 variant | String | The version/variant of the entity
@@ -323,7 +323,7 @@ A incomplete entity-message showing use of the demography aspect:
 }
 ```
 
-Field | Type | Suggested values (but you can surely use your own)
+Field | Type | Suggested values (but you can certainly use your own)
 ----- | ---- | -----------
 gender | String | `Male`, `Female`, `Unknown`, `Trans Female`, `Trans Male`, `Trans Person`, `Gender Variant`, `Gender Questioning`, `Bigender`, `Androgynous`, `Pangender`, `Transsexual`.
 birth_year | Integer | 19+ ... 2014

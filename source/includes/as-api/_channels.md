@@ -1,7 +1,7 @@
 # Channels
 ##Introduction Channels in AS
 Channels allow users or a group of users to collaborate on as events across multiple entities (horizontal).
-Each channel monitors specific entities, event types, sources or uses custom filters to dictate what event show up in the channel.
+Each channel monitors specific entities, event types, sources or uses custom filters to dictate what events show up in the channel.
 
 **Att.** Currently all channels are open but this will be changed in the next version of the API
 
