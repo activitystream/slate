@@ -123,26 +123,25 @@ Entity snippet showing the Classification aspect
   "aspects": {
     "classification": {
       "type":"Mobile Phone",
-      "make":"Apple",
-      "model":"iPhone",
-      "variant":"6+ Gold",
-      "year": 2015
+      "variant":"iPhone 6+ Gold",
+      "categories":["Apple","iPhone","iPhone 6"]
     }
   }
 }
 ```
-Used to classify entities (e.g. product)
+Used to classify entities (e.g. product, customers, suppliers etc.)
 
 Field | Type | Description
 ----- | ---- | -----------
 type | String | Type of entity (e.g. product, email, etc.)
-make | String | The make or brand of entity
-model | String | The model of the entity
 variant | String | The version/variant of the entity
-size | String | The size of the entity (if sized)
-year | Integer | The year of production (2015)
-market | String | Primary market for the entity
+rating | Double | Rating of the object
+outlook | Long | Indicating possible rating changes and the direction of (-3 ... +3)
+weight | Double | Weight of the rating used when combining/aggregated rating for collapsed entities
 categories | String[]| Categories to which the entity belongs
+tags | String[]| Tags describing the entity
+active_since | Timestamp| When did the entity become active (or rated for the first time)
+last_updated | Timestamp| When was the rating last updated
 
 **Applies to:** `Entities`
 
