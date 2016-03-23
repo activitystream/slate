@@ -136,7 +136,7 @@ Field | Type | Description
 type | String | Type of entity (e.g. product, email, etc.)
 variant | String | The version/variant of the entity
 rating | Double | Rating of the object
-outlook | Long | Indicating possible rating changes and the direction of (-3 ... +3)
+outlook | Long | Indicating possible rating changes and the direction of (-5 ... +5)
 weight | Double | Weight of the rating used when combining/aggregated rating for collapsed entities
 categories | String[]| Categories to which the entity belongs
 tags | String[]| Tags describing the entity
