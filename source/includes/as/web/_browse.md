@@ -2,6 +2,38 @@
 Activity stream tracks and services source control and development in various ways.
 
 ##Customer Account Provided
+```shell
+Typical customer account provided message:
+{
+    "type": "as.web.customer.account.provided",
+    "origin": "www.activitystream.com",
+    "occurred_at": "2016-04-20T12:18:15.656Z"
+    "involves": [
+        {
+            "role": "ACTOR",
+            "entity": {
+                "entity_ref": "ASWebSession/5c3867bd-cf97-68d9-8edb-b086b73179e4"
+                "relations": [
+                    {
+                        "type": "PROXY_FOR",
+                        "entity": {
+                            "entity_ref": "Email/stefanb@hotmail.com"
+                        },
+                        "aspects": {
+                            "presentation": {
+                                "label": "Stefan Baxter"
+                            }
+                        }
+                    }
+                ],
+                "aspects": {
+                    "client_ip": "127.0.0.1"
+                }
+            }
+        }
+    ]
+}
+```
 Sent when the customer provides his user account details
 
 ###Fields
@@ -155,6 +187,43 @@ Property | Type | Description
 properties | Map | Any other custom  properties to store with the event
 
 ##Product Viewed
+```shell
+A typical product-viewed message:
+{
+    "type": "as.web.product.viewed",
+    "origin": "www.activitystream.com",
+    "occurred_at": "2016-04-01T12:15:07.456Z",
+    "involves": [
+        {
+            "role": "ACTOR",
+            "entity": {
+                "entity_ref": "ASWebSession/1b2f14a6-d64a-4e60-9e8d-efbda6298273"
+                "relations": [
+                    {
+                        "type": "AKA",
+                        "entity_ref": "Email/customer@email.com"
+                    }
+                ]
+            }
+        },
+        {
+            "role": "INVOLVES",
+            "entity_ref": "Category/Concerts"
+        },
+        {
+            "role": "VIEWED",
+            "entity": {
+                "entity_ref": "Product/115903",
+                "aspects": {
+                    "presentation": {
+                        "label": "The Magic Flute"
+                    }
+                }
+            }
+        }
+    ]
+}
+```
 Sent when a product is viewed
 
 ###Fields
