@@ -44,7 +44,7 @@ Property | Type | Description
 **occurred_at** | ISO-Date | The date+time for when purchase occurred
 **[involves](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
  | ACTOR | The web user, session or browser that generated the event
-[aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
+    [aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
  | [pageview](/as-api.html#pageview) | Information regarding the page that was viewed
  | [client IP](/as-api.html#client-ip) | IP address that generated
  | [presentation](/as-api.html#presentation) | Presentation and content information
@@ -234,6 +234,7 @@ Property | Type | Description
 **occurred_at** | ISO-Date | The date+time for when purchase occurred
 **[involves](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
  | ACTOR | The web user, session or browser that generated the event
+ | VIEWED | The product being viewed
 [aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
  | [pageview](/as-api.html#pageview) | Information regarding the page that was viewed
  | [client IP](/as-api.html#client-ip) | IP address that generated

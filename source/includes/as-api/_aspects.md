@@ -442,32 +442,70 @@ reserved | Double | Quantity of goods or service that has been reserved
 
 ## Items (xCommerce)
 ```shell
-A fairly complete purchase message with composite product and currency information:
+A fairly complete purchase message:
 {
-  "action": "as.xcommerce.purchase.completed",
-  "source": "ticketsales.web",
-  "entities": [{"ACTOR":"Session/311068"}],
-  "aspects": {
-    "items": [
-      {
-        "BOUGHT":"Event/3982928",
-        "variant":"VIP Pass",
-        "item_count":3,
-        "item_price":75
-      },
-      {
-        "RENTED":"Event/3982928",
-        "variant":"Parking",
-        "item_count":1,
-        "item_price":25,
-        "valid_from":"<iso-date-time>",
-        "valid_until":"<iso-date-time>"
-      }
+    "type": "as.commerce.purchase.completed",
+    "origin": "ticketsales.web",
+    "occurred_at": "2016-04-25T10:42:45.986Z",
+    "involves": [
+        {
+            "role": "ACTOR:BUYER",
+            "entity": {
+                "entity_ref": "Email/ste@some.com",
+                "aspects": {
+                    "presentation": {
+                        "label": "Stefan B"
+                    }
+                }
+            }
+        },
+        {
+            "role": "INVOLVES",
+            "entity_ref": "Order/4232182"
+        }
     ],
-    "locale":{
-      "currency":"USD"
+    "aspects": {
+        "items": [
+            {
+                "involves": [
+                    {
+                        "role": "TRADE:PURCHASED",
+                        "entity": {
+                            "entity_ref": "Event/234427",
+                            "relations": [
+                                {
+                                    "type": "SUPPLIED_BY",
+                                    "entity_ref": "Organizer/2"
+                                }
+                            ],
+                            "aspects": {
+                                "presentation": {
+                                    "label": "<Name_of_event>"
+                                },
+                                "timed": {
+                                    "begins": "2016-05-10T21:00:00.000Z"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "CREATES": "Ticket/5226477"
+                    },
+                    {
+                        "CREATES": "Ticket/5446478"
+                    },
+                    {
+                        "role": "ACTOR:SOLD_BY",
+                        "entity_ref": "Reseller/1"
+                    }
+                ],
+                "commission_fixed": 5.0,
+                "currency": "USD",
+                "item_price": 25.0,
+                "item_count": 2
+            }
+        ]
     }
-  }
 }
 ```
 Generic purchase information. Items in the list will get the appropriate relations to the ACTOR entity specified in the relations section.
