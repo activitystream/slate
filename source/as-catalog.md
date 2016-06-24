@@ -12,8 +12,8 @@ toc_footers:
   - <a href='/as-api.html#'>Activity Stream API</a>
   - <a href='/provisioning.html#'>Provisioning API</a>
   - <a href='/analytics.html#'>Analytic Queries</a>
-  - <a href='/web-catalog.html#'>Web-Event Catalog</a>
   - The AS Event-Type Catalog
+  - <a href='/web-analytics.html#'>Web Analytics Utility</a>
 
 includes:
   - as/pm/_ticket
