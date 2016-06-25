@@ -18,6 +18,7 @@ search: true
 
 # Web Events
 ```javascript
+// Add this snippet inside <head> 
 (function(i,s,o,g,r,a,m){i['ActivitystreamAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//cdn.activitystream.com/asa.js','asa');
 
 asa('tenantId', 'AS-123456');
@@ -34,6 +35,15 @@ This snippet loads the main Activity Stream analytics script in a way that does 
 
 ##Sending events with asa.js
 To send events, simply invoke the asa function with the event type as a string and the payload. Examples are provided in the javascript tab to the right.
+
+
+## Type-id pairs
+Some events have a type and id pair, like when describing a user identification or a product. These values can be anything you choose, but there
+are two important considerations to keep in mind:
+
+* **Every type/id pair must be unique**
+* **Usage of types should be consistent** - for example, if you are using "Customer" and a numerical id, but also want to use email identification,
+you should use a new type for that, e.g. "Email".  
 
 
 ##Customer Account Provided
@@ -55,29 +65,33 @@ Sent when the customer provides his user account details
 Property | Attribute | Type | Description | Required
 -------- | ----------- | ------ | ----------------------------------------- | ---- 
 **user** | | Array | List of available information about the web user(s) | Yes
- | device_id | String | Unique identifier for the visitor/browser | No *
- | session | String | Session id | No *
- | type | String | Type of user identification, e.g. "Email", "Phone", etc. | Yes
+ | did | String | Unique identifier for the visitor/browser | No
+ | sid | String | Session id | No *
+ | type | String | Type of user identification, e.g. "Email", "Phone", "User", "Customer", etc. | Yes 
  | id | String | Unique id identifying the user | Yes
 
 * These attributes are supplied automatically by asa.js and are always a part of every web event. Therefore they are not required, 
 but can be overridden if needed.
+
 
 ##Product Viewed
 ```javascript
 // Product viewed: 
 asa('product.viewed',
 {
-    "product": {
-        "description": "The magic flute",
-        "type": "Event",
-        "id": "1234",
-        "product_variant": "Floor",
-        "price_category": "C",
-        "item_price": 200.0,
-        "currency": "DKK",
-        "categories": ["Concert", "Opera"]
-    }
+    "products": [
+        {
+            "description": "The magic flute",
+            "type": "Event",
+            "id": "1234",
+            "product_variant": "Floor",
+            "price_category": "C",
+            "item_count": 1,
+            "item_price": 200.0,
+            "currency": "DKK",
+            "categories": ["Concert", "Opera"]
+        }
+    ]
 });
 ```
 Sent when a product is viewed
@@ -91,6 +105,7 @@ Property | Attribute | Type | Description | Required
  | id | String | Unique identifier of item | Yes
  | product_variant | String | Variant, e.g. front row seat, floor, etc. | No
  | price_category | String | Price category of item | No 
+ | item_count | Number | How many items were carted | No
  | item_price | Number | Price of item | No
  | currency | String | What currency the listed price is in | No
  | categories | Array | List of any categories the product belongs to, e.g. "Theater", "Comedy", "Sports" | No
@@ -122,14 +137,33 @@ Property | Attribute | Type | Description | Required
  | description | String | Short description, e.g. the name of an event | No
  | type | String | Type of product, e.g. Event, Ticket, etc. | Yes
  | id | String | Unique identifier of item | Yes
- | categories | Array | List of any categories the product belongs to, e.g. "Theater", "Comedy", "Sports" | No
+ | product_variant | String | Variant, e.g. front row seat, floor, etc. | No
+ | price_category | String | Price category of item | No 
  | item_count | Number | How many items were carted | No
- | item_price | Number | Price of item added | No
+ | item_price | Number | Price of item | No
  | currency | String | What currency the listed price is in | No
+ | categories | Array | List of any categories the product belongs to, e.g. "Theater", "Comedy", "Sports" | No
  
 
 ##Product Uncarted
 Sent when an item is removed from the cart
+
+```javascript
+// Product Uncarted
+asa('product.uncarted',
+{
+    "products": [
+        {
+            "type": "EventDate",
+            "id": "1559",
+            "name": "Scuba diving school",
+            "categories": ["Ware"],
+            "price": 200.0,
+            "item_count": 2
+        }
+    ]
+}
+```
 
 ###Fields
 Property | Attribute | Type | Description | Required
@@ -138,9 +172,12 @@ Property | Attribute | Type | Description | Required
  | description | String | Short description, e.g. the name of an event | No
  | type | String | Type of product, e.g. Event, Ticket, etc. | Yes
  | id | String | Unique identifier of item | Yes
- | categories | Array | List of any categories the product belongs to, e.g. "Theater", "Comedy", "Sports" | No
+ | product_variant | String | Variant, e.g. front row seat, floor, etc. | No
+ | price_category | String | Price category of item | No 
  | item_count | Number | How many items were carted | No
+ | item_price | Number | Price of item | No
  | currency | String | What currency the listed price is in | No
+ | categories | Array | List of any categories the product belongs to, e.g. "Theater", "Comedy", "Sports" | No
  
 ##Product searched
 Sent when a web user runs a search 
@@ -198,7 +235,7 @@ Property | Attribute | Type | Description | Required
  | id | String | Unique identifier of order | Yes 
  | total_price | Number | Total price of order | No 
  | currency | String | Currency used for payment | No 
- | products | Array | List of products involved in the order | No
+ | products | Array | List of [products](#product-viewed) involved in the order | No
 
 ##Order Delivery Selected
 Sent when the user selects a type of delivery
@@ -248,12 +285,19 @@ Property | Attribute | Type | Description | Required
 
 ##Order Reviewed
 Sent when the user reviews his order - no additional information is required to be added to these events
+
 ```javascript
+// Order reviewed
 asa('order.reviewed');
 ```
 
 
 ##Payment Failed
 Sent when payment fails - no additional information is required to be added to these events
+
 ```javascript
+// Payment failed
 asa('payment.failed');
+```
+
+<br/><br/><br/><br/><br/><br/><br/>
