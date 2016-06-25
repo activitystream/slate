@@ -65,7 +65,7 @@ Sent when the customer provides his user account details
 Property | Attribute | Type | Description | Required
 -------- | ----------- | ------ | ----------------------------------------- | ---- 
 **user** | | Array | List of available information about the web user(s) | Yes
- | did | String | Unique identifier for the visitor/browser | No
+ | did | String | Unique identifier for the visitor/browser | No *
  | sid | String | Session id | No *
  | type | String | Type of user identification, e.g. "Email", "Phone", "User", "Customer", etc. | Yes 
  | id | String | Unique id identifying the user | Yes
