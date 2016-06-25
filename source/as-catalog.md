@@ -13,7 +13,7 @@ toc_footers:
   - <a href='/provisioning.html#'>Provisioning API</a>
   - <a href='/analytics.html#'>Analytic Queries</a>
   - The AS Event-Type Catalog
-  - <a href='/web-analytics.html#'>Web Analytics Utility</a>
+  - <a href='/web-tracking.html#'>Web Tracking</a>
 
 includes:
   - as/pm/_ticket
