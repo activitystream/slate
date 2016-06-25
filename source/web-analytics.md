@@ -28,7 +28,7 @@ The following events are a simplified version of the canonical Activity Stream w
 web analytics script [asa.js](https://github.com/activitystream/asa.js). 
 
 To get started using our script to collect analytical information from your website all you need to do is to place the javascript snippet to the right
-somewhere between the \<head> and \</head> tags (remember to replace 'AS-123456' with your tenant id from Activity Stream).
+somewhere between the \<head> and \</head> tags (**remember to replace 'AS-123456' with your tenant id from Activity Stream**).
 
 This snippet loads the main Activity Stream analytics script in a way that does not affect your end users' experience and sends a pageview event.
 
@@ -51,7 +51,7 @@ you should use a new type for that, e.g. "Email".
 // Customer account provided:
 asa('customer.account.provided',
 {
-    "user": [ 
+    "ids": [
         {
             "type": "Email",
             "id": "some_customer@mail.com"
@@ -61,17 +61,12 @@ asa('customer.account.provided',
 ```
 Sent when the customer provides his user account details
 
-###Fields
+###Fields 
 Property | Attribute | Type | Description | Required
 -------- | ----------- | ------ | ----------------------------------------- | ---- 
-**user** | | Array | List of available information about the web user(s) | Yes
- | did | String | Unique identifier for the visitor/browser | No *
- | sid | String | Session id | No *
+**ids** | | Array | List of available identifications of the web user(s) | Yes
  | type | String | Type of user identification, e.g. "Email", "Phone", "User", "Customer", etc. | Yes 
  | id | String | Unique id identifying the user | Yes
-
-* These attributes are supplied automatically by asa.js and are always a part of every web event. Therefore they are not required, 
-but can be overridden if needed.
 
 
 ##Product Viewed
@@ -162,7 +157,7 @@ asa('product.uncarted',
             "item_count": 2
         }
     ]
-}
+});
 ```
 
 ###Fields
@@ -211,19 +206,21 @@ Sent when a product is purchased
 asa('purchase.completed', 
 {
     "orders": [
-        "id": "1234",
-        "total_price": 125.25,
-        "currency": "USD",
-        "products": [
-            {
-                "description": "Some event",
-                "type": "EventDate",
-                "id": "5678",
-                "categories": ["Ticket"],
-                "item_count": 2,
-                "item_price": 50
-            }
-        ]
+        {
+            "id": "1234",
+            "total_price": 125.25,
+            "currency": "USD",
+            "products": [
+                {
+                    "description": "Some event",
+                    "type": "EventDate",
+                    "id": "5678",
+                    "categories": ["Ticket"],
+                    "item_count": 2,
+                    "item_price": 50
+                }
+            ]
+        }
     ]
 });
 ```
@@ -299,5 +296,6 @@ Sent when payment fails - no additional information is required to be added to t
 // Payment failed
 asa('payment.failed');
 ```
+
 
 <br/><br/><br/><br/><br/><br/><br/>
