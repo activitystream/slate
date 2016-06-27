@@ -94,7 +94,7 @@ Sent when a product is viewed
 ###Fields
 Property | Attribute | Type | Description | Required
 -------- | ----------- | ------ | ----------------------------------------- | ---- 
-**products** | | Array | List of products being viewed | Yes
+[**products**](#products) | | Array | List of products being viewed | Yes
  | description | String | Short description, e.g. the name of an event | No
  | type | String | Type of product, e.g. Event, Ticket, etc. | Yes
  | id | String | Unique identifier of item | Yes
@@ -128,7 +128,7 @@ asa('product.carted',
 ###Fields
 Property | Attribute | Type | Description | Required
 -------- | ----------- | ------ | ----------------------------------------- | ---- 
-**products** | | Array | List of products being carted | Yes
+[**products**](#products) | | Array | List of products being carted | Yes
  | description | String | Short description, e.g. the name of an event | No
  | type | String | Type of product, e.g. Event, Ticket, etc. | Yes
  | id | String | Unique identifier of item | Yes
@@ -163,7 +163,7 @@ asa('product.uncarted',
 ###Fields
 Property | Attribute | Type | Description | Required
 -------- | ----------- | ------ | ----------------------------------------- | ---- 
-**products** | | Array | List of products being carted | Yes
+[**products**](#products) | | Array | List of products being carted | Yes
  | description | String | Short description, e.g. the name of an event | No
  | type | String | Type of product, e.g. Event, Ticket, etc. | Yes
  | id | String | Unique identifier of item | Yes
@@ -232,7 +232,7 @@ Property | Attribute | Type | Description | Required
  | id | String | Unique identifier of order | Yes 
  | total_price | Number | Total price of order | No 
  | currency | String | Currency used for payment | No 
- | products | Array | List of [products](#product-viewed) involved in the order | No
+ | products | Array | List of [products](#products) involved in the order | No
 
 ##Order Delivery Selected
 Sent when the user selects a type of delivery
@@ -296,6 +296,27 @@ Sent when payment fails - no additional information is required to be added to t
 // Payment failed
 asa('payment.failed');
 ```
+
+
+##Products
+Below is a complete list of supported attributes for a product. For the above examples, only the most common use-case for the message being descibed is provided, 
+but you are free to include any of these when sending a product in a message.
+
+Attribute | Type | Description | Required
+----------- | ------ | ----------------------------------------- | ---- 
+description | String | Short description, e.g. the name of an event | No
+type | String | Type of product, e.g. Event, Ticket, etc. | Yes
+id | String | Unique identifier of item | Yes
+product_variant | String | Variant, e.g. front row seat, floor, etc. | No
+price_category | String | Price category of item | No 
+item_count | Number | How many items were carted | No
+item_price | Number | Price of item | No
+currency | String | What currency the listed price is in | No
+categories | Array | List of any categories the product belongs to, e.g. "Theater", "Comedy", "Sports" | No
+commission | Number | Fixed item cost, added on top of the price | No
+commission_percentage | Number | Variable item cost, added on top of the price| No
+discount_percentage | Number | Discount percentage to be subracted from the total item price | No
+tax_percentage | Number | Tax percentage added to the item price | No
 
 
 <br/><br/><br/><br/><br/><br/><br/>
