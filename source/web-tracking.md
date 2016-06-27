@@ -163,7 +163,7 @@ asa('product.uncarted',
 ###Fields
 Property | Attribute | Type | Description | Required
 -------- | ----------- | ------ | ----------------------------------------- | ---- 
-[**products**](#products) | | Array | List of products being carted | Yes
+[**products**](#products) | | Array | List of products being uncarted | Yes
  | description | String | Short description, e.g. the name of an event | No
  | type | String | Type of product, e.g. Event, Ticket, etc. | Yes
  | id | String | Unique identifier of item | Yes
@@ -174,7 +174,7 @@ Property | Attribute | Type | Description | Required
  | currency | String | What currency the listed price is in | No
  | categories | Array | List of any categories the product belongs to, e.g. "Theater", "Comedy", "Sports" | No
  
-##Product searched
+##Product Searched
 Sent when a web user runs a search 
 
 ```javascript
@@ -198,7 +198,37 @@ Property | Attribute | Type | Description | Required
 **period_start** | | Date | ISO date representing the lower bounds of the time constraints of the query | No
 **period_end** | | Date | Upper bounds of time constraints | No
 
-##Purchase completed
+
+##Product Availability Check
+Sent when a user checks whether a product is available
+
+```javascript
+// Product availability check
+
+asa('product.interest', 
+{
+    "products": [
+        {
+            "description": "Iceland - England",
+            "type": "Football Match",
+            "id": "Q-123",
+            "categories": ["Sports", "Football"]
+        }
+    ]
+});
+```
+
+###Fields
+Property | Attribute | Type | Description | Required
+-------- | ----------- | ------ | ----------------------------------------- | ---- 
+[**products**](#products) | | Array | List of products being checked | Yes
+ | description | String | Short description, e.g. the name of an event | No
+ | type | String | Type of product, e.g. Event, Ticket, etc. | Yes
+ | id | String | Unique identifier of item | Yes
+ | categories | Array | List of any categories the product belongs to, e.g. "Theater", "Comedy", "Sports" | No
+
+
+##Purchase Completed
 Sent when a product is purchased
 
 ```javascript
@@ -251,7 +281,7 @@ Property | Attribute | Type | Description | Required
 **delivery_type** | | String | Type of delivery selected | Yes
 
 
-##Product unavailable
+##Product Unavailable
 Sent when a searched or selected product is not available
 
 ```javascript
@@ -272,7 +302,7 @@ asa('product.unavailable',
 ###Fields
 Property | Attribute | Type | Description | Required
 -------- | ----------- | ------ | ----------------------------------------- | ---- 
-**products** | | Array | List of products being carted | Yes
+**products** | | Array | List of products unavailable | Yes
  | description | String | Short description, e.g. the name of an event | No
  | type | String | Type of product, e.g. Event, Ticket, etc. | Yes
  | id | String | Unique identifier of item | Yes
