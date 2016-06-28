@@ -20,6 +20,7 @@ includes:
   - as/web/_browse
   - as/pm/_ticket  
   - as/crm/_messaging
+  - as/ticketing/_ticketing
   
 
 ---
