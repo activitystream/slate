@@ -1,4 +1,4 @@
-# Tickets & Issues
+# Service Tickets & Issues
 Activity stream tracks and services tickets and issues in various ways.
 The following samples are based on Zendesk tickets but they can be implemented for any ticketing system using Activity Stream [event messages](/as-api.html#introduction-to-events).
 
