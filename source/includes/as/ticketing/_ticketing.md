@@ -1,6 +1,6 @@
 # Ticketing
 
-##Ticket presented
+##Ticket Presented
 as.ticketing.ticket.presented
 Sent when a ticket is presented by the ticketholder
 
