@@ -262,7 +262,7 @@ Property | Attribute | Type | Description | Required
  | id | String | Unique identifier of order | Yes 
  | total_price | Number | Total price of order | No 
  | currency | String | Currency used for payment | No 
- | products | Array | List of [products](#products) involved in the order | No
+ | products | Array | List of [products](#products) involved in the order | Yes
 
 ##Order Delivery Selected
 Sent when the user selects a type of delivery
