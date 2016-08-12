@@ -19,12 +19,12 @@ search: true
 # Web Tracking
 ```javascript
 // Add this snippet inside <head> 
-<script>
+\<script>
 (function(i,s,o,g,r,a,m){i['ActivitystreamAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//cdn.activitystream.com/asa.js','asa');
 
 asa('tenantId', 'AS-123456');
 asa('pageview');
-</script>
+\</script>
 ```
 The following events are a simplified version of the canonical Activity Stream web events, to facilitate quick and easy message sending with our 
 web analytics script [asa.js](https://github.com/activitystream/asa.js). 
