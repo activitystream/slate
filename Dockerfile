@@ -7,7 +7,6 @@ ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
 RUN cd /app; bundle install
 ADD . /app
-VOLUME /app/source
 EXPOSE 4567
 WORKDIR /app
 CMD ["bundle", "exec", "middleman", "server"]
