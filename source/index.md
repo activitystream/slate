@@ -19,7 +19,7 @@ search: true
 
 # Introduction
 Here you will find the documentation for the Activity Stream platform.</br>
-We hope it will help you get quickly up-to-speed and provide you with enough information to tak full advantage of our platform.
+We hope it will help you get quickly up-to-speed and provide you with enough information to take full advantage of our platform.
 
 ##[Activity Stream API](/as-api.html)
 Everything you need to know about sending event-messages, time-series data and other activity stream items to AS via REST API or via Message Queue. It also covers how to query the activity stream, deal with access controls and several other advanced topics when it comes to manipulating the activity stream.
