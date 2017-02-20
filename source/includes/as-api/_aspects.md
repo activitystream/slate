@@ -552,6 +552,20 @@ Field | Type | Description
 **cloud_level** | Double | Numeric indicator of cloud level
 **description** | String | Textual description of weather conditions (e.g. "clear", "broken clouds", "light rain")
 
+## Local Weather Forecast
+
+The Local Weather Forecast aspect contains information on *predicted* weather near a city, zip code or geo-coordinates *at a particular time*. Temperature, wind, humidity and cloud level are supported.
+
+Field | Type | Description
+----- | ---- | -----------
+**forcast_at** | Long | Timestamp for the time being forcasted
+**duration** | String | ISO period for how long from forecast_at the prediction is valid
+**temperature** | Double | Temperature in Celcius degrees
+**wind_speed** | Double | Strength of wind in km/h
+**wind_direction** | Double | Direction of wind in degrees
+**cloud_level** | Double | Numeric indicator of cloud level
+**description** | String | Textual description of weather conditions (e.g. "clear", "broken clouds", "light rain")
+
 
 ## Locale
 ```shell
@@ -886,6 +900,16 @@ external_id | String | When external systems need to find individual events base
 batch_id | String | External batch id which can be used, when supplied with source, to resolve a whole batch of events.</br>*batch_id is resolved with source information.
 
 **Applies to:** [`Events`](#introduction-to-events)</br>
+
+## Sentiment
+
+Used to store results of sentiment analysis.
+
+Field | Type | Description
+----- | ---- | -----------
+score | Double | Sentiment analysis score (<0 is negative, >0 is positive)
+confidence | Double | Confidence value for sentiment score. (0.0 is no confidence, 1.0 is maximum confidence)
+range | String | Range of sentiment score (e.g. "Very negative", "Negative", "Slightly negative",  "Neutral", "Slightly Positive", "Very Positive")
 
 ## Settings
 ```shell
