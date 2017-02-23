@@ -872,6 +872,18 @@ icon | String | URL pointing to a default icon/logo used to represent the entity
 
 **Applies to:** [`Events`](#introduction-to-events), [`Entities`](#introduction-to-entities), [`Event-Types`](), [`Entity-Types`]()</br>
 
+## Pricing
+
+Pricing settings for products or services. Used for dynamic pricing.
+
+Field | Type | Description
+----- | ---- | -----------
+minimum_price | Double | Minimum price to sell product or service at.
+maximum_price | Double | Maximum price to sell product or service at.
+
+**Applies to:** [`Entities`](#introduction-to-entities)</br>
+
+
 ## Resolvable
 ```shell
 {
