@@ -540,32 +540,29 @@ currency | String | The currency for the amounts (defaults to the value in the l
 **Applies to:** [`Events`](#introduction-to-events)</br>
 **Enhanced by:** [`Locale`](#timed), [`transaction`](#transaction)
 
-## Local Weather
+## Environment
 
-The Local Weather aspect contains information on weather near a city, zip code or geo-coordinates. Temperature, wind, humidity and cloud level are supported.
-
-Field | Type | Description
------ | ---- | -----------
-**temperature** | Double | Temperature in Celcius degrees
-**wind_speed** | Double | Strength of wind in km/h
-**wind_direction** | Double | Direction of wind in degrees
-**cloud_level** | Double | Numeric indicator of cloud level
-**description** | String | Textual description of weather conditions (e.g. "clear", "broken clouds", "light rain")
-
-## Local Weather Forecast
-
-The Local Weather Forecast aspect contains information on *predicted* weather near a city, zip code or geo-coordinates *at a particular time*. Temperature, wind, humidity and cloud level are supported.
+The environment aspect contains information on environmental conditions relating to weather or indoor conditions
 
 Field | Type | Description
 ----- | ---- | -----------
-**forcast_at** | Long | Timestamp for the time being forcasted
-**duration** | String | ISO period for how long from forecast_at the prediction is valid
-**temperature** | Double | Temperature in Celcius degrees
-**wind_speed** | Double | Strength of wind in km/h
+**source** | String | Data source (e.g. "OpenWeatherMap")
+**type** | String | "Actual" or "Prediction"
+**registered_at** | String | ISO Date for when information was registered
+**conditions_at** | String | ISO Date for when in time this information applies
+**duration** | String | ISO period for how long from conditions_at the information applies
+**temperature** | Double | Average temperature for period in Celcius degrees 
+**min_temperature** | Double | Minimum temperature for period in Celcius degrees
+**max_temperature** | Double | Maximum temperature for period in Celcius degrees
+**pressure** | Double | Athmospheric pressure in hPa
+**humidity** | Double | Humidity in %
+**description** | String | Main description of conditions
+**description_detail** | String | Detailed description of conditions
+**cloud_level** | Double | Cloudiness, %
+**wind_speed** | Double | Wind speed in meters/second
 **wind_direction** | Double | Direction of wind in degrees
-**cloud_level** | Double | Numeric indicator of cloud level
-**description** | String | Textual description of weather conditions (e.g. "clear", "broken clouds", "light rain")
-
+**rain** | Double | Rain volume in millimeters
+**snow** | Double | Snow volume in millimeters
 
 ## Locale
 ```shell
