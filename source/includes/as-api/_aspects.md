@@ -540,30 +540,6 @@ currency | String | The currency for the amounts (defaults to the value in the l
 **Applies to:** [`Events`](#introduction-to-events)</br>
 **Enhanced by:** [`Locale`](#timed), [`transaction`](#transaction)
 
-## Environment
-
-The environment aspect contains information on environmental conditions relating to weather or indoor conditions
-
-Field | Type | Description
------ | ---- | -----------
-**source** | String | Data source (e.g. "OpenWeatherMap")
-**type** | String | "Actual" or "Prediction"
-**registered_at** | String | ISO Date for when information was registered
-**conditions_at** | String | ISO Date for when in time this information applies
-**duration** | String | ISO period for how long from conditions_at the information applies
-**temperature** | Double | Average temperature for period in Celcius degrees 
-**min_temperature** | Double | Minimum temperature for period in Celcius degrees
-**max_temperature** | Double | Maximum temperature for period in Celcius degrees
-**pressure** | Double | Athmospheric pressure in hPa
-**humidity** | Double | Humidity in %
-**description** | String | Main description of conditions
-**description_detail** | String | Detailed description of conditions
-**cloud_level** | Double | Cloudiness, %
-**wind_speed** | Double | Wind speed in meters/second
-**wind_direction** | Double | Direction of wind in degrees
-**rain** | Double | Rain volume in millimeters
-**snow** | Double | Snow volume in millimeters
-
 ## Locale
 ```shell
 {
@@ -595,6 +571,28 @@ timezone | String | The time zone ID. (time zones in the tz database) Sample tim
 
 **Applies to:** [`Events`](#introduction-to-events) [`Entities`](#introduction-to-entities)</br>
 **Enhances:** [`items`](##items-xcommerce) [`transaction`](#transaction) [`gelolocation`](#gelo-location)
+
+## LocalWeather
+
+The Local Weather aspect contains information on environmental conditions relating to weather
+
+Field | Type | Description
+----- | ---- | -----------
+**predicted_at** | String | ISO Date for when forecast was made
+**conditions_at** | String | ISO Date for when in time this information applies
+**duration** | String | ISO period for how long from conditions_at the information applies
+**temperature** | Double | Average temperature for period in Celcius degrees 
+**min_temperature** | Double | Minimum temperature for period in Celcius degrees
+**max_temperature** | Double | Maximum temperature for period in Celcius degrees
+**pressure** | Double | Athmospheric pressure in hPa
+**humidity** | Double | Humidity in %
+**description** | String | Main description of conditions
+**description_detail** | String | Detailed description of conditions
+**cloud_level** | Double | Cloudiness, %
+**wind_speed** | Double | Wind speed in meters/second
+**wind_direction** | Double | Direction of wind in degrees
+**rain** | Double | Rain volume in millimeters
+**snow** | Double | Snow volume in millimeters
 
 ## Geo Location
 ```shell
