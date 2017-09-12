@@ -22,6 +22,7 @@ includes:
   - as/crm/_messaging
   - as/ticketing/_ticketing
   - as/dogfood/_dogfood
+  - as/enrichment/_enrichment
   
 
 ---
