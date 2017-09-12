@@ -13,5 +13,5 @@ Property | Type | Description
 **[involves](/as-api.html#event-relations)** | | list of entities involved in the event and what role the played
  | INVOLVES | Entity that the forecast involves
 [aspects](/as-api.html#aspects) | | The standard event aspects used for this event message
- | [localweatheraspect](/as-api.html#dimensions-metricsfacts) | Additional information added for analytics processing  
-properties | Map | Any other custom  properties to store with the ticket 
+ | [localweather](/as-api.html#dimensions-metricsfacts) | Additional information added for analytics processing  
+properties | Map | Any other custom  properties to store 
